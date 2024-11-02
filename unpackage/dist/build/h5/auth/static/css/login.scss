@@ -1,0 +1,129 @@
+.login{
+	height: 100%;
+	position: relative;
+	background: url('~@/auth/static/image/login-right-bg.png') right top/70% 400rpx no-repeat,url('~@/auth/static/image/login-left-bg.png') bottom left/40% 260rpx no-repeat;
+	@include flex-box(row, null, center);
+	.info{
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0 60rpx;
+		.info-top{
+			margin-bottom: 40rpx;
+			.title{
+				font-weight: bold;
+				font-size: 46rpx;
+			}
+		}
+		.info-form{
+			.form-rows{
+				.form-row{
+					@include flex-box(row, null, center);
+					min-height: 90rpx;
+					background: $bg-color;
+					border-radius: 60rpx;
+					padding: 0 20rpx;
+					&:not(:last-child){
+						margin-bottom: 40rpx;
+					}
+					.row-left{
+						font-size: 30rpx;
+						width: 60rpx;
+						text-align: center;
+						.row-left-icon{
+							width: 40rpx;
+						}
+					}
+					.row-input{
+						flex: 1;
+						font-size: 30rpx;
+						@include flex-box();
+					}
+					.code-btn{
+						margin-left: 10rpx;
+						background: none;
+						height: 40rpx;
+						line-height: 40rpx;
+						border-radius: 0;
+						padding:0 0 0 20rpx;
+						color: $text-grey;
+						font-size: 28rpx;
+						border-left: 2rpx solid $text-grey;
+						min-width: 160rpx;
+						box-sizing: border-box;
+						&[disabled]{
+							color: $text-grey;
+							background: none!important;
+						}
+					}
+				}
+			}
+			.form-bot-text{
+				display: inline-block;
+				padding: 30rpx 0;
+			}
+			.form-xieyi{
+				@include flex-box(row, null, center);
+				padding: 15rpx 0;
+				.check-img{
+					width: 34rpx;
+					margin-right: 10rpx;
+				}
+				text{
+					color: $text-grey;
+				}
+			}
+			.form-bot-btns{
+				margin-top: 20rpx;
+				>button{
+					background: none;
+				}
+				.login-btn{
+					background: $bg-btn;
+					color: #fff;
+					height: 90rpx;
+					line-height: 90rpx;
+					border-radius: 50rpx;
+				}
+				.reg-btn{
+					height: 80rpx;
+					line-height: 80rpx;
+					font-size: 28rpx;
+				}
+			}
+		}
+	}
+	.wx-login{
+		position: absolute;
+		bottom: 50rpx;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		left: 50%;
+		transform: translateX(-50%);
+		.icon-img{
+			width: 80rpx;
+			text-align: center;
+		}
+	}
+}
+.reg{
+	background: url('~@/auth/static/image/reg-right-bg.png') right top/50% 300rpx no-repeat,url('~@/auth/static/image/reg-left-bg.png') bottom left/60% 260rpx no-repeat;
+	.xieyi{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 60%;
+		height: 260rpx;
+		@include flex-box(row, center, center);
+		.check-img{
+			width: 40rpx;
+			margin-right: 5rpx;
+		}
+		text{
+			&.theme{
+				color: $text-theme;
+			}
+		}
+	}
+}

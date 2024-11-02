@@ -1,0 +1,98 @@
+@import 'uview-ui/theme.scss';
+@mixin flex-all{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+@mixin flex-center{
+	display: flex;
+	align-items: center;
+}
+@mixin flex-box($direction: row,$justify : null,$align: null, $flex-wrap: null) {
+	display: flex;
+	@if $direction!=null {
+		flex-direction: $direction;
+	}
+	@if $justify!=null {
+		justify-content: $justify;
+	}
+	@if $align!=null {
+		align-items: $align;
+	}
+	@if $flex-wrap!=null {
+		flex-wrap: $flex-wrap;
+	}
+}
+/* 颜色变量 */
+/* 公共样式 */
+$bg-color:#efefef;
+$bg-F6F6F6:#F6F6F6;
+$bg-FFEEEE:#FFEEEE;
+$bg-F7F7F7:#F7F7F7;
+$bg-F1F1F1:#F1F1F1;
+$bg-EA642D:#EA642D;
+$bg-EBEBEB:#EBEBEB;
+$bg-btn:#00A73C;
+$bg-btn-dis:rgba($bg-btn,0.6);
+$bg-btn-dis-orange:rgba(#EC5662,0.2);
+$bg-btn-888:#888888;
+$bg-btn-blue:#218AFB;
+$bg-btn-yellow:#F7B432;
+$theme-color:#02ABAB;
+$theme-red:#FE4927;
+$theme-28C445:#28C445;
+$theme-F94A36:#F94A36;
+$theme-907AF6:#907AF6;
+$theme-008B8B:#008B8B;
+$theme-006400:#006400;
+$theme-FF303A:#A52B2A;
+$theme-007AFF:#007AFF;
+$theme-orange:#DFAA49;
+$color-FDBD39:#FDBD39;
+$color-FCBE38:#FCBE38;
+$color-A9FBB3:#A9FBB3;
+$color-ADADAD:#ADADAD;
+$color-EDFFEF:#EDFFEF;
+$color-E4FFBE:#E4FFBE;
+$color-080524:#080524;
+$color-919191:#919191;
+$color-BCBCBC:#BCBCBC;
+$color-3293FB:#3293FB;
+$color-06B4FD:#06B4FD;
+$color-5E5E5E:#5E5E5E;
+$color-FFE9AF:#FFE9AF;
+$color-B59143:#B59143;
+$text-theme:#ED4731;
+$text-theme2:#FB5E31;
+$text-grey:#888888;
+$text-red:#FE4927;
+$text-blue:#218AFB;
+$text-555:#555555;
+$text-666:#666666;
+$text-888:#888888;
+$text-999:#999999;
+$text-171717:#171717;
+$text-191919:#191919;
+$text-353535:#353535;
+$text-B5B5B5:#B5B5B5;
+$text-B1B1B1:#B1B1B1;
+$text-CAC9CE:#CAC9CE;
+$text-959595:#959595;
+$text-595959:#595959;
+$text-2D2D2D:#2D2D2D;
+$text-7C7C7C:#7C7C7C;
+$text-5A5A5A:#5A5A5A;
+$text-zi:#AA65FF;
+$border-F7F7F7:#F7F7F7;
+$border-F1F1F1:#F1F1F1;
+$border-EA642D:#EA642D;
+$border-color:#EFEFEF;
+$border-666:#666666;
+$border-888:#888888;
+$line-color:#F1F1F1;
+$global-border:0.5px solid $border-color;
+$global-shade:0px 0px 8rpx rgba($color: #999999, $alpha: 0.2);
+
+$row-h:90rpx;
+$bottom-h:100rpx;
+$border-radius:20rpx;

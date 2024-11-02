@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 公共样式 */
+.container .groups.data-v-e1676890 {
+  padding: 20rpx 20rpx 0 20rpx;
+}
+.container .group.data-v-e1676890 {
+  background: #fff;
+  border-radius: 20rpx;
+}
+.container .logout.data-v-e1676890 {
+  background: #00A73C;
+  min-height: 80rpx;
+  border-radius: 50rpx;
+  color: #fff;
+  font-size: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 40rpx 20rpx 0 20rpx;
+}
+.take-photo .top .text-red.data-v-e1676890 {
+  color: #FE4927;
+}
+

@@ -1,0 +1,105 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/login",
+    "pages/index/html-detail",
+    "pages/my/my",
+    "pages/my/set",
+    "pages/my/password",
+    "pages/index/notice-list",
+    "pages/index/search",
+    "pages/my/user-collect",
+    "pages/my/servicepay",
+    "pages/my/servicekf",
+    "pages/my/contract",
+    "pages/my/invoice",
+    "pages/my/invoicelist",
+    "pages/my/contract-detail",
+    "pages/my/qrcode",
+    "pages/my/nickname",
+    "pages/my/user-personal",
+    "pages/my/service",
+    "pages/message/message",
+    "pages/talents/index",
+    "pages/index/detail",
+    "pages/talents/detail",
+    "pages/kefu/index",
+    "pages/talents/my",
+    "pages/talents/publish",
+    "pages/index/filter-list",
+    "pages/kefu/my",
+    "pages/kefu/link-up",
+    "pages/kefu/online",
+    "pages/message/private_chat"
+  ],
+  "subPackages": [
+    {
+      "root": "auth",
+      "pages": [
+        "register",
+        "forget",
+        "mobile-login",
+        "kefu-login"
+      ]
+    },
+    {
+      "root": "my",
+      "pages": [
+        "link-up",
+        "my-resume",
+        "desired-city",
+        "change-identity",
+        "item-list"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "利易联",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#F7F7F7"
+  },
+  "tabBar": {
+    "color": "#686868",
+    "selectedColor": "#48A6A5",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/index.png",
+        "selectedIconPath": "static/tabbar/index_s.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "iconPath": "static/tabbar/message.png",
+        "selectedIconPath": "static/tabbar/message_s.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "static/tabbar/profile.png",
+        "selectedIconPath": "static/tabbar/profile_s.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 120000,
+    "connectSocket": 60000,
+    "uploadFile": 60000,
+    "downloadFile": 60000
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation",
+    "chooseAddress"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "为了更好的服务 请授权访问您的位置！"
+    }
+  },
+  "usingComponents": {}
+}

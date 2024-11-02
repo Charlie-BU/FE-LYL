@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["uview-ui/components/u-loading-page/u-loading-page"],{"113d":function(n,i,t){},"3b55":function(n,i,t){"use strict";var u=t("113d"),e=t.n(u);e.a},"3cd2":function(n,i,t){"use strict";t.d(i,"b",(function(){return e})),t.d(i,"c",(function(){return o})),t.d(i,"a",(function(){return u}));var u={uTransition:function(){return Promise.all([t.e("common/vendor"),t.e("uview-ui/components/u-transition/u-transition")]).then(t.bind(null,"267b"))},uLoadingIcon:function(){return Promise.all([t.e("common/vendor"),t.e("uview-ui/components/u-loading-icon/u-loading-icon")]).then(t.bind(null,"65ae"))}},e=function(){var n=this,i=n.$createElement,t=(n._self._c,n.image?n.$u.addUnit(n.iconSize):null),u=n.image?n.$u.addUnit(n.iconSize):null,e=n.image?null:n.$u.addUnit(n.iconSize),o=n.$u.addUnit(n.fontSize);n.$mp.data=Object.assign({},{$root:{g0:t,g1:u,g2:e,g3:o}})},o=[]},"48c8":function(n,i,t){"use strict";t.r(i);var u=t("3cd2"),e=t("933f");for(var o in e)["default"].indexOf(o)<0&&function(n){t.d(i,n,(function(){return e[n]}))}(o);t("3b55");var a=t("828b"),d=Object(a["a"])(e["default"],u["b"],u["c"],!1,null,"398331fc",null,!1,u["a"],void 0);i["default"]=d.exports},"8dfd":function(n,i,t){"use strict";(function(n){var u=t("47a9");Object.defineProperty(i,"__esModule",{value:!0}),i.default=void 0;var e=u(t("1b95")),o={name:"u-loading-page",mixins:[n.$u.mpMixin,n.$u.mixin,e.default],data:function(){return{}},methods:{}};i.default=o}).call(this,t("df3c")["default"])},"933f":function(n,i,t){"use strict";t.r(i);var u=t("8dfd"),e=t.n(u);for(var o in u)["default"].indexOf(o)<0&&function(n){t.d(i,n,(function(){return u[n]}))}(o);i["default"]=e.a}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'uview-ui/components/u-loading-page/u-loading-page-create-component',
+    {
+        'uview-ui/components/u-loading-page/u-loading-page-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('df3c')['createComponent'](__webpack_require__("48c8"))
+        })
+    },
+    [['uview-ui/components/u-loading-page/u-loading-page-create-component']]
+]);

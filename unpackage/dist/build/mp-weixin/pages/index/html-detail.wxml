@@ -1,0 +1,1 @@
+<view class="container data-v-8a1f8090"><block wx:if="{{web_url!=''}}"><web-view src="{{web_url}}" class="data-v-8a1f8090"></web-view></block></view>

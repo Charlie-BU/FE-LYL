@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["uview-ui/components/u-index-anchor/u-index-anchor"],{"0b03":function(n,t,i){},4965:function(n,t,i){"use strict";(function(n){var e=i("47a9");Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var u=e(i("188f")),a={name:"u-index-anchor",mixins:[n.$u.mpMixin,n.$u.mixin,u.default],data:function(){return{}},mounted:function(){this.init()},methods:{init:function(){var t=n.$u.$parent.call(this,"u-index-list");if(!t)return n.$u.error("u-index-anchor必须要搭配u-index-list组件使用");t.anchors.push(this);var i=n.$u.$parent.call(this,"u-index-item");if(!i)return n.$u.error("u-index-anchor必须要搭配u-index-item组件使用");i.id=this.text.charCodeAt(0)}}};t.default=a}).call(this,i("df3c")["default"])},a69d:function(n,t,i){"use strict";i.r(t);var e=i("fa1e"),u=i("b3ed");for(var a in u)["default"].indexOf(a)<0&&function(n){i.d(t,n,(function(){return u[n]}))}(a);i("f698");var r=i("828b"),c=Object(r["a"])(u["default"],e["b"],e["c"],!1,null,"5380d314",null,!1,e["a"],void 0);t["default"]=c.exports},b3ed:function(n,t,i){"use strict";i.r(t);var e=i("4965"),u=i.n(e);for(var a in e)["default"].indexOf(a)<0&&function(n){i.d(t,n,(function(){return e[n]}))}(a);t["default"]=u.a},f698:function(n,t,i){"use strict";var e=i("0b03"),u=i.n(e);u.a},fa1e:function(n,t,i){"use strict";i.d(t,"b",(function(){return e})),i.d(t,"c",(function(){return u})),i.d(t,"a",(function(){}));var e=function(){var n=this.$createElement,t=(this._self._c,this.$u.addUnit(this.height)),i=this.$u.addUnit(this.size);this.$mp.data=Object.assign({},{$root:{g0:t,g1:i}})},u=[]}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'uview-ui/components/u-index-anchor/u-index-anchor-create-component',
+    {
+        'uview-ui/components/u-index-anchor/u-index-anchor-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('df3c')['createComponent'](__webpack_require__("a69d"))
+        })
+    },
+    [['uview-ui/components/u-index-anchor/u-index-anchor-create-component']]
+]);

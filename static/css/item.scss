@@ -1,0 +1,132 @@
+//项目、人才等详情
+.project{
+	padding: 0 34rpx;
+	.project-top{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 40rpx 0;
+		border-bottom: $global-border;
+		.left-text{
+			font-size: 48rpx;
+			font-weight: bold;
+			color: #141414;
+		}
+		.left-img{
+			margin-right: 28rpx;
+			width: 88rpx;
+			height: 88rpx;
+			border-radius: 50%;
+		}
+		.center-text{
+			font-size: 32rpx;
+			font-weight: 500;
+			flex: 1;
+		}
+		.right-text{
+			color: #02ABAB;
+			font-size: 34rpx;
+			font-weight: bold;
+		}
+	}
+	.project-head{
+		padding: 30rpx 0;
+		display: flex;
+		border-bottom: $global-border;
+		.left-img{
+			margin-right: 28rpx;
+			width: 88rpx;
+			height: 88rpx;
+			border-radius: 50%;
+		}
+		.right{
+			flex: 1;
+			align-self: center;
+			.name-title{
+				color: #1E1E1E;
+			}
+			.sub-name-title{
+				color: #7A7A7A;
+				font-size: 26rpx;
+			}
+		}
+		.time-text{
+			align-self: center;
+			color: #7A7A7A;
+		}
+	}
+	.project-detail{
+		padding-top: 30rpx;
+		.title-text{
+			font-size: 32rpx;
+			font-weight: bold;
+		}
+		.project-tags{
+			display: grid;
+			grid-template-columns: repeat(4,1fr);
+			grid-gap: 20rpx 10rpx;
+			margin-top: 30rpx;
+			.project-tag{
+				line-height: 52rpx;
+				font-size: 26rpx;
+				background: #EFEFEF;
+				color: #5E5E5E;
+				text-align: center;
+				border-radius: 6rpx;
+			}
+		}
+		.project-rows{
+			margin-top: 30rpx;
+			.project-row{
+				line-height: 60rpx;
+				display: flex;
+				&.column{
+					flex-direction: column;
+					.right-text{
+						
+					}
+				}
+				.left-text{
+					font-weight: 500;
+					flex-shrink: 0;
+				}
+				.right-text{
+					color: #606060;
+				}
+			}
+		}
+	}
+}
+//项目、人才等页面底部
+.project-bot{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	background: #fff;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	padding: 0 35rpx;
+	box-sizing: border-box;
+	box-shadow: 0px -1px 0px 0px rgba(0,0,0,0.08); 
+	height: 136rpx;
+	.bot-item{
+		text-align: center;
+		margin-right: 26rpx;
+		.item-img{
+			width: 38rpx;
+		}
+		.item-text{
+			font-size: 26rpx;
+			color: #606060;
+		}
+	}
+	.project-btn{
+		flex: 1;
+		font-size: 28rpx;
+		line-height: 80rpx;
+		color: #fff;
+		background: $theme-color;
+		border-radius: 10rpx;
+	}
+}
