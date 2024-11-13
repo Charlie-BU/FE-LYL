@@ -1,0 +1,285 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 公共样式 */
+.scroll.data-v-d4e6bb4e {
+  height: 90vh;
+}
+.search_bar.data-v-d4e6bb4e {
+  width: 540rpx;
+  margin: 15rpx 20rpx;
+}
+.box.data-v-d4e6bb4e {
+  box-sizing: border-box;
+  padding: 40rpx 20rpx;
+  background-color: white;
+  margin-top: 8rpx;
+  background: #ffffff;
+  border-radius: 20rpx 20rpx 20rpx 20rpx;
+}
+.box .btn.data-v-d4e6bb4e {
+  margin-left: 20rpx;
+}
+.box .mon.data-v-d4e6bb4e {
+  margin-top: 20rpx;
+  text-align: right;
+  font-weight: 600;
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 40rpx;
+}
+.box .mon .q.data-v-d4e6bb4e {
+  font-size: 38rpx;
+}
+.box .time.data-v-d4e6bb4e {
+  margin-top: 20rpx;
+  box-sizing: box-sizing;
+  padding: 20rpx;
+  background: #fff3eb;
+  border-radius: 8rpx 8rpx 8rpx 8rpx;
+  font-weight: 500;
+  font-size: 24rpx;
+  color: #000000;
+  line-height: 30rpx;
+  text-align: justify;
+}
+.box .time2.data-v-d4e6bb4e {
+  margin-top: 20rpx;
+  box-sizing: box-sizing;
+  padding: 20rpx;
+  background: #ebebeb;
+  border-radius: 8rpx 8rpx 8rpx 8rpx;
+  font-weight: 500;
+  font-size: 24rpx;
+  color: #000000;
+  line-height: 30rpx;
+  text-align: justify;
+}
+.box .time3.data-v-d4e6bb4e {
+  margin-top: 20rpx;
+  box-sizing: box-sizing;
+  padding: 20rpx;
+  background: #f2c7ff;
+  border-radius: 8rpx 8rpx 8rpx 8rpx;
+  font-weight: 500;
+  font-size: 24rpx;
+  color: #000000;
+  line-height: 30rpx;
+  text-align: justify;
+}
+.box .l.data-v-d4e6bb4e {
+  font-weight: 400;
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 24rpx;
+  margin-left: 10rpx;
+}
+.box .r.data-v-d4e6bb4e {
+  font-weight: 600;
+  font-size: 28rpx;
+  color: #f25c07;
+  line-height: 28rpx;
+  margin-right: 20rpx;
+}
+.box .bc.data-v-d4e6bb4e {
+  border-radius: 12rpx 12rpx 12rpx 12rpx;
+  margin-top: 30rpx;
+  background-color: white;
+  box-sizing: box-sizing;
+  padding: 18rpx 0rpx;
+}
+.box .bc .text1.data-v-d4e6bb4e {
+  margin-top: 4rpx;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #282456;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+.box .bc .text2.data-v-d4e6bb4e {
+  margin-top: 34rpx;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 600;
+  font-size: 26rpx;
+  color: black;
+  line-height: 10rpx;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+.box .bc .text3.data-v-d4e6bb4e {
+  margin-top: 34rpx;
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 400;
+  font-size: 24rpx;
+  color: #666666;
+  line-height: 15rpx;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+.box .bc .right.data-v-d4e6bb4e {
+  width: 54%;
+}
+.box .bc .left.data-v-d4e6bb4e {
+  width: 42%;
+}
+.box .bc .left .bcImg.data-v-d4e6bb4e {
+  border-radius: 20rpx;
+  width: 100%;
+  height: 116.67px;
+}
+.app.data-v-d4e6bb4e {
+  box-sizing: border-box;
+  padding: 20rpx;
+  background: linear-gradient(0deg, #efefef 0%, #f6f6f6 25%, #1abfc0 100%);
+}
+.tabA.data-v-d4e6bb4e {
+  background-color: #1abfc0 !important;
+  color: white !important;
+}
+.tabs.data-v-d4e6bb4e {
+  width: 16%;
+  text-align: center;
+  font-weight: 400;
+  font-size: 24rpx !important;
+  color: #999999;
+  background-color: red;
+  box-sizing: border-box;
+  padding: 5rpx 20rpx;
+  background: #ffffff;
+  border-radius: 40rpx 40rpx 40rpx 40rpx;
+}
+.head.data-v-d4e6bb4e {
+  position: relative;
+}
+.head .headTitle.data-v-d4e6bb4e {
+  font-weight: 600;
+  font-size: 35rpx;
+  color: #212121;
+  line-height: 36rpx;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 100rpx;
+  z-index: 999;
+  position: fixed;
+}
+.section.data-v-d4e6bb4e {
+  background: #ffffff;
+  border-radius: 20rpx 20rpx 20rpx 20rpx;
+  box-sizing: border-box;
+  padding: 20rpx;
+  margin-top: 20rpx;
+}
+.section .cu-btn.data-v-d4e6bb4e {
+  margin-right: 20rpx;
+}
+.section .boxList.data-v-d4e6bb4e {
+  margin-top: 6rpx;
+  box-sizing: border-box;
+  padding: 30rpx 20rpx;
+  padding-top: 40rpx;
+  border-bottom: 1px solid #f2f2f2;
+}
+.section .boxList .left.data-v-d4e6bb4e {
+  width: 15%;
+}
+.section .boxList .right.data-v-d4e6bb4e {
+  width: 83%;
+}
+.section .boxList .right .quan.data-v-d4e6bb4e {
+  margin-right: 4rpx;
+  border-radius: 50%;
+  background: #d9d9d9;
+  width: 28rpx;
+  height: 28rpx;
+  display: inline-block;
+  position: relative;
+  top: 4rpx;
+}
+.section .boxList .right .text1.data-v-d4e6bb4e {
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #333333;
+  line-height: 35rpx;
+}
+.section .boxList .right .text2.data-v-d4e6bb4e {
+  margin-top: 28rpx;
+  font-weight: bold;
+  font-size: 28rpx;
+  color: black;
+  line-height: 22rpx;
+}
+.section .boxList .right .text3.data-v-d4e6bb4e {
+  font-weight: 500;
+  font-size: 26rpx;
+  color: #999999;
+  line-height: 38rpx;
+  text-align: justify;
+}
+.section .boxList .lIcon.data-v-d4e6bb4e {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.phb.data-v-d4e6bb4e {
+  box-sizing: border-box;
+  padding: 30rpx;
+  background-color: white;
+  margin-top: 35rpx;
+  background: #FEF2DA;
+  border-radius: 14rpx;
+}
+.phb .yjfk.data-v-d4e6bb4e {
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 28rpx;
+}
+.phb .jf.data-v-d4e6bb4e {
+  font-family: PingFang SC, PingFang SC;
+  font-weight: 400;
+  font-size: 28rpx;
+  color: #282456;
+  line-height: 36rpx;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+.phb .num.data-v-d4e6bb4e {
+  font-family: PingFang SC, PingFang SC;
+  font-weight: bold;
+  font-size: 48rpx;
+  color: #282456;
+  line-height: 48rpx;
+  text-align: center;
+  font-style: normal;
+  text-transform: none;
+}
+.time.data-v-d4e6bb4e {
+  margin-top: 10rpx;
+  box-sizing: box-sizing;
+  padding: 20rpx;
+  background: #f2c7ff;
+  border-radius: 8rpx 8rpx 8rpx 8rpx;
+  font-weight: 500;
+  font-size: 24rpx;
+  color: #000000;
+  line-height: 30rpx;
+  text-align: justify;
+}
+.headBox.data-v-d4e6bb4e {
+  background: linear-gradient(135deg, #FEF2DA, #FFD5A4);
+  box-sizing: border-box;
+  padding: 20rpx;
+}
+.topHead.data-v-d4e6bb4e {
+  margin-top: 50rpx;
+}
+.icon.data-v-d4e6bb4e {
+  margin-right: 30rpx;
+  width: 37rpx;
+  height: 37rpx;
+}
+

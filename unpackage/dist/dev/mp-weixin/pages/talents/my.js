@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/talents/my"],{
 
 /***/ 375:
-/*!**************************************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE/main.js?{"page":"pages%2Ftalents%2Fmy"} ***!
-  \**************************************************************************/
+/*!******************************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/main.js?{"page":"pages%2Ftalents%2Fmy"} ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22,9 +22,9 @@ createPage(_my.default);
 /***/ }),
 
 /***/ 376:
-/*!*******************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE/pages/talents/my.vue ***!
-  \*******************************************************/
+/*!***********************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/pages/talents/my.vue ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -63,9 +63,9 @@ component.options.__file = "pages/talents/my.vue"
 /***/ }),
 
 /***/ 377:
-/*!**************************************************************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE/pages/talents/my.vue?vue&type=template&id=d840c226&scoped=true& ***!
-  \**************************************************************************************************/
+/*!******************************************************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/pages/talents/my.vue?vue&type=template&id=d840c226&scoped=true& ***!
+  \******************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -85,9 +85,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 378:
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!S:/Work/上海利易联建筑设计科技有限公司/FE/pages/talents/my.vue?vue&type=template&id=d840c226&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/pages/talents/my.vue?vue&type=template&id=d840c226&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -101,16 +101,16 @@ var components
 try {
   components = {
     uLoadingPage: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 513))
+      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 522))
     },
     uTabs: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs/u-tabs.vue */ 529))
+      return Promise.all(/*! import() | uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs/u-tabs.vue */ 538))
     },
     myXmItems: function () {
-      return __webpack_require__.e(/*! import() | components/common/my-xm-items */ "components/common/my-xm-items").then(__webpack_require__.bind(null, /*! @/components/common/my-xm-items.vue */ 613))
+      return __webpack_require__.e(/*! import() | components/common/my-xm-items */ "components/common/my-xm-items").then(__webpack_require__.bind(null, /*! @/components/common/my-xm-items.vue */ 622))
     },
     myZdItem: function () {
-      return __webpack_require__.e(/*! import() | components/common/my-zd-item */ "components/common/my-zd-item").then(__webpack_require__.bind(null, /*! @/components/common/my-zd-item.vue */ 682))
+      return __webpack_require__.e(/*! import() | components/common/my-zd-item */ "components/common/my-zd-item").then(__webpack_require__.bind(null, /*! @/components/common/my-zd-item.vue */ 691))
     },
   }
 } catch (e) {
@@ -144,9 +144,9 @@ render._withStripped = true
 /***/ }),
 
 /***/ 379:
-/*!********************************************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE/pages/talents/my.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
+/*!************************************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/pages/talents/my.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -160,9 +160,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 380:
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!S:/Work/上海利易联建筑设计科技有限公司/FE/pages/talents/my.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/pages/talents/my.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -178,7 +178,7 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
 var wxLogin = function wxLogin() {
   __webpack_require__.e(/*! require.ensure | components/wx-login/wx-login */ "components/wx-login/wx-login").then((function () {
-    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 592));
+    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 601));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _this;
@@ -440,9 +440,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 381:
-/*!*****************************************************************************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE/pages/talents/my.vue?vue&type=style&index=0&id=d840c226&lang=scss&scoped=true& ***!
-  \*****************************************************************************************************************/
+/*!*********************************************************************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/pages/talents/my.vue?vue&type=style&index=0&id=d840c226&lang=scss&scoped=true& ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -456,9 +456,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 382:
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!S:/Work/上海利易联建筑设计科技有限公司/FE/pages/talents/my.vue?vue&type=style&index=0&id=d840c226&lang=scss&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/pages/talents/my.vue?vue&type=style&index=0&id=d840c226&lang=scss&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
