@@ -31,7 +31,8 @@
     "pages/kefu/link-up",
     "pages/kefu/online",
     "pages/message/private_chat",
-    "pages/square/index"
+    "pages/square/index",
+    "pages/square/detail"
   ],
   "subPackages": [
     {
