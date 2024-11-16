@@ -265,7 +265,6 @@ var _default = {
           time: utils.format_time(post.time)
         });
       });
-      console.log(_this.posts);
     });
     // login_check(user => {
     // 	this.user = user;

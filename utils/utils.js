@@ -40,44 +40,6 @@ export function decode(encodedString) {
 	return decodedString;
 }
 
-export function token_operation(user_token) {
-	// 从user_token中拿到user_id和timestamp
-	const decoded_user_token = decode(user_token);
-	const regex = /(.*?)=(.*)=([\d.]+)$/;
-	const match = decoded_user_token.match(regex);
-	const user_id = match ? match[1] : null;
-	const token_check = match ? match[2] : null;
-	const timestamp = +(match ? match[3] : null);
-	// 设置token过期时间
-	const login_time = new Date(timestamp * 1000);
-	const valid_time_end = new Date(login_time.getTime() + 24 * 60 * 60 * 1000);
-	const now = new Date();
-	if (!match || token_check !== 'logined_user_id[ATTENTION]timestamp') {
-		console.log('用户token无效');
-		wx.clearStorageSync();
-		return null;
-	}
-	if (now > valid_time_end) {
-		console.log('登录过期');
-		wx.clearStorageSync();
-		return null;
-	}
-	return user_id;
-}
-
-export function get_user_info(user_token) {
-	const user_id = token_operation(user_token);
-	if (!user_id) {
-		return [null, null];
-	}
-	fetch_data('POST', 'get_this_user', { 'user_id': user_id }, 'user', res => {
-		uni.setStorageSync("user", res.data.user);
-	})
-	// 计算活跃度
-	fetch_data('POST', 'cal_active', { 'user_id': user_id }, 'user')
-	return [+user_id, uni.getStorageSync("user")];
-}
-
 export function format_time(datetime) {
 	const date = new Date(datetime);
 	if (isNaN(date.getTime())) {

@@ -37665,7 +37665,7 @@ module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAAD
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(wx, uni) {
+/* WEBPACK VAR INJECTION */(function(wx) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -37674,9 +37674,7 @@ exports.decode = decode;
 exports.decodeBase64 = decodeBase64;
 exports.format_time = format_time;
 exports.get_openid = get_openid;
-exports.get_user_info = get_user_info;
 exports.subscirbe_message = subscirbe_message;
-exports.token_operation = token_operation;
 var _ajax_request = __webpack_require__(/*! ./ajax_request.js */ 438);
 function get_openid() {
   var _success = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -37716,46 +37714,6 @@ function decode(encodedString) {
   var decodedString = decodeURIComponent(escape(byteString));
   return decodedString;
 }
-function token_operation(user_token) {
-  // 从user_token中拿到user_id和timestamp
-  var decoded_user_token = decode(user_token);
-  var regex = /(.*?)=(.*)=([\d.]+)$/;
-  var match = decoded_user_token.match(regex);
-  var user_id = match ? match[1] : null;
-  var token_check = match ? match[2] : null;
-  var timestamp = +(match ? match[3] : null);
-  // 设置token过期时间
-  var login_time = new Date(timestamp * 1000);
-  var valid_time_end = new Date(login_time.getTime() + 24 * 60 * 60 * 1000);
-  var now = new Date();
-  if (!match || token_check !== 'logined_user_id[ATTENTION]timestamp') {
-    console.log('用户token无效');
-    wx.clearStorageSync();
-    return null;
-  }
-  if (now > valid_time_end) {
-    console.log('登录过期');
-    wx.clearStorageSync();
-    return null;
-  }
-  return user_id;
-}
-function get_user_info(user_token) {
-  var user_id = token_operation(user_token);
-  if (!user_id) {
-    return [null, null];
-  }
-  (0, _ajax_request.fetch_data)('POST', 'get_this_user', {
-    'user_id': user_id
-  }, 'user', function (res) {
-    uni.setStorageSync("user", res.data.user);
-  });
-  // 计算活跃度
-  (0, _ajax_request.fetch_data)('POST', 'cal_active', {
-    'user_id': user_id
-  }, 'user');
-  return [+user_id, uni.getStorageSync("user")];
-}
 function format_time(datetime) {
   var date = new Date(datetime);
   if (isNaN(date.getTime())) {
@@ -37786,7 +37744,7 @@ function subscirbe_message(template_Ids) {
     }
   });
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ })
 ]]);

@@ -28,36 +28,44 @@
 						<div class="poster-name">
 							<span v-if="post.poster_realname"
 								style="display: block;">{{post.poster_realname}}</span>
-							<span v-else style="display: block;">{{post.poster_mobile}}</span>
+							<span v-else style="display: block;">{{post.poster_nickname}}</span>
 							<span v-if="post.time" class="post-time"
 								style="display: block;">{{post.time}}</span>
 						</div>
 					</div>
 					<div class="right">
 						<div v-if="post.title" class="post-content" style="font-weight: bold;">
-							{{post.title}}</div>
+							{{post.title}}
+						</div>
 						<div v-if="post.content" class="post-content">{{post.content}}</div>
 						<div v-if="post.post_image" class="post-content">
-							<div v-if="post.post_image.length>=1 && post.post_image.length<=3" class="image-grid" style="height: 200rpx;">
+							<div v-if="post.post_image.length>=1 && post.post_image.length<=3"
+								class="image-grid" style="height: 200rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
-									<img v-if="image && image.length>=6" class="post-images" :src="image" @click="image_operation(image)" />
+									<img v-if="image && image.length>=6" class="post-images"
+										:src="image" @click="image_operation(image)" />
 								</div>
 							</div>
-							<div v-else-if="post.post_image.length>=4 && post.post_image.length<=6" class="image-grid" style="height: 400rpx;">
+							<div v-else-if="post.post_image.length>=4 && post.post_image.length<=6"
+								class="image-grid" style="height: 400rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
-									<img v-if="image && image.length>=6" class="post-images" :src="image" @click="image_operation(image)" />
+									<img v-if="image && image.length>=6" class="post-images"
+										:src="image" @click="image_operation(image)" />
 								</div>
 							</div>
-							<div v-else-if="post.post_image.length>=7 && post.post_image.length<=9" class="image-grid" style="height: 600rpx;">
+							<div v-else-if="post.post_image.length>=7 && post.post_image.length<=9"
+								class="image-grid" style="height: 600rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
-									<img v-if="image && image.length>=6" class="post-images" :src="image" @click="image_operation(image)" />
+									<img v-if="image && image.length>=6" class="post-images"
+										:src="image" @click="image_operation(image)" />
 								</div>
 							</div>
 						</div>
 						<div style="text-align: end; margin-top: 30rpx;">
 							<div style="display: inline-block; text-align: center; margin-right: 30rpx;">
 								<img class="bottom-icon" src="../../static/square/like-after.jpg" />
-								<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.likes}}</p>
+								<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.likes}}
+								</p>
 							</div>
 							<div style="display: inline-block; text-align: center;">
 								<img class="bottom-icon" src="../../static/square/talk.jpg" />
@@ -72,9 +80,7 @@
 </template>
 
 <script>
-	import {
-		fetch_data
-	} from '../../utils/ajax_request.js'
+	import { fetch_data } from '../../utils/ajax_request.js'
 	import * as utils from '../../utils/utils.js'
 	export default {
 		data() {
@@ -99,9 +105,9 @@
 			fetch_data("POST", "get_all_posts", null, "application", (res) => {
 				this.posts = res.data.posts.map(post => ({
 					...post,
-					time: utils.format_time(post.time)
+					time: utils.format_time(post.time),
+
 				}));
-				console.log(this.posts);
 			})
 			// login_check(user => {
 			// 	this.user = user;
@@ -145,7 +151,7 @@
 					current: image_url,
 				});
 			},
-			
+
 			send_comment(QA) {
 				wx.showModal({
 					title: QA.question,
@@ -166,9 +172,11 @@
 									duration: 1000,
 								});
 								if (res.data.status == 200) {
-									fetch_data("POST", "get_QAs", null, "application", res => {
-										this.display_content = res.data.QAs;
-									});
+									fetch_data("POST", "get_QAs", null,
+										"application", res => {
+											this.display_content =
+												res.data.QAs;
+										});
 								}
 							})
 						}
@@ -358,26 +366,26 @@
 			}
 
 			.image-grid {
-			  display: grid;
-			  grid-template-columns: repeat(3, 1fr);
-			  gap: 10rpx;
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 10rpx;
 			}
-			
+
 			.image-item {
-			  position: relative;
-			  width: 100%;
-			  padding-top: 100%;
-			  overflow: hidden;
+				position: relative;
+				width: 100%;
+				padding-top: 100%;
+				overflow: hidden;
 			}
-			
+
 			.post-images {
-			  position: absolute;
-			  top: 0;
-			  left: 0;
-			  width: 100%;
-			  height: 100%;
-			  object-fit: cover;
-			  border-radius: 5rpx;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 5rpx;
 			}
 
 
