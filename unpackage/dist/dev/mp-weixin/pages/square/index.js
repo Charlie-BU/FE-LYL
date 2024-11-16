@@ -125,8 +125,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var m0 = __webpack_require__(/*! ../../static/square/like-after.jpg */ 924)
-  var m1 = __webpack_require__(/*! ../../static/square/talk.jpg */ 925)
+  var m2 = __webpack_require__(/*! ../../static/square/talk.jpg */ 925)
   var l3 = _vm.__map(_vm.posts, function (post, index) {
     var $orig = _vm.__get_orig(post)
     var g0 = post.post_image
@@ -173,6 +172,8 @@ var render = function () {
             }
           })
         : null
+    var m0 = post.liked ? __webpack_require__(/*! ../../static/square/like-after.jpg */ 924) : null
+    var m1 = !post.liked ? __webpack_require__(/*! ../../static/square/like-before.jpg */ 927) : null
     return {
       $orig: $orig,
       g0: g0,
@@ -181,14 +182,15 @@ var render = function () {
       l1: l1,
       g4: g4,
       l2: l2,
+      m0: m0,
+      m1: m1,
     }
   })
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
-        m0: m0,
-        m1: m1,
+        m2: m2,
         l3: l3,
       },
     }
@@ -245,7 +247,6 @@ var _default = {
   data: function data() {
     return {
       user: "",
-      message: "",
       posts: [],
       tabbar_list: [{
         name: "全部"
@@ -262,36 +263,12 @@ var _default = {
     (0, _ajax_request.fetch_data)("POST", "get_all_posts", null, "application", function (res) {
       _this.posts = res.data.posts.map(function (post) {
         return _objectSpread(_objectSpread({}, post), {}, {
-          time: utils.format_time(post.time)
+          time: utils.format_time(post.time),
+          liked: false
         });
       });
     });
-    // login_check(user => {
-    // 	this.user = user;
-    // });
-    // if (!this.user) {
-    // 	wx.showToast({
-    // 		title: "请登录",
-    // 		icon: "none",
-    // 		duration: 1500,
-    // 	});
-    // 	setTimeout(() => {
-    // 		uni.reLaunch({
-    // 			url: '/pages/login/login',
-    // 		})
-    // 	}, 1000);
-    // };
-    // wx.showToast({
-    // 	title: '加载中',
-    // 	icon: 'loading',
-    // 	duration: 100000,
-    // });
-    // fetch_data("POST", "get_Chinese_posts", null, "application", res => {
-    // 	this.posts = res.data.posts;
-    // 	wx.hideToast();
-    // });
   },
-
   methods: {
     onInput: function onInput(e) {
       this.search_post = e.target.value;
@@ -307,31 +284,51 @@ var _default = {
         current: image_url
       });
     },
-    send_comment: function send_comment(QA) {
+    like_post_or_cancel: function like_post_or_cancel(post) {
+      if (!post.liked) {
+        (0, _ajax_request.fetch_data)("POST", "like_post", {
+          'post_id': post.id
+        }, "application", function (res) {
+          post.liked = true;
+          ++post.likes;
+        });
+      } else {
+        (0, _ajax_request.fetch_data)("POST", "cancel_like_post", {
+          'post_id': post.id
+        }, "application", function (res) {
+          post.liked = false;
+          --post.likes;
+        });
+      }
+    },
+    send_comment: function send_comment(post) {
       var _this2 = this;
       wx.showModal({
-        title: QA.question,
-        content: QA.answer,
+        title: "评论",
         editable: true,
-        confirmText: "修改",
+        confirmText: "评论",
         success: function success(res) {
           if (res.confirm) {
+            if (!res.content) {
+              wx.showToast({
+                title: "请输入评论内容",
+                icon: "none",
+                duration: 700
+              });
+              return;
+            }
             var data = {
               "my_id": _this2.user_id,
-              "QA_id": QA.id,
-              "answer": res.content
+              "post_id": post.id,
+              "content": res.content
             };
-            (0, _ajax_request.fetch_data)("POST", "modify_QA", data, "application", function (res) {
+            (0, _ajax_request.fetch_data)("POST", "send_comment", data, "application", function (res) {
+              ++post.comment_length;
               wx.showToast({
-                title: res.data.message,
+                title: "评论成功",
                 icon: "none",
-                duration: 1000
+                duration: 700
               });
-              if (res.data.status == 200) {
-                (0, _ajax_request.fetch_data)("POST", "get_QAs", null, "application", function (res) {
-                  _this2.display_content = res.data.QAs;
-                });
-              }
             });
           }
         }
@@ -403,38 +400,6 @@ var _default = {
     // 		});
     // 	};
     // },
-    // anecdote(post) {
-    // 	if (!post.anecdote) {
-    // 		wx.showToast({
-    // 			title: "该运动员暂未完善轶闻趣事",
-    // 			icon: "none",
-    // 			duration: 1000,
-    // 		});
-    // 		return;
-    // 	}
-    // 	wx.showModal({
-    // 		title: post.name + '的轶闻趣事',
-    // 		content: post.anecdote,
-    // 		showCancel: false,
-    // 		confirmText: "退出",
-    // 	})
-    // },
-    // comment(post) {
-    // 	if (!post.comment) {
-    // 		wx.showToast({
-    // 			title: "该运动员暂未完善人物评价",
-    // 			icon: "none",
-    // 			duration: 1000,
-    // 		});
-    // 		return;
-    // 	}
-    // 	wx.showModal({
-    // 		title: post.name + '的人物评价',
-    // 		content: post.comment,
-    // 		showCancel: false,
-    // 		confirmText: "退出",
-    // 	})
-    // }
   }
 };
 exports.default = _default;
