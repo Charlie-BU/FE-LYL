@@ -33426,7 +33426,7 @@ exports.fetch_data = fetch_data;
 var res = "";
 
 // 服务器ip
-var local_ip = 'http://127.0.0.1:5000/';
+var local_ip = 'http://127.0.0.1:8000/';
 var release_ip = 'https://liyilian.cn/';
 var run_ip = local_ip;
 function fetch_data() {
@@ -37548,6 +37548,245 @@ var _default = {
 };
 exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 837 */,
+/* 838 */,
+/* 839 */,
+/* 840 */,
+/* 841 */,
+/* 842 */,
+/* 843 */,
+/* 844 */,
+/* 845 */,
+/* 846 */,
+/* 847 */,
+/* 848 */,
+/* 849 */,
+/* 850 */,
+/* 851 */,
+/* 852 */,
+/* 853 */,
+/* 854 */,
+/* 855 */,
+/* 856 */,
+/* 857 */,
+/* 858 */,
+/* 859 */,
+/* 860 */,
+/* 861 */,
+/* 862 */,
+/* 863 */,
+/* 864 */,
+/* 865 */,
+/* 866 */,
+/* 867 */,
+/* 868 */,
+/* 869 */,
+/* 870 */,
+/* 871 */,
+/* 872 */,
+/* 873 */,
+/* 874 */,
+/* 875 */,
+/* 876 */,
+/* 877 */,
+/* 878 */,
+/* 879 */,
+/* 880 */,
+/* 881 */,
+/* 882 */,
+/* 883 */,
+/* 884 */,
+/* 885 */,
+/* 886 */,
+/* 887 */,
+/* 888 */,
+/* 889 */,
+/* 890 */,
+/* 891 */,
+/* 892 */,
+/* 893 */,
+/* 894 */,
+/* 895 */,
+/* 896 */,
+/* 897 */,
+/* 898 */,
+/* 899 */,
+/* 900 */,
+/* 901 */,
+/* 902 */,
+/* 903 */,
+/* 904 */,
+/* 905 */,
+/* 906 */,
+/* 907 */,
+/* 908 */,
+/* 909 */,
+/* 910 */,
+/* 911 */,
+/* 912 */,
+/* 913 */,
+/* 914 */,
+/* 915 */,
+/* 916 */,
+/* 917 */,
+/* 918 */,
+/* 919 */,
+/* 920 */,
+/* 921 */,
+/* 922 */,
+/* 923 */,
+/* 924 */
+/*!*******************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/like-after.jpg ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAHkSURBVEiJ1ZS/a9RgGMc/b/JWOng3XKUU2j/glpYOCoIVMki94wIOLl2FjgUdHBw69E/QQUoHJwUL4lCacEI9yGAnLV0c7g9wOMRU2hRULsnjcE0879L7Peh3y/OQz+d53ycE/veorOKJba+g1D2gqESmBeqmaTr509MawPd8/i5xXFJQFKV+AnVE9gqO86GnwC+XF5TWLwHrkmk+AQhcz+yLvI+j6MFMtfqlS+CXywto/VHBXL9j94pAgzC8kUh0atL6DUPCpyoVjKUl4uNjmgcHEEUomEPr18BtAAPgW6VyB7g5ysTG/DxX1teZ3twE00zKKxfMlsBsLXToNF2XHxsb/NrexlxcZGp1Ne0lTKM1hlEcRZAkrNWIGw3M5eU/xQumBhCRcBwBQFit/vWcMJMlHwGlcQRN1+0sHUFyRXG8Ow48KzG8SgUF1/0ssDMxulLPr+3v11MBQBQEj4HDCeAPw7OzJ6mrvfPVsq7qXO4dcGtkeBCUZj3vPCkY7d1ZzzsPg6AE7A1LFnjbCYdL/qZiWfokl9tVcH9QeCEI1pTndX3umYJhJL3gPQWDSPrBoWMHXXbPCwtBsCbwIgO+0w8OfU7QHt+2nyqlHgKIyLMZx3k06LsDx7ftLd+2tyYO/qfzG9fjuIJLCBBGAAAAAElFTkSuQmCC"
+
+/***/ }),
+/* 925 */
+/*!*************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/talk.jpg ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAG6SURBVEiJ1ZWxbtRAEIa/GVuiSRGJgsZFQBRpIkUK0vEIibjWlY8eFOEnCFWUB4gR4soQOFGkiQR0oedqWiRSXJEiSFektHco4l2c4y53iWnyV7uzq/+b+W3ZcNcl8y5khSVRxDMxnjpYAVA4NeF7VfF1kMvoVoCssCRWdh30BOJpdwxKhY+l4/Us0FRAb982NeITsHxddw2NcaSHuZzMBfT2bVMiPs/qepYMSnFsTUKuALLCkkj5cYPOJzWuHGvNuLR5Giu7LcwBlmuPoDBBVliiyq+bRjMpg9I5HvopwgQqdNuaAwjEKnT9Phiq0LF6fX/JSDsVAEfDiN8XsnDNewH9KwAHKz6vtFOx8ciFrvrf4oVr3is0ftsoFtXfiODUR3Q0jMIFv1605r38OrxFz9/YCxHe/Y+uzXj54ZX0a9ilnPHFoGxtDmWkHPt9AAxyGYkxaAsQ+HmwLWf/AAAqYwcYt2Sspm9taSpgkMsIR9o2qnuOJ1MBAIe5nIhjixaTiLIxE+AhlWMN4/1109Rn55N1hccBNq+brLBEha4KneYv0xnDSDk+2Jaz+jO/LrBuxgNV9poP+m7rDzNaqBsRs6WeAAAAAElFTkSuQmCC"
+
+/***/ }),
+/* 926 */
+/*!*****************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/utils/utils.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx, uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.decode = decode;
+exports.decodeBase64 = decodeBase64;
+exports.format_time = format_time;
+exports.get_openid = get_openid;
+exports.get_user_info = get_user_info;
+exports.subscirbe_message = subscirbe_message;
+exports.token_operation = token_operation;
+var _ajax_request = __webpack_require__(/*! ./ajax_request.js */ 438);
+function get_openid() {
+  var _success = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  wx.login({
+    success: function success(r) {
+      if (r.code) {
+        // 由于微信官方要求，获取用户openid的接口调用必须在后端实现，此处把r.code发给后端，换取openid
+        (0, _ajax_request.fetch_data)("POST", "fetch_openid", {
+          "code": r.code
+        }, "user", function (res) {
+          if (res.data.openid) {
+            _success(res.data.openid);
+          } else {
+            console.log("openid获取失败");
+          }
+        });
+      } else {
+        console.log("openid获取失败");
+      }
+    }
+  });
+}
+function decodeBase64(encodedString) {
+  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+  var str = String(encodedString).replace(/=+$/, '');
+  if (str.length % 4 === 1) {
+    throw new Error("'decodeBase64' failed: The string to be decoded is not correctly encoded.");
+  }
+  var output = '';
+  for (var bc = 0, bs, buffer, idx = 0; buffer = str.charAt(idx++); ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer, bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
+    buffer = chars.indexOf(buffer);
+  }
+  return output;
+}
+function decode(encodedString) {
+  var byteString = decodeBase64(encodedString);
+  var decodedString = decodeURIComponent(escape(byteString));
+  return decodedString;
+}
+function token_operation(user_token) {
+  // 从user_token中拿到user_id和timestamp
+  var decoded_user_token = decode(user_token);
+  var regex = /(.*?)=(.*)=([\d.]+)$/;
+  var match = decoded_user_token.match(regex);
+  var user_id = match ? match[1] : null;
+  var token_check = match ? match[2] : null;
+  var timestamp = +(match ? match[3] : null);
+  // 设置token过期时间
+  var login_time = new Date(timestamp * 1000);
+  var valid_time_end = new Date(login_time.getTime() + 24 * 60 * 60 * 1000);
+  var now = new Date();
+  if (!match || token_check !== 'logined_user_id[ATTENTION]timestamp') {
+    console.log('用户token无效');
+    wx.clearStorageSync();
+    return null;
+  }
+  if (now > valid_time_end) {
+    console.log('登录过期');
+    wx.clearStorageSync();
+    return null;
+  }
+  return user_id;
+}
+function get_user_info(user_token) {
+  var user_id = token_operation(user_token);
+  if (!user_id) {
+    return [null, null];
+  }
+  (0, _ajax_request.fetch_data)('POST', 'get_this_user', {
+    'user_id': user_id
+  }, 'user', function (res) {
+    uni.setStorageSync("user", res.data.user);
+  });
+  // 计算活跃度
+  (0, _ajax_request.fetch_data)('POST', 'cal_active', {
+    'user_id': user_id
+  }, 'user');
+  return [+user_id, uni.getStorageSync("user")];
+}
+function format_time(datetime) {
+  var date = new Date(datetime);
+  if (isNaN(date.getTime())) {
+    console.log('Invalid datetime:', datetime);
+    return null;
+  }
+  var year = date.getUTCFullYear().toString();
+  var month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  var day = date.getUTCDate().toString().padStart(2, '0');
+  var hours = date.getUTCHours().toString().padStart(2, '0');
+  var minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  var seconds = date.getUTCSeconds().toString().padStart(2, '0');
+  return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hours, ":").concat(minutes, ":").concat(seconds);
+}
+function subscirbe_message(template_Ids) {
+  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  //template_Ids为列表，对应的消息模板
+  wx.requestSubscribeMessage({
+    tmplIds: template_Ids,
+    success: function success(res) {
+      //用户授权后，无论同意与否
+      if (res.errMsg == 'requestSubscribeMessage:ok') {
+        callback();
+      }
+    },
+    fail: function fail(e) {
+      console.log(e);
+    }
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ })
 ]]);

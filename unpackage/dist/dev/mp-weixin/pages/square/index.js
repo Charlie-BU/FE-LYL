@@ -125,6 +125,74 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var m0 = __webpack_require__(/*! ../../static/square/like-after.jpg */ 924)
+  var m1 = __webpack_require__(/*! ../../static/square/talk.jpg */ 925)
+  var l3 = _vm.__map(_vm.posts, function (post, index) {
+    var $orig = _vm.__get_orig(post)
+    var g0 = post.post_image
+      ? post.post_image.length >= 1 && post.post_image.length <= 3
+      : null
+    var l0 =
+      post.post_image && g0
+        ? _vm.__map(post.post_image, function (image, i) {
+            var $orig = _vm.__get_orig(image)
+            var g1 = image && image.length >= 6
+            return {
+              $orig: $orig,
+              g1: g1,
+            }
+          })
+        : null
+    var g2 =
+      post.post_image && !g0
+        ? post.post_image.length >= 4 && post.post_image.length <= 6
+        : null
+    var l1 =
+      post.post_image && !g0 && g2
+        ? _vm.__map(post.post_image, function (image, i) {
+            var $orig = _vm.__get_orig(image)
+            var g3 = image && image.length >= 6
+            return {
+              $orig: $orig,
+              g3: g3,
+            }
+          })
+        : null
+    var g4 =
+      post.post_image && !g0 && !g2
+        ? post.post_image.length >= 7 && post.post_image.length <= 9
+        : null
+    var l2 =
+      post.post_image && !g0 && !g2 && g4
+        ? _vm.__map(post.post_image, function (image, i) {
+            var $orig = _vm.__get_orig(image)
+            var g5 = image && image.length >= 6
+            return {
+              $orig: $orig,
+              g5: g5,
+            }
+          })
+        : null
+    return {
+      $orig: $orig,
+      g0: g0,
+      l0: l0,
+      g2: g2,
+      l1: l1,
+      g4: g4,
+      l2: l2,
+    }
+  })
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        m0: m0,
+        m1: m1,
+        l3: l3,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -160,48 +228,24 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni, wx) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _ajax_request = __webpack_require__(/*! ../../utils/ajax_request.js */ 438);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var utils = _interopRequireWildcard(__webpack_require__(/*! ../../utils/utils.js */ 926));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
   data: function data() {
     return {
       user: "",
       message: "",
-      search_post: "",
       posts: [],
       tabbar_list: [{
         name: "全部"
@@ -213,7 +257,16 @@ var _default = {
       current: 0
     };
   },
-  onLoad: function onLoad() {
+  onShow: function onShow() {
+    var _this = this;
+    (0, _ajax_request.fetch_data)("POST", "get_all_posts", null, "application", function (res) {
+      _this.posts = res.data.posts.map(function (post) {
+        return _objectSpread(_objectSpread({}, post), {}, {
+          time: utils.format_time(post.time)
+        });
+      });
+      console.log(_this.posts);
+    });
     // login_check(user => {
     // 	this.user = user;
     // });
@@ -239,6 +292,7 @@ var _default = {
     // 	wx.hideToast();
     // });
   },
+
   methods: {
     onInput: function onInput(e) {
       this.search_post = e.target.value;
@@ -248,7 +302,42 @@ var _default = {
         delta: 1
       });
     },
-    // search() {
+    image_operation: function image_operation(image_url) {
+      wx.previewImage({
+        urls: [image_url],
+        current: image_url
+      });
+    },
+    send_comment: function send_comment(QA) {
+      var _this2 = this;
+      wx.showModal({
+        title: QA.question,
+        content: QA.answer,
+        editable: true,
+        confirmText: "修改",
+        success: function success(res) {
+          if (res.confirm) {
+            var data = {
+              "my_id": _this2.user_id,
+              "QA_id": QA.id,
+              "answer": res.content
+            };
+            (0, _ajax_request.fetch_data)("POST", "modify_QA", data, "application", function (res) {
+              wx.showToast({
+                title: res.data.message,
+                icon: "none",
+                duration: 1000
+              });
+              if (res.data.status == 200) {
+                (0, _ajax_request.fetch_data)("POST", "get_QAs", null, "application", function (res) {
+                  _this2.display_content = res.data.QAs;
+                });
+              }
+            });
+          }
+        }
+      });
+    } // search() {
     // 	this.current = 4;
     // 	wx.showToast({
     // 		title: '加载中',
@@ -315,12 +404,7 @@ var _default = {
     // 		});
     // 	};
     // },
-    image_operation: function image_operation(image_url) {
-      wx.previewImage({
-        urls: [image_url],
-        current: image_url
-      });
-    } // anecdote(post) {
+    // anecdote(post) {
     // 	if (!post.anecdote) {
     // 		wx.showToast({
     // 			title: "该运动员暂未完善轶闻趣事",

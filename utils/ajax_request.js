@@ -1,7 +1,7 @@
 var res = ""
 
 // 服务器ip
-var local_ip = 'http://127.0.0.1:5000/'
+var local_ip = 'http://127.0.0.1:8000/'
 var release_ip = 'https://liyilian.cn/'
 var run_ip = local_ip
 

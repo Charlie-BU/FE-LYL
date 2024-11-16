@@ -1,6 +1,6 @@
 import { fetch_data } from './ajax_request.js'
 
-function get_openid(success=null) {
+export function get_openid(success=null) {
 	wx.login({
 		success(r) {
 			if (r.code) {
@@ -19,7 +19,7 @@ function get_openid(success=null) {
 	})
 }
 
-function decodeBase64(encodedString) {
+export function decodeBase64(encodedString) {
 	const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 	let str = String(encodedString).replace(/=+$/, '');
 	if (str.length % 4 === 1) {
@@ -34,13 +34,13 @@ function decodeBase64(encodedString) {
 	return output;
 }
 
-function decode(encodedString) {
+export function decode(encodedString) {
 	let byteString = decodeBase64(encodedString);
 	let decodedString = decodeURIComponent(escape(byteString));
 	return decodedString;
 }
 
-function token_operation(user_token) {
+export function token_operation(user_token) {
 	// 从user_token中拿到user_id和timestamp
 	const decoded_user_token = decode(user_token);
 	const regex = /(.*?)=(.*)=([\d.]+)$/;
@@ -65,7 +65,7 @@ function token_operation(user_token) {
 	return user_id;
 }
 
-function get_user_info(user_token) {
+export function get_user_info(user_token) {
 	const user_id = token_operation(user_token);
 	if (!user_id) {
 		return [null, null];
@@ -78,7 +78,7 @@ function get_user_info(user_token) {
 	return [+user_id, uni.getStorageSync("user")];
 }
 
-function format_time(datetime) {
+export function format_time(datetime) {
 	const date = new Date(datetime);
 	if (isNaN(date.getTime())) {
 		console.log('Invalid datetime:', datetime);
@@ -93,7 +93,7 @@ function format_time(datetime) {
 	return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
-function subscirbe_message(template_Ids, callback = null) {
+export function subscirbe_message(template_Ids, callback = null) {
 	//template_Ids为列表，对应的消息模板
 	wx.requestSubscribeMessage({
 		tmplIds: template_Ids,
@@ -109,12 +109,3 @@ function subscirbe_message(template_Ids, callback = null) {
 	});
 }
 
-export {
-	get_openid,
-	get_rank,
-	get_my_rank,
-	decode,
-	get_user_info,
-	format_time,
-	subscirbe_message,
-}

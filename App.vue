@@ -254,7 +254,7 @@
 					color: #02AAAB;
 				}
 			}
-			.images{
+			.images {
 				display: grid;
 				grid-template-columns: repeat(4,1fr);
 				grid-gap: 30rpx 0;
