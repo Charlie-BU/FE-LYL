@@ -65,14 +65,14 @@
 							</div>
 						</div>
 						<div style="text-align: end; margin-top: 30rpx;">
-							<div style="display: inline-block; text-align: center; margin-right: 30rpx;">
-								<img class="bottom-icon" src="../../static/square/like-after.jpg" />
-								<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.likes}}
-								</p>
+							<div style="display: inline-block; text-align: center; margin-right: 30rpx;" @click="like_post_or_cancel(post)">
+								<img v-if="post.liked" class="bottom-icon" src="../../static/square/like-after.jpg" />
+								<img v-else class="bottom-icon" src="../../static/square/like-before.jpg" />
+								<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.likes}}</p>
 							</div>
-							<div style="display: inline-block; text-align: center;">
+							<div style="display: inline-block; text-align: center;" @click="send_comment(post)">
 								<img class="bottom-icon" src="../../static/square/talk.jpg" />
-								<p style="font-size: 22rpx; color: #999999; margin: 0;">120</p>
+								<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.comment_length}}</p>
 							</div>
 						</div>
 					</div>
@@ -89,7 +89,6 @@
 		data() {
 			return {
 				user: "",
-				message: "",
 				posts: [],
 				tabbar_list: [{
 						name: "全部",
@@ -109,32 +108,9 @@
 				this.posts = res.data.posts.map(post => ({
 					...post,
 					time: utils.format_time(post.time),
+					liked: false
 				}));
 			})
-			// login_check(user => {
-			// 	this.user = user;
-			// });
-			// if (!this.user) {
-			// 	wx.showToast({
-			// 		title: "请登录",
-			// 		icon: "none",
-			// 		duration: 1500,
-			// 	});
-			// 	setTimeout(() => {
-			// 		uni.reLaunch({
-			// 			url: '/pages/login/login',
-			// 		})
-			// 	}, 1000);
-			// };
-			// wx.showToast({
-			// 	title: '加载中',
-			// 	icon: 'loading',
-			// 	duration: 100000,
-			// });
-			// fetch_data("POST", "get_Chinese_posts", null, "application", res => {
-			// 	this.posts = res.data.posts;
-			// 	wx.hideToast();
-			// });
 		},
 		methods: {
 			onInput(e) {
@@ -154,32 +130,48 @@
 				});
 			},
 
-			send_comment(QA) {
+			like_post_or_cancel(post) {
+				if (!post.liked) {
+					fetch_data("POST", "like_post", {'post_id': post.id}, "application", res=>{
+						post.liked = true;
+						++post.likes;
+					})
+				} else {
+					fetch_data("POST", "cancel_like_post", {'post_id': post.id}, "application", res=>{
+						post.liked = false;
+						--post.likes;
+					})
+				}
+				
+			},
+			
+			send_comment(post) {
 				wx.showModal({
-					title: QA.question,
-					content: QA.answer,
+					title: "评论",
 					editable: true,
-					confirmText: "修改",
+					confirmText: "评论",
 					success: res => {
 						if (res.confirm) {
+							if (!res.content) {
+								wx.showToast({
+									title: "请输入评论内容",
+									icon: "none",
+									duration: 700,
+								});
+								return;
+							}
 							let data = {
 								"my_id": this.user_id,
-								"QA_id": QA.id,
-								"answer": res.content,
+								"post_id": post.id,
+								"content": res.content,
 							}
-							fetch_data("POST", "modify_QA", data, "application", res => {
+							fetch_data("POST", "send_comment", data, "application", res=>{
+								++post.comment_length;
 								wx.showToast({
-									title: res.data.message,
+									title: "评论成功",
 									icon: "none",
-									duration: 1000,
+									duration: 700,
 								});
-								if (res.data.status == 200) {
-									fetch_data("POST", "get_QAs", null,
-										"application", res => {
-											this.display_content =
-												res.data.QAs;
-										});
-								}
 							})
 						}
 					}
@@ -259,39 +251,7 @@
 			// 	};
 			// },
 
-			// anecdote(post) {
-			// 	if (!post.anecdote) {
-			// 		wx.showToast({
-			// 			title: "该运动员暂未完善轶闻趣事",
-			// 			icon: "none",
-			// 			duration: 1000,
-			// 		});
-			// 		return;
-			// 	}
-			// 	wx.showModal({
-			// 		title: post.name + '的轶闻趣事',
-			// 		content: post.anecdote,
-			// 		showCancel: false,
-			// 		confirmText: "退出",
-			// 	})
-			// },
-
-			// comment(post) {
-			// 	if (!post.comment) {
-			// 		wx.showToast({
-			// 			title: "该运动员暂未完善人物评价",
-			// 			icon: "none",
-			// 			duration: 1000,
-			// 		});
-			// 		return;
-			// 	}
-			// 	wx.showModal({
-			// 		title: post.name + '的人物评价',
-			// 		content: post.comment,
-			// 		showCancel: false,
-			// 		confirmText: "退出",
-			// 	})
-			// }
+			
 		}
 	}
 </script>
