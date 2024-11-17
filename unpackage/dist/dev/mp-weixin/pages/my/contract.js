@@ -101,13 +101,13 @@ var components
 try {
   components = {
     uLoadingPage: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 522))
+      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 526))
     },
     myContract: function () {
-      return __webpack_require__.e(/*! import() | components/common/my-contract */ "components/common/my-contract").then(__webpack_require__.bind(null, /*! @/components/common/my-contract.vue */ 659))
+      return __webpack_require__.e(/*! import() | components/common/my-contract */ "components/common/my-contract").then(__webpack_require__.bind(null, /*! @/components/common/my-contract.vue */ 663))
     },
     uEmpty: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-empty/u-empty */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-empty/u-empty")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-empty/u-empty.vue */ 614))
+      return Promise.all(/*! import() | uview-ui/components/u-empty/u-empty */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-empty/u-empty")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-empty/u-empty.vue */ 618))
     },
   }
 } catch (e) {

@@ -101,13 +101,13 @@ var components
 try {
   components = {
     uLoadingPage: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 522))
+      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 526))
     },
     uLoadmore: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loadmore/u-loadmore */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loadmore/u-loadmore")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 561))
+      return Promise.all(/*! import() | uview-ui/components/u-loadmore/u-loadmore */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loadmore/u-loadmore")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 565))
     },
     uEmpty: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-empty/u-empty */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-empty/u-empty")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-empty/u-empty.vue */ 614))
+      return Promise.all(/*! import() | uview-ui/components/u-empty/u-empty */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-empty/u-empty")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-empty/u-empty.vue */ 618))
     },
   }
 } catch (e) {

@@ -101,34 +101,34 @@ var components
 try {
   components = {
     uLoadingPage: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 522))
+      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 526))
     },
     uSticky: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-sticky/u-sticky */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-sticky/u-sticky")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-sticky/u-sticky.vue */ 530))
+      return Promise.all(/*! import() | uview-ui/components/u-sticky/u-sticky */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-sticky/u-sticky")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-sticky/u-sticky.vue */ 534))
     },
     uTabs: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs/u-tabs.vue */ 538))
+      return Promise.all(/*! import() | uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs/u-tabs.vue */ 542))
     },
     uSearch: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-search/u-search */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-search/u-search")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 546))
+      return Promise.all(/*! import() | uview-ui/components/u-search/u-search */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-search/u-search")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 550))
     },
     myItems: function () {
-      return __webpack_require__.e(/*! import() | components/common/my-items */ "components/common/my-items").then(__webpack_require__.bind(null, /*! @/components/common/my-items.vue */ 554))
+      return __webpack_require__.e(/*! import() | components/common/my-items */ "components/common/my-items").then(__webpack_require__.bind(null, /*! @/components/common/my-items.vue */ 558))
     },
     uLoadmore: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loadmore/u-loadmore */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loadmore/u-loadmore")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 561))
+      return Promise.all(/*! import() | uview-ui/components/u-loadmore/u-loadmore */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loadmore/u-loadmore")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 565))
     },
     uSwiper: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-swiper/u-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-swiper/u-swiper")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 569))
+      return Promise.all(/*! import() | uview-ui/components/u-swiper/u-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-swiper/u-swiper")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 573))
     },
     uBackTop: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-back-top/u-back-top */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-back-top/u-back-top")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-back-top/u-back-top.vue */ 577))
+      return Promise.all(/*! import() | uview-ui/components/u-back-top/u-back-top */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-back-top/u-back-top")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-back-top/u-back-top.vue */ 581))
     },
     uPopup: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 585))
+      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 589))
     },
     uInput: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 593))
+      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 597))
     },
   }
 } catch (e) {
@@ -227,7 +227,7 @@ var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
 var wxLogin = function wxLogin() {
   __webpack_require__.e(/*! require.ensure | components/wx-login/wx-login */ "components/wx-login/wx-login").then((function () {
-    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 601));
+    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 605));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _this;

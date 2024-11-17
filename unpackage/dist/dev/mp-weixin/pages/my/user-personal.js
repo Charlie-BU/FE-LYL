@@ -101,16 +101,16 @@ var components
 try {
   components = {
     uLoadingPage: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 522))
+      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 526))
     },
     uInput: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 593))
+      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 597))
     },
     uIcon: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 629))
+      return Promise.all(/*! import() | uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 633))
     },
     uPopup: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 585))
+      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 589))
     },
   }
 } catch (e) {

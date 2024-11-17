@@ -1557,7 +1557,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8923,7 +8923,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8944,14 +8944,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -9047,7 +9047,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -11144,7 +11144,7 @@ var s = /*#__PURE__*/function () {
     key: "isTaro",
     value: function isTaro() {
       try {
-        return void 0 !== Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).TARO_ENV;
+        return void 0 !== Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).TARO_ENV;
       } catch (e) {
         return !1;
       }
@@ -15008,7 +15008,7 @@ function xt(e, t, s) {
     try {
       e = t.storage.debug;
     } catch (e) {}
-    return !e && "undefined" != typeof process && "env" in process && (e = Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).DEBUG), e;
+    return !e && "undefined" != typeof process && "env" in process && (e = Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"利易联","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).DEBUG), e;
   }
   (t = e.exports = Ot.exports).log = function () {
     return "object" == (typeof console === "undefined" ? "undefined" : (0, _typeof2.default)(console)) && console.log && Function.prototype.apply.call(console.log, console, arguments);
@@ -33407,9 +33407,39 @@ exports.default = RecorderManager;
 /* 433 */,
 /* 434 */,
 /* 435 */,
-/* 436 */,
-/* 437 */,
+/* 436 */
+/*!*************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/talk.jpg ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAG6SURBVEiJ1ZWxbtRAEIa/GVuiSRGJgsZFQBRpIkUK0vEIibjWlY8eFOEnCFWUB4gR4soQOFGkiQR0oedqWiRSXJEiSFektHco4l2c4y53iWnyV7uzq/+b+W3ZcNcl8y5khSVRxDMxnjpYAVA4NeF7VfF1kMvoVoCssCRWdh30BOJpdwxKhY+l4/Us0FRAb982NeITsHxddw2NcaSHuZzMBfT2bVMiPs/qepYMSnFsTUKuALLCkkj5cYPOJzWuHGvNuLR5Giu7LcwBlmuPoDBBVliiyq+bRjMpg9I5HvopwgQqdNuaAwjEKnT9Phiq0LF6fX/JSDsVAEfDiN8XsnDNewH9KwAHKz6vtFOx8ciFrvrf4oVr3is0ftsoFtXfiODUR3Q0jMIFv1605r38OrxFz9/YCxHe/Y+uzXj54ZX0a9ilnPHFoGxtDmWkHPt9AAxyGYkxaAsQ+HmwLWf/AAAqYwcYt2Sspm9taSpgkMsIR9o2qnuOJ1MBAIe5nIhjixaTiLIxE+AhlWMN4/1109Rn55N1hccBNq+brLBEha4KneYv0xnDSDk+2Jaz+jO/LrBuxgNV9poP+m7rDzNaqBsRs6WeAAAAAElFTkSuQmCC"
+
+/***/ }),
+/* 437 */
+/*!*******************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/like-after.jpg ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAHkSURBVEiJ1ZS/a9RgGMc/b/JWOng3XKUU2j/glpYOCoIVMki94wIOLl2FjgUdHBw69E/QQUoHJwUL4lCacEI9yGAnLV0c7g9wOMRU2hRULsnjcE0879L7Peh3y/OQz+d53ycE/veorOKJba+g1D2gqESmBeqmaTr509MawPd8/i5xXFJQFKV+AnVE9gqO86GnwC+XF5TWLwHrkmk+AQhcz+yLvI+j6MFMtfqlS+CXywto/VHBXL9j94pAgzC8kUh0atL6DUPCpyoVjKUl4uNjmgcHEEUomEPr18BtAAPgW6VyB7g5ysTG/DxX1teZ3twE00zKKxfMlsBsLXToNF2XHxsb/NrexlxcZGp1Ne0lTKM1hlEcRZAkrNWIGw3M5eU/xQumBhCRcBwBQFit/vWcMJMlHwGlcQRN1+0sHUFyRXG8Ow48KzG8SgUF1/0ssDMxulLPr+3v11MBQBQEj4HDCeAPw7OzJ6mrvfPVsq7qXO4dcGtkeBCUZj3vPCkY7d1ZzzsPg6AE7A1LFnjbCYdL/qZiWfokl9tVcH9QeCEI1pTndX3umYJhJL3gPQWDSPrBoWMHXXbPCwtBsCbwIgO+0w8OfU7QHt+2nyqlHgKIyLMZx3k06LsDx7ftLd+2tyYO/qfzG9fjuIJLCBBGAAAAAElFTkSuQmCC"
+
+/***/ }),
 /* 438 */
+/*!********************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/like-before.jpg ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFRSURBVEiJ5dSvSkRBFAbwn7rBsMG4cUHBDT6A4YKbTIsa9jEMKwZfwSD4EgZx41aDBsFgXFAwKBgWNGgwWATDPRevy133bxE/GJg5f75v5syc4a9jboC9jA3UsIguLvEW/qXwr+EDd+F/7ydaKCA/wBmquYQtHIXwJk5QwXOI7eAQ87gadJoS2rjASoG/gtMYlQL/SuS2g6tw5+eDnL9gP7ehUogc9AeV8SIty7g4jtxWrKuxLueDmuhMQJ4hI81O0glO82FYlb6USfEovfjtWHexzHe9P41f+37s5eYl0QLZCW5Qn1Igjzqu84YSHpDMgDzBvYKKNEKk6I2PikpwNAYFtHA7oUg1cltD4rTQk/5Do6IWOUPJJxGp4Qm7Y2wIaaM8DRHJyJvjko8isjYteV7k1c8nnIRtavIikUT678yMPEMivfie2TRkIdZj/CN8AZAQP78pCgM5AAAAAElFTkSuQmCC"
+
+/***/ }),
+/* 439 */,
+/* 440 */,
+/* 441 */
 /*!************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/utils/ajax_request.js ***!
   \************************************************************/
@@ -33465,10 +33495,96 @@ function fetch_data() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
-/* 439 */,
-/* 440 */,
-/* 441 */,
-/* 442 */,
+/* 442 */
+/*!*****************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/utils/utils.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.decode = decode;
+exports.decodeBase64 = decodeBase64;
+exports.format_time = format_time;
+exports.get_openid = get_openid;
+exports.subscirbe_message = subscirbe_message;
+var _ajax_request = __webpack_require__(/*! ./ajax_request.js */ 441);
+function get_openid() {
+  var _success = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  wx.login({
+    success: function success(r) {
+      if (r.code) {
+        // 由于微信官方要求，获取用户openid的接口调用必须在后端实现，此处把r.code发给后端，换取openid
+        (0, _ajax_request.fetch_data)("POST", "fetch_openid", {
+          "code": r.code
+        }, "user", function (res) {
+          if (res.data.openid) {
+            _success(res.data.openid);
+          } else {
+            console.log("openid获取失败");
+          }
+        });
+      } else {
+        console.log("openid获取失败");
+      }
+    }
+  });
+}
+function decodeBase64(encodedString) {
+  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+  var str = String(encodedString).replace(/=+$/, '');
+  if (str.length % 4 === 1) {
+    throw new Error("'decodeBase64' failed: The string to be decoded is not correctly encoded.");
+  }
+  var output = '';
+  for (var bc = 0, bs, buffer, idx = 0; buffer = str.charAt(idx++); ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer, bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
+    buffer = chars.indexOf(buffer);
+  }
+  return output;
+}
+function decode(encodedString) {
+  var byteString = decodeBase64(encodedString);
+  var decodedString = decodeURIComponent(escape(byteString));
+  return decodedString;
+}
+function format_time(datetime) {
+  var date = new Date(datetime);
+  if (isNaN(date.getTime())) {
+    console.log('Invalid datetime:', datetime);
+    return null;
+  }
+  var year = date.getUTCFullYear().toString();
+  var month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  var day = date.getUTCDate().toString().padStart(2, '0');
+  var hours = date.getUTCHours().toString().padStart(2, '0');
+  var minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  var seconds = date.getUTCSeconds().toString().padStart(2, '0');
+  return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hours, ":").concat(minutes, ":").concat(seconds);
+}
+function subscirbe_message(template_Ids) {
+  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  //template_Ids为列表，对应的消息模板
+  wx.requestSubscribeMessage({
+    tmplIds: template_Ids,
+    success: function success(res) {
+      //用户授权后，无论同意与否
+      if (res.errMsg == 'requestSubscribeMessage:ok') {
+        callback();
+      }
+    },
+    fail: function fail(e) {
+      console.log(e);
+    }
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
+
+/***/ }),
 /* 443 */,
 /* 444 */,
 /* 445 */,
@@ -33529,7 +33645,11 @@ function fetch_data() {
 /* 500 */,
 /* 501 */,
 /* 502 */,
-/* 503 */
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */
 /*!********************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/utils/mapUtils.js ***!
   \********************************************************/
@@ -33651,10 +33771,6 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 504 */,
-/* 505 */,
-/* 506 */,
-/* 507 */,
 /* 508 */,
 /* 509 */,
 /* 510 */,
@@ -33674,7 +33790,11 @@ module.exports = {
 /* 524 */,
 /* 525 */,
 /* 526 */,
-/* 527 */
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */
 /*!**********************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-loading-page/props.js ***!
   \**********************************************************************************/
@@ -33741,14 +33861,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 528 */,
-/* 529 */,
-/* 530 */,
-/* 531 */,
 /* 532 */,
 /* 533 */,
 /* 534 */,
-/* 535 */
+/* 535 */,
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */
 /*!****************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-sticky/props.js ***!
   \****************************************************************************/
@@ -33800,14 +33920,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 536 */,
-/* 537 */,
-/* 538 */,
-/* 539 */,
 /* 540 */,
 /* 541 */,
 /* 542 */,
-/* 543 */
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */
 /*!**************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-tabs/props.js ***!
   \**************************************************************************/
@@ -33889,14 +34009,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 544 */,
-/* 545 */,
-/* 546 */,
-/* 547 */,
 /* 548 */,
 /* 549 */,
 /* 550 */,
-/* 551 */
+/* 551 */,
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */
 /*!****************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-search/props.js ***!
   \****************************************************************************/
@@ -34032,10 +34152,6 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 552 */,
-/* 553 */,
-/* 554 */,
-/* 555 */,
 /* 556 */,
 /* 557 */,
 /* 558 */,
@@ -34046,7 +34162,11 @@ exports.default = _default;
 /* 563 */,
 /* 564 */,
 /* 565 */,
-/* 566 */
+/* 566 */,
+/* 567 */,
+/* 568 */,
+/* 569 */,
+/* 570 */
 /*!******************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-loadmore/props.js ***!
   \******************************************************************************/
@@ -34158,14 +34278,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 567 */,
-/* 568 */,
-/* 569 */,
-/* 570 */,
 /* 571 */,
 /* 572 */,
 /* 573 */,
-/* 574 */
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */
 /*!****************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-swiper/props.js ***!
   \****************************************************************************/
@@ -34308,14 +34428,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 575 */,
-/* 576 */,
-/* 577 */,
-/* 578 */,
 /* 579 */,
 /* 580 */,
 /* 581 */,
-/* 582 */
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */
 /*!******************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-back-top/props.js ***!
   \******************************************************************************/
@@ -34387,14 +34507,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 583 */,
-/* 584 */,
-/* 585 */,
-/* 586 */,
 /* 587 */,
 /* 588 */,
 /* 589 */,
-/* 590 */
+/* 590 */,
+/* 591 */,
+/* 592 */,
+/* 593 */,
+/* 594 */
 /*!***************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-popup/props.js ***!
   \***************************************************************************/
@@ -34491,14 +34611,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 591 */,
-/* 592 */,
-/* 593 */,
-/* 594 */,
 /* 595 */,
 /* 596 */,
 /* 597 */,
-/* 598 */
+/* 598 */,
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */
 /*!***************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-input/props.js ***!
   \***************************************************************************/
@@ -34703,10 +34823,6 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 599 */,
-/* 600 */,
-/* 601 */,
-/* 602 */,
 /* 603 */,
 /* 604 */,
 /* 605 */,
@@ -34715,7 +34831,11 @@ exports.default = _default;
 /* 608 */,
 /* 609 */,
 /* 610 */,
-/* 611 */
+/* 611 */,
+/* 612 */,
+/* 613 */,
+/* 614 */,
+/* 615 */
 /*!****************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-switch/props.js ***!
   \****************************************************************************/
@@ -34787,14 +34907,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 612 */,
-/* 613 */,
-/* 614 */,
-/* 615 */,
 /* 616 */,
 /* 617 */,
 /* 618 */,
-/* 619 */
+/* 619 */,
+/* 620 */,
+/* 621 */,
+/* 622 */,
+/* 623 */
 /*!***************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-empty/props.js ***!
   \***************************************************************************/
@@ -34871,10 +34991,6 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 620 */,
-/* 621 */,
-/* 622 */,
-/* 623 */,
 /* 624 */,
 /* 625 */,
 /* 626 */,
@@ -34885,7 +35001,11 @@ exports.default = _default;
 /* 631 */,
 /* 632 */,
 /* 633 */,
-/* 634 */
+/* 634 */,
+/* 635 */,
+/* 636 */,
+/* 637 */,
+/* 638 */
 /*!**************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-icon/icons.js ***!
   \**************************************************************************/
@@ -35116,7 +35236,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 635 */
+/* 639 */
 /*!**************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-icon/props.js ***!
   \**************************************************************************/
@@ -35223,14 +35343,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 636 */,
-/* 637 */,
-/* 638 */,
-/* 639 */,
 /* 640 */,
 /* 641 */,
 /* 642 */,
-/* 643 */
+/* 643 */,
+/* 644 */,
+/* 645 */,
+/* 646 */,
+/* 647 */
 /*!**************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-code/props.js ***!
   \**************************************************************************/
@@ -35282,10 +35402,6 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 644 */,
-/* 645 */,
-/* 646 */,
-/* 647 */,
 /* 648 */,
 /* 649 */,
 /* 650 */,
@@ -35296,7 +35412,11 @@ exports.default = _default;
 /* 655 */,
 /* 656 */,
 /* 657 */,
-/* 658 */
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */,
+/* 662 */
 /*!**************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-text/props.js ***!
   \**************************************************************************/
@@ -35424,10 +35544,6 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 659 */,
-/* 660 */,
-/* 661 */,
-/* 662 */,
 /* 663 */,
 /* 664 */,
 /* 665 */,
@@ -35443,7 +35559,11 @@ exports.default = _default;
 /* 675 */,
 /* 676 */,
 /* 677 */,
-/* 678 */
+/* 678 */,
+/* 679 */,
+/* 680 */,
+/* 681 */,
+/* 682 */
 /*!**********************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-swipe-action/props.js ***!
   \**********************************************************************************/
@@ -35470,12 +35590,12 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 679 */,
-/* 680 */,
-/* 681 */,
-/* 682 */,
 /* 683 */,
-/* 684 */
+/* 684 */,
+/* 685 */,
+/* 686 */,
+/* 687 */,
+/* 688 */
 /*!*******************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/libs/mixin/touch.js ***!
   \*******************************************************************/
@@ -35551,7 +35671,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 685 */
+/* 689 */
 /*!***************************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-swipe-action-item/props.js ***!
   \***************************************************************************************/
@@ -35610,7 +35730,7 @@ exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 686 */
+/* 690 */
 /*!*************************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-swipe-action-item/wxs.js ***!
   \*************************************************************************************/
@@ -35642,10 +35762,6 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 687 */,
-/* 688 */,
-/* 689 */,
-/* 690 */,
 /* 691 */,
 /* 692 */,
 /* 693 */,
@@ -35658,7 +35774,11 @@ exports.default = _default;
 /* 700 */,
 /* 701 */,
 /* 702 */,
-/* 703 */
+/* 703 */,
+/* 704 */,
+/* 705 */,
+/* 706 */,
+/* 707 */
 /*!******************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-textarea/props.js ***!
   \******************************************************************************/
@@ -35795,14 +35915,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 704 */,
-/* 705 */,
-/* 706 */,
-/* 707 */,
 /* 708 */,
 /* 709 */,
 /* 710 */,
-/* 711 */
+/* 711 */,
+/* 712 */,
+/* 713 */,
+/* 714 */,
+/* 715 */
 /*!*************************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-datetime-picker/props.js ***!
   \*************************************************************************************/
@@ -35936,7 +36056,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 712 */
+/* 716 */
 /*!******************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/libs/util/dayjs.js ***!
   \******************************************************************/
@@ -36248,14 +36368,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = 
 });
 
 /***/ }),
-/* 713 */,
-/* 714 */,
-/* 715 */,
-/* 716 */,
 /* 717 */,
 /* 718 */,
 /* 719 */,
-/* 720 */
+/* 720 */,
+/* 721 */,
+/* 722 */,
+/* 723 */,
+/* 724 */
 /*!****************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-picker/props.js ***!
   \****************************************************************************/
@@ -36352,14 +36472,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 721 */,
-/* 722 */,
-/* 723 */,
-/* 724 */,
 /* 725 */,
 /* 726 */,
 /* 727 */,
-/* 728 */
+/* 728 */,
+/* 729 */,
+/* 730 */,
+/* 731 */,
+/* 732 */
 /*!********************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-index-list/props.js ***!
   \********************************************************************************/
@@ -36406,14 +36526,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 729 */,
-/* 730 */,
-/* 731 */,
-/* 732 */,
 /* 733 */,
 /* 734 */,
 /* 735 */,
-/* 736 */
+/* 736 */,
+/* 737 */,
+/* 738 */,
+/* 739 */,
+/* 740 */
 /*!********************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-index-item/props.js ***!
   \********************************************************************************/
@@ -36433,14 +36553,14 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 737 */,
-/* 738 */,
-/* 739 */,
-/* 740 */,
 /* 741 */,
 /* 742 */,
 /* 743 */,
-/* 744 */
+/* 744 */,
+/* 745 */,
+/* 746 */,
+/* 747 */,
+/* 748 */
 /*!**********************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-index-anchor/props.js ***!
   \**********************************************************************************/
@@ -36487,14 +36607,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 745 */,
-/* 746 */,
-/* 747 */,
-/* 748 */,
 /* 749 */,
 /* 750 */,
 /* 751 */,
-/* 752 */
+/* 752 */,
+/* 753 */,
+/* 754 */,
+/* 755 */,
+/* 756 */
 /*!********************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-transition/props.js ***!
   \********************************************************************************/
@@ -36536,7 +36656,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 753 */
+/* 757 */
 /*!*************************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-transition/transition.js ***!
   \*************************************************************************************/
@@ -36553,7 +36673,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
-var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 754));
+var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 758));
 // 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
 var nextTick = function nextTick() {
   return new Promise(function (resolve) {
@@ -36645,7 +36765,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 754 */
+/* 758 */
 /*!***************************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-transition/nvue.ani-map.js ***!
   \***************************************************************************************/
@@ -36838,14 +36958,14 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 755 */,
-/* 756 */,
-/* 757 */,
-/* 758 */,
 /* 759 */,
 /* 760 */,
 /* 761 */,
-/* 762 */
+/* 762 */,
+/* 763 */,
+/* 764 */,
+/* 765 */,
+/* 766 */
 /*!**********************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-loading-icon/props.js ***!
   \**********************************************************************************/
@@ -36922,14 +37042,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 763 */,
-/* 764 */,
-/* 765 */,
-/* 766 */,
 /* 767 */,
 /* 768 */,
 /* 769 */,
-/* 770 */
+/* 770 */,
+/* 771 */,
+/* 772 */,
+/* 773 */,
+/* 774 */
 /*!***************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-badge/props.js ***!
   \***************************************************************************/
@@ -37019,14 +37139,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 771 */,
-/* 772 */,
-/* 773 */,
-/* 774 */,
 /* 775 */,
 /* 776 */,
 /* 777 */,
-/* 778 */
+/* 778 */,
+/* 779 */,
+/* 780 */,
+/* 781 */,
+/* 782 */
 /*!**************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-line/props.js ***!
   \**************************************************************************/
@@ -37077,14 +37197,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 779 */,
-/* 780 */,
-/* 781 */,
-/* 782 */,
 /* 783 */,
 /* 784 */,
 /* 785 */,
-/* 786 */
+/* 786 */,
+/* 787 */,
+/* 788 */,
+/* 789 */,
+/* 790 */
 /*!**************************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-swiper-indicator/props.js ***!
   \**************************************************************************************/
@@ -37131,14 +37251,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 787 */,
-/* 788 */,
-/* 789 */,
-/* 790 */,
 /* 791 */,
 /* 792 */,
 /* 793 */,
-/* 794 */
+/* 794 */,
+/* 795 */,
+/* 796 */,
+/* 797 */,
+/* 798 */
 /*!*****************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-overlay/props.js ***!
   \*****************************************************************************/
@@ -37180,14 +37300,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 795 */,
-/* 796 */,
-/* 797 */,
-/* 798 */,
 /* 799 */,
 /* 800 */,
 /* 801 */,
-/* 802 */
+/* 802 */,
+/* 803 */,
+/* 804 */,
+/* 805 */,
+/* 806 */
 /*!********************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-status-bar/props.js ***!
   \********************************************************************************/
@@ -37213,14 +37333,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 803 */,
-/* 804 */,
-/* 805 */,
-/* 806 */,
 /* 807 */,
 /* 808 */,
 /* 809 */,
-/* 810 */
+/* 810 */,
+/* 811 */,
+/* 812 */,
+/* 813 */,
+/* 814 */
 /*!*********************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-safe-bottom/props.js ***!
   \*********************************************************************************/
@@ -37240,14 +37360,14 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 811 */,
-/* 812 */,
-/* 813 */,
-/* 814 */,
 /* 815 */,
 /* 816 */,
 /* 817 */,
-/* 818 */
+/* 818 */,
+/* 819 */,
+/* 820 */,
+/* 821 */,
+/* 822 */
 /*!**************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-text/value.js ***!
   \**************************************************************************/
@@ -37355,7 +37475,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 819 */
+/* 823 */
 /*!********************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/libs/mixin/button.js ***!
   \********************************************************************/
@@ -37385,7 +37505,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 820 */
+/* 824 */
 /*!**********************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/libs/mixin/openType.js ***!
   \**********************************************************************/
@@ -37427,14 +37547,14 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-/* 821 */,
-/* 822 */,
-/* 823 */,
-/* 824 */,
 /* 825 */,
 /* 826 */,
 /* 827 */,
-/* 828 */
+/* 828 */,
+/* 829 */,
+/* 830 */,
+/* 831 */,
+/* 832 */
 /*!*****************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-toolbar/props.js ***!
   \*****************************************************************************/
@@ -37486,14 +37606,14 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 829 */,
-/* 830 */,
-/* 831 */,
-/* 832 */,
 /* 833 */,
 /* 834 */,
 /* 835 */,
-/* 836 */
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */,
+/* 840 */
 /*!**************************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/uview-ui/components/u-link/props.js ***!
   \**************************************************************************/
@@ -37548,213 +37668,6 @@ var _default = {
 };
 exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 837 */,
-/* 838 */,
-/* 839 */,
-/* 840 */,
-/* 841 */,
-/* 842 */,
-/* 843 */,
-/* 844 */,
-/* 845 */,
-/* 846 */,
-/* 847 */,
-/* 848 */,
-/* 849 */,
-/* 850 */,
-/* 851 */,
-/* 852 */,
-/* 853 */,
-/* 854 */,
-/* 855 */,
-/* 856 */,
-/* 857 */,
-/* 858 */,
-/* 859 */,
-/* 860 */,
-/* 861 */,
-/* 862 */,
-/* 863 */,
-/* 864 */,
-/* 865 */,
-/* 866 */,
-/* 867 */,
-/* 868 */,
-/* 869 */,
-/* 870 */,
-/* 871 */,
-/* 872 */,
-/* 873 */,
-/* 874 */,
-/* 875 */,
-/* 876 */,
-/* 877 */,
-/* 878 */,
-/* 879 */,
-/* 880 */,
-/* 881 */,
-/* 882 */,
-/* 883 */,
-/* 884 */,
-/* 885 */,
-/* 886 */,
-/* 887 */,
-/* 888 */,
-/* 889 */,
-/* 890 */,
-/* 891 */,
-/* 892 */,
-/* 893 */,
-/* 894 */,
-/* 895 */,
-/* 896 */,
-/* 897 */,
-/* 898 */,
-/* 899 */,
-/* 900 */,
-/* 901 */,
-/* 902 */,
-/* 903 */,
-/* 904 */,
-/* 905 */,
-/* 906 */,
-/* 907 */,
-/* 908 */,
-/* 909 */,
-/* 910 */,
-/* 911 */,
-/* 912 */,
-/* 913 */,
-/* 914 */,
-/* 915 */,
-/* 916 */,
-/* 917 */,
-/* 918 */,
-/* 919 */,
-/* 920 */,
-/* 921 */,
-/* 922 */,
-/* 923 */,
-/* 924 */
-/*!*******************************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/like-after.jpg ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAHkSURBVEiJ1ZS/a9RgGMc/b/JWOng3XKUU2j/glpYOCoIVMki94wIOLl2FjgUdHBw69E/QQUoHJwUL4lCacEI9yGAnLV0c7g9wOMRU2hRULsnjcE0879L7Peh3y/OQz+d53ycE/veorOKJba+g1D2gqESmBeqmaTr509MawPd8/i5xXFJQFKV+AnVE9gqO86GnwC+XF5TWLwHrkmk+AQhcz+yLvI+j6MFMtfqlS+CXywto/VHBXL9j94pAgzC8kUh0atL6DUPCpyoVjKUl4uNjmgcHEEUomEPr18BtAAPgW6VyB7g5ysTG/DxX1teZ3twE00zKKxfMlsBsLXToNF2XHxsb/NrexlxcZGp1Ne0lTKM1hlEcRZAkrNWIGw3M5eU/xQumBhCRcBwBQFit/vWcMJMlHwGlcQRN1+0sHUFyRXG8Ow48KzG8SgUF1/0ssDMxulLPr+3v11MBQBQEj4HDCeAPw7OzJ6mrvfPVsq7qXO4dcGtkeBCUZj3vPCkY7d1ZzzsPg6AE7A1LFnjbCYdL/qZiWfokl9tVcH9QeCEI1pTndX3umYJhJL3gPQWDSPrBoWMHXXbPCwtBsCbwIgO+0w8OfU7QHt+2nyqlHgKIyLMZx3k06LsDx7ftLd+2tyYO/qfzG9fjuIJLCBBGAAAAAElFTkSuQmCC"
-
-/***/ }),
-/* 925 */
-/*!*************************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/talk.jpg ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAG6SURBVEiJ1ZWxbtRAEIa/GVuiSRGJgsZFQBRpIkUK0vEIibjWlY8eFOEnCFWUB4gR4soQOFGkiQR0oedqWiRSXJEiSFektHco4l2c4y53iWnyV7uzq/+b+W3ZcNcl8y5khSVRxDMxnjpYAVA4NeF7VfF1kMvoVoCssCRWdh30BOJpdwxKhY+l4/Us0FRAb982NeITsHxddw2NcaSHuZzMBfT2bVMiPs/qepYMSnFsTUKuALLCkkj5cYPOJzWuHGvNuLR5Giu7LcwBlmuPoDBBVliiyq+bRjMpg9I5HvopwgQqdNuaAwjEKnT9Phiq0LF6fX/JSDsVAEfDiN8XsnDNewH9KwAHKz6vtFOx8ciFrvrf4oVr3is0ftsoFtXfiODUR3Q0jMIFv1605r38OrxFz9/YCxHe/Y+uzXj54ZX0a9ilnPHFoGxtDmWkHPt9AAxyGYkxaAsQ+HmwLWf/AAAqYwcYt2Sspm9taSpgkMsIR9o2qnuOJ1MBAIe5nIhjixaTiLIxE+AhlWMN4/1109Rn55N1hccBNq+brLBEha4KneYv0xnDSDk+2Jaz+jO/LrBuxgNV9poP+m7rDzNaqBsRs6WeAAAAAElFTkSuQmCC"
-
-/***/ }),
-/* 926 */
-/*!*****************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/utils/utils.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(wx) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.decode = decode;
-exports.decodeBase64 = decodeBase64;
-exports.format_time = format_time;
-exports.get_openid = get_openid;
-exports.subscirbe_message = subscirbe_message;
-var _ajax_request = __webpack_require__(/*! ./ajax_request.js */ 438);
-function get_openid() {
-  var _success = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  wx.login({
-    success: function success(r) {
-      if (r.code) {
-        // 由于微信官方要求，获取用户openid的接口调用必须在后端实现，此处把r.code发给后端，换取openid
-        (0, _ajax_request.fetch_data)("POST", "fetch_openid", {
-          "code": r.code
-        }, "user", function (res) {
-          if (res.data.openid) {
-            _success(res.data.openid);
-          } else {
-            console.log("openid获取失败");
-          }
-        });
-      } else {
-        console.log("openid获取失败");
-      }
-    }
-  });
-}
-function decodeBase64(encodedString) {
-  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-  var str = String(encodedString).replace(/=+$/, '');
-  if (str.length % 4 === 1) {
-    throw new Error("'decodeBase64' failed: The string to be decoded is not correctly encoded.");
-  }
-  var output = '';
-  for (var bc = 0, bs, buffer, idx = 0; buffer = str.charAt(idx++); ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer, bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
-    buffer = chars.indexOf(buffer);
-  }
-  return output;
-}
-function decode(encodedString) {
-  var byteString = decodeBase64(encodedString);
-  var decodedString = decodeURIComponent(escape(byteString));
-  return decodedString;
-}
-function format_time(datetime) {
-  var date = new Date(datetime);
-  if (isNaN(date.getTime())) {
-    console.log('Invalid datetime:', datetime);
-    return null;
-  }
-  var year = date.getUTCFullYear().toString();
-  var month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-  var day = date.getUTCDate().toString().padStart(2, '0');
-  var hours = date.getUTCHours().toString().padStart(2, '0');
-  var minutes = date.getUTCMinutes().toString().padStart(2, '0');
-  var seconds = date.getUTCSeconds().toString().padStart(2, '0');
-  return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hours, ":").concat(minutes, ":").concat(seconds);
-}
-function subscirbe_message(template_Ids) {
-  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  //template_Ids为列表，对应的消息模板
-  wx.requestSubscribeMessage({
-    tmplIds: template_Ids,
-    success: function success(res) {
-      //用户授权后，无论同意与否
-      if (res.errMsg == 'requestSubscribeMessage:ok') {
-        callback();
-      }
-    },
-    fail: function fail(e) {
-      console.log(e);
-    }
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
-
-/***/ }),
-/* 927 */
-/*!********************************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/like-before.jpg ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFRSURBVEiJ5dSvSkRBFAbwn7rBsMG4cUHBDT6A4YKbTIsa9jEMKwZfwSD4EgZx41aDBsFgXFAwKBgWNGgwWATDPRevy133bxE/GJg5f75v5syc4a9jboC9jA3UsIguLvEW/qXwr+EDd+F/7ydaKCA/wBmquYQtHIXwJk5QwXOI7eAQ87gadJoS2rjASoG/gtMYlQL/SuS2g6tw5+eDnL9gP7ehUogc9AeV8SIty7g4jtxWrKuxLueDmuhMQJ4hI81O0glO82FYlb6USfEovfjtWHexzHe9P41f+37s5eYl0QLZCW5Qn1Igjzqu84YSHpDMgDzBvYKKNEKk6I2PikpwNAYFtHA7oUg1cltD4rTQk/5Do6IWOUPJJxGp4Qm7Y2wIaaM8DRHJyJvjko8isjYteV7k1c8nnIRtavIikUT678yMPEMivfie2TRkIdZj/CN8AZAQP78pCgM5AAAAAElFTkSuQmCC"
 
 /***/ })
 ]]);

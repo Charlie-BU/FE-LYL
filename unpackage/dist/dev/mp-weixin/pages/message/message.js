@@ -103,16 +103,16 @@ var components
 try {
   components = {
     uTabs: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs/u-tabs.vue */ 538))
+      return Promise.all(/*! import() | uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs/u-tabs.vue */ 542))
     },
     uSwipeAction: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-swipe-action/u-swipe-action */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-swipe-action/u-swipe-action")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swipe-action/u-swipe-action.vue */ 673))
+      return Promise.all(/*! import() | uview-ui/components/u-swipe-action/u-swipe-action */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-swipe-action/u-swipe-action")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swipe-action/u-swipe-action.vue */ 677))
     },
     uSwipeActionItem: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-swipe-action-item/u-swipe-action-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-swipe-action-item/u-swipe-action-item")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swipe-action-item/u-swipe-action-item.vue */ 679))
+      return Promise.all(/*! import() | uview-ui/components/u-swipe-action-item/u-swipe-action-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-swipe-action-item/u-swipe-action-item")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swipe-action-item/u-swipe-action-item.vue */ 683))
     },
     uEmpty: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-empty/u-empty */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-empty/u-empty")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-empty/u-empty.vue */ 614))
+      return Promise.all(/*! import() | uview-ui/components/u-empty/u-empty */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-empty/u-empty")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-empty/u-empty.vue */ 618))
     },
   }
 } catch (e) {

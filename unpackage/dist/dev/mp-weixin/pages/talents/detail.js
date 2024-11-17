@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uLoadingPage: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 522))
+      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 526))
     },
   }
 } catch (e) {
@@ -182,7 +182,7 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
 var wxLogin = function wxLogin() {
   __webpack_require__.e(/*! require.ensure | components/wx-login/wx-login */ "components/wx-login/wx-login").then((function () {
-    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 601));
+    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 605));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _this;

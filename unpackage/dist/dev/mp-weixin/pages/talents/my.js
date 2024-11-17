@@ -101,16 +101,16 @@ var components
 try {
   components = {
     uLoadingPage: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 522))
+      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 526))
     },
     uTabs: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs/u-tabs.vue */ 538))
+      return Promise.all(/*! import() | uview-ui/components/u-tabs/u-tabs */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs/u-tabs")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs/u-tabs.vue */ 542))
     },
     myXmItems: function () {
-      return __webpack_require__.e(/*! import() | components/common/my-xm-items */ "components/common/my-xm-items").then(__webpack_require__.bind(null, /*! @/components/common/my-xm-items.vue */ 622))
+      return __webpack_require__.e(/*! import() | components/common/my-xm-items */ "components/common/my-xm-items").then(__webpack_require__.bind(null, /*! @/components/common/my-xm-items.vue */ 626))
     },
     myZdItem: function () {
-      return __webpack_require__.e(/*! import() | components/common/my-zd-item */ "components/common/my-zd-item").then(__webpack_require__.bind(null, /*! @/components/common/my-zd-item.vue */ 691))
+      return __webpack_require__.e(/*! import() | components/common/my-zd-item */ "components/common/my-zd-item").then(__webpack_require__.bind(null, /*! @/components/common/my-zd-item.vue */ 695))
     },
   }
 } catch (e) {
@@ -178,7 +178,7 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
 var wxLogin = function wxLogin() {
   __webpack_require__.e(/*! require.ensure | components/wx-login/wx-login */ "components/wx-login/wx-login").then((function () {
-    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 601));
+    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 605));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _this;
