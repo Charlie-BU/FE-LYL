@@ -1,7 +1,0 @@
-@charset "UTF-8";
-/* 颜色变量 */
-/* 公共样式 */
-.u-status-bar.data-v-13f16680 {
-  width: 100%;
-}
-

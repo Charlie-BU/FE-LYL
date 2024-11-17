@@ -326,6 +326,15 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor":"#1abfc0"
 			}
+		},
+		{
+			"path" : "pages/square/detail",
+			"style" : 
+			{
+				"navigationBarTitleText": "帖子详情",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#1abfc0"
+			}
 		}
 	],
 	"globalStyle": {

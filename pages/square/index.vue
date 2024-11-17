@@ -38,6 +38,9 @@
 							{{post.title}}
 						</div>
 						<div v-if="post.content" class="post-content">{{post.content}}</div>
+						<!-- //todo  格式与显示条件 -->
+						<p @click="go_to_detail(post.id)" style="color: skyblue;">显示详情</p>
+						
 						<div v-if="post.post_image" class="post-content">
 							<div v-if="post.post_image.length>=1 && post.post_image.length<=3"
 								class="image-grid" style="height: 200rpx;">
@@ -174,6 +177,11 @@
 					}
 				})
 			},
+			go_to_detail(id){
+				uni.navigateTo({
+					url: "/pages/square/detail?id=" + id
+				})
+			}
 			// search() {
 			// 	this.current = 4;
 			// 	wx.showToast({

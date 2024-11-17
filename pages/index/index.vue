@@ -360,7 +360,7 @@
 			//项目点击
 			itemClick(res) {
 				console.log(res);
-				let { item } = res
+				let  item  = res
 				if (item.type == 1) {
 					_this.toNext(`/pages/index/detail?id=${item.id}`)
 				} else {
