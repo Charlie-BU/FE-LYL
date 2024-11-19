@@ -110,7 +110,7 @@ try {
       return __webpack_require__.e(/*! import() | components/common/my-xm-items */ "components/common/my-xm-items").then(__webpack_require__.bind(null, /*! @/components/common/my-xm-items.vue */ 633))
     },
     myZdItem: function () {
-      return __webpack_require__.e(/*! import() | components/common/my-zd-item */ "components/common/my-zd-item").then(__webpack_require__.bind(null, /*! @/components/common/my-zd-item.vue */ 702))
+      return __webpack_require__.e(/*! import() | components/common/my-zd-item */ "components/common/my-zd-item").then(__webpack_require__.bind(null, /*! @/components/common/my-zd-item.vue */ 707))
     },
   }
 } catch (e) {

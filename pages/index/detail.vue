@@ -79,7 +79,6 @@
 			}
 		},
 		onLoad(e) {
-			console.log("in detail");
 			_this = this;
 			if (e.id) {
 				_this.id = e.id

@@ -187,7 +187,7 @@ var wxLogin = function wxLogin() {
 };
 var coopList = function coopList() {
   __webpack_require__.e(/*! require.ensure | pages/index/cooperation-list */ "pages/index/cooperation-list").then((function () {
-    return resolve(__webpack_require__(/*! @/pages/index/cooperation-list.vue */ 936));
+    return resolve(__webpack_require__(/*! @/pages/index/cooperation-list.vue */ 702));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _this;
@@ -201,7 +201,6 @@ var _default = {
     };
   },
   onLoad: function onLoad(e) {
-    console.log("in detail");
     _this = this;
     if (e.id) {
       _this.id = e.id;
