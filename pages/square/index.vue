@@ -18,19 +18,16 @@
 
 		<div v-for="(post, index) in posts" :key="index">
 
-			<section class="section">
+			<section @click="go_to_detail(post.id, post.liked)" class="section">
 				<div class="boxList flex">
 					<div style="display: flex;">
 						<div>
-							<img v-if="post.poster_pic" class="lIcon" :src="baseUrl+post.poster_pic"
-								alt="AVATAR" />
+							<img v-if="post.poster_pic" class="lIcon" :src="baseUrl+post.poster_pic" alt="AVATAR" />
 						</div>
 						<div class="poster-name">
-							<span v-if="post.poster_realname"
-								style="display: block;">{{post.poster_realname}}</span>
+							<span v-if="post.poster_realname" style="display: block;">{{post.poster_realname}}</span>
 							<span v-else style="display: block;">{{post.poster_nickname}}</span>
-							<span v-if="post.time" class="post-time"
-								style="display: block;">{{post.time}}</span>
+							<span v-if="post.time" class="post-time" style="display: block;">{{post.time}}</span>
 						</div>
 					</div>
 					<div class="right">
@@ -38,39 +35,31 @@
 							{{post.title}}
 						</div>
 						<div v-if="post.content" class="post-content">{{post.content}}</div>
-						<!-- //todo  格式与显示条件 -->
-						<p @click="go_to_detail(post.id)" style="color: skyblue;">显示详情</p>
-						
+			
 						<div v-if="post.post_image" class="post-content">
-							<div v-if="post.post_image.length>=1 && post.post_image.length<=3"
-								class="image-grid" style="height: 200rpx;">
+							<div v-if="post.post_image.length>=1 && post.post_image.length<=3" class="image-grid" style="height: 200rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
-									<img v-if="image && image.length>=6" class="post-images"
-										:src="image" @click="image_operation(image)" />
+									<img v-if="image && image.length>=6" class="post-images" :src="image" @click.stop="image_operation(image)" />
 								</div>
 							</div>
-							<div v-else-if="post.post_image.length>=4 && post.post_image.length<=6"
-								class="image-grid" style="height: 400rpx;">
+							<div v-else-if="post.post_image.length>=4 && post.post_image.length<=6" class="image-grid" style="height: 400rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
-									<img v-if="image && image.length>=6" class="post-images"
-										:src="image" @click="image_operation(image)" />
+									<img v-if="image && image.length>=6" class="post-images" :src="image" @click.stop="image_operation(image)" />
 								</div>
 							</div>
-							<div v-else-if="post.post_image.length>=7 && post.post_image.length<=9"
-								class="image-grid" style="height: 600rpx;">
+							<div v-else-if="post.post_image.length>=7 && post.post_image.length<=9" class="image-grid" style="height: 600rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
-									<img v-if="image && image.length>=6" class="post-images"
-										:src="image" @click="image_operation(image)" />
+									<img v-if="image && image.length>=6" class="post-images" :src="image" @click.stop="image_operation(image)" />
 								</div>
 							</div>
 						</div>
 						<div style="text-align: end; margin-top: 30rpx;">
-							<div style="display: inline-block; text-align: center; margin-right: 30rpx;" @click="like_post_or_cancel(post)">
+							<div style="display: inline-block; text-align: center; margin-right: 30rpx;" @click.stop="like_post_or_cancel(post)">
 								<img v-if="post.liked" class="bottom-icon" src="../../static/square/like-after.jpg" />
 								<img v-else class="bottom-icon" src="../../static/square/like-before.jpg" />
 								<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.likes}}</p>
 							</div>
-							<div style="display: inline-block; text-align: center;" @click="send_comment(post)">
+							<div style="display: inline-block; text-align: center;" @click.stop="send_comment(post)">
 								<img class="bottom-icon" src="../../static/square/talk.jpg" />
 								<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.comment_length}}</p>
 							</div>
@@ -108,7 +97,7 @@
 				this.posts = res.data.posts.map(post => ({
 					...post,
 					time: utils.format_time(post.time),
-					liked: false
+					liked: false,
 				}));
 			})
 		},
@@ -149,6 +138,7 @@
 				wx.showModal({
 					title: "评论",
 					editable: true,
+					placeHolderText: "请发表您的评论",
 					confirmText: "评论",
 					success: res => {
 						if (res.confirm) {
@@ -177,11 +167,11 @@
 					}
 				})
 			},
-			go_to_detail(id){
+			go_to_detail(id, liked) {
 				uni.navigateTo({
-					url: "/pages/square/detail?id=" + id
+					url: "/pages/square/detail?id=" + id + "&liked=" + liked,
 				})
-			}
+			},
 			// search() {
 			// 	this.current = 4;
 			// 	wx.showToast({

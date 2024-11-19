@@ -1,0 +1,154 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 公共样式 */
+.items-container .zp-item.data-v-7eaa232b {
+  padding: 35rpx;
+  margin-bottom: 16rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.items-container .zp-item > view.data-v-7eaa232b:not(:first-child) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
+.items-container .zp-item button.data-v-7eaa232b {
+  padding: 0;
+  width: 190rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  border-radius: 30rpx;
+  color: #fff;
+  background: #02ABAB;
+  font-size: 24rpx;
+}
+.items-container .zp-item-title.data-v-7eaa232b {
+  display: flex;
+}
+.items-container .zp-item-title .left.data-v-7eaa232b {
+  display: flex;
+  align-items: center;
+}
+.items-container .zp-item-title .left .left-img.data-v-7eaa232b {
+  width: 63rpx;
+  height: 63rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+.items-container .zp-item-title .left text.data-v-7eaa232b {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+.items-container .zp-item-title .center.data-v-7eaa232b {
+  width: 160rpx;
+}
+.items-container .zp-item-title .right.data-v-7eaa232b {
+  color: #02ABAB;
+  font-size: 30rpx;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.items-container .zp-item-tab .tab-item.data-v-7eaa232b {
+  background: #EFEFEF;
+  color: #5E5E5E;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+}
+.items-container .zp-item-tab .tab-item.data-v-7eaa232b:not(:first-child) {
+  margin-left: 10rpx;
+}
+.items-container .zp-item-bot.data-v-7eaa232b {
+  align-items: center;
+  justify-content: space-between;
+}
+.items-container .zp-item-bot .left.data-v-7eaa232b {
+  display: flex;
+  align-items: center;
+}
+.items-container .zp-item-bot .left .name-title.data-v-7eaa232b {
+  color: #292929;
+}
+.items-container .zp-item-bot .right text.data-v-7eaa232b {
+  color: #7A7A7A;
+  font-size: 26rpx;
+}
+.items-container .zp-item-bot .right text.data-v-7eaa232b:not(:last-child) {
+  margin-right: 6rpx;
+}
+.items-container .zp-item-bot-btns.data-v-7eaa232b {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.items-container .zp-item-bot-btns .left.data-v-7eaa232b {
+  display: flex;
+  align-items: center;
+}
+.items-container .zp-item-bot-btns .left .left-icon.data-v-7eaa232b {
+  width: 32rpx;
+  margin-right: 10rpx;
+}
+.items-container .zp-item-bot-btns .left text.data-v-7eaa232b {
+  font-size: 26rpx;
+}
+.items-container .zp-item-bot-btns .blue-text.data-v-7eaa232b {
+  color: #2F94FF;
+}
+.items-container .zp-item-bot-btns .success-text.data-v-7eaa232b {
+  color: #12A70B;
+}
+.items-container .zp-item-bot-btns .theme-text.data-v-7eaa232b {
+  color: #02AAAB;
+}
+.items-container .zp-item-bot-btns .red-text.data-v-7eaa232b {
+  color: #E92129;
+}
+.items-container .zp-item-bot-btns .yellow-text.data-v-7eaa232b {
+  color: #FF9900;
+}
+.items-container .zp-item-bot-btns .right.data-v-7eaa232b {
+  display: flex;
+}
+.items-container .zp-item-bot-btns .right button.data-v-7eaa232b {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8rpx;
+  width: 116rpx;
+  padding: 0;
+  line-height: 52rpx;
+}
+.items-container .zp-item-bot-btns .right button.data-v-7eaa232b:not(:last-child) {
+  margin-right: 14rpx;
+}
+.items-container .zp-item-bot-btns .right button.theme-btn.data-v-7eaa232b {
+  background: #02AAAB;
+  color: #fff;
+}
+.items-container .zp-item-bot-btns .right button.red-btn.data-v-7eaa232b {
+  background: #FFF6F6;
+  border: 2rpx solid #F03D37;
+  color: #F03D37;
+}
+.items-container .zp-item-bot-btns .right button.ty-btn.data-v-7eaa232b {
+  background: #FFF9F1;
+  border: 2rpx solid #FF9900;
+  color: #FF9900;
+}
+.items-container .zp-item-bot-btns .right button.qy-btn.data-v-7eaa232b {
+  background: #F5FFF5;
+  color: #12A70B;
+  border: 2rpx solid #12A70B;
+}
+.items-container .zp-item-bot-btns .right button .btn-icon.data-v-7eaa232b {
+  width: 32rpx;
+  margin-right: 6rpx;
+}
+.items-container .zp-item-bot-btns .right button text.data-v-7eaa232b {
+  font-size: 26rpx;
+}
+

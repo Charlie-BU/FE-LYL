@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 公共样式 */
+.container.data-v-484772fa {
+  height: 100%;
+}
+.container .items.data-v-484772fa {
+  padding: 15rpx 15rpx 0 15rpx;
+}
+

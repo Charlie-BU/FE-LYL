@@ -1,0 +1,19 @@
+{
+  "navigationBarTitleText": "首页",
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#15B3B4",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-loading-page": "/uview-ui/components/u-loading-page/u-loading-page",
+    "u-sticky": "/uview-ui/components/u-sticky/u-sticky",
+    "u-tabs": "/uview-ui/components/u-tabs/u-tabs",
+    "u-search": "/uview-ui/components/u-search/u-search",
+    "my-items": "/components/common/my-items",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore",
+    "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
+    "u-back-top": "/uview-ui/components/u-back-top/u-back-top",
+    "u-popup": "/uview-ui/components/u-popup/u-popup",
+    "u-input": "/uview-ui/components/u-input/u-input",
+    "weixin-login": "/components/wx-login/wx-login"
+  }
+}

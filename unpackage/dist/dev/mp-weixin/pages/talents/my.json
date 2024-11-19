@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "我的",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "u-loading-page": "/uview-ui/components/u-loading-page/u-loading-page",
+    "u-tabs": "/uview-ui/components/u-tabs/u-tabs",
+    "my-xm-items": "/components/common/my-xm-items",
+    "my-zd-item": "/components/common/my-zd-item",
+    "weixin-login": "/components/wx-login/wx-login"
+  }
+}
