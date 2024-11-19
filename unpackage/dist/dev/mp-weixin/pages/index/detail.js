@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uLoadingPage: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 525))
+      return Promise.all(/*! import() | uview-ui/components/u-loading-page/u-loading-page */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-loading-page/u-loading-page")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loading-page/u-loading-page.vue */ 533))
     },
   }
 } catch (e) {
@@ -182,7 +182,12 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
 var wxLogin = function wxLogin() {
   __webpack_require__.e(/*! require.ensure | components/wx-login/wx-login */ "components/wx-login/wx-login").then((function () {
-    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 604));
+    return resolve(__webpack_require__(/*! @/components/wx-login/wx-login.vue */ 612));
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+};
+var coopList = function coopList() {
+  __webpack_require__.e(/*! require.ensure | pages/index/cooperation-list */ "pages/index/cooperation-list").then((function () {
+    return resolve(__webpack_require__(/*! @/pages/index/cooperation-list.vue */ 936));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _this;
@@ -196,6 +201,7 @@ var _default = {
     };
   },
   onLoad: function onLoad(e) {
+    console.log("in detail");
     _this = this;
     if (e.id) {
       _this.id = e.id;
@@ -211,7 +217,8 @@ var _default = {
     _this.get_user_info();
   },
   components: {
-    wxLogin: wxLogin
+    wxLogin: wxLogin,
+    coopList: coopList
   },
   onShow: function onShow() {
     _this.get_items_xq();

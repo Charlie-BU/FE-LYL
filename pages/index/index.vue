@@ -1,4 +1,5 @@
 <template>
+	<!--我要找活-->
 	<view class="container">
 		<u-loading-page :loading="true" v-if="load" fontSize="28rpx" />
 		<block v-else>
@@ -359,8 +360,7 @@
 			},
 			//项目点击
 			itemClick(res) {
-				console.log(res);
-				let  item  = res
+				let  item  = res.item;
 				if (item.type == 1) {
 					_this.toNext(`/pages/index/detail?id=${item.id}`)
 				} else {

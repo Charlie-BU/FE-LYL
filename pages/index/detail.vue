@@ -1,4 +1,5 @@
 <template>
+	<!--我要找活-->
 	<view class="container">
 		<u-loading-page :loading="true" v-if="load" fontSize="28rpx" />
 		<block v-else>
@@ -7,11 +8,13 @@
 				<view class="left-text">{{detail.title}}</view>
 				<view class="right-text">{{detail.salary + detail.salary_unit}}</view>
 			</view>
+			
 			<view class="project-head">
 				<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFit" class="left-img"/>
 				<view class="right">
 					<view class="name-title">{{detail.user.qy_name}}</view>
 					<view class="sub-name-title">{{detail.user.user_name}}</view>
+					<view style="font-size: inherit;font-weight: 600;">评分</view>
 				</view>
 				<view class="time-text">{{detail.update_time_text}}</view>
 			</view>
@@ -45,6 +48,7 @@
 						<view class="left-text">备注信息：</view>
 						<view class="right-text">{{detail.remark}}</view>
 					</view>
+					<coopList></coopList>
 				</view>
 			</view>
 			<view style="height: 136rpx;"></view>
@@ -62,7 +66,8 @@
 </template>
 
 <script>
-	import wxLogin from "@/components/wx-login/wx-login.vue"
+	import wxLogin from "@/components/wx-login/wx-login.vue";
+	import coopList from "@/pages/index/cooperation-list.vue";
 	var _this;
 	const GoEasy = uni.$GoEasy;
 	export default {
@@ -74,6 +79,7 @@
 			}
 		},
 		onLoad(e) {
+			console.log("in detail");
 			_this = this;
 			if (e.id) {
 				_this.id = e.id
@@ -89,7 +95,8 @@
 			_this.get_user_info()
 		},
 		components:{
-			wxLogin
+			wxLogin,
+			coopList,
 		},
 		onShow() {
 			_this.get_items_xq()
@@ -227,7 +234,6 @@
 <style lang="scss" scoped>
 	@import "static/css/item.scss";
 	.container {
-		height: 100%;
 		background: #fff;
 		position: relative;
 	}

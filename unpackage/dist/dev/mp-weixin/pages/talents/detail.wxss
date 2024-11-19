@@ -133,4 +133,36 @@
   background: #fff;
   position: relative;
 }
+.top.data-v-1cad5292 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 40rpx;
+}
+.top .left-text.data-v-1cad5292 {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #141414;
+}
+.top .left-img.data-v-1cad5292 {
+  margin-right: 28rpx;
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+}
+.top .center-text.data-v-1cad5292 {
+  font-size: 32rpx;
+  font-weight: 500;
+  flex: 1;
+}
+.top .right-text.data-v-1cad5292 {
+  color: #02ABAB;
+  font-size: 34rpx;
+  font-weight: bold;
+}
+.score.data-v-1cad5292 {
+  margin-left: 135rpx;
+  font-size: inherit;
+  font-weight: 700;
+}
 

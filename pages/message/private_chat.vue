@@ -257,13 +257,21 @@
 						<image src="@/static/message/chat-file.png" mode="widthFix" class="item-img" />
 						<view class="item-text">文件</view>
 					</view>
-					<view class="bot-item" @click="send_custom_msg('swap_phone')">
+					<view class="bot-item" @click="confirm_coopration('swap_phone')">
 						<image src="@/static/message/chat-phone.png" mode="widthFix" class="item-img" />
-						<view class="item-text">换电话</view>
+						<view class="item-text">确认合作</view>
 					</view>
-					<view class="bot-item" @click="send_custom_msg()">
+					<view class="bot-item" @click="grade_coopration()">
 						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
-						<view class="item-text">换微信</view>
+						<view class="item-text">合作评分</view>
+					</view>
+					<view class="bot-item" @click="sign_contrast()">
+						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
+						<view class="item-text">签署合同</view>
+					</view>
+					<view class="bot-item" @click="manage_asset()">
+						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
+						<view class="item-text">资金代管</view>
 					</view>
 				</view>
 			</view>
@@ -1085,7 +1093,19 @@
 				uni.previewImage({
 					urls: [item.payload.url]
 				})
-			}
+			},
+			confirm_coopration() {
+				console.log("确认合作");
+			},
+			grade_coopration() {
+				console.log("合作打分");
+			},
+			sign_contrast() {
+				console.log("签署合同");
+			},
+			manage_asset() {
+				console.log("资金代管");
+			},
 		}
 	}
 </script>

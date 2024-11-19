@@ -4,12 +4,13 @@
 			<view class="zp-item-title">
 				<view class="left" v-if="item.type == 1">
 					<text>{{item.title}}</text>
+					<text class="score">评分</text>
 				</view>
 				<view class="left" v-else>
 					<image :src="getFullUrl(item.user.head_pic)" class="left-img" mode="aspectFit"/>
 					<text>{{item.user.user_name}}</text>
+					<text class="score">评分</text>
 				</view>
-				<view class="center"></view>
 				<view class="right">{{item.salary + item.salary_unit}}</view>
 			</view>
 			<view class="zp-item-tab">
@@ -145,13 +146,15 @@
 						border-radius: 50%;
 						margin-right: 12rpx;
 					}
+					.score{
+						font-size: 30rpx;
+						margin-left: 20rpx;
+						font-weight: 800;
+					}
 					text{
 						font-size: 34rpx;
 						font-weight: 500;
 					}
-				}
-				.center{
-					width: 160rpx;
 				}
 				.right{
 					color: #02ABAB;

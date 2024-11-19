@@ -101,10 +101,10 @@ var components
 try {
   components = {
     uInput: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 596))
+      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 604))
     },
     uPopup: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 588))
+      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 596))
     },
   }
 } catch (e) {
@@ -212,6 +212,14 @@ var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
 var _utils = __webpack_require__(/*! @/lib/utils */ 338);
 var _RecorderManager = _interopRequireDefault(__webpack_require__(/*! @/lib/RecorderManager */ 429));
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1351,6 +1359,18 @@ var _default = {
       uni.previewImage({
         urls: [item.payload.url]
       });
+    },
+    confirm_coopration: function confirm_coopration() {
+      console.log("确认合作");
+    },
+    grade_coopration: function grade_coopration() {
+      console.log("合作打分");
+    },
+    sign_contrast: function sign_contrast() {
+      console.log("签署合同");
+    },
+    manage_asset: function manage_asset() {
+      console.log("资金代管");
     }
   }
 };
