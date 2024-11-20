@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "人才详情",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-loading-page": "/uview-ui/components/u-loading-page/u-loading-page",
+    "weixin-login": "/components/wx-login/wx-login"
+  }
+}

@@ -167,9 +167,15 @@
 			},
 
 			send_comment(post) {
+				wx.showToast({
+					title: "请稍后...",
+					icon: "loading",
+					duration: 10000,
+				});
 				wx.showModal({
 					title: "评论",
 					editable: true,
+					placeholderText: "请发表您的评论",
 					confirmText: "评论",
 					success: res => {
 						if (res.confirm) {
@@ -211,6 +217,11 @@
 					content: '确定删除该帖子',
 					success: res => {
 						if (res.confirm) {
+							wx.showToast({
+								title: "删除中...",
+								icon: "loading",
+								duration: 10000,
+							});
 							const data = {
 								"my_id": this.user_id,
 								"post_id": post_id,
@@ -258,6 +269,11 @@
 					content: '确定删除该评论',
 					success: res => {
 						if (res.confirm) {
+							wx.showToast({
+								title: "删除中...",
+								icon: "loading",
+								duration: 10000,
+							});
 							const data = {
 								"my_id": this.user_id,
 								"comment_id": comment_id,

@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "审核",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#15B3B4",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "u-tabs": "/uview-ui/components/u-tabs/u-tabs",
+    "my-items": "/components/common/my-items",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore"
+  }
+}

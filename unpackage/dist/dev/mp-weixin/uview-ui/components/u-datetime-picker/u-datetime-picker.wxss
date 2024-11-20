@@ -1,0 +1,13 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 公共样式 */
+view.data-v-ecaf3bdc, scroll-view.data-v-ecaf3bdc, swiper-item.data-v-ecaf3bdc {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  align-items: stretch;
+  align-content: flex-start;
+}
+
