@@ -1,8 +1,0 @@
-@charset "UTF-8";
-/* 颜色变量 */
-/* 公共样式 */
-.u-sticky.data-v-5d41d740 {
-  position: -webkit-sticky;
-  position: sticky;
-}
-
