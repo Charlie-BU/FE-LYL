@@ -3,7 +3,7 @@ var res = ""
 // 服务器ip
 var local_ip = 'http://127.0.0.1:8000/'
 var release_ip = 'https://liyilian.cn/'
-var run_ip = local_ip
+var run_ip = release_ip
 
 export function fetch_data(request_type=null, url=null, data=null, blue=null, success=null){
 	let full_url = run_ip + blue + '/' + url
