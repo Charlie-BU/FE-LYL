@@ -211,13 +211,18 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
-var _utils = __webpack_require__(/*! @/lib/utils */ 338);
+var _ajax_request = __webpack_require__(/*! ../../utils/ajax_request.js */ 441);
+var utils = _interopRequireWildcard(__webpack_require__(/*! ../../utils/utils.js */ 442));
+var _utils2 = __webpack_require__(/*! @/lib/utils */ 338);
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 //
 //
 //
@@ -347,7 +352,7 @@ var _default = {
   },
 
   methods: {
-    formatDate: _utils.formatDate,
+    formatDate: _utils2.formatDate,
     is_self: function is_self(item) {
       var senderId = item.lastMessage.senderId;
       // let arr = senderId.split('_')
@@ -505,24 +510,32 @@ var _default = {
       });
     },
     clickItem: function clickItem(item) {
-      console.log('clickItem', item);
-      // _this.toNext(`/pages/message/private_chat?id=user_3`)
-      var data = item.data;
-      var title = '';
-      switch (data.identity) {
-        case 1:
-          title = data.user_name;
-          break;
-        case 2:
-          title = data.qy_name;
-          break;
-        case 3:
-          title = data.kf_name;
-          break;
-        default:
-          break;
-      }
-      _this.toNext("/pages/message/private_chat?id=".concat(item.userId, "&title=").concat(title));
+      // 询问用户是否订阅消息提醒
+      utils.get_openid(function (openid) {
+        (0, _ajax_request.fetch_data)("POST", "store_openid", {
+          "my_id": _this.user_id,
+          "openid": openid
+        }, "user");
+      });
+      utils.subscirbe_message(['8AMX7lHwjpeH4uN-6XslAmSDJhcbbsJcB_RLdIcQZ4o'], function () {
+        console.log('clickItem', item);
+        var data = item.data;
+        var title = '';
+        switch (data.identity) {
+          case 1:
+            title = data.user_name;
+            break;
+          case 2:
+            title = data.qy_name;
+            break;
+          case 3:
+            title = data.kf_name;
+            break;
+          default:
+            break;
+        }
+        _this.toNext("/pages/message/private_chat?id=".concat(item.userId, "&title=").concat(title));
+      });
     }
   }
 };

@@ -60,7 +60,7 @@ export function subscirbe_message(template_Ids, callback = null) {
 	wx.requestSubscribeMessage({
 		tmplIds: template_Ids,
 		success(res) {
-			//用户授权后，无论同意与否
+			// 用户授权后，无论同意与否
 			if (res.errMsg == 'requestSubscribeMessage:ok') {
 				callback();
 			} 

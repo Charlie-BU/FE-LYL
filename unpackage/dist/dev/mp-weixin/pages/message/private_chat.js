@@ -200,9 +200,10 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
+/* WEBPACK VAR INJECTION */(function(uni, wx) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -210,8 +211,14 @@ exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
-var _utils = __webpack_require__(/*! @/lib/utils */ 338);
+var _ajax_request = __webpack_require__(/*! ../../utils/ajax_request.js */ 441);
+var utils = _interopRequireWildcard(__webpack_require__(/*! ../../utils/utils.js */ 442));
+var _utils2 = __webpack_require__(/*! @/lib/utils */ 338);
 var _RecorderManager = _interopRequireDefault(__webpack_require__(/*! @/lib/RecorderManager */ 429));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+//
+//
 //
 //
 //
@@ -599,7 +606,7 @@ var _default = {
     GoEasy.im.off(GoEasy.IM_EVENT.MESSAGE_DELETED, this.onMessageDeleted);
   },
   methods: {
-    formatDate: _utils.formatDate,
+    formatDate: _utils2.formatDate,
     is_self: function is_self(item) {
       var senderId = item.senderId;
       // let arr = senderId.split('_')
@@ -963,12 +970,50 @@ var _default = {
         _this.scroll_to_bottom();
       }
       var im = GoEasy.im;
-      //发送消息
+      // 发送消息
       im.sendMessage({
         message: message,
         onSuccess: function onSuccess(message1) {
           //发送成功
           console.log("Private message sent successfully.", message1);
+          // 给收信人发订阅消息
+          // const match = _this.to.id.match(/\d+/); 		// 匹配数字
+          // const receiver_id = match ? match[0] : null; 
+          // let data = {
+          // 	"my_id": _this.user_id,
+          // 	"receiver_id": receiver_id,
+          // }
+          // fetch_data("POST", "send_notification", data, "user", res => {
+          // 	if (res.data.status === 200) {
+          // 		console.log("微信通知发送成功");
+          // 	} else {
+          // 		console.log("微信通知发送失败", res.data);
+          // 	}
+          // })
+
+          var ONE_HOUR = 3600 * 1000; // 1 小时的毫秒数
+          var now = Date.now();
+          var last_execution_time = wx.getStorageSync('last_execution_time') || 0;
+          // 检查是否超过 1 小时
+          if (now - last_execution_time >= ONE_HOUR) {
+            // 更新本地存储时间戳
+            wx.setStorageSync('last_execution_time', now);
+            var match = _this.to.id.match(/\d+/); // 匹配数字
+            var receiver_id = match ? match[0] : null;
+            var data = {
+              my_id: _this.user_id,
+              receiver_id: receiver_id
+            };
+            (0, _ajax_request.fetch_data)("POST", "send_notification", data, "user", function (res) {
+              if (res.data.status === 200) {
+                console.log("微信通知发送成功");
+              } else {
+                console.log("微信通知发送失败", res.data);
+              }
+            });
+          } else {
+            console.log("已在 1 小时内给此人发送过，跳过此次执行");
+          }
           if (is_text) {
             _this.msg = '';
           }
@@ -1375,7 +1420,7 @@ var _default = {
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
 
