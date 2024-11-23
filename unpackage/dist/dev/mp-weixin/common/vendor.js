@@ -33143,6 +33143,180 @@ function downloadImg(url) {
 /* 336 */,
 /* 337 */,
 /* 338 */
+/*!************************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/utils/ajax_request.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx, uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetch_data = fetch_data;
+exports.upload_file = upload_file;
+var res = "";
+
+// 服务器ip
+var local_ip = 'http://127.0.0.1:8000/';
+var release_ip = 'https://liyilian.cn/';
+var run_ip = local_ip;
+function fetch_data() {
+  var request_type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var blue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var _success = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+  var full_url = run_ip + blue + '/' + url;
+  wx.request({
+    url: full_url,
+    data: data,
+    dataType: "json",
+    method: request_type,
+    sslVerify: false,
+    withCredentials: false,
+    firstIpv4: false,
+    success: function success(res) {
+      if (_success) {
+        _success(res);
+        // console.log("success :", res.data)		// 包含敏感信息，生产环境切勿加
+      }
+    },
+    fail: function fail(e) {
+      console.log('fail :', e);
+      wx.showToast({
+        title: "服务器繁忙，请稍后再试",
+        icon: "none",
+        duration: 1000
+      });
+    } // complete(res) {
+    // 	console.log("complete :", res);
+    // },
+  });
+}
+function upload_file() {
+  var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var file_path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var blue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var _success2 = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+  var full_url = run_ip + blue + '/' + url;
+  uni.uploadFile({
+    url: full_url,
+    filePath: file_path,
+    name: name,
+    // 后台接收的文件字段名
+    success: function success(res) {
+      if (_success2) {
+        _success2(res);
+      }
+    },
+    fail: function fail(err) {
+      console.error('上传失败:', err);
+      wx.showToast({
+        title: "文件上传失败",
+        icon: "none",
+        duration: 1000
+      });
+    }
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 339 */
+/*!*****************************************************!*\
+  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/utils/utils.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.decode = decode;
+exports.decodeBase64 = decodeBase64;
+exports.format_time = format_time;
+exports.get_openid = get_openid;
+exports.subscirbe_message = subscirbe_message;
+var _ajax_request = __webpack_require__(/*! ./ajax_request.js */ 338);
+function get_openid() {
+  var _success = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  wx.login({
+    success: function success(r) {
+      if (r.code) {
+        // 由于微信官方要求，获取用户openid的接口调用必须在后端实现，此处把r.code发给后端，换取openid
+        (0, _ajax_request.fetch_data)("POST", "fetch_openid", {
+          "code": r.code
+        }, "user", function (res) {
+          if (res.data.openid) {
+            _success(res.data.openid);
+          } else {
+            console.log("openid获取失败");
+          }
+        });
+      } else {
+        console.log("openid获取失败");
+      }
+    }
+  });
+}
+function decodeBase64(encodedString) {
+  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+  var str = String(encodedString).replace(/=+$/, '');
+  if (str.length % 4 === 1) {
+    throw new Error("'decodeBase64' failed: The string to be decoded is not correctly encoded.");
+  }
+  var output = '';
+  for (var bc = 0, bs, buffer, idx = 0; buffer = str.charAt(idx++); ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer, bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
+    buffer = chars.indexOf(buffer);
+  }
+  return output;
+}
+function decode(encodedString) {
+  var byteString = decodeBase64(encodedString);
+  var decodedString = decodeURIComponent(escape(byteString));
+  return decodedString;
+}
+function format_time(datetime) {
+  var date = new Date(datetime);
+  if (isNaN(date.getTime())) {
+    console.log('Invalid datetime:', datetime);
+    return null;
+  }
+  var year = date.getUTCFullYear().toString();
+  var month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  var day = date.getUTCDate().toString().padStart(2, '0');
+  var hours = date.getUTCHours().toString().padStart(2, '0');
+  var minutes = date.getUTCMinutes().toString().padStart(2, '0');
+  var seconds = date.getUTCSeconds().toString().padStart(2, '0');
+  return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hours, ":").concat(minutes, ":").concat(seconds);
+}
+function subscirbe_message(template_Ids) {
+  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  //template_Ids为列表，对应的消息模板
+  wx.requestSubscribeMessage({
+    tmplIds: template_Ids,
+    success: function success(res) {
+      // 用户授权后，无论同意与否
+      if (res.errMsg == 'requestSubscribeMessage:ok') {
+        callback();
+      }
+    },
+    fail: function fail(e) {
+      console.log(e);
+    }
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
+
+/***/ }),
+/* 340 */
 /*!***************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/lib/utils.js ***!
   \***************************************************/
@@ -33208,8 +33382,6 @@ function formateTime(time) {
 }
 
 /***/ }),
-/* 339 */,
-/* 340 */,
 /* 341 */,
 /* 342 */,
 /* 343 */,
@@ -33298,7 +33470,9 @@ function formateTime(time) {
 /* 426 */,
 /* 427 */,
 /* 428 */,
-/* 429 */
+/* 429 */,
+/* 430 */,
+/* 431 */
 /*!*************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/lib/RecorderManager.js ***!
   \*************************************************************/
@@ -33401,13 +33575,13 @@ exports.default = RecorderManager;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-/* 430 */,
-/* 431 */,
 /* 432 */,
 /* 433 */,
 /* 434 */,
 /* 435 */,
-/* 436 */
+/* 436 */,
+/* 437 */,
+/* 438 */
 /*!*************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/talk.jpg ***!
   \*************************************************************/
@@ -33417,7 +33591,7 @@ exports.default = RecorderManager;
 module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAG6SURBVEiJ1ZWxbtRAEIa/GVuiSRGJgsZFQBRpIkUK0vEIibjWlY8eFOEnCFWUB4gR4soQOFGkiQR0oedqWiRSXJEiSFektHco4l2c4y53iWnyV7uzq/+b+W3ZcNcl8y5khSVRxDMxnjpYAVA4NeF7VfF1kMvoVoCssCRWdh30BOJpdwxKhY+l4/Us0FRAb982NeITsHxddw2NcaSHuZzMBfT2bVMiPs/qepYMSnFsTUKuALLCkkj5cYPOJzWuHGvNuLR5Giu7LcwBlmuPoDBBVliiyq+bRjMpg9I5HvopwgQqdNuaAwjEKnT9Phiq0LF6fX/JSDsVAEfDiN8XsnDNewH9KwAHKz6vtFOx8ciFrvrf4oVr3is0ftsoFtXfiODUR3Q0jMIFv1605r38OrxFz9/YCxHe/Y+uzXj54ZX0a9ilnPHFoGxtDmWkHPt9AAxyGYkxaAsQ+HmwLWf/AAAqYwcYt2Sspm9taSpgkMsIR9o2qnuOJ1MBAIe5nIhjixaTiLIxE+AhlWMN4/1109Rn55N1hccBNq+brLBEha4KneYv0xnDSDk+2Jaz+jO/LrBuxgNV9poP+m7rDzNaqBsRs6WeAAAAAElFTkSuQmCC"
 
 /***/ }),
-/* 437 */
+/* 439 */
 /*!*******************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/like-after.jpg ***!
   \*******************************************************************/
@@ -33427,7 +33601,7 @@ module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAAD
 module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAHkSURBVEiJ1ZS/a9RgGMc/b/JWOng3XKUU2j/glpYOCoIVMki94wIOLl2FjgUdHBw69E/QQUoHJwUL4lCacEI9yGAnLV0c7g9wOMRU2hRULsnjcE0879L7Peh3y/OQz+d53ycE/veorOKJba+g1D2gqESmBeqmaTr509MawPd8/i5xXFJQFKV+AnVE9gqO86GnwC+XF5TWLwHrkmk+AQhcz+yLvI+j6MFMtfqlS+CXywto/VHBXL9j94pAgzC8kUh0atL6DUPCpyoVjKUl4uNjmgcHEEUomEPr18BtAAPgW6VyB7g5ysTG/DxX1teZ3twE00zKKxfMlsBsLXToNF2XHxsb/NrexlxcZGp1Ne0lTKM1hlEcRZAkrNWIGw3M5eU/xQumBhCRcBwBQFit/vWcMJMlHwGlcQRN1+0sHUFyRXG8Ow48KzG8SgUF1/0ssDMxulLPr+3v11MBQBQEj4HDCeAPw7OzJ6mrvfPVsq7qXO4dcGtkeBCUZj3vPCkY7d1ZzzsPg6AE7A1LFnjbCYdL/qZiWfokl9tVcH9QeCEI1pTndX3umYJhJL3gPQWDSPrBoWMHXXbPCwtBsCbwIgO+0w8OfU7QHt+2nyqlHgKIyLMZx3k06LsDx7ftLd+2tyYO/qfzG9fjuIJLCBBGAAAAAElFTkSuQmCC"
 
 /***/ }),
-/* 438 */
+/* 440 */
 /*!********************************************************************!*\
   !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/static/square/like-before.jpg ***!
   \********************************************************************/
@@ -33437,182 +33611,8 @@ module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAAD
 module.exports = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAFRSURBVEiJ5dSvSkRBFAbwn7rBsMG4cUHBDT6A4YKbTIsa9jEMKwZfwSD4EgZx41aDBsFgXFAwKBgWNGgwWATDPRevy133bxE/GJg5f75v5syc4a9jboC9jA3UsIguLvEW/qXwr+EDd+F/7ydaKCA/wBmquYQtHIXwJk5QwXOI7eAQ87gadJoS2rjASoG/gtMYlQL/SuS2g6tw5+eDnL9gP7ehUogc9AeV8SIty7g4jtxWrKuxLueDmuhMQJ4hI81O0glO82FYlb6USfEovfjtWHexzHe9P41f+37s5eYl0QLZCW5Qn1Igjzqu84YSHpDMgDzBvYKKNEKk6I2PikpwNAYFtHA7oUg1cltD4rTQk/5Do6IWOUPJJxGp4Qm7Y2wIaaM8DRHJyJvjko8isjYteV7k1c8nnIRtavIikUT678yMPEMivfie2TRkIdZj/CN8AZAQP78pCgM5AAAAAElFTkSuQmCC"
 
 /***/ }),
-/* 439 */,
-/* 440 */,
-/* 441 */
-/*!************************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/utils/ajax_request.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(wx, uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetch_data = fetch_data;
-exports.upload_file = upload_file;
-var res = "";
-
-// 服务器ip
-var local_ip = 'http://127.0.0.1:8000/';
-var release_ip = 'https://liyilian.cn/';
-var run_ip = local_ip;
-function fetch_data() {
-  var request_type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var blue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-  var _success = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-  var full_url = run_ip + blue + '/' + url;
-  wx.request({
-    url: full_url,
-    data: data,
-    dataType: "json",
-    method: request_type,
-    sslVerify: false,
-    withCredentials: false,
-    firstIpv4: false,
-    success: function success(res) {
-      if (_success) {
-        _success(res);
-        // console.log("success :", res.data)		// 包含敏感信息，生产环境切勿加
-      }
-    },
-    fail: function fail(e) {
-      console.log('fail :', e);
-      wx.showToast({
-        title: "服务器繁忙，请稍后再试",
-        icon: "none",
-        duration: 1000
-      });
-    } // complete(res) {
-    // 	console.log("complete :", res);
-    // },
-  });
-}
-function upload_file() {
-  var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  var file_path = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var name = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var blue = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-  var _success2 = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-  var full_url = run_ip + blue + '/' + url;
-  uni.uploadFile({
-    url: full_url,
-    filePath: file_path,
-    name: name,
-    // 后台接收的文件字段名
-    success: function success(res) {
-      if (_success2) {
-        _success2(res);
-      }
-    },
-    fail: function fail(err) {
-      console.error('上传失败:', err);
-      wx.showToast({
-        title: "文件上传失败",
-        icon: "none",
-        duration: 1000
-      });
-    }
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-/* 442 */
-/*!*****************************************************!*\
-  !*** S:/Work/上海利易联建筑设计科技有限公司/FE-LYL/utils/utils.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(wx) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.decode = decode;
-exports.decodeBase64 = decodeBase64;
-exports.format_time = format_time;
-exports.get_openid = get_openid;
-exports.subscirbe_message = subscirbe_message;
-var _ajax_request = __webpack_require__(/*! ./ajax_request.js */ 441);
-function get_openid() {
-  var _success = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-  wx.login({
-    success: function success(r) {
-      if (r.code) {
-        // 由于微信官方要求，获取用户openid的接口调用必须在后端实现，此处把r.code发给后端，换取openid
-        (0, _ajax_request.fetch_data)("POST", "fetch_openid", {
-          "code": r.code
-        }, "user", function (res) {
-          if (res.data.openid) {
-            _success(res.data.openid);
-          } else {
-            console.log("openid获取失败");
-          }
-        });
-      } else {
-        console.log("openid获取失败");
-      }
-    }
-  });
-}
-function decodeBase64(encodedString) {
-  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-  var str = String(encodedString).replace(/=+$/, '');
-  if (str.length % 4 === 1) {
-    throw new Error("'decodeBase64' failed: The string to be decoded is not correctly encoded.");
-  }
-  var output = '';
-  for (var bc = 0, bs, buffer, idx = 0; buffer = str.charAt(idx++); ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer, bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
-    buffer = chars.indexOf(buffer);
-  }
-  return output;
-}
-function decode(encodedString) {
-  var byteString = decodeBase64(encodedString);
-  var decodedString = decodeURIComponent(escape(byteString));
-  return decodedString;
-}
-function format_time(datetime) {
-  var date = new Date(datetime);
-  if (isNaN(date.getTime())) {
-    console.log('Invalid datetime:', datetime);
-    return null;
-  }
-  var year = date.getUTCFullYear().toString();
-  var month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-  var day = date.getUTCDate().toString().padStart(2, '0');
-  var hours = date.getUTCHours().toString().padStart(2, '0');
-  var minutes = date.getUTCMinutes().toString().padStart(2, '0');
-  var seconds = date.getUTCSeconds().toString().padStart(2, '0');
-  return "".concat(year, "-").concat(month, "-").concat(day, " ").concat(hours, ":").concat(minutes, ":").concat(seconds);
-}
-function subscirbe_message(template_Ids) {
-  var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  //template_Ids为列表，对应的消息模板
-  wx.requestSubscribeMessage({
-    tmplIds: template_Ids,
-    success: function success(res) {
-      // 用户授权后，无论同意与否
-      if (res.errMsg == 'requestSubscribeMessage:ok') {
-        callback();
-      }
-    },
-    fail: function fail(e) {
-      console.log(e);
-    }
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
-
-/***/ }),
+/* 441 */,
+/* 442 */,
 /* 443 */,
 /* 444 */,
 /* 445 */,

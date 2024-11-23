@@ -14,7 +14,7 @@
 				<view class="right">
 					<view class="name-title">{{detail.user.qy_name}}</view>
 					<view class="sub-name-title">{{detail.user.user_name}}</view>
-					<view style="font-size: inherit;font-weight: 600;">评分</view>
+					<!-- <view style="font-size: inherit;font-weight: 600;">评分</view> -->
 				</view>
 				<view class="time-text">{{detail.update_time_text}}</view>
 			</view>
@@ -66,8 +66,8 @@
 </template>
 
 <script>
-	import wxLogin from "@/components/wx-login/wx-login.vue";
-	import coopList from "@/pages/index/cooperation-list.vue";
+	import {wxLogin} from "@/components/wx-login/wx-login.vue";
+	import {coopList} from "@/pages/index/cooperation-list.vue";
 	var _this;
 	const GoEasy = uni.$GoEasy;
 	export default {

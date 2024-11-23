@@ -360,7 +360,7 @@
 			},
 			//项目点击
 			itemClick(res) {
-				let  item  = res.item;
+				let item  = res.item;
 				if (item.type == 1) {
 					_this.toNext(`/pages/index/detail?id=${item.id}`)
 				} else {

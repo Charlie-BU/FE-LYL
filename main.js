@@ -31,12 +31,12 @@ function setUnreadNumber(content) {
 	let unreadTotal = content.unreadTotal;
 	if (unreadTotal > 0) {
 		uni.setTabBarBadge({
-			index: 1,
+			index: 2,
 			text: unreadTotal.toString()
 		});
 	} else {
 		uni.removeTabBarBadge({
-			index: 1
+			index: 2
 		});
 	}
 }
