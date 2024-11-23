@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "修改昵称",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "u-loading-page": "/uview-ui/components/u-loading-page/u-loading-page",
-    "u-input": "/uview-ui/components/u-input/u-input"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "我的合约",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "u-loading-page": "/uview-ui/components/u-loading-page/u-loading-page",
-    "my-contract": "/components/common/my-contract",
-    "u-empty": "/uview-ui/components/u-empty/u-empty"
-  }
-}

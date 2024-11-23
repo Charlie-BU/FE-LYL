@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "分销推广",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "u-loading-page": "/uview-ui/components/u-loading-page/u-loading-page"
-  }
-}

@@ -1,1 +1,0 @@
-<view class="{{['u-index-item','data-v-2c60557e','u-index-item-'+id]}}" id="{{'u-index-item-'+id}}"><slot></slot></view>
