@@ -1,22 +1,16 @@
 <template>
 	<view class="container">
 		<view class="top">
-			<u-tabs
-			lineColor="#15B3B4"
-			:list="list1" 
-			:scrollable="false"
-			 :activeStyle="{
+			<u-tabs lineColor="#15B3B4" :list="list1" :scrollable="false" :activeStyle="{
 				 color: '#000000',
 				 fontWeight: 'bold',
 				 transform: 'scale(1.05)',
 				 fontSize:'28rpx'
-			 }"
-			 :inactiveStyle="{
+			 }" :inactiveStyle="{
 				 color: '#5B5B5B',
 				 transform: 'scale(1)',
 				 fontSize:'28rpx'
-			 }"
-			@click="clickTab"></u-tabs>
+			 }" @click="clickTab"></u-tabs>
 		</view>
 		<scroll-view scroll-y="true" class="scroll">
 			<view class="info">
@@ -58,13 +52,16 @@
 	.container {
 		height: 100%;
 		overflow: hidden;
-		.top{
+
+		.top {
 			background: #fff;
 			height: 88rpx;
 		}
-		.scroll{
+
+		.scroll {
 			height: calc(100% - 88rpx);
-			.info{
+
+			.info {
 				padding: 15rpx 15rpx 0 15rpx;
 			}
 		}

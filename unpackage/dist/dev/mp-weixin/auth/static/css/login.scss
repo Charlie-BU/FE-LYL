@@ -1,0 +1,179 @@
+.login{
+	height: 100%;
+	position: relative;
+	// background: url('~@/auth/static/image/login-right-bg.png') right top/70% 400rpx no-repeat,url('~@/auth/static/image/login-left-bg.png') bottom left/40% 260rpx no-repeat;
+	// @include flex-box(row, null, center);
+	.login-top {
+		padding: 90rpx 0 180rpx 44rpx;
+	
+		.title-text {
+			font-size: 52rpx;
+			font-weight: bold;
+		}
+	
+		.sub-title-text {
+			margin-top: 10rpx;
+			font-size: 28rpx;
+			color: #7A7A7A;
+		}
+	}
+	.login-logo{
+		text-align: center;
+		margin-bottom: 120rpx;
+		padding-top: 229rpx;
+		image{
+			width: 349rpx;
+		}
+	}
+	.login-btns{
+		padding: 0 44rpx;
+		button{
+			line-height: 100rpx;
+			font-size: 32rpx;
+			border-radius: 16rpx;
+			&:not(:last-child){
+				margin-bottom: 32rpx;
+			}
+			&.xcx-btn{
+				background: $theme-color;
+				color: #fff;
+			}
+			&.mobile-btn{
+				background: none;
+				color: #141414;
+				border: 2rpx solid #F4F4F4;
+			}
+		}
+	}
+	.login-xieyi{
+		padding: 0 44rpx;
+		@include flex-box(row, null, center);
+		.xieyi-img{
+			width: 40rpx;
+			margin-right: 16rpx;
+		}
+		.xieyi-text{
+			text{
+				font-size: 24rpx;
+				color: #7A7A7A;
+				&.theme-text{
+					color: $theme-color;
+				}
+			}
+		}
+	}
+	.p-0{
+		padding: 0;
+	}
+	.login-form{
+		padding: 0 44rpx;
+		.form-rows{
+			.form-row{
+				@include flex-box(row, null, center);
+				min-height: 90rpx;
+				background: #F6F6F6;
+				border-radius: 16rpx;
+				padding: 0 30rpx;
+				&:not(:last-child){
+					margin-bottom: 30rpx;
+				}
+				.row-left{
+					font-size: 30rpx;
+					width: 60rpx;
+					text-align: center;
+					.row-left-icon{
+						width: 40rpx;
+					}
+				}
+				.row-input{
+					flex: 1;
+					font-size: 30rpx;
+					@include flex-box();
+				}
+				.code-btn{
+					background: none;
+					height: 40rpx;
+					line-height: 40rpx;
+					border-radius: 0;
+					padding:0 0 0 20rpx;
+					color: $theme-color;
+					font-size: 28rpx;
+					min-width: 160rpx;
+					box-sizing: border-box;
+					&[disabled]{
+						color: $text-grey;
+						background: none!important;
+					}
+				}
+			}
+		}
+		.form-bot-text{
+			display: inline-block;
+			padding: 30rpx 0;
+		}
+		.form-xieyi{
+			@include flex-box(row, null, center);
+			padding: 15rpx 0;
+			.check-img{
+				width: 34rpx;
+				margin-right: 10rpx;
+			}
+			text{
+				color: $text-grey;
+			}
+		}
+		.form-bot-btns{
+			margin-top: 49rpx;
+			>button{
+				background: none;
+				font-size: 32rpx;
+				border-radius: 16rpx;
+			}
+			.login-btn{
+				background: $theme-color;
+				color: #fff;
+				line-height: 98rpx;
+				box-shadow: 0px 3px 11.16px 0.21px rgba(21,179,179,0.22); 
+			}
+			.reg-btn{
+				height: 80rpx;
+				line-height: 80rpx;
+				font-size: 28rpx;
+			}
+		}
+	}
+	.wx-login{
+		position: absolute;
+		bottom: 50rpx;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		left: 50%;
+		transform: translateX(-50%);
+		.icon-img{
+			width: 80rpx;
+			text-align: center;
+		}
+	}
+}
+.reg{
+	background: url('~@/auth/static/image/reg-right-bg.png') right top/50% 300rpx no-repeat,url('~@/auth/static/image/reg-left-bg.png') bottom left/60% 260rpx no-repeat;
+	.xieyi{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 60%;
+		height: 260rpx;
+		@include flex-box(row, center, center);
+		.check-img{
+			width: 40rpx;
+			margin-right: 5rpx;
+		}
+		text{
+			&.theme{
+				color: $text-theme;
+			}
+		}
+	}
+}

@@ -1,0 +1,60 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 公共样式 */
+view.data-v-62136660, scroll-view.data-v-62136660, swiper-item.data-v-62136660 {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  align-items: stretch;
+  align-content: flex-start;
+}
+.u-index-list__letter.data-v-62136660 {
+  position: fixed;
+  right: 0;
+  text-align: center;
+  z-index: 3;
+}
+.u-index-list__letter__item.data-v-62136660 {
+  width: 16px;
+  height: 16px;
+  border-radius: 100px;
+  margin: 1px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.u-index-list__letter__item--active.data-v-62136660 {
+  background-color: #3c9cff;
+}
+.u-index-list__letter__item__index.data-v-62136660 {
+  font-size: 12px;
+  text-align: center;
+  line-height: 12px;
+}
+.u-index-list__indicator.data-v-62136660 {
+  width: 50px;
+  height: 50px;
+  border-radius: 100px 100px 0 100px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #c9c9c9;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.u-index-list__indicator__text.data-v-62136660 {
+  font-size: 28px;
+  line-height: 28px;
+  font-weight: bold;
+  color: #fff;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  text-align: center;
+}
+

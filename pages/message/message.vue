@@ -77,6 +77,11 @@
 
 <script>
 	import {
+		fetch_data,
+		upload_file
+	} from '../../utils/ajax_request.js'
+	import * as utils from '../../utils/utils.js'
+	import {
 		formatDate
 	} from '@/lib/utils';
 	var _this;
@@ -271,24 +276,30 @@
 				})
 			},
 			clickItem(item) {
-				console.log('clickItem', item);
-				// _this.toNext(`/pages/message/private_chat?id=user_3`)
-				let data = item.data
-				let title = ''
-				switch (data.identity) {
-					case 1:
-						title = data.user_name
-						break;
-					case 2:
-						title = data.qy_name
-						break;
-					case 3:
-						title = data.kf_name
-						break;
-					default:
-						break;
-				}
-				_this.toNext(`/pages/message/private_chat?id=${item.userId}&title=${title}`)
+				// 询问用户是否订阅消息提醒
+				utils.get_openid((openid) => {
+					fetch_data("POST", "store_openid", { "my_id": _this.user_id, "openid": openid }, "user");
+				})
+				utils.subscirbe_message(['8AMX7lHwjpeH4uN-6XslAmSDJhcbbsJcB_RLdIcQZ4o'], () => {
+					console.log('clickItem', item);
+					let data = item.data
+					let title = ''
+					switch (data.identity) {
+						case 1:
+							title = data.user_name
+							break;
+						case 2:
+							title = data.qy_name
+							break;
+						case 3:
+							title = data.kf_name
+							break;
+						default:
+							break;
+					}
+					_this.toNext(`/pages/message/private_chat?id=${item.userId}&title=${title}`)
+				});
+				
 			},
 		}
 	}

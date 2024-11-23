@@ -1,0 +1,66 @@
+page {
+	/* #ifdef APP */
+	background: $bg-F1F1F1;
+	/* #endif */
+	/* #ifndef APP */
+	background: $bg-color;
+	/* #endif */
+	height: 100%;
+	font-size: 28rpx;
+	color: $text-171717;
+}
+image {
+	will-change: transform;
+	width: auto;
+	height: auto;
+}
+button {
+	margin: 0;
+	padding: 0;
+	&::before,
+	&::after {
+		content: none;
+	}
+	&[disabled]{
+		background: $color-919191!important;
+	}
+}
+.empty-container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+}
+.load-more{
+	margin-top: 20rpx!important;
+}
+uni-page-head .uni-btn-icon {
+	overflow: unset;
+}
+.status-bar {
+	height: var(--status-bar-height);
+}
+.container{}
+.chooseBtn{
+	margin-top: 20rpx;
+	background: $theme-color;
+	color: #fff;
+}
+// 提交按钮
+.submit{
+	padding: 40rpx 0 0 0;
+}
+.submit-btn{
+	width: 100%;
+	color: #fff!important;
+	height:88rpx;
+	line-height:88rpx;
+	background: $bg-btn!important;
+	border-radius: 50rpx;
+	@include flex-box(null, center, center);
+	font-size: 30rpx;
+	&[disabled]{
+		background: $bg-btn-dis!important;
+	}
+}

@@ -93,7 +93,8 @@
 										</view>
 									</view>
 									<view class="center-bot-text" @click="copy(item)">
-										{{item.payload.type == 1 ? '复制手机号' : '复制微信号'}}</view>
+										{{item.payload.type == 1 ? '复制手机号' : '复制微信号'}}
+									</view>
 								</view>
 							</view>
 						</block>
@@ -194,7 +195,8 @@
 										</view>
 									</view>
 									<view class="center-bot-text" @click="copy(item)">
-										{{item.payload.type == 1 ? '复制手机号' : '复制微信号'}}</view>
+										{{item.payload.type == 1 ? '复制手机号' : '复制微信号'}}
+									</view>
 								</view>
 							</view>
 							<view class="item item-file" @click="openFile(item)"
@@ -257,13 +259,21 @@
 						<image src="@/static/message/chat-file.png" mode="widthFix" class="item-img" />
 						<view class="item-text">文件</view>
 					</view>
-					<view class="bot-item" @click="send_custom_msg('swap_phone')">
+					<view class="bot-item" @click="confirm_coopration('swap_phone')">
 						<image src="@/static/message/chat-phone.png" mode="widthFix" class="item-img" />
-						<view class="item-text">换电话</view>
+						<view class="item-text">确认合作</view>
 					</view>
-					<view class="bot-item" @click="send_custom_msg()">
+					<view class="bot-item" @click="grade_coopration()">
 						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
-						<view class="item-text">换微信</view>
+						<view class="item-text">合作评分</view>
+					</view>
+					<view class="bot-item" @click="sign_contrast()">
+						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
+						<view class="item-text">签署合同</view>
+					</view>
+					<view class="bot-item" @click="manage_asset()">
+						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
+						<view class="item-text">资金代管</view>
 					</view>
 				</view>
 			</view>
@@ -289,6 +299,11 @@
 </template>
 
 <script>
+	import {
+		fetch_data,
+		upload_file
+	} from '../../utils/ajax_request.js'
+	import * as utils from '../../utils/utils.js'
 	var _this;
 	const GoEasy = uni.$GoEasy;
 	import {
@@ -366,6 +381,7 @@
 			this.initAudioPlayer();
 			// 录音监听器
 			this.initRecorderListeners();
+
 		},
 		onReady() {
 			this.loadHistoryMessage();
@@ -699,11 +715,50 @@
 					_this.scroll_to_bottom()
 				}
 				var im = GoEasy.im;
-				//发送消息
+				// 发送消息
 				im.sendMessage({
 					message: message,
 					onSuccess(message1) { //发送成功
 						console.log("Private message sent successfully.", message1);
+						// 给收信人发订阅消息
+						// const match = _this.to.id.match(/\d+/); 		// 匹配数字
+						// const receiver_id = match ? match[0] : null; 
+						// let data = {
+						// 	"my_id": _this.user_id,
+						// 	"receiver_id": receiver_id,
+						// }
+						// fetch_data("POST", "send_notification", data, "user", res => {
+						// 	if (res.data.status === 200) {
+						// 		console.log("微信通知发送成功");
+						// 	} else {
+						// 		console.log("微信通知发送失败", res.data);
+						// 	}
+						// })
+
+						const ONE_HOUR = 3600 * 1000; // 1 小时的毫秒数
+						const now = Date.now();
+						const last_execution_time = wx.getStorageSync('last_execution_time') || 0;
+						// 检查是否超过 1 小时
+						if (now - last_execution_time >= ONE_HOUR) {
+							// 更新本地存储时间戳
+							wx.setStorageSync('last_execution_time', now);
+							const match = _this.to.id.match(/\d+/); // 匹配数字
+							const receiver_id = match ? match[0] : null;
+							let data = {
+								my_id: _this.user_id,
+								receiver_id: receiver_id,
+							};
+							fetch_data("POST", "send_notification", data, "user", (res) => {
+								if (res.data.status === 200) {
+									console.log("微信通知发送成功");
+								} else {
+									console.log("微信通知发送失败", res.data);
+								}
+							});
+						} else {
+							console.log("已在 1 小时内给此人发送过，跳过此次执行");
+						}
+
 						if (is_text) {
 							_this.msg = ''
 						}
@@ -1085,7 +1140,19 @@
 				uni.previewImage({
 					urls: [item.payload.url]
 				})
-			}
+			},
+			confirm_coopration() {
+				console.log("确认合作");
+			},
+			grade_coopration() {
+				console.log("合作打分");
+			},
+			sign_contrast() {
+				console.log("签署合同");
+			},
+			manage_asset() {
+				console.log("资金代管");
+			},
 		}
 	}
 </script>

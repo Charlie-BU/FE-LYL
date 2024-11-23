@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "开具发票",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "u-input": "/uview-ui/components/u-input/u-input",
+    "u--text": "/uview-ui/components/u--text/u--text",
+    "u-empty": "/uview-ui/components/u-empty/u-empty"
+  }
+}

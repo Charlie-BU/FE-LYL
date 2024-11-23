@@ -1,0 +1,213 @@
+//顶部tab--s
+.top-tab{
+	background: $theme-color;
+	padding-bottom: 60rpx;
+}
+//顶部tab--e
+//预览简历--s
+.resume-info{
+	background: #fff;
+	border-radius: 20rpx;
+	padding: 30rpx;
+	.resume-info-top{
+		display: flex;
+		.left{
+			flex: 1;
+			.title-text{
+				font-size: 40rpx;
+				font-weight: bold;
+				display: flex;
+				align-items: center;
+				.icon-img{
+					width: 50rpx;
+					margin-left: 10rpx;
+				}
+			}
+			.bot-text{
+				margin-top: 12rpx;
+				color: #5A5A5A;
+				font-size: 30rpx;
+			}
+		}
+		.right{
+			position: relative;
+			.head-img{
+				border-radius: 50%;
+				width: 104rpx;
+				height: 104rpx;
+			}
+			.icon-img{
+				width: 32rpx;
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+		}
+	}
+	.phone-info{
+		color: #5A5A5A;
+		display: flex;
+		align-items: center;
+		margin-top: 20rpx;
+	}
+	.lz-info{
+		display: inline-block;
+		margin-top: 20rpx;
+		color: #15B3B3;
+		border: 2rpx solid #15B3B3;
+		padding: 6rpx 10rpx;
+		border-radius: 10rpx;
+		font-size: 26rpx;
+	}
+	.row-items{
+		.row-item{
+			margin-top: 30rpx;
+			.row-title{
+				font-size: 32rpx;
+				font-weight: bold;
+				color: #000;
+				line-height: 70rpx;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.icon-img{
+					width: 50rpx;
+				}
+			}
+			.row-info{
+				margin-top: 10rpx;
+				.flex{
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					line-height: 60rpx;
+					text{
+						color: #5A5A5A;
+					}
+					.red-text{
+						color: #F52E33;
+						font-size: 32rpx;
+						font-weight: bold;
+					}
+					.name{
+						color: #171717;
+						font-size: 30rpx;
+					}
+				}
+				.jn-flex{
+					display: flex;
+					align-items: center;
+					line-height: 60rpx;
+					.name{
+						font-size: 30rpx;
+						font-weight: 500;
+						margin-right: 30rpx;
+					}
+				}
+				.jn-row{
+					line-height: 60rpx;
+					color: #5A5A5A;
+				}
+				.jn-img{
+					display: flex;
+					align-items: center;
+					text{
+						color: #5A5A5A;
+					}
+					image{
+						width: 66rpx;
+						height: 66rpx;
+						border-radius: 10rpx;
+					}
+				}
+				.name-text{
+					line-height: 60rpx;
+					.name{
+						font-size: 30rpx;
+						font-weight: 500;
+					}
+					.grey-text{
+						color: #888888;
+					}
+				}
+				.text{
+					line-height: 60rpx;
+					color: #888888;
+				}
+				.img-info{
+					display: grid;
+					grid-template-columns: repeat(3,1fr);
+					grid-gap: 20rpx 20rpx;
+					margin-top: 10rpx;
+					image{
+						width: 100%;
+						height: 200rpx;
+						border-radius: 10rpx;
+					}
+					.jn-img{
+						width: 86rpx;
+						height: 86rpx;
+					}
+				}
+				.tag-info{
+					display: flex;
+					margin-top: 10rpx;
+					.tag-text{
+						padding: 6rpx 16rpx;
+						color: #0CA6A6;
+						background: #E4FDFD;
+						border-radius: 10rpx;
+						&:not(:first-child){
+							margin-left: 20rpx;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+.resume-bot{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100rpx;
+	display: flex;
+	padding: 0 30rpx;
+	box-sizing: border-box;
+	background: #fff;
+	.left{
+		flex: 3;
+		display: flex;
+		.left-item{
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			image{
+				width: 50rpx;
+			}
+			.item-text{
+				font-size: 24rpx;
+				color: #3A3A3A;
+			}
+		}
+	}
+	.right{
+		flex: 2;
+		display: flex;
+		button{
+			background: $theme-color;
+			font-size: 30rpx;
+			align-self: center;
+			margin: 0;
+			padding: 0;
+			color: #fff;
+			line-height: 76rpx;
+			width: 100%;
+			border-radius: 40rpx;
+		}
+	}
+}
+//预览简历--s

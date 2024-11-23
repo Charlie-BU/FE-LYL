@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "职位搜索",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "u-search": "/uview-ui/components/u-search/u-search",
+    "my-items": "/components/common/my-items",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore",
+    "u-empty": "/uview-ui/components/u-empty/u-empty"
+  }
+}

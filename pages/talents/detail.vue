@@ -1,12 +1,16 @@
 <template>
+	<!--我要发活-->
 	<view class="container">
 		<u-loading-page :loading="true" v-if="load" fontSize="28rpx" />
 		<block v-else>
 			<view class="project">
-				<view class="project-top">
-					<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFit" class="left-img"/>
-					<view class="center-text">{{detail.user.user_name}}</view>
-					<view class="right-text">{{detail.salary + detail.salary_unit}}</view>
+				<view style="border-bottom: 0.5px solid #EFEFEF;">
+					<view class="top">
+						<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFit" class="left-img"/>
+						<view class="center-text">{{detail.user.user_name}}</view>
+						<view class="right-text">{{detail.salary + detail.salary_unit}}</view>
+					</view>
+					<view class="score">评分</view>
 				</view>
 				<view class="project-detail">
 					<view class="title-text">人才详情</view>
@@ -229,5 +233,37 @@
 		height: 100%;
 		background: #fff;
 		position: relative;
+	}
+	.top{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 40rpx;
+		.left-text{
+			font-size: 48rpx;
+			font-weight: bold;
+			color: #141414;
+		}
+		.left-img{
+			margin-right: 28rpx;
+			width: 88rpx;
+			height: 88rpx;
+			border-radius: 50%;
+		}
+		.center-text{
+			font-size: 32rpx;
+			font-weight: 500;
+			flex: 1;
+		}
+		.right-text{
+			color: #02ABAB;
+			font-size: 34rpx;
+			font-weight: bold;
+		}
+	}
+	.score{
+		margin-left: 135rpx;
+		font-size: inherit;
+		font-weight: 700;
 	}
 </style>
