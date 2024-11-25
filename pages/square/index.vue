@@ -154,12 +154,18 @@
 			}
 		},
 		onShow() {
+			wx.showToast({
+				title: "加载中...",
+				icon: "loading",
+				duration: 100000,
+			});
 			fetch_data("POST", "get_all_posts", null, "application", (res) => {
 				this.posts = res.data.posts.map(post => ({
 					...post,
 					time: utils.format_time(post.time),
 					liked: false,
 				}));
+				wx.hideToast();
 			})
 		},
 		methods: {

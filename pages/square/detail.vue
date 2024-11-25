@@ -56,7 +56,7 @@
 					</div>
 					<div style="display: inline-block; text-align: center; z-index: 999;" @click="send_comment(post)">
 						<img class="bottom-icon" src="../../static/square/talk.jpg" />
-						<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.comment_length}}</p>
+						<p style="font-size: 22rpx; color: #999999; margin: 0;">{{comment_length}}</p>
 					</div>
 				</div>
 				<div style="margin-top: 30rpx;">
@@ -112,10 +112,16 @@
 				id: 0,
 				post: "",
 				comments: [],
+				comment_length: 0,
 				liked: false,
 			}
 		},
 		onLoad(options) {
+			wx.showToast({
+				title: "加载中...",
+				icon: "loading",
+				duration: 100000,
+			});
 			this.id = options.id;
 			if (!this.id) {
 				wx.showToast({
@@ -142,6 +148,8 @@
 						time: utils.format_time(comment.time),
 						liked: false,
 					}));
+					this.comment_length = res.data.comment_length;
+					wx.hideToast();
 				});
 			});
 		},

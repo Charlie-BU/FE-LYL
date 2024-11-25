@@ -239,11 +239,17 @@ var _default = {
       id: 0,
       post: "",
       comments: [],
+      comment_length: 0,
       liked: false
     };
   },
   onLoad: function onLoad(options) {
     var _this = this;
+    wx.showToast({
+      title: "加载中...",
+      icon: "loading",
+      duration: 100000
+    });
     this.id = options.id;
     if (!this.id) {
       wx.showToast({
@@ -271,6 +277,8 @@ var _default = {
             liked: false
           });
         });
+        _this.comment_length = res.data.comment_length;
+        wx.hideToast();
       });
     });
   },

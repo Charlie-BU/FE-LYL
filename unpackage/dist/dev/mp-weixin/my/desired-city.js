@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uIndexList: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-index-list/u-index-list */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-index-list/u-index-list")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-list/u-index-list.vue */ 742))
+      return Promise.all(/*! import() | uview-ui/components/u-index-list/u-index-list */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-index-list/u-index-list")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-list/u-index-list.vue */ 750))
     },
     uSearch: function () {
       return Promise.all(/*! import() | uview-ui/components/u-search/u-search */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-search/u-search")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-search/u-search.vue */ 558))
@@ -110,10 +110,10 @@ try {
       return Promise.all(/*! import() | uview-ui/components/u-icon/u-icon */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-icon/u-icon")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 641))
     },
     uIndexItem: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-index-item/u-index-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-index-item/u-index-item")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-item/u-index-item.vue */ 750))
+      return Promise.all(/*! import() | uview-ui/components/u-index-item/u-index-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-index-item/u-index-item")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-item/u-index-item.vue */ 758))
     },
     uIndexAnchor: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-index-anchor/u-index-anchor */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-index-anchor/u-index-anchor")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-anchor/u-index-anchor.vue */ 758))
+      return Promise.all(/*! import() | uview-ui/components/u-index-anchor/u-index-anchor */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-index-anchor/u-index-anchor")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-index-anchor/u-index-anchor.vue */ 766))
     },
   }
 } catch (e) {
