@@ -19,8 +19,8 @@
 						 }" @click="clickTab"></u-tabs>
 						</view>
 						<view class="kefu-search" v-if="form.type != ''">
-							<u-search bgColor="#EFEFEF" placeholder="请输入要搜索的内容" @search="search"
-								@custom="search" :showAction="false" :actionStyle="{
+							<u-search bgColor="#EFEFEF" placeholder="请输入要搜索的内容" @search="search" @custom="search"
+								:showAction="false" :actionStyle="{
 							'color':'#02AAAB'
 						}" v-model="form.keyword" />
 							<view class="search-right"
@@ -43,21 +43,20 @@
 				<view class="top-search" :style="{'backgroundImage':`url(${baseUrl}/uni/index-bg.png)`}">
 					<view class="search" @click="goNext('/pages/index/search')">
 						<u-search placeholder="请输入要搜索的内容" disabled bgColor="#fff" :showAction="false" />
-						<view class="search-right"
-							@click.stop="goNext('/pages/index/filter-list?from=1&is_filter=1')">
+						<view class="search-right" @click.stop="goNext('/pages/index/filter-list?from=1&is_filter=1')">
 							<image src="@/static/index/shaixuan.png" mode="widthFix" />
 							<text>筛选</text>
 						</view>
 					</view>
 					<view class="banner" v-if="identity == 1">
-						<u-swiper :list="banner1" interval="5000" circular indicator indicatorMode="dot"
-							height="180" :autoplay="true" indicatorActiveColor="#fff"
+						<u-swiper :list="banner1" interval="5000" circular indicator indicatorMode="dot" height="180"
+							:autoplay="true" indicatorActiveColor="#fff"
 							indicatorInactiveColor="rgba(255, 255, 255, 0.3)" radius="5" @click="clickAd"
 							keyName="image" />
 					</view>
 					<view class="banner" v-else>
-						<u-swiper :list="banner2" interval="5000" circular indicator indicatorMode="dot"
-							height="180" :autoplay="true" indicatorActiveColor="#fff"
+						<u-swiper :list="banner2" interval="5000" circular indicator indicatorMode="dot" height="180"
+							:autoplay="true" indicatorActiveColor="#fff"
 							indicatorInactiveColor="rgba(255, 255, 255, 0.3)" radius="5" @click="clickAd"
 							keyName="image" />
 					</view>
@@ -93,6 +92,11 @@
 </template>
 
 <script>
+	import Vue from 'vue';
+	import {
+		fetch_data
+	} from "../../utils/ajax_request.js";
+	import * as utils from "../../utils/utils.js"
 	import wxLogin from "@/components/wx-login/wx-login.vue"
 	var _this;
 	const GoEasy = uni.$GoEasy;
@@ -141,7 +145,7 @@
 			_this = this
 			if (e.reid) {
 				uni.setStorageSync('reid', e.reid)
-			}	
+			}
 			if (e.scene) {
 				let scene = decodeURIComponent(e.scene);
 				let res = scene.split('=')
@@ -360,7 +364,7 @@
 			},
 			//项目点击
 			itemClick(res) {
-				let item  = res.item;
+				let item = res.item;
 				if (item.type == 1) {
 					_this.toNext(`/pages/index/detail?id=${item.id}`)
 				} else {
@@ -513,15 +517,73 @@
 					_this.get_items_list()
 				}
 			},
+			// 不行：item为局部的值，无法作用于本页面lists
+			// async get_items_list() {
+			// 	const data = await _this.$post('port/get_items_list', _this.form)
+			// 	if (data.code == 200) {
+			// 		_this.lists.push(...data.result.list)
+			// 		_this.hasMore = data.result.list.length >= _this.form.pageSize
+			// 		// 添加评分
+			// 		_this.lists.forEach((item) => {
+			// 		  fetch_data('POST', 'get_user_star', { "user_id": item.user_id }, "user", (res) => {
+			// 		    // 直接修改对象属性
+			// 		    item.star_as_elite = res.data.star_as_elite;
+			// 		    item.star_as_business = res.data.star_as_business;
+			// 		  }); 
+			// 		})
+			// 	} else {
+			// 		_this.hasMore = false
+			// 	}
+			// },
+
+			// 不行：Vue2的响应式机制使异步更新数据后模板未能实时渲染
+			// async get_items_list() {
+			// 	const data = await _this.$post('port/get_items_list', _this.form);
+			// 	if (data.code == 200) {
+			// 		_this.lists.push(...data.result.list);
+			// 		_this.hasMore = data.result.list.length >= _this.form.pageSize;
+			// 		// 异步添加评分
+			// 		const promises = _this.lists.map((item) =>
+			// 			fetch_data('POST', 'get_user_star', {
+			// 				"user_id": item.user_id
+			// 			}, "user", (res) => {
+			// 				item.star_as_elite = res.data.star_as_elite;
+			// 				item.star_as_business = res.data.star_as_business;
+			// 			})
+			// 		);
+			// 		// 等待所有请求完成后处理结果
+			// 		await Promise.all(promises);
+			// 		console.log('所有评分已添加');
+			// 	} else {
+			// 		_this.hasMore = false;
+			// 	}
+			// },
+
+			// 解决方案：使用Vue.set显式地让属性响应式
 			async get_items_list() {
-				const data = await _this.$post('port/get_items_list', _this.form)
+				const data = await _this.$post('port/get_items_list', _this.form);
 				if (data.code == 200) {
-					_this.lists.push(...data.result.list)
-					_this.hasMore = data.result.list.length >= _this.form.pageSize
+					_this.lists.push(...data.result.list);
+					_this.hasMore = data.result.list.length >= _this.form.pageSize;
+					// 异步添加评分
+					const promises = _this.lists.map((item) =>
+						fetch_data('POST', 'get_user_star', {
+							"user_id": item.user_id
+						}, "user", (res) => {
+							const star_as_elite = utils.show_stars(res.data.star_as_elite);
+							const star_as_business = utils.show_stars(res.data.star_as_business);
+							Vue.set(item, 'star_as_elite', star_as_elite); // 响应式添加属性
+							Vue.set(item, 'star_as_business', star_as_business); // 响应式添加属性
+						})
+					);
+					// 等待所有请求完成后处理结果
+					await Promise.all(promises);
+					console.log('所有评分已添加');
 				} else {
-					_this.hasMore = false
+					_this.hasMore = false;
 				}
 			},
+
 			confirmReason() {
 				if (_this.reason == '') {
 					this.$u.toast('请输入驳回原因')

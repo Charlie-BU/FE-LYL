@@ -6,11 +6,11 @@
 			<view class="project">
 				<view style="border-bottom: 0.5px solid #EFEFEF;">
 					<view class="top">
-						<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFit" class="left-img"/>
-						<view class="center-text">{{detail.user.user_name}}</view>
+						<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFit" class="left-img" />
+						<view class="center-text">{{detail.user.user_name}} <text v-if="star.length !== 0" class="score">{{star[0]}} {{star[1]}}</text></view>
 						<view class="right-text">{{detail.salary + detail.salary_unit}}</view>
 					</view>
-					<view class="score">评分</view>
+					<!-- <view class="score">评分</view>÷ -->
 				</view>
 				<view class="project-detail">
 					<view class="title-text">人才详情</view>
@@ -44,7 +44,8 @@
 			</view>
 			<view class="project-bot" v-if="identity != 3">
 				<view class="bot-item" @click="items_sc()">
-					<image :src="is_sc == 0 ? '/static/index/shoucang.png' : '/static/index/shoucang_selected.png'" mode="widthFix" class="item-img"/>
+					<image :src="is_sc == 0 ? '/static/index/shoucang.png' : '/static/index/shoucang_selected.png'"
+						mode="widthFix" class="item-img" />
 					<view class="item-text">{{is_sc == 0 ? '收藏' : '已收藏'}}</view>
 				</view>
 				<button class="project-btn" @click="toChat">立即沟通</button>
@@ -56,24 +57,29 @@
 
 <script>
 	import wxLogin from "@/components/wx-login/wx-login.vue"
+	import {
+		fetch_data
+	} from '../../utils/ajax_request.js'
+	import * as utils from '../../utils/utils.js'
 	var _this;
 	const GoEasy = uni.$GoEasy;
 	export default {
 		data() {
 			return {
-				id:'',
-				is_sc:0,
-				fromIdentity:0
+				id: '',
+				is_sc: 0,
+				fromIdentity: 0,
+				star: [],
 			}
 		},
 		onLoad(e) {
 			_this = this;
 			if (e.id) {
 				_this.id = e.id
-			}else{
-				this.$u.toast('提交参数有误',()=>{
-						_this.finish()
-					})
+			} else {
+				this.$u.toast('提交参数有误', () => {
+					_this.finish()
+				})
 				return;
 			}
 			if (e.from) {
@@ -83,20 +89,28 @@
 		},
 		onShow() {
 			_this.get_items_xq()
+			// 获取评分
+			setTimeout(()=>{
+				fetch_data("POST", "get_user_star", {
+					"user_id": this.detail.user_id
+				}, "user", (res) => {
+					this.star = utils.show_stars(res.data.star_as_elite);
+				});
+			}, 2000)
 		},
 		onShareAppMessage() {
 			return {
-				title:'利易联',
-				path:`/pages/talents/detail?id=${this.id}&from=1`,
+				title: '利易联',
+				path: `/pages/talents/detail?id=${this.id}&from=1`,
 				// imageUrl:_this.detail.goods_img
 			}
 		},
-		components:{
+		components: {
 			wxLogin
 		},
 		methods: {
-			loginAfter(result){
-				console.log('loginAfter',result);
+			loginAfter(result) {
+				console.log('loginAfter', result);
 			},
 			async get_items_xq() {
 				const params = {
@@ -107,10 +121,10 @@
 					_this.detail = data.result.detail
 					_this.is_sc = _this.detail.is_sc
 				} else if (data.code == 100) {
-					this.$u.toast(data.msg,()=>{
+					this.$u.toast(data.msg, () => {
 						_this.finish()
 					})
-				}else {
+				} else {
 					this.$u.toast(data.msg)
 				}
 				if (_this.load) {
@@ -123,13 +137,13 @@
 				}
 				const data = await _this.$post('port/items_gt', params)
 				if (data.code == 200) {
-					
+
 				} else {
-					
+
 				}
 			},
 			//收藏项目
-			async items_sc(){
+			async items_sc() {
 				if (_this.user_id == 0) {
 					// _this.$refs.wx_login.loginShow = true
 					uni.navigateTo({
@@ -145,14 +159,14 @@
 					id: _this.id,
 				}
 				const data = await _this.$post('port/items_sc', params)
-				if(data.code==200){
+				if (data.code == 200) {
 					this.$u.toast(data.msg)
-					_this.is_sc = _this.is_sc==1?0:1
-				}else{
+					_this.is_sc = _this.is_sc == 1 ? 0 : 1
+				} else {
 					this.$u.toast(data.msg)
 				}
 			},
-			async toChat(){
+			async toChat() {
 				if (_this.user_id == 0) {
 					// _this.$refs.wx_login.loginShow = true
 					uni.navigateTo({
@@ -178,7 +192,9 @@
 					_this.items_gt()
 					let init = _this.detail.is_send == 1 ? 0 : 1
 					let user_name = _this.detail.user.user_name
-					_this.toNext(`/pages/message/private_chat?id=user_${_this.detail.user_id}&init=${init}&title=${user_name}`)
+					_this.toNext(
+						`/pages/message/private_chat?id=user_${_this.detail.user_id}&init=${init}&title=${user_name}`
+						)
 				} else {
 					this.$u.toast(data.msg)
 				}
@@ -191,8 +207,8 @@
 						//存入用户信息
 						this.$u.vuex('current_user', data.result.user)
 						if (GoEasy.getConnectionStatus() === 'disconnected') {
-						  this.connectGoEasy(); //连接goeasy
-						  // this.subscribeGroup(); //建立连接后，就应该订阅群聊消息，避免漏掉
+							this.connectGoEasy(); //连接goeasy
+							// this.subscribeGroup(); //建立连接后，就应该订阅群聊消息，避免漏掉
 						}
 					} else {
 						this.$u.toast(data.msg)
@@ -200,28 +216,29 @@
 				}
 			},
 			connectGoEasy() {
-				console.log('connectGoEasy',this.get_prefix() + this.user_id);
-			  GoEasy.connect({
-			    id: this.get_prefix() + this.user_id,
-			    data: {
-			      user_id: this.current_user.user_id,
-			      qy_name: this.current_user.qy_name,
-			      user_name: this.current_user.user_name,
-			      is_kf: this.current_user.is_kf,
-			      head_pic: this.current_user.head_pic,
-				  identity:this.identity
-			    },
-			    onSuccess: () => {
-			      console.log('GoEasy connect successfully.')
-				  // GoEasy.im.on(GoEasy.IM_EVENT.CONVERSATIONS_UPDATED, this.setUnreadNumber);
-			    },
-			    onFailed: (error) => {
-			      console.log('Failed to connect GoEasy, code:' + error.code + ',error:' + error.content);
-			    },
-			    onProgress: (attempts) => {
-			      console.log('GoEasy is connecting', attempts);
-			    }
-			  });
+				console.log('connectGoEasy', this.get_prefix() + this.user_id);
+				GoEasy.connect({
+					id: this.get_prefix() + this.user_id,
+					data: {
+						user_id: this.current_user.user_id,
+						qy_name: this.current_user.qy_name,
+						user_name: this.current_user.user_name,
+						is_kf: this.current_user.is_kf,
+						head_pic: this.current_user.head_pic,
+						identity: this.identity
+					},
+					onSuccess: () => {
+						console.log('GoEasy connect successfully.')
+						// GoEasy.im.on(GoEasy.IM_EVENT.CONVERSATIONS_UPDATED, this.setUnreadNumber);
+					},
+					onFailed: (error) => {
+						console.log('Failed to connect GoEasy, code:' + error.code + ',error:' + error
+						.content);
+					},
+					onProgress: (attempts) => {
+						console.log('GoEasy is connecting', attempts);
+					}
+				});
 			}
 		}
 	}
@@ -229,41 +246,50 @@
 
 <style lang="scss" scoped>
 	@import "static/css/item.scss";
+
 	.container {
 		height: 100%;
 		background: #fff;
 		position: relative;
 	}
-	.top{
+
+	.top {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding-top: 40rpx;
-		.left-text{
+
+		.left-text {
 			font-size: 48rpx;
 			font-weight: bold;
 			color: #141414;
 		}
-		.left-img{
+
+		.left-img {
 			margin-right: 28rpx;
 			width: 88rpx;
 			height: 88rpx;
 			border-radius: 50%;
 		}
-		.center-text{
+
+		.center-text {
 			font-size: 32rpx;
 			font-weight: 500;
 			flex: 1;
 		}
-		.right-text{
+
+		.right-text {
 			color: #02ABAB;
 			font-size: 34rpx;
 			font-weight: bold;
 		}
 	}
-	.score{
-		margin-left: 135rpx;
-		font-size: inherit;
-		font-weight: 700;
+
+	.score {
+		font-size: 30rpx;
+		margin-left: 20rpx;
+		font-weight: 800;
+		color: gold;
+		white-space: nowrap;
 	}
 </style>

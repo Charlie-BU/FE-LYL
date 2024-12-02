@@ -1,34 +1,29 @@
 <template>
-	<view>
-		<div class="top" style="font-size: 32rpx;font-weight: bold;display: flex;">
-			合作列表 (<p style="color: #03A9F4;">{{lists.length}}</p> )
-		</div>
-		<view v-for="(one,index) in lists" :key="index" style="margin-top: 40rpx;border-bottom: 0.5px solid #EFEFEF;;">
-			<div class="header" @click="changeMode(index)">
-				<div>
-				<span class="left">名称：    </span>
-				<span class="right">{{one.name.slice(0,1) + '*'.repeat(one.name.length-1)}}</span>
-				</div>
-				<span>▼</span>
-			</div>
-			<div v-if="lists[index].mode">
-				<span class="right"></span>
-				<span class="left"></span>
-				<ul>
-					<li class="li">
-						<span class="right">国家/地区：</span>
-						<span class="left">{{lists[index].position}}</span>
-						</li>
-					<li class="li">
-						<span class="right">报价时间： </span>
-						<span class="left">{{lists[index].time}}</span>
-					</li>
-					<li class="li">
-						<span class="right">报价类型： </span>
-						<span class="left">{{lists[index].type}}</span>
-					</li>
-				</ul>
-			</div>
+	<view v-if="item_chats.length !== 0" class="container">
+		<view class="top">
+			沟通中：<span class="count">{{item_chats.length}}</span>
+		</view>
+
+		<!-- 列表循环 -->
+		<view v-for="(chat, index) in item_chats" :key="index" class="list-item">
+			<view class="header" @click="changeMode(index)">
+				<view>
+					<!-- <text class="masked">{{chat.elite_name.slice(0,2) + '*'.repeat(chat.elite_name.length - 2)}}</text> -->
+					<text class="masked">{{chat.elite_name}}</text>
+				</view>
+				<text class="arrow">{{item_chats[index].mode ? '∧' : '∨'}}</text>
+			</view>
+
+			<view v-if="item_chats[index].mode" class="details">
+				<view class="detail-item">
+					<text class="detail-label">沟通时间：</text>
+					<text class="detail-value">{{chat.update_time}}</text>
+				</view>
+				<view class="detail-item">
+					<text class="detail-label">用户评分：</text>
+					<text class="detail-value">{{chat.elite_star}}</text>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -37,57 +32,94 @@
 	export default {
 		data() {
 			return {
-				lists:[],
-			}
+				item_chats: [],
+			};
 		},
-		created() { // 在组件创建后调用
-		    this.get_lists();
-		  },
+		created() {
+			this.get_lists();
+		},
 		methods: {
-			get_lists(){
-				console.log("in get_lists");
-				this.lists = [
-					{
-						name: "哇哇哇的撒下",
-						position : "上海",
-						time: "2024-11-06 17:09:01",
-						type: "主动报价",
-						},
-					{name: "啊速度下",position : "上海",time: "2024-11-06 17:09:01",type: "主动报价"},
-					{name: "婆婆家分店撒阿迪斯",position : "上海",time: "2024-11-06 17:09:01",type: "主动报价"},
-					{name: "特人也如同让人",position : "上海",time: "2024-11-06 17:09:01",type: "主动报价"},
-					{name: "达到",position : "上海",time: "2024-11-06 17:09:01",type: "主动报价"},
-				];
-				this.lists = this.lists.map(item => ({ ...item, mode: false }));//子标签是否展开
+			get_lists() {
+				this.item_chats = uni.getStorageSync("item_chats");
+				uni.removeStorageSync("item_chats");
 			},
-			changeMode(index){
-				this.lists[index].mode = !this.lists[index].mode;
-			}
-		}
-	}
+			changeMode(index) {
+				this.item_chats[index].mode = !this.item_chats[index].mode;
+			},
+		},
+	};
 </script>
 
 <style lang="scss" scoped>
-	.top {
-		font-size: 32rpx;
-		font-weight: bold;
-		display: flex;
-		border-top: 0.5px solid #EFEFEF;
+	.container {
+		padding: 20rpx;
+		background-color: #f9f9f9;
 	}
+
+	/* 顶部标题样式 */
+	.top {
+		color: #333;
+		border-bottom: 2rpx solid #03A9F4;
+		padding-bottom: 10rpx;
+		margin-bottom: 20rpx;
+	}
+
+	.count {
+		color: #7668f4;
+	}
+
+	/* 列表项样式 */
+	.list-item {
+		background-color: #ffffff;
+		border-radius: 10rpx;
+		margin-bottom: 20rpx;
+		padding: 20rpx;
+		box-shadow: 0 4rpx 6rpx rgba(0, 0, 0, 0.1);
+	}
+
+	/* 标题区域 */
 	.header {
 		display: flex;
 		justify-content: space-between;
-		font-weight: 700;
+		align-items: center;
+		color: #333;
+		margin-left: 20rpx;
 	}
-	.right {
-		justify-content: space-between;
+
+	.label {
+		color: #666;
 	}
-	.left {
-		justify-content: space-between;
+
+	.masked {
+		color: #000;
 	}
-	li {
-		margin-top: 10rpx;
+
+	.arrow {
+		color: #03A9F4;
+		cursor: pointer;
+		margin-right: 13rpx;
+	}
+
+	/* 折叠区域 */
+	.details {
+		margin-top: 20rpx;
+		padding-top: 10rpx;
+		border-top: 1rpx dashed #ddd;
+	}
+
+	.detail-item {
+		display: flex;
 		justify-content: space-between;
-		display:flex;
+		padding: 10rpx 0;
+		margin-left: 20rpx;
+		margin-right: 20rpx;
+	}
+
+	.detail-label {
+		color: #999;
+	}
+
+	.detail-value {
+		color: #333;
 	}
 </style>

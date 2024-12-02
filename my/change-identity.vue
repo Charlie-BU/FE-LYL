@@ -29,6 +29,7 @@
 </template>
 
 <script>
+	import { fetch_data } from "../utils/ajax_request";
 	var _this;
 	const GoEasy = uni.$GoEasy;
 	export default {
@@ -53,6 +54,8 @@
 				}
 			},
 			goNext(){
+				// 计算用户得分（临时）
+				fetch_data("POST", "calc_star_as_elite", {"user_id": this.user_id}, "user");
 				this.$u.vuex('identity', _this.index)
 				uni.reLaunch({
 					url:'/pages/index/index'

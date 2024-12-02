@@ -94,7 +94,7 @@
   margin-top: 20rpx;
   padding: 20rpx;
   background-color: #f9f9f9;
-  border-radius: 10rpx;
+  border-radius: 25rpx;
 }
 .section .boxList .comment-item.data-v-974a8f4c {
   padding: 20rpx 0;

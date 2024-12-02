@@ -132,4 +132,17 @@
   background: #fff;
   position: relative;
 }
+.chats-list.data-v-5166ee27 {
+  margin-top: 40rpx;
+  padding: 20rpx;
+  background-color: #f9f9f9;
+  border-radius: 30rpx;
+}
+.score.data-v-5166ee27 {
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  font-weight: 800;
+  color: gold;
+  white-space: nowrap;
+}
 

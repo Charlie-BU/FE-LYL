@@ -299,7 +299,6 @@
 					}
 					_this.toNext(`/pages/message/private_chat?id=${item.userId}&title=${title}`)
 				});
-				
 			},
 		}
 	}

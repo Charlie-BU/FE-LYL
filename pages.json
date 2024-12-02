@@ -323,7 +323,7 @@
 			"path": "pages/square/index",
 			"style": {
 				"navigationBarTitleText": "广场",
-				"enablePullDownRefresh": false,
+				"enablePullDownRefresh": true,
 				"navigationBarBackgroundColor":"#1abfc0"
 			}
 		},

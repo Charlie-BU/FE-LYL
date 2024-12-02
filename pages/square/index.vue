@@ -24,7 +24,7 @@
 		</div> -->
 
 		<div v-for="(post, index) in posts" :key="index">
-			<section @click="go_to_detail(post.id, post.liked)" class="section">
+			<section class="section">
 				<div class="boxList flex">
 					<div style="display: flex;">
 						<div>
@@ -35,18 +35,18 @@
 							<span v-else style="display: block;">{{post.poster_nickname}}</span>
 							<span v-if="post.time" class="post-time" style="display: block;">{{post.time}}</span>
 						</div>
-						<div style="margin-left: 230rpx;" @click.stop="star_post_or_unstar(post)">
+						<div style="margin-left: 230rpx; z-index: 999;" @click="star_post_or_unstar(post)">
 							<uni-icons v-if="post.starred" type="star-filled" color="gold" size="30" />
 							<uni-icons v-else-if="!post.starred && identity === 3" type="star" color="gold" size="30" />
 						</div>
 					</div>
-					<div class="right">
+					<div @click="go_to_detail(post.id, post.liked)" class="right">
 						<div v-if="post.title" class="post-content" style="font-weight: bold;">
 							{{post.title}}
 						</div>
 						<div v-if="post.content" class="post-content">{{post.content}}</div>
 
-						<div v-if="post.post_image" class="post-content">
+						<div @click.stop="" v-if="post.post_image" class="post-content">
 							<div v-if="post.post_image.length>=1 && post.post_image.length<=3" class="image-grid"
 								style="height: 200rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
@@ -74,13 +74,13 @@
 								@click.stop="like_post_or_cancel(post)">
 								<img v-if="post.liked" class="bottom-icon" src="../../static/square/like-after.jpg" />
 								<img v-else class="bottom-icon" src="../../static/square/like-before.jpg" />
-								<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.likes}}
+								<p style="font-size: 22rpx; color: #999999; margin: 0;">{{post.likes ? post.likes : 0}}
 								</p>
 							</div>
 							<div style="display: inline-block; text-align: center;" @click.stop="send_comment(post)">
 								<img class="bottom-icon" src="../../static/square/talk.jpg" />
 								<p style="font-size: 22rpx; color: #999999; margin: 0;">
-									{{post.comment_length}}
+									{{post.comment_length ? post.comment_length : 0}}
 								</p>
 							</div>
 						</div>
@@ -95,12 +95,12 @@
 				<h3 class="modal-title">发布帖子</h3>
 				<div class="form-group">
 					<label for="post-title">标题</label>
-					<input id="post-title" v-model="new_post.title" type="text" placeholder="请输入标题"
+					<input id="post-title" v-model="new_post_title" type="text" placeholder="请输入标题"
 						class="input-field" />
 				</div>
 				<div class="form-group">
 					<label for="post-content">内容</label>
-					<textarea id="post-content" v-model="new_post.content" placeholder="说点什么吧..."
+					<textarea id="post-content" v-model="new_post_content" placeholder="说点什么吧..."
 						class="textarea-field"></textarea>
 				</div>
 				<div class="form-group">
@@ -108,9 +108,9 @@
 					<div class="image-preview">
 						<img v-for="(image, index) in preview_images" :key="index" :src="image" class="preview-image"
 							@click="image_operation(image)" />
-						<button v-if="preview_images.length === 0" @click="choose_image"
+						<button v-if="preview_images.length === 0" @click="choose_image()"
 							class="upload-button">+</button>
-						<button v-else @click="choose_image" class="upload-button">×</button>
+						<button v-else @click="choose_image()" class="upload-button">×</button>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -145,21 +145,19 @@
 				],
 				current: 0,
 				showPostModal: false,
-				new_post: {
-					title: '',
-					content: '',
-					images: [],
-				},
+				new_post_title: '',
+				new_post_content: '',
+				new_post_images: [],
 				preview_images: []
 			}
 		},
-		onShow() {
+		onLoad() {
 			wx.showToast({
 				title: "加载中...",
 				icon: "loading",
 				duration: 100000,
 			});
-			fetch_data("POST", "get_all_posts", null, "application", (res) => {
+			fetch_data("POST", "get_all_posts_with_star", null, "application", (res) => {
 				this.posts = res.data.posts.map(post => ({
 					...post,
 					time: utils.format_time(post.time),
@@ -169,9 +167,21 @@
 			})
 		},
 		methods: {
-			onInput(e) {
-				this.new_post.title = e.target.value;
-				this.new_post.content = e.target.value;
+			onPullDownRefresh() {
+				wx.showToast({
+					title: "加载中...",
+					icon: "loading",
+					duration: 100000,
+				});
+				fetch_data("POST", "get_all_posts_with_star", null, "application", (res) => {
+					this.posts = res.data.posts.map(post => ({
+						...post,
+						time: utils.format_time(post.time),
+						liked: false,
+					}));
+					wx.hideToast();
+				})
+				uni.stopPullDownRefresh();
 			},
 
 			back() {
@@ -180,14 +190,52 @@
 				});
 			},
 
+			change(observer) {
+				this.current = observer.index; 			// 按钮切换状态
+				if (observer.index == 0) {					
+					wx.showToast({
+						title: '加载中',
+						icon: 'loading',
+						duration: 100000,
+					});
+					fetch_data("POST", "get_all_posts_with_star", null, "application", (res) => {
+						this.posts = res.data.posts.map(post => ({
+							...post,
+							time: utils.format_time(post.time),
+							liked: false,
+						}));
+						wx.hideToast();
+					})
+				} else if (observer.index == 1) {
+					wx.showToast({
+						title: '加载中',
+						icon: 'loading',
+						duration: 100000,
+					});
+					fetch_data("POST", "get_all_posts", null, "application", (res) => {
+						this.posts = res.data.posts.map(post => ({
+							...post,
+							time: utils.format_time(post.time),
+							liked: false,
+						}));
+						wx.hideToast();
+					})
+				} else if (observer.index == 2) {
+					this.current = 0;
+					wx.showToast({
+						title: '该功能暂未开放，敬请期待',
+						icon: 'none',
+						duration: 1000,
+					});
+				} 
+			},
+			
 			// 关闭模态弹框
 			closeModal() {
 				this.showPostModal = false;
-				this.new_post = {
-					title: '',
-					content: '',
-					images: [],
-				};
+				this.new_post_title = "";
+				this.new_post_content = "";
+				this.new_post_images = [];
 				this.preview_images = [];
 			},
 
@@ -196,18 +244,18 @@
 					sizeType: ['original', 'compressed'],
 					sourceType: [sourceType],
 					success: (res) => {
-						this.new_post.images = res.tempFilePaths;
+						this.new_post_images = res.tempFilePaths;
 						this.preview_images = res.tempFilePaths;
 					}
 				});
 			},
-
+			
 			upload_images() {
-				if (!this.new_post.images || this.new_post.images.length === 0) {
+				console.log(this.new_post_images)
+				if (!this.new_post_images || this.new_post_images.length === 0) {
 					return Promise.resolve([]); // 如果没有图片，直接返回空数组
 				}
-
-				const uploadPromises = this.new_post.images.map((image_path) => {
+				const uploadPromises = this.new_post_images.map((image_path) => {
 					return new Promise((resolve, reject) => {
 						upload_file("upload_image_to_OSS", image_path, 'image',
 							"application", (res) => {
@@ -237,12 +285,25 @@
 							});
 					});
 				});
-
 				return Promise.all(uploadPromises); // 等待所有上传完成
 			},
 
 			async submit_post() {
-				if (!this.new_post.title || !this.new_post.content) {
+				if (!this.user_id) {
+					wx.showToast({
+						title: "请先登录",
+						icon: "none",
+						duration: 1000,
+					});
+					setTimeout(()=>{
+						uni.reLaunch({
+							url:'/pages/index/login'
+						})
+					}, 1000)
+					return;
+				}
+				await this.$nextTick();
+				if (!this.new_post_title || !this.new_post_content) {
 					wx.showToast({
 						title: "请填写标题和内容",
 						icon: "none",
@@ -263,11 +324,10 @@
 					// 准备提交数据
 					const data = {
 						"my_id": this.user_id,
-						"title": this.new_post.title,
-						"content": this.new_post.content,
+						"title": this.new_post_title,
+						"content": this.new_post_content,
 						"image_urls": image_urls,
 					};
-
 					// 提交数据
 					fetch_data("POST", "send_post", data, "application", (res) => {
 						if (res.data.status === 200) {
@@ -276,8 +336,9 @@
 								icon: "none",
 								duration: 700,
 							});
+							this.current = 0;
 							// 刷新帖子列表
-							fetch_data("POST", "get_all_posts", null, "application", (
+							fetch_data("POST", "get_all_posts_with_star", null, "application", (
 								res) => {
 								this.posts = res.data.posts.map(post => ({
 									...post,
@@ -344,8 +405,9 @@
 										icon: "none",
 										duration: 700,
 									});
+									this.current = 0;
 									// 刷新帖子列表
-									fetch_data("POST", "get_all_posts", null, "application", (res) => {
+									fetch_data("POST", "get_all_posts_with_star", null, "application", (res) => {
 										this.posts = res.data.posts.map(post => ({
 											...post,
 											time: utils.format_time(post.time),
@@ -435,60 +497,7 @@
 			// 	});
 			// },
 
-			// change(index) {
-			// 	this.current = index; 			// 按钮切换状态
-			// 	if (index == 0) {
-			// 		wx.showToast({
-			// 			title: '加载中',
-			// 			icon: 'loading',
-			// 			duration: 100000,
-			// 		});
-			// 		fetch_data("POST", "get_Chinese_posts", null, "application", res => {
-			// 			this.posts = res.data.posts;
-			// 			wx.hideToast();
-			// 		});
-			// 	} else if (index == 1) {
-			// 		wx.showToast({
-			// 			title: '加载中',
-			// 			icon: 'loading',
-			// 			duration: 100000,
-			// 		});
-			// 		fetch_data("POST", "get_foreign_posts", null, "application", res => {
-			// 			this.posts = res.data.posts;
-			// 			wx.hideToast();
-			// 		});
-			// 	} else if (index == 2) {
-			// 		wx.showToast({
-			// 			title: '加载中',
-			// 			icon: 'loading',
-			// 			duration: 100000,
-			// 		});
-			// 		fetch_data("POST", "get_male_posts", null, "application", res => {
-			// 			this.posts = res.data.posts;
-			// 			wx.hideToast();
-			// 		});
-			// 	} else if (index == 3) {
-			// 		wx.showToast({
-			// 			title: '加载中',
-			// 			icon: 'loading',
-			// 			duration: 100000,
-			// 		});
-			// 		fetch_data("POST", "get_female_posts", null, "application", res => {
-			// 			this.posts = res.data.posts;
-			// 			wx.hideToast();
-			// 		});
-			// 	} else if (index == 4) {
-			// 		wx.showToast({
-			// 			title: '加载中',
-			// 			icon: 'loading',
-			// 			duration: 100000,
-			// 		});
-			// 		fetch_data("POST", "get_posts", null, "application", res => {
-			// 			this.posts = res.data.posts;
-			// 			wx.hideToast();
-			// 		});
-			// 	};
-			// },
+			
 		}
 	}
 </script>
@@ -674,7 +683,7 @@
 		border: 1px solid #ddd;
 		border-radius: 8px;
 	}
-
+	
 	.textarea-field {
 		height: 80px;
 		resize: none;
@@ -713,6 +722,7 @@
 		margin-top: 10px;
 		gap: 10px;
 		align-items: center;
+		z-index: 999;
 	}
 
 	.preview-image {

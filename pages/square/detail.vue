@@ -43,7 +43,7 @@
 				</div>
 				<div style="display: flex;">
 					<p v-if="formatted_time" class="post-time">发布于{{formatted_time}}</p>
-					<p v-if="post.poster_id === user_id" class="post-time"
+					<p v-if="(post.poster_id === user_id) || identity === 3" class="post-time"
 						style="color: red; margin-left: 20rpx; z-index: 999;" @click="delete_post(post.id)">删除</p>
 				</div>
 
@@ -84,10 +84,10 @@
 										<img v-else class="action-icon" src="../../static/square/like-before.jpg" />
 										<span>{{comment.likes}}</span>
 									</div>
-									<div v-if="comment.sender_id === user_id && !comment.comment_sender" @click.stop="delete_comment(comment.id, true)" class="comment-action">
+									<div v-if="(comment.sender_id === user_id && !comment.comment_sender) || identity === 3" @click.stop="delete_comment(comment.id, true)" class="comment-action">
 										<span style="color: red;">删除</span>
 									</div>
-									<div v-else-if="comment.sender_id === user_id && comment.comment_sender" @click.stop="delete_comment(comment.id, false)" class="comment-action">
+									<div v-else-if="(comment.sender_id === user_id && comment.comment_sender) || identity === 3" @click.stop="delete_comment(comment.id, false)" class="comment-action">
 										<span style="color: red;">删除</span>
 									</div>
 								</div>
@@ -483,7 +483,7 @@
 				margin-top: 20rpx;
 				padding: 20rpx;
 				background-color: #f9f9f9;
-				border-radius: 10rpx;
+				border-radius: 25rpx;
 			}
 
 			.comment-item {

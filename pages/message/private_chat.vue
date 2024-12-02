@@ -9,8 +9,8 @@
 							<text class="text-b8">{{ formatDate(item.timestamp) }}</text>
 						</view>
 						<block v-if="is_self(item)">
-							<view class="item item-right" :id="`item-${item.messageId}`"
-								:key="item.messageId" v-if="item.type == 'text'">
+							<view class="item item-right" :id="`item-${item.messageId}`" :key="item.messageId"
+								v-if="item.type == 'text'">
 								<image :src="identity == 3 ? '/my/static/kefu.png' : current_user.head_pic"
 									mode="aspectFill" class="left-img" />
 								<view class="center-text">
@@ -22,16 +22,15 @@
 								<image :src="identity == 3 ? '/my/static/kefu.png' : current_user.head_pic"
 									mode="aspectFill" class="left-img" />
 								<view class="center-image">
-									<image :src="item.payload.thumbnail" mode="widthFix"
-										@click="previewImage(item)" />
+									<image :src="item.payload.thumbnail" mode="widthFix" @click="previewImage(item)" />
 								</view>
 							</view>
-							<view class="item item-time" :id="`item-${item.messageId}`"
-								v-if="item.type == 'swap_wx'" :key="item.messageId">
+							<view class="item item-time" :id="`item-${item.messageId}`" v-if="item.type == 'swap_wx'"
+								:key="item.messageId">
 								<text class="grey-text">您申请了与对方交换微信</text>
 							</view>
-							<view class="item item-time" :id="`item-${item.messageId}`"
-								v-if="item.type == 'swap_phone'" :key="item.messageId">
+							<view class="item item-time" :id="`item-${item.messageId}`" v-if="item.type == 'swap_phone'"
+								:key="item.messageId">
 								<text class="grey-text">您申请了与对方交换电话</text>
 							</view>
 							<view class="item item-time" v-if="item.type == 'refuse_wx_phone'"
@@ -45,15 +44,14 @@
 									class="grey-text">{{item.payload.type == 1 ? '您同意了与对方交换电话' : '您同意了对方与您交换微信'}}</text>
 							</view>
 							<view class="item item-file item-right" @click="openFile(item)"
-								:id="`item-${item.messageId}`" v-if="item.type == 'file'"
-								:key="item.messageId">
+								:id="`item-${item.messageId}`" v-if="item.type == 'file'" :key="item.messageId">
 								<image :src="identity == 3 ? '/my/static/kefu.png' : current_user.head_pic"
 									mode="aspectFill" class="left-img" />
 								<view class="center-file">
-									<image src="@/static/message/chat-pdf.png" mode="widthFix"
-										class="top-icon" v-if="getFileType(item) == 'pdf'" />
-									<image src="@/static/message/chat-word.png" mode="widthFix"
-										class="top-icon" v-else />
+									<image src="@/static/message/chat-pdf.png" mode="widthFix" class="top-icon"
+										v-if="getFileType(item) == 'pdf'" />
+									<image src="@/static/message/chat-word.png" mode="widthFix" class="top-icon"
+										v-else />
 									<view class="right">
 										<view class="title-text">{{item.payload.name}}</view>
 										<view class="info-text">{{ formatFileSize(item) }}</view>
@@ -65,11 +63,10 @@
 								<image :src="identity == 3 ? '/my/static/kefu.png' : current_user.head_pic"
 									mode="aspectFill" class="left-img" />
 								<view class="audio-file" @click.stop="playAudio(item)">
-									<image src="@/static/common/play-self1.gif" mode="widthFix"
-										class="audio-icon"
+									<image src="@/static/common/play-self1.gif" mode="widthFix" class="audio-icon"
 										v-if="audioPlayer.playingMessage && audioPlayer.playingMessage.messageId === item.messageId" />
-									<image src="@/static/common/voice-self.png" mode="widthFix"
-										class="audio-icon" v-else />
+									<image src="@/static/common/voice-self.png" mode="widthFix" class="audio-icon"
+										v-else />
 								</view>
 								<view class="audio-text">{{ Math.ceil(item.payload.duration)}}″</view>
 							</view>
@@ -79,11 +76,10 @@
 									mode="aspectFill" class="left-img" />
 								<view class="center-phone">
 									<view class="center-top">
-										<image src="@/static/message/chat-phone-blue.png"
-											mode="widthFix" class="top-icon"
-											v-if="item.payload.type == 1" />
-										<image src="@/static/index/weixin.png" mode="widthFix"
-											class="top-icon" v-else />
+										<image src="@/static/message/chat-phone-blue.png" mode="widthFix"
+											class="top-icon" v-if="item.payload.type == 1" />
+										<image src="@/static/index/weixin.png" mode="widthFix" class="top-icon"
+											v-else />
 										<view class="right">
 											<view class="title-text">
 												{{item.payload.type == 1 ? '我的手机号' : '我的微信号'}}：
@@ -107,38 +103,31 @@
 									<text>{{item.payload.text}}</text>
 								</view>
 							</view>
-							<view class="item item-image" :id="`item-${item.messageId}`"
-								v-if="item.type == 'image'" :key="item.messageId">
+							<view class="item item-image" :id="`item-${item.messageId}`" v-if="item.type == 'image'"
+								:key="item.messageId">
 								<image :src="toIdentity == 3 ? '/my/static/kefu.png' : to.data.head_pic"
 									mode="aspectFill" class="left-img" @click.stop="clickHead()" />
 								<view class="center-image">
-									<image :src="item.payload.thumbnail" mode="widthFix"
-										@click="previewImage(item)" />
+									<image :src="item.payload.thumbnail" mode="widthFix" @click="previewImage(item)" />
 								</view>
 							</view>
-							<view class="item item-swap" v-if="item.type == 'swap_wx'"
-								:id="`item-${item.messageId}`" :key="item.messageId">
+							<view class="item item-swap" v-if="item.type == 'swap_wx'" :id="`item-${item.messageId}`"
+								:key="item.messageId">
 								<image :src="toIdentity == 3 ? '/my/static/kefu.png' : to.data.head_pic"
 									mode="aspectFill" class="left-img" @click.stop="clickHead()" />
 								<view class="center-info">
 									<view class="center-top">
-										<image src="@/static/index/weixin.png" mode="widthFix"
-											class="top-icon" />
+										<image src="@/static/index/weixin.png" mode="widthFix" class="top-icon" />
 										<text class="top-text">我想要和您交换微信，您是否同意</text>
 									</view>
-									<view class="center-bot-button"
-										:class="{'one-button':item.payload.status != -1}">
+									<view class="center-bot-button" :class="{'one-button':item.payload.status != -1}">
 										<block v-if="item.payload.status == -1">
-											<button class="refuse-btn"
-												@click="refuse(2,item,index)">拒绝</button>
-											<button class="agree-btn"
-												@click="agree(2,item,index)">同意</button>
+											<button class="refuse-btn" @click="refuse(2,item,index)">拒绝</button>
+											<button class="agree-btn" @click="agree(2,item,index)">同意</button>
 										</block>
 										<block v-else>
-											<button class="agree-btn"
-												v-if="item.payload.status == 1">已同意</button>
-											<button class="refuse-btn"
-												v-if="item.payload.status == 2">已拒绝</button>
+											<button class="agree-btn" v-if="item.payload.status == 1">已同意</button>
+											<button class="refuse-btn" v-if="item.payload.status == 2">已拒绝</button>
 										</block>
 									</view>
 								</view>
@@ -149,23 +138,18 @@
 									mode="aspectFill" class="left-img" @click.stop="clickHead()" />
 								<view class="center-info">
 									<view class="center-top">
-										<image src="@/static/message/chat-phone-blue.png"
-											mode="widthFix" class="top-icon" />
+										<image src="@/static/message/chat-phone-blue.png" mode="widthFix"
+											class="top-icon" />
 										<text class="top-text">我想要和您交换电话，您是否同意</text>
 									</view>
-									<view class="center-bot-button"
-										:class="{'one-button':item.payload.status != -1}">
+									<view class="center-bot-button" :class="{'one-button':item.payload.status != -1}">
 										<block v-if="item.payload.status == -1">
-											<button class="refuse-btn"
-												@click="refuse(1,item,index)">拒绝</button>
-											<button class="agree-btn"
-												@click="agree(1,item,index)">同意</button>
+											<button class="refuse-btn" @click="refuse(1,item,index)">拒绝</button>
+											<button class="agree-btn" @click="agree(1,item,index)">同意</button>
 										</block>
 										<block v-else>
-											<button class="agree-btn"
-												v-if="item.payload.status == 1">已同意</button>
-											<button class="refuse-btn"
-												v-if="item.payload.status == 2">已拒绝</button>
+											<button class="agree-btn" v-if="item.payload.status == 1">已同意</button>
+											<button class="refuse-btn" v-if="item.payload.status == 2">已拒绝</button>
 										</block>
 									</view>
 								</view>
@@ -181,11 +165,10 @@
 									mode="aspectFill" class="left-img" @click.stop="clickHead()" />
 								<view class="center-phone">
 									<view class="center-top">
-										<image src="@/static/message/chat-phone-blue.png"
-											mode="widthFix" class="top-icon"
-											v-if="item.payload.type == 1" />
-										<image src="@/static/index/weixin.png" mode="widthFix"
-											class="top-icon" v-else />
+										<image src="@/static/message/chat-phone-blue.png" mode="widthFix"
+											class="top-icon" v-if="item.payload.type == 1" />
+										<image src="@/static/index/weixin.png" mode="widthFix" class="top-icon"
+											v-else />
 										<view class="right">
 											<view class="title-text">
 												{{item.payload.type == 1 ? '我的手机号' : '我的微信号'}}：
@@ -199,32 +182,29 @@
 									</view>
 								</view>
 							</view>
-							<view class="item item-file" @click="openFile(item)"
-								v-if="item.type == 'file'" :id="`item-${item.messageId}`"
-								:key="item.messageId">
+							<view class="item item-file" @click="openFile(item)" v-if="item.type == 'file'"
+								:id="`item-${item.messageId}`" :key="item.messageId">
 								<image :src="toIdentity == 3 ? '/my/static/kefu.png' : to.data.head_pic"
 									mode="aspectFill" class="left-img" @click.stop="clickHead()" />
 								<view class="center-file">
-									<image src="@/static/message/chat-pdf.png" mode="widthFix"
-										class="top-icon" v-if="getFileType(item) == 'pdf'" />
-									<image src="@/static/message/chat-word.png" mode="widthFix"
-										class="top-icon" v-else />
+									<image src="@/static/message/chat-pdf.png" mode="widthFix" class="top-icon"
+										v-if="getFileType(item) == 'pdf'" />
+									<image src="@/static/message/chat-word.png" mode="widthFix" class="top-icon"
+										v-else />
 									<view class="right">
 										<view class="title-text">{{item.payload.name}}</view>
 										<view class="info-text">{{ formatFileSize(item) }}</view>
 									</view>
 								</view>
 							</view>
-							<view class="item item-audio" v-if="item.type == 'audio'"
-								:id="`item-${item.messageId}`" :key="item.messageId">
+							<view class="item item-audio" v-if="item.type == 'audio'" :id="`item-${item.messageId}`"
+								:key="item.messageId">
 								<image :src="toIdentity == 3 ? '/my/static/kefu.png' : to.data.head_pic"
 									mode="aspectFill" class="left-img" @click.stop="clickHead()" />
 								<view class="audio-file" @click.stop="playAudio(item)">
-									<image src="@/static/common/play.gif" mode="widthFix"
-										class="audio-icon"
+									<image src="@/static/common/play.gif" mode="widthFix" class="audio-icon"
 										v-if="audioPlayer.playingMessage && audioPlayer.playingMessage.messageId === item.messageId" />
-									<image src="@/static/common/voice.png" mode="widthFix"
-										class="audio-icon" v-else />
+									<image src="@/static/common/voice.png" mode="widthFix" class="audio-icon" v-else />
 								</view>
 								<view class="audio-text">{{ Math.ceil(item.payload.duration)}}″</view>
 							</view>
@@ -235,9 +215,8 @@
 			<view class="chat-bot">
 				<view class="chat-bot-top" :class="{'border':open_bot}">
 					<view class="left">
-						<u-input placeholder="新信息" border="none" type="text"
-							placeholderClass="placeholder28" v-model="msg" confirmType="send"
-							@confirm="confirmMsg" clearable />
+						<u-input placeholder="新信息" border="none" type="text" placeholderClass="placeholder28"
+							v-model="msg" confirmType="send" @confirm="confirmMsg" clearable />
 					</view>
 					<view class="right">
 						<image src="@/static/message/chat-voice.png" @touchstart.stop="onRecordStart"
@@ -259,7 +238,19 @@
 						<image src="@/static/message/chat-file.png" mode="widthFix" class="item-img" />
 						<view class="item-text">文件</view>
 					</view>
-					<view class="bot-item" @click="confirm_coopration('swap_phone')">
+					<view class="bot-item" @click="send_custom_msg('swap_phone')">
+						<image src="@/static/message/chat-phone.png" mode="widthFix" class="item-img" />
+						<view class="item-text">换电话</view>
+					</view>
+					<view class="bot-item" @click="send_custom_msg()">
+						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
+						<view class="item-text">换微信</view>
+					</view>
+					<view class="bot-item" @click="subscribe_wx_msg">
+						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
+						<view class="item-text">订阅新消息提醒</view>
+					</view>
+					<!-- <view class="bot-item" @click="confirm_coopration('swap_phone')">
 						<image src="@/static/message/chat-phone.png" mode="widthFix" class="item-img" />
 						<view class="item-text">确认合作</view>
 					</view>
@@ -274,7 +265,7 @@
 					<view class="bot-item" @click="manage_asset()">
 						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
 						<view class="item-text">资金代管</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</view>
@@ -720,28 +711,12 @@
 					message: message,
 					onSuccess(message1) { //发送成功
 						console.log("Private message sent successfully.", message1);
-						// 给收信人发订阅消息
-						// const match = _this.to.id.match(/\d+/); 		// 匹配数字
-						// const receiver_id = match ? match[0] : null; 
-						// let data = {
-						// 	"my_id": _this.user_id,
-						// 	"receiver_id": receiver_id,
-						// }
-						// fetch_data("POST", "send_notification", data, "user", res => {
-						// 	if (res.data.status === 200) {
-						// 		console.log("微信通知发送成功");
-						// 	} else {
-						// 		console.log("微信通知发送失败", res.data);
-						// 	}
-						// })
-
+						// 给用户微信发送新消息提醒
 						const ONE_HOUR = 3600 * 1000; // 1 小时的毫秒数
 						const now = Date.now();
 						const last_execution_time = wx.getStorageSync('last_execution_time') || 0;
 						// 检查是否超过 1 小时
 						if (now - last_execution_time >= ONE_HOUR) {
-							// 更新本地存储时间戳
-							wx.setStorageSync('last_execution_time', now);
 							const match = _this.to.id.match(/\d+/); // 匹配数字
 							const receiver_id = match ? match[0] : null;
 							let data = {
@@ -751,12 +726,14 @@
 							fetch_data("POST", "send_notification", data, "user", (res) => {
 								if (res.data.status === 200) {
 									console.log("微信通知发送成功");
+									// 发送成功，更新本地存储时间戳
+									wx.setStorageSync('last_execution_time', now);
 								} else {
-									console.log("微信通知发送失败", res.data);
+									console.log("微信通知发送失败", res);
 								}
 							});
 						} else {
-							console.log("已在 1 小时内给此人发送过，跳过此次执行");
+							console.log("已在1小时内给此人发送过，跳过此次执行");
 						}
 
 						if (is_text) {
@@ -1153,6 +1130,15 @@
 			manage_asset() {
 				console.log("资金代管");
 			},
+			subscribe_wx_msg() {
+				// 询问用户是否订阅消息提醒
+				utils.get_openid((openid) => {
+					fetch_data("POST", "store_openid", { "my_id": _this.user_id, "openid": openid }, "user");
+				})
+				utils.subscirbe_message(['8AMX7lHwjpeH4uN-6XslAmSDJhcbbsJcB_RLdIcQZ4o'], () => {
+					this.$u.toast("订阅成功");
+				});
+			}
 		}
 	}
 </script>

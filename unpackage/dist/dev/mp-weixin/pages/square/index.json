@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "广场",
-  "enablePullDownRefresh": false,
+  "enablePullDownRefresh": true,
   "navigationBarBackgroundColor": "#1abfc0",
   "usingComponents": {
     "u-tabs": "/uview-ui/components/u-tabs/u-tabs",

@@ -161,8 +161,10 @@
   font-weight: bold;
 }
 .score.data-v-1cad5292 {
-  margin-left: 135rpx;
-  font-size: inherit;
-  font-weight: 700;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+  font-weight: 800;
+  color: gold;
+  white-space: nowrap;
 }
 
