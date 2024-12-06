@@ -3,12 +3,12 @@
 		<view class="zp-item" v-for="(item,index) in datas" :key="index" @click="itemClick(item,1,index)">
 			<view class="zp-item-title">
 				<view class="left" v-if="item.type == 1">
-					<text>{{item.title}}<text v-if="item.star_as_business" class="score">{{item.star_as_business[0]}} {{item.star_as_business[1]}}</text></text>
+					<text>{{item.title}}<text v-if="item.star_as_business" class="score">{{item.star_as_business[0]}}</text></text>
 				</view>
 				<view class="left" v-else>
 					<image :src="getFullUrl(item.user.head_pic)" class="left-img" mode="aspectFit" />
 					<!-- <text>{{item.user.user_name}}</text> -->
-					<text>{{item.user.user_name}}<text v-if="item.star_as_elite" class="score">{{item.star_as_elite[0]}} {{item.star_as_elite[1]}}</text></text>
+					<text>{{item.user.user_name}}<text v-if="item.star_as_elite" class="score">{{item.star_as_elite[0]}}</text></text>
 				</view>
 				<view class="right">{{item.salary + item.salary_unit}}</view>
 			</view>

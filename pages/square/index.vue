@@ -47,25 +47,25 @@
 						<div v-if="post.content" class="post-content">{{post.content}}</div>
 
 						<div @click.stop="" v-if="post.post_image" class="post-content">
-							<div v-if="post.post_image.length>=1 && post.post_image.length<=3" class="image-grid"
-								style="height: 200rpx;">
+							<div v-if="post.post_image.image_length>=1 && post.post_image.image_length<=3"
+								class="image-grid" style="height: 200rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
 									<img v-if="image && image.length>=6" class="post-images" :src="image"
-										@click.stop="image_operation(image)" />
+										mode="aspectFill" @click.stop="image_operation(post.post_image, image)" />
 								</div>
 							</div>
-							<div v-else-if="post.post_image.length>=4 && post.post_image.length<=6" class="image-grid"
-								style="height: 400rpx;">
+							<div v-else-if="post.post_image.image_length>=4 && post.post_image.image_length<=6"
+								class="image-grid" style="height: 400rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
 									<img v-if="image && image.length>=6" class="post-images" :src="image"
-										@click.stop="image_operation(image)" />
+										mode="aspectFill" @click.stop="image_operation(post.post_image, image)" />
 								</div>
 							</div>
-							<div v-else-if="post.post_image.length>=7 && post.post_image.length<=9" class="image-grid"
-								style="height: 600rpx;">
+							<div v-else-if="post.post_image.image_length>=7 && post.post_image.image_length<=9"
+								class="image-grid" style="height: 600rpx;">
 								<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
 									<img v-if="image && image.length>=6" class="post-images" :src="image"
-										@click.stop="image_operation(image)" />
+										mode="aspectFill" @click.stop="image_operation(post.post_image, image)" />
 								</div>
 							</div>
 						</div>
@@ -106,8 +106,8 @@
 				<div class="form-group">
 					<label for="post-images">上传图片</label>
 					<div class="image-preview">
-						<img v-for="(image, index) in preview_images" :key="index" :src="image" class="preview-image"
-							@click="image_operation(image)" />
+						<img v-for="(image, index) in preview_images" :key="index" :src="image" class="preview-image" mode="aspectFill"
+							@click="image_operation(preview_images, image, 'upload')" />
 						<button v-if="preview_images.length === 0" @click="choose_image()"
 							class="upload-button">+</button>
 						<button v-else @click="choose_image()" class="upload-button">×</button>
@@ -140,7 +140,7 @@
 						name: "全部",
 					},
 					{
-						name: "同城",
+						name: "其他",
 					},
 				],
 				current: 0,
@@ -191,8 +191,8 @@
 			},
 
 			change(observer) {
-				this.current = observer.index; 			// 按钮切换状态
-				if (observer.index == 0) {					
+				this.current = observer.index; // 按钮切换状态
+				if (observer.index == 0) {
 					wx.showToast({
 						title: '加载中',
 						icon: 'loading',
@@ -227,9 +227,9 @@
 						icon: 'none',
 						duration: 1000,
 					});
-				} 
+				}
 			},
-			
+
 			// 关闭模态弹框
 			closeModal() {
 				this.showPostModal = false;
@@ -245,11 +245,11 @@
 					sourceType: [sourceType],
 					success: (res) => {
 						this.new_post_images = res.tempFilePaths;
-						this.preview_images = res.tempFilePaths;
+						this.preview_images = [...res.tempFilePaths];
 					}
 				});
 			},
-			
+
 			upload_images() {
 				console.log(this.new_post_images)
 				if (!this.new_post_images || this.new_post_images.length === 0) {
@@ -295,9 +295,9 @@
 						icon: "none",
 						duration: 1000,
 					});
-					setTimeout(()=>{
+					setTimeout(() => {
 						uni.reLaunch({
-							url:'/pages/index/login'
+							url: '/pages/index/login'
 						})
 					}, 1000)
 					return;
@@ -369,10 +369,20 @@
 				this.showPostModal = true;
 			},
 
-			image_operation(image_url) {
+			image_operation(post_images, this_image, where = "display") {
+				let image_urls;
+				if (where === "display") {
+					// 筛选出所有图片URL
+					image_urls = Object.keys(post_images)
+						.filter(key => key.startsWith("image") && key !== "image_length" && post_images[
+						key]) // 筛选出以"image"开头且值不为空的键
+						.map(key => post_images[key]);
+				} else if (where === "upload") {
+					image_urls = post_images;
+				}			
 				wx.previewImage({
-					urls: [image_url],
-					current: image_url,
+					urls: image_urls,
+					current: this_image,
 				});
 			},
 
@@ -407,13 +417,14 @@
 									});
 									this.current = 0;
 									// 刷新帖子列表
-									fetch_data("POST", "get_all_posts_with_star", null, "application", (res) => {
-										this.posts = res.data.posts.map(post => ({
-											...post,
-											time: utils.format_time(post.time),
-											liked: false,
-										}));
-									});
+									fetch_data("POST", "get_all_posts_with_star", null, "application",
+										(res) => {
+											this.posts = res.data.posts.map(post => ({
+												...post,
+												time: utils.format_time(post.time),
+												liked: false,
+											}));
+										});
 								}
 							})
 						}
@@ -497,7 +508,7 @@
 			// 	});
 			// },
 
-			
+
 		}
 	}
 </script>
@@ -683,7 +694,7 @@
 		border: 1px solid #ddd;
 		border-radius: 8px;
 	}
-	
+
 	.textarea-field {
 		height: 80px;
 		resize: none;

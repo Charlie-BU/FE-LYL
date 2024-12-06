@@ -18,25 +18,26 @@
 					<div v-if="post.content" class="post-content">{{post.content}}</div>
 
 					<div v-if="post.post_image" class="post-content">
-						<div v-if="post.post_image.length>=1 && post.post_image.length<=3" class="image-grid"
+						<div v-if="post.post_image.image_length>=1 && post.post_image.image_length<=3" class="image-grid"
 							style="height: 200rpx;">
 							<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
-								<img v-if="image && image.length>=6" class="post-images" :src="image"
-									@click="image_operation(image)" />
+								<!-- image.length>=6是为了判断是否为url -->
+								<img v-if="image && image.length>=6" class="post-images" :src="image" mode="aspectFill"
+									@click="image_operation(post.post_image, image)" />
 							</div>
 						</div>
-						<div v-else-if="post.post_image.length>=4 && post.post_image.length<=6" class="image-grid"
+						<div v-else-if="post.post_image.image_length>=4 && post.post_image.image_length<=6" class="image-grid"
 							style="height: 400rpx;">
 							<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
-								<img v-if="image && image.length>=6" class="post-images" :src="image"
-									@click="image_operation(image)" />
+								<img v-if="image && image.length>=6" class="post-images" :src="image" mode="aspectFill"
+									@click="image_operation(post.post_image, image)" />
 							</div>
 						</div>
-						<div v-else-if="post.post_image.length>=7 && post.post_image.length<=9" class="image-grid"
+						<div v-else-if="post.post_image.image_length>=7 && post.post_image.image_length<=9" class="image-grid"
 							style="height: 600rpx;">
 							<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
-								<img v-if="image && image.length>=6" class="post-images" :src="image"
-									@click="image_operation(image)" />
+								<img v-if="image && image.length>=6" class="post-images" :src="image" mode="aspectFill"
+									@click="image_operation(post.post_image, image)" />
 							</div>
 						</div>
 					</div>
@@ -159,10 +160,14 @@
 			},
 		},
 		methods: {
-			image_operation(image_url) {
+			image_operation(post_images, this_image) {
+				// 筛选出所有图片URL
+				const image_urls = Object.keys(post_images)
+					.filter(key => key.startsWith("image") && key !== "image_length" && post_images[key]) // 筛选出以"image"开头且值不为空的键
+					.map(key => post_images[key]);
 				wx.previewImage({
-					urls: [image_url],
-					current: image_url,
+					urls: image_urls,
+					current: this_image,
 				});
 			},
 
