@@ -32,7 +32,9 @@
 							<view class="left-text">期望城市：</view>
 							<view class="right-text">{{detail.citys.join('、')}}</view>
 						</view>
-						<view class="project-row">
+						
+						
+						<view v-if="detail.hz_start_time && detail.hz_end_time" class="project-row">
 							<view class="left-text">合作时间：</view>
 							<view class="right-text">{{detail.hz_start_time}} 至 {{detail.hz_end_time}}</view>
 						</view>
@@ -44,12 +46,25 @@
 							<view class="left-text">岗位职责：</view>
 							<view class="right-text">{{detail.experience}}</view>
 						</view>
+						
+						<view v-if="preview_images.length !== 0" class="project-row column">
+							<view class="left-text">
+								<text>项目展示：</text>
+							</view>
+							<div class="image-preview">
+								<div v-for="(image, index) in preview_images" :key="index">
+									<image :src="image" class="preview-image" mode="aspectFill"
+										@click="image_operation(preview_images, image, 'upload')" />
+								</div>
+							</div>
+						</view>
+						
 						<view v-if="detail.remark" class="project-row column">
 							<view class="left-text">备注信息：</view>
 							<view class="right-text">{{detail.remark}}</view>
 						</view>
 						<!-- 沟通列表 -->
-						<div class="chats-list">
+						<div v-if="item_chats.length !== 0" class="chats-list">
 							<coopList :item_chats="all_chats" />
 						</div>
 					</view>
@@ -89,6 +104,8 @@
 				is_sc: 0,
 				fromIdentity: 0,
 				star: [],
+				item_chats: [],
+				preview_images: [],
 			}
 		},
 		onLoad(e) {
@@ -114,14 +131,14 @@
 			_this.get_items_xq()
 			// 获取项目的沟通列表
 			fetch_data("POST", "get_all_item_chats", {
-				"item_id": this.id
+				"item_id": _this.id
 			}, "application", (res) => {
-				var item_chats = res.data.all_chats.map(chat => ({
+				_this.item_chats = res.data.all_chats.map(chat => ({
 					...chat,
 					update_time: utils.format_time(chat.update_time),
 					mode: false,
 				}));
-				uni.setStorageSync("item_chats", item_chats);
+				uni.setStorageSync("item_chats", _this.item_chats);
 			});
 			// 获取评分
 			setTimeout(()=>{
@@ -130,6 +147,15 @@
 				}, "user", (res) => {
 					this.star = utils.show_stars(res.data.star_as_business);
 				});
+				fetch_data("POST", "get_item_files", {
+					"item_id": this.detail.id
+				}, "user", (res) => {
+					const item_files = res.data.item_files;
+					_this.preview_images = [];
+					for (let i = 1; i <= item_files.length; i++) {
+						_this.preview_images.push(item_files['file' + i]);
+					}
+				})
 			}, 2000)
 		},
 		onShareAppMessage() {
@@ -258,7 +284,23 @@
 						console.log('GoEasy is connecting', attempts);
 					}
 				});
-			}
+			},
+			image_operation(post_images, this_image, where = "display") {
+				let image_urls;
+				if (where === "display") {
+					// 筛选出所有图片URL
+					image_urls = Object.keys(post_images)
+						.filter(key => key.startsWith("image") && key !== "image_length" && post_images[
+							key]) // 筛选出以"image"开头且值不为空的键
+						.map(key => post_images[key]);
+				} else if (where === "upload") {
+					image_urls = post_images;
+				}
+				wx.previewImage({
+					urls: image_urls,
+					current: this_image,
+				});
+			},
 		}
 	}
 </script>
@@ -285,5 +327,21 @@
 		white-space: nowrap;
 	}
 	
+	.image-preview {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 10px;
+		gap: 10px;
+		align-items: center;
+		z-index: 999;
+	}
+	
+	.preview-image {
+		width: 60px;
+		height: 60px;
+		object-fit: cover;
+		border-radius: 4px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
 	
 </style>

@@ -234,6 +234,9 @@
 </template>
 
 <script>
+	import {
+		fetch_data
+	} from '../../utils/ajax_request.js'
 	import wxLogin from "@/components/wx-login/wx-login.vue"
 	var _this;
 	export default {
@@ -572,7 +575,30 @@
 						confirmColor:'#02AAAB',
 						success(res1) {
 							if (res1.confirm) {
-								_this.do_item(4,res.item,'',res.index)
+								// _this.do_item(4,res.item,'',res.index)
+								wx.showToast({
+									title: "删除中...",
+									icon: "loading",
+									duration: 100000,
+								});
+								let data = {
+									"item_id": res.item.id,
+									"user_id": res.item.user_id,
+								}
+								fetch_data("POST", "delete_item", data, "user", (response) => {
+									if (response.data.status === 200) {
+										wx.showToast({
+											title: "删除成功",
+											icon: "none",
+											duration: 700,
+										});
+										setTimeout(()=>{
+											uni.reLaunch({
+												url: "/pages/my/my"
+											})
+										}, 700)
+									}
+								})
 							}else{
 								console.log('点击了取消');
 							}

@@ -1,8 +1,8 @@
 <template>
 	<div class="app">
 		<div style="display: flex;">
-			<view style="width: 75%;">
-				<u-tabs lineColor="#15B3B4" :list="tabbar_list" :scrollable="false" :current="current" @change="change"
+			<view style="width: 75%; margin-left: 40rpx;">
+				<u-tabs lineColor="#15B3B4" :list="tabbar_list" :scrollable="true" :current="current" @change="change"
 					:activeStyle="{
 				 color: '#000000',
 				 fontWeight: 'bold',
@@ -22,7 +22,10 @@
 			<u-search class="search_bar" v-model="search_post" bg-color="#ffffff" :show-action="false" placeholder="输入"></u-search>
 			<button class="cu-btn btn" @click="search">查找</button>
 		</div> -->
-
+		<div v-if="posts.length === 0" class="no-posts">
+			<p class="no-posts-message">当前没有帖子哦，快来发布一个吧！</p>
+			<uni-icons type="heart-filled" color="#999" size="50" />
+		</div>
 		<div v-for="(post, index) in posts" :key="index">
 			<section class="section">
 				<div class="boxList flex">
@@ -69,6 +72,9 @@
 								</div>
 							</div>
 						</div>
+						<div class="post-type-bar">
+							<span class="post-type-bar-label">{{ postTypeName(post.type) }}</span>
+						</div>
 						<div style="text-align: end; margin-top: 30rpx;">
 							<div style="display: inline-block; text-align: center; margin-right: 30rpx;"
 								@click.stop="like_post_or_cancel(post)">
@@ -93,26 +99,51 @@
 		<div v-if="showPostModal" class="modal-overlay">
 			<div class="modal">
 				<h3 class="modal-title">发布帖子</h3>
+
+				<!-- 标题 -->
 				<div class="form-group">
 					<label for="post-title">标题</label>
 					<input id="post-title" v-model="new_post_title" type="text" placeholder="请输入标题"
 						class="input-field" />
 				</div>
+
+				<!-- 内容 -->
 				<div class="form-group">
 					<label for="post-content">内容</label>
 					<textarea id="post-content" v-model="new_post_content" placeholder="说点什么吧..."
 						class="textarea-field"></textarea>
 				</div>
+
+				<!-- 上传图片 -->
 				<div class="form-group">
 					<label for="post-images">上传图片</label>
 					<div class="image-preview">
-						<img v-for="(image, index) in preview_images" :key="index" :src="image" class="preview-image" mode="aspectFill"
-							@click="image_operation(preview_images, image, 'upload')" />
+						<img v-for="(image, index) in preview_images" :key="index" :src="image" class="preview-image"
+							mode="aspectFill" @click="image_operation(preview_images, image, 'upload')" />
 						<button v-if="preview_images.length === 0" @click="choose_image()"
 							class="upload-button">+</button>
-						<button v-else @click="choose_image()" class="upload-button">×</button>
+						<button v-else @click="clear_image()" class="upload-button">×</button>
 					</div>
 				</div>
+
+				<!-- 帖子类别 -->
+				<div class="form-group">
+					<label>选择类别</label>
+					<div class="category-options">
+						<label v-for="(category, index) in categories" :key="index">
+							<div v-if="category.id===new_post_type" class="category-option-selected"
+								@click="select_type(category.id)" :id="'category-' + category.id">
+								<span class="category-label">{{ category.name }}</span>
+							</div>
+							<div v-else class="category-option-unselected" @click="select_type(category.id)"
+								:id="'category-' + category.id">
+								<span class="category-label">{{ category.name }}</span>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- 模态框按钮 -->
 				<div class="modal-footer">
 					<button class="btn btn-cancel" @click="closeModal">取消</button>
 					<button class="btn btn-submit" @click="submit_post">发布</button>
@@ -137,10 +168,13 @@
 						name: "推荐",
 					},
 					{
-						name: "全部",
+						name: "行业动态",
 					},
 					{
-						name: "其他",
+						name: "职场树洞",
+					},
+					{
+						name: "分享瞬间",
 					},
 				],
 				current: 0,
@@ -148,7 +182,23 @@
 				new_post_title: '',
 				new_post_content: '',
 				new_post_images: [],
-				preview_images: []
+				preview_images: [],
+				// 存储帖子类别的ID
+				new_post_type: '',
+				// 定义类别的数据
+				categories: [{
+						id: 0,
+						name: "行业动态"
+					},
+					{
+						id: 1,
+						name: "职场树洞"
+					},
+					{
+						id: 2,
+						name: "分享瞬间"
+					}
+				]
 			}
 		},
 		onLoad() {
@@ -173,6 +223,7 @@
 					icon: "loading",
 					duration: 100000,
 				});
+				this.new_post_type === "";
 				fetch_data("POST", "get_all_posts_with_star", null, "application", (res) => {
 					this.posts = res.data.posts.map(post => ({
 						...post,
@@ -188,6 +239,11 @@
 				uni.navigateBack({
 					delta: 1
 				});
+			},
+
+			postTypeName(post_type) {
+				const category = this.categories.find((cat) => cat.id === post_type);
+				return category ? category.name : '其他';
 			},
 
 			change(observer) {
@@ -212,7 +268,9 @@
 						icon: 'loading',
 						duration: 100000,
 					});
-					fetch_data("POST", "get_all_posts", null, "application", (res) => {
+					fetch_data("POST", "get_posts_by_type", {
+						"type": 0
+					}, "application", (res) => {
 						this.posts = res.data.posts.map(post => ({
 							...post,
 							time: utils.format_time(post.time),
@@ -221,12 +279,37 @@
 						wx.hideToast();
 					})
 				} else if (observer.index == 2) {
-					this.current = 0;
 					wx.showToast({
-						title: '该功能暂未开放，敬请期待',
-						icon: 'none',
-						duration: 1000,
+						title: '加载中',
+						icon: 'loading',
+						duration: 100000,
 					});
+					fetch_data("POST", "get_posts_by_type", {
+						"type": 1
+					}, "application", (res) => {
+						this.posts = res.data.posts.map(post => ({
+							...post,
+							time: utils.format_time(post.time),
+							liked: false,
+						}));
+						wx.hideToast();
+					})
+				} else if (observer.index == 3) {
+					wx.showToast({
+						title: '加载中',
+						icon: 'loading',
+						duration: 100000,
+					});
+					fetch_data("POST", "get_posts_by_type", {
+						"type": 2
+					}, "application", (res) => {
+						this.posts = res.data.posts.map(post => ({
+							...post,
+							time: utils.format_time(post.time),
+							liked: false,
+						}));
+						wx.hideToast();
+					})
 				}
 			},
 
@@ -250,11 +333,16 @@
 				});
 			},
 
+			clear_image() {
+				this.new_post_images = [];
+				this.preview_images = [];
+			},
+
 			upload_images() {
-				console.log(this.new_post_images)
 				if (!this.new_post_images || this.new_post_images.length === 0) {
 					return Promise.resolve([]); // 如果没有图片，直接返回空数组
 				}
+				// 一张一张传
 				const uploadPromises = this.new_post_images.map((image_path) => {
 					return new Promise((resolve, reject) => {
 						upload_file("upload_image_to_OSS", image_path, 'image',
@@ -288,6 +376,10 @@
 				return Promise.all(uploadPromises); // 等待所有上传完成
 			},
 
+			select_type(type) {
+				this.new_post_type = type;
+			},
+
 			async submit_post() {
 				if (!this.user_id) {
 					wx.showToast({
@@ -311,13 +403,21 @@
 					});
 					return;
 				}
+				if (this.new_post_type === "") {
+					wx.showToast({
+						title: "请选择帖子类别",
+						icon: "none",
+						duration: 700,
+					});
+					return;
+				}
 				try {
 					wx.showToast({
 						title: "发布中...",
 						icon: "loading",
 						duration: 10000,
 					});
-					// 等待图片上传完成
+					// 等待图片上传完成，拿到所有图片的url
 					const image_urls = await this.upload_images();
 					// 图片上传成功后关闭加载提示
 					wx.hideToast();
@@ -327,6 +427,7 @@
 						"title": this.new_post_title,
 						"content": this.new_post_content,
 						"image_urls": image_urls,
+						"type": this.new_post_type
 					};
 					// 提交数据
 					fetch_data("POST", "send_post", data, "application", (res) => {
@@ -375,11 +476,11 @@
 					// 筛选出所有图片URL
 					image_urls = Object.keys(post_images)
 						.filter(key => key.startsWith("image") && key !== "image_length" && post_images[
-						key]) // 筛选出以"image"开头且值不为空的键
+							key]) // 筛选出以"image"开头且值不为空的键
 						.map(key => post_images[key]);
 				} else if (where === "upload") {
 					image_urls = post_images;
-				}			
+				}
 				wx.previewImage({
 					urls: image_urls,
 					current: this_image,
@@ -519,7 +620,6 @@
 	}
 
 	.post-button {
-		margin-left: 30rpx;
 		width: 100rpx;
 		padding: 10rpx 20rpx;
 		background: linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4);
@@ -627,6 +727,26 @@
 			}
 		}
 	}
+
+	/* 容器样式 */
+	.post-type-bar {
+		border-radius: 20px;
+		background: linear-gradient(135deg, #6a11cb, #2575fc);
+		/* 渐变背景 */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		/* 添加轻微阴影 */
+		width: fit-content;
+		margin-top: 20rpx;
+	}
+
+	/* 标签样式 */
+	.post-type-bar-label {
+		color: white;
+		font-size: 25rpx;
+		letter-spacing: 1px;
+		padding: 5px 10px;
+	}
+
 
 	/* 背景遮罩 */
 	.modal-overlay {
@@ -744,6 +864,42 @@
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 
+	/* 单选框容器 */
+	.category-options {
+		display: flex;
+		gap: 10px;
+		margin-top: 30rpx;
+		margin-left: 20rpx;
+	}
+
+	.category-option-unselected {
+		display: flex;
+		align-items: center;
+		border-radius: 8px;
+		cursor: pointer;
+		background: rgba(0, 0, 0, 0.05);
+		border: 1px solid transparent;
+	}
+
+	.category-option-selected {
+		background: linear-gradient(135deg, #bdd6d6, #72fefe);
+		border-radius: 8px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		/* 增加阴影效果 */
+		border: 1px solid #fa659a;
+		/* 添加渐变边框 */
+	}
+
+	/* 单选按钮的标签 */
+	.category-label {
+		font-size: 16px;
+		color: #333;
+		display: block;
+		padding: 8px 15px;
+		border-radius: 8px;
+		transition: background 0.3s ease, color 0.3s ease;
+	}
+
 
 	/* 按钮 */
 	.modal-footer {
@@ -776,5 +932,21 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.no-posts {
+		text-align: center;
+		margin-top: 100px;
+		color: #666;
+	}
+
+	.no-posts-message {
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+
+	.no-posts uni-icons {
+		margin-top: 10px;
+		color: #999;
 	}
 </style>

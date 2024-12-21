@@ -5,7 +5,6 @@
   background: linear-gradient(0deg, #efefef 0%, #f6f6f6 25%, #1abfc0 100%);
 }
 .post-button.data-v-d4e6bb4e {
-  margin-left: 30rpx;
   width: 100rpx;
   padding: 10rpx 20rpx;
   background: linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4);
@@ -98,6 +97,24 @@
   height: 100%;
   object-fit: cover;
   border-radius: 5rpx;
+}
+/* 容器样式 */
+.post-type-bar.data-v-d4e6bb4e {
+  border-radius: 20px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  /* 渐变背景 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* 添加轻微阴影 */
+  width: -webkit-fit-content;
+  width: fit-content;
+  margin-top: 20rpx;
+}
+/* 标签样式 */
+.post-type-bar-label.data-v-d4e6bb4e {
+  color: white;
+  font-size: 25rpx;
+  letter-spacing: 1px;
+  padding: 5px 10px;
 }
 /* 背景遮罩 */
 .modal-overlay.data-v-d4e6bb4e {
@@ -215,6 +232,38 @@ label.data-v-d4e6bb4e {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+/* 单选框容器 */
+.category-options.data-v-d4e6bb4e {
+  display: flex;
+  gap: 10px;
+  margin-top: 30rpx;
+  margin-left: 20rpx;
+}
+.category-option-unselected.data-v-d4e6bb4e {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid transparent;
+}
+.category-option-selected.data-v-d4e6bb4e {
+  background: linear-gradient(135deg, #bdd6d6, #72fefe);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* 增加阴影效果 */
+  border: 1px solid #fa659a;
+  /* 添加渐变边框 */
+}
+/* 单选按钮的标签 */
+.category-label.data-v-d4e6bb4e {
+  font-size: 16px;
+  color: #333;
+  display: block;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
 /* 按钮 */
 .modal-footer.data-v-d4e6bb4e {
   display: flex;
@@ -243,5 +292,18 @@ label.data-v-d4e6bb4e {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.no-posts.data-v-d4e6bb4e {
+  text-align: center;
+  margin-top: 100px;
+  color: #666;
+}
+.no-posts-message.data-v-d4e6bb4e {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.no-posts uni-icons.data-v-d4e6bb4e {
+  margin-top: 10px;
+  color: #999;
 }
 

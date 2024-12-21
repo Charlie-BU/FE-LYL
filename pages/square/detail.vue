@@ -18,29 +18,32 @@
 					<div v-if="post.content" class="post-content">{{post.content}}</div>
 
 					<div v-if="post.post_image" class="post-content">
-						<div v-if="post.post_image.image_length>=1 && post.post_image.image_length<=3" class="image-grid"
-							style="height: 200rpx;">
+						<div v-if="post.post_image.image_length>=1 && post.post_image.image_length<=3"
+							class="image-grid" style="height: 200rpx;">
 							<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
 								<!-- image.length>=6是为了判断是否为url -->
 								<img v-if="image && image.length>=6" class="post-images" :src="image" mode="aspectFill"
 									@click="image_operation(post.post_image, image)" />
 							</div>
 						</div>
-						<div v-else-if="post.post_image.image_length>=4 && post.post_image.image_length<=6" class="image-grid"
-							style="height: 400rpx;">
+						<div v-else-if="post.post_image.image_length>=4 && post.post_image.image_length<=6"
+							class="image-grid" style="height: 400rpx;">
 							<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
 								<img v-if="image && image.length>=6" class="post-images" :src="image" mode="aspectFill"
 									@click="image_operation(post.post_image, image)" />
 							</div>
 						</div>
-						<div v-else-if="post.post_image.image_length>=7 && post.post_image.image_length<=9" class="image-grid"
-							style="height: 600rpx;">
+						<div v-else-if="post.post_image.image_length>=7 && post.post_image.image_length<=9"
+							class="image-grid" style="height: 600rpx;">
 							<div v-for="(image, i) in post.post_image" :key="i" class="image-item">
 								<img v-if="image && image.length>=6" class="post-images" :src="image" mode="aspectFill"
 									@click="image_operation(post.post_image, image)" />
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="post-type-bar">
+					<span class="post-type-bar-label">{{ postTypeName(post.type) }}</span>
 				</div>
 				<div style="display: flex;">
 					<p v-if="formatted_time" class="post-time">发布于{{formatted_time}}</p>
@@ -70,7 +73,9 @@
 										:src="baseUrl+comment.sender_pic" alt="User Avatar" />
 									<div class="comment-user-info">
 										<span v-if="comment.sender_realname"
-											class="comment-username">{{comment.sender_realname}}<span v-if="comment.comment_sender" style="margin-left: 13rpx;"> > {{comment.comment_sender}}</span></span>
+											class="comment-username">{{comment.sender_realname}}<span
+												v-if="comment.comment_sender" style="margin-left: 13rpx;"> >
+												{{comment.comment_sender}}</span></span>
 										<span v-else class="comment-username">{{comment.sender_nickname}}</span>
 										<span class="comment-time">{{comment.time}}</span>
 									</div>
@@ -79,16 +84,19 @@
 									{{comment.content}}
 								</div>
 								<div class="comment-actions flex">
-									<div v-if="!comment.comment_sender" @click.stop="like_comment_or_cancel(comment)" class="comment-action">
+									<div v-if="!comment.comment_sender" @click.stop="like_comment_or_cancel(comment)"
+										class="comment-action">
 										<img v-if="comment.liked" class="action-icon"
 											src="../../static/square/like-after.jpg" />
 										<img v-else class="action-icon" src="../../static/square/like-before.jpg" />
 										<span>{{comment.likes}}</span>
 									</div>
-									<div v-if="(comment.sender_id === user_id && !comment.comment_sender) || identity === 3" @click.stop="delete_comment(comment.id, true)" class="comment-action">
+									<div v-if="(comment.sender_id === user_id && !comment.comment_sender) || identity === 3"
+										@click.stop="delete_comment(comment.id, true)" class="comment-action">
 										<span style="color: red;">删除</span>
 									</div>
-									<div v-else-if="(comment.sender_id === user_id && comment.comment_sender) || identity === 3" @click.stop="delete_comment(comment.id, false)" class="comment-action">
+									<div v-else-if="(comment.sender_id === user_id && comment.comment_sender) || identity === 3"
+										@click.stop="delete_comment(comment.id, false)" class="comment-action">
 										<span style="color: red;">删除</span>
 									</div>
 								</div>
@@ -115,6 +123,19 @@
 				comments: [],
 				comment_length: 0,
 				liked: false,
+				categories: [{
+						id: 0,
+						name: "行业动态"
+					},
+					{
+						id: 1,
+						name: "职场树洞"
+					},
+					{
+						id: 2,
+						name: "分享瞬间"
+					}
+				]
 			}
 		},
 		onLoad(options) {
@@ -160,10 +181,16 @@
 			},
 		},
 		methods: {
+			postTypeName(post_type) {
+				const category = this.categories.find((cat) => cat.id === post_type);
+				return category ? category.name : '其他';
+			},
+
 			image_operation(post_images, this_image) {
 				// 筛选出所有图片URL
 				const image_urls = Object.keys(post_images)
-					.filter(key => key.startsWith("image") && key !== "image_length" && post_images[key]) // 筛选出以"image"开头且值不为空的键
+					.filter(key => key.startsWith("image") && key !== "image_length" && post_images[
+					key]) // 筛选出以"image"开头且值不为空的键
 					.map(key => post_images[key]);
 				wx.previewImage({
 					urls: image_urls,
@@ -325,7 +352,7 @@
 					}
 				})
 			},
-			
+
 			reply_comment(comment) {
 				if (comment.comment_sender) {
 					return;
@@ -377,7 +404,6 @@
 			}
 		}
 	}
-		
 </script>
 
 
@@ -412,6 +438,33 @@
 		font-style: normal;
 		text-transform: none;
 	}
+
+	/* 容器样式 */
+	.post-type-bar {
+		display: flex;
+		/* 启用 Flexbox */
+		justify-content: center;
+		/* 水平居中 */
+		align-items: center;
+		/* 垂直居中 */
+		border-radius: 20px;
+		background: linear-gradient(135deg, #6a11cb, #2575fc);
+		/* 渐变背景 */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		/* 添加轻微阴影 */
+		width: fit-content;
+		margin-top: 20rpx;
+		height: 50rpx;
+	}
+
+	/* 标签样式 */
+	.post-type-bar-label {
+		color: white;
+		font-size: 25rpx;
+		letter-spacing: 1px;
+		padding: 5px 10px;
+	}
+
 
 	.section {
 		background: #ffffff;

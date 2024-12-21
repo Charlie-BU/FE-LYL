@@ -7,7 +7,8 @@
 				<view style="border-bottom: 0.5px solid #EFEFEF;">
 					<view class="top">
 						<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFit" class="left-img" />
-						<view class="center-text">{{detail.user.user_name}} <text v-if="star.length !== 0" class="score">{{star[0]}} {{star[1]}}</text></view>
+						<view class="center-text">{{detail.user.user_name}} <text v-if="star.length !== 0"
+								class="score">{{star[0]}} {{star[1]}}</text></view>
 						<view class="right-text">{{detail.salary + detail.salary_unit}}</view>
 					</view>
 					<!-- <view class="score">评分</view>÷ -->
@@ -33,6 +34,17 @@
 						<view class="project-row column">
 							<view class="left-text">项目经历：</view>
 							<view class="right-text">{{detail.experience}}</view>
+						</view>
+						<view class="project-row column">
+							<view class="left-text">
+								<text>作品展示：</text>
+							</view>
+							<div class="image-preview">
+								<div v-for="(image, index) in preview_images" :key="index">
+									<image :src="image" class="preview-image" mode="aspectFill"
+										@click="image_operation(preview_images, image, 'upload')" />
+								</div>
+							</div>
 						</view>
 						<view class="project-row column">
 							<view class="left-text">备注信息：</view>
@@ -70,6 +82,7 @@
 				is_sc: 0,
 				fromIdentity: 0,
 				star: [],
+				preview_images: [],
 			}
 		},
 		onLoad(e) {
@@ -89,14 +102,7 @@
 		},
 		onShow() {
 			_this.get_items_xq()
-			// 获取评分
-			setTimeout(()=>{
-				fetch_data("POST", "get_user_star", {
-					"user_id": this.detail.user_id
-				}, "user", (res) => {
-					this.star = utils.show_stars(res.data.star_as_elite);
-				});
-			}, 2000)
+			
 		},
 		onShareAppMessage() {
 			return {
@@ -120,6 +126,24 @@
 				if (data.code == 200) {
 					_this.detail = data.result.detail
 					_this.is_sc = _this.detail.is_sc
+					
+					// 获取评分
+					setTimeout(() => {
+						fetch_data("POST", "get_user_star", {
+							"user_id": this.detail.user_id
+						}, "user", (res) => {
+							this.star = utils.show_stars(res.data.star_as_elite);
+						});
+						fetch_data("POST", "get_item_files", {
+							"item_id": this.detail.id
+						}, "user", (res) => {
+							const item_files = res.data.item_files;
+							_this.preview_images = [];
+							for (let i = 1; i <= item_files.length; i++) {
+								_this.preview_images.push(item_files['file' + i]);
+							}
+						})
+					}, 2000)
 				} else if (data.code == 100) {
 					this.$u.toast(data.msg, () => {
 						_this.finish()
@@ -194,7 +218,7 @@
 					let user_name = _this.detail.user.user_name
 					_this.toNext(
 						`/pages/message/private_chat?id=user_${_this.detail.user_id}&init=${init}&title=${user_name}`
-						)
+					)
 				} else {
 					this.$u.toast(data.msg)
 				}
@@ -233,13 +257,29 @@
 					},
 					onFailed: (error) => {
 						console.log('Failed to connect GoEasy, code:' + error.code + ',error:' + error
-						.content);
+							.content);
 					},
 					onProgress: (attempts) => {
 						console.log('GoEasy is connecting', attempts);
 					}
 				});
-			}
+			},
+			image_operation(post_images, this_image, where = "display") {
+				let image_urls;
+				if (where === "display") {
+					// 筛选出所有图片URL
+					image_urls = Object.keys(post_images)
+						.filter(key => key.startsWith("image") && key !== "image_length" && post_images[
+							key]) // 筛选出以"image"开头且值不为空的键
+						.map(key => post_images[key]);
+				} else if (where === "upload") {
+					image_urls = post_images;
+				}
+				wx.previewImage({
+					urls: image_urls,
+					current: this_image,
+				});
+			},
 		}
 	}
 </script>
@@ -248,7 +288,7 @@
 	@import "static/css/item.scss";
 
 	.container {
-		height: 100%;
+		height: 120%;
 		background: #fff;
 		position: relative;
 	}
@@ -291,5 +331,22 @@
 		font-weight: 800;
 		color: gold;
 		white-space: nowrap;
+	}
+	
+	.image-preview {
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: 10px;
+		gap: 10px;
+		align-items: center;
+		z-index: 999;
+	}
+	
+	.preview-image {
+		width: 60px;
+		height: 60px;
+		object-fit: cover;
+		border-radius: 4px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 </style>
