@@ -21,7 +21,10 @@
 				</view>
 				<view class="detail-item">
 					<text class="detail-label">用户评分：</text>
-					<text class="detail-value">{{chat.elite_star}}</text>
+					<text class="detail-value">{{chat.elite_star}} 分</text>
+				</view>
+				<view class="icon">
+					<image src="@/static/index/cooperating.png" mode="aspectFill" />
 				</view>
 			</view>
 		</view>
@@ -53,7 +56,7 @@
 <style lang="scss" scoped>
 	.container {
 		padding: 20rpx;
-		background-color: #f9f9f9;
+		background-color: #d4f1f0;
 	}
 
 	/* 顶部标题样式 */
@@ -71,7 +74,7 @@
 	/* 列表项样式 */
 	.list-item {
 		background-color: #ffffff;
-		border-radius: 10rpx;
+		border-radius: 20rpx;
 		margin-bottom: 20rpx;
 		padding: 20rpx;
 		box-shadow: 0 4rpx 6rpx rgba(0, 0, 0, 0.1);
@@ -109,7 +112,6 @@
 
 	.detail-item {
 		display: flex;
-		justify-content: space-between;
 		padding: 10rpx 0;
 		margin-left: 20rpx;
 		margin-right: 20rpx;

@@ -1,14 +1,12 @@
 <template>
-	<!--我要发活-->
 	<view class="container">
 		<u-loading-page :loading="true" v-if="load" fontSize="28rpx" />
 		<block v-else>
 			<view class="project">
 				<view style="border-bottom: 0.5px solid #EFEFEF;">
 					<view class="top">
-						<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFit" class="left-img" />
-						<view class="center-text">{{detail.user.user_name}} <text v-if="star.length !== 0"
-								class="score">{{star[0]}} {{star[1]}}</text></view>
+						<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFill" class="left-img" />
+						<view class="center-text">{{detail.user.user_name}} <text v-if="star.length !== 0" class="score">{{star[1]}} 分</text></view>
 						<view class="right-text">{{detail.salary + detail.salary_unit}}</view>
 					</view>
 					<!-- <view class="score">评分</view>÷ -->
@@ -98,7 +96,7 @@
 			if (e.from) {
 				_this.fromIdentity = e.from
 			}
-			_this.get_user_info()
+			_this.get_user_info();
 		},
 		onShow() {
 			_this.get_items_xq()
@@ -126,24 +124,24 @@
 				if (data.code == 200) {
 					_this.detail = data.result.detail
 					_this.is_sc = _this.detail.is_sc
-					
 					// 获取评分
-					setTimeout(() => {
-						fetch_data("POST", "get_user_star", {
-							"user_id": this.detail.user_id
-						}, "user", (res) => {
-							this.star = utils.show_stars(res.data.star_as_elite);
-						});
-						fetch_data("POST", "get_item_files", {
-							"item_id": this.detail.id
-						}, "user", (res) => {
-							const item_files = res.data.item_files;
-							_this.preview_images = [];
+					fetch_data("POST", "get_user_star", {
+						"user_id": this.detail.user_id
+					}, "user", (res) => {
+						this.star = utils.show_stars(res.data.star_as_elite);
+					});
+					// 获取作品
+					fetch_data("POST", "get_item_files", {
+						"item_id": this.detail.id
+					}, "user", (res) => {
+						const item_files = res.data.item_files;
+						_this.preview_images = [];
+						if (item_files) {
 							for (let i = 1; i <= item_files.length; i++) {
 								_this.preview_images.push(item_files['file' + i]);
 							}
-						})
-					}, 2000)
+						}
+					})
 				} else if (data.code == 100) {
 					this.$u.toast(data.msg, () => {
 						_this.finish()
@@ -326,11 +324,8 @@
 	}
 
 	.score {
-		font-size: 30rpx;
+		color: #1ca6a5;
 		margin-left: 20rpx;
-		font-weight: 800;
-		color: gold;
-		white-space: nowrap;
 	}
 	
 	.image-preview {

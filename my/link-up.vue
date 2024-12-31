@@ -11,7 +11,7 @@
 								<text>{{item.title}}</text>
 							</view>
 							<view class="left" v-else>
-								<image :src="getFullUrl(item.user.head_pic)" class="left-img" mode="aspectFit"/>
+								<image :src="getFullUrl(item.user.head_pic)" class="left-img" mode="aspectFill"/>
 								<text>{{item.user.user_name}}</text>
 							</view>
 							<view class="center"></view>

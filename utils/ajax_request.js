@@ -7,6 +7,7 @@ var run = release;
 
 export function fetch_data(request_type = null, url = null, data = null, blue = null, success = null) {
 	let full_url = run + blue + '/' + url;
+	// 把wx.request()封装写死，存在success和fail回调，无返回值，不能用Promise风格
 	wx.request({
 		url: full_url,
 		data: data,
@@ -18,7 +19,6 @@ export function fetch_data(request_type = null, url = null, data = null, blue = 
 		success(res) {
 			if (success) {
 				success(res)
-				// console.log("success :", res.data)		// 包含敏感信息，生产环境切勿加
 			}
 		},
 		fail(e) {
@@ -29,9 +29,6 @@ export function fetch_data(request_type = null, url = null, data = null, blue = 
 				duration: 1000,
 			});
 		},
-		// complete(res) {
-		// 	console.log("complete :", res);
-		// },
 	});
 }
 

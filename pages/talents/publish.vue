@@ -260,7 +260,7 @@
 				} catch (error) {
 					console.log(error);
 				}
-			}, 2000);
+			}, 1000);
 		},
 		onUnload() {
 			uni.$off('chooseTag')

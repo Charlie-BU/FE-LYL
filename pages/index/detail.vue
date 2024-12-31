@@ -10,11 +10,10 @@
 				</view>
 				
 				<view class="project-head">
-					<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFit" class="left-img" />
+					<image :src="getFullUrl(detail.user.head_pic)" mode="aspectFill" class="left-img" />
 					<view class="right">
-						<view class="name-title">{{detail.user.qy_name}} <text v-if="star.length !== 0" class="score">{{star[0]}} {{star[1]}}</text></view>
-						<view class="sub-name-title">{{detail.user.user_name}}</view>
-						<!-- <view style="font-size: inherit;font-weight: 600;">评分</view> -->
+						<view class="name-title">{{detail.user.qy_name}}</view>
+						<view class="sub-name-title">{{detail.user.user_name}} <text v-if="star.length !== 0" class="score">{{star[1]}} 分</text></view>
 					</view>
 					<view class="time-text">{{detail.update_time_text}}</view>
 				</view>
@@ -129,10 +128,11 @@
 		},
 		onShow() {
 			_this.get_items_xq()
+			// fetch_data()写死不支持Promise，不能用async/await，只能用地狱回调
+			// 以后开发的时候要注意！！！
+			
 			// 获取项目的沟通列表
-			fetch_data("POST", "get_all_item_chats", {
-				"item_id": _this.id
-			}, "application", (res) => {
+			fetch_data("POST", "get_all_item_chats", { "item_id": _this.id }, "application", (res) => {
 				_this.item_chats = res.data.all_chats.map(chat => ({
 					...chat,
 					update_time: utils.format_time(chat.update_time),
@@ -140,23 +140,6 @@
 				}));
 				uni.setStorageSync("item_chats", _this.item_chats);
 			});
-			// 获取评分
-			setTimeout(()=>{
-				fetch_data("POST", "get_user_star", {
-					"user_id": this.detail.user_id
-				}, "user", (res) => {
-					this.star = utils.show_stars(res.data.star_as_business);
-				});
-				fetch_data("POST", "get_item_files", {
-					"item_id": this.detail.id
-				}, "user", (res) => {
-					const item_files = res.data.item_files;
-					_this.preview_images = [];
-					for (let i = 1; i <= item_files.length; i++) {
-						_this.preview_images.push(item_files['file' + i]);
-					}
-				})
-			}, 2000)
 		},
 		onShareAppMessage() {
 			return {
@@ -177,6 +160,22 @@
 				if (data.code == 200) {
 					_this.detail = data.result.detail
 					_this.is_sc = _this.detail.is_sc
+					
+					// 下面两个函数必须等待data拿到后才能调用
+					// 获取评分
+					fetch_data("POST", "get_user_star", { "user_id": this.detail.user_id }, "user", (res) => {
+						this.star = utils.show_stars(res.data.star_as_business);
+					});
+					// 获取展示图片
+					fetch_data("POST", "get_item_files", { "item_id": this.detail.id }, "user", (res) => {
+						const item_files = res.data.item_files;
+						_this.preview_images = [];
+						if (item_files) {
+							for (let i = 1; i <= item_files.length; i++) {
+								_this.preview_images.push(item_files['file' + i]);
+							}
+						}
+					})
 				} else if (data.code == 100) {
 					this.$u.toast(data.msg, () => {
 						_this.finish()
@@ -316,15 +315,13 @@
 	.chats-list {
 		margin-top: 40rpx;
 		padding: 20rpx;
-		background-color: #f9f9f9;
+		background-color: #d4f1f0;
 		border-radius: 30rpx;
 	}
+	
 	.score {
-		font-size: 30rpx;
+		color: #1ca6a5;
 		margin-left: 20rpx;
-		font-weight: 800;
-		color: gold;
-		white-space: nowrap;
 	}
 	
 	.image-preview {

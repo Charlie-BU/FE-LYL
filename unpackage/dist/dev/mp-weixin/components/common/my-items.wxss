@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* 颜色变量 */
 /* 公共样式 */
+.items-container .score.data-v-97191bd0 {
+  color: #1ca6a5;
+  margin-left: 20rpx;
+}
 .items-container .zp-item.data-v-97191bd0 {
   padding: 30rpx 22rpx;
   margin-bottom: 16rpx;
@@ -26,13 +30,6 @@
   height: 63rpx;
   border-radius: 50%;
   margin-right: 12rpx;
-}
-.items-container .zp-item-title .left .score.data-v-97191bd0 {
-  font-size: 30rpx;
-  margin-left: 20rpx;
-  font-weight: 800;
-  color: gold;
-  white-space: nowrap;
 }
 .items-container .zp-item-title .left text.data-v-97191bd0 {
   font-size: 34rpx;

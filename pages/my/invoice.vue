@@ -48,8 +48,8 @@
 						<view class="cart-goods-items">
 						<view class="goods-item" v-for="(item,index) in info.paylist" :key="index" >
 							<block v-if="item.status==0">
-								<image src="/static/common/dz-checkbox.png" v-if="item.checkbox==1"  @click="checkboxitem(item,index)"   class="goods-imgcheck" mode="aspectFit" />
-								<image src="/static/common/dz-checkbox-sel.png" v-else  class="goods-imgcheck"  @click="checkboxitems(item,index)" mode="aspectFit" />
+								<image src="/static/common/dz-checkbox.png" v-if="item.checkbox==1"  @click="checkboxitem(item,index)"   class="goods-imgcheck" mode="aspectFill" />
+								<image src="/static/common/dz-checkbox-sel.png" v-else  class="goods-imgcheck"  @click="checkboxitems(item,index)" mode="aspectFill" />
 								<view class="goods-item-right"  v-if="item.checkbox==1" @click="checkboxitem(item,index)">
 									<view class="goods-name">打款用户：{{item.user.nickname}}</view>
 									<view class="goods-name">收款用户：{{item.touser.nickname}}</view>
@@ -73,7 +73,7 @@
 								</view>
 							</block>
 							
-							<image :src="getFullUrl(item.img)"  @click="previewImage(getFullUrl(item.img))" class="goods-img" mode="aspectFit" />
+							<image :src="getFullUrl(item.img)"  @click="previewImage(getFullUrl(item.img))" class="goods-img" mode="aspectFill" />
 						</view>
 						</view>
 					</view>

@@ -23,7 +23,7 @@
 			<view v-if="current==0">
 				<view  class="infosimg" v-if="info.imgarr&&info.imgarr.length>0">
 					<block v-for="(item,index) in info.imgarr">
-							<image :src="getFullUrl(item.src)" class="info-img" mode="aspectFit"   @click="previewImage(getFullUrl(item.src))" >
+							<image :src="getFullUrl(item.src)" class="info-img" mode="aspectFill"   @click="previewImage(getFullUrl(item.src))" >
 					</block>
 				</view>
 					<block v-for="(item,index) in info.filearr">
@@ -35,7 +35,7 @@
 							<button size="mini" @click="previewFile(item.src)">查看</button>
 						</view>
 						<!-- <view class="infos">
-							<image src='/static/common/wenjians.png' class="info-img" mode="aspectFit"/>
+							<image src='/static/common/wenjians.png' class="info-img" mode="aspectFill"/>
 							<view class="rightbtn" @click="previewFile(item.src)">查看文件  &nbsp;&nbsp;&nbsp; ></view>
 						</view> -->
 					</block>
@@ -73,7 +73,7 @@
 											<view class="goods-name">收款用户：{{item.touser.nickname}}</view>
 											<view class="goods-name">打款金额：{{item.money}}</view>
 										</view>
-										<image :src="getFullUrl(item.img)"  @click="previewImage(getFullUrl(item.img))" class="goods-img" mode="aspectFit" />
+										<image :src="getFullUrl(item.img)"  @click="previewImage(getFullUrl(item.img))" class="goods-img" mode="aspectFill" />
 									</view>
 								</view>
 							</view>
@@ -110,7 +110,7 @@
 											<view class="goods-name">收款用户：{{item.touser.nickname}}</view>
 											<view class="goods-name">打款金额：{{item.money}}</view>
 										</view>
-										<image :src="getFullUrl(item.img)"  @click="previewImage(getFullUrl(item.img))" class="goods-img" mode="aspectFit" />
+										<image :src="getFullUrl(item.img)"  @click="previewImage(getFullUrl(item.img))" class="goods-img" mode="aspectFill" />
 									</view>
 								</view>
 							</view>

@@ -161,11 +161,8 @@
   font-weight: bold;
 }
 .score.data-v-1cad5292 {
-  font-size: 30rpx;
+  color: #1ca6a5;
   margin-left: 20rpx;
-  font-weight: 800;
-  color: gold;
-  white-space: nowrap;
 }
 .image-preview.data-v-1cad5292 {
   display: flex;

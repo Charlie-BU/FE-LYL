@@ -63,7 +63,7 @@
 						<p style="font-size: 22rpx; color: #999999; margin: 0;">{{comment_length}}</p>
 					</div>
 				</div>
-				<div style="margin-top: 30rpx;">
+				<!-- <div style="margin-top: 30rpx;">
 					<div style="font-size: 30rpx; font-weight: bold;">全部评论</div>
 					<div v-if="post.comment_length !== 0" class="comment-section">
 						<div v-for="(comment, ind) in comments" :key="ind" class="comment-item">
@@ -72,38 +72,113 @@
 									<img v-if="comment.sender_pic" class="comment-avatar"
 										:src="baseUrl+comment.sender_pic" alt="User Avatar" />
 									<div class="comment-user-info">
-										<span v-if="comment.sender_realname"
-											class="comment-username">{{comment.sender_realname}}<span
-												v-if="comment.comment_sender" style="margin-left: 13rpx;"> >
-												{{comment.comment_sender}}</span></span>
+										<span v-if="comment.sender_realname" class="comment-username">{{comment.sender_realname}}
+											<span v-if="comment.comment_sender">{{comment.comment_sender}}</span>
+										</span>
 										<span v-else class="comment-username">{{comment.sender_nickname}}</span>
-										<span class="comment-time">{{comment.time}}</span>
+									</div>
+									<div class="comment-actions flex">
+										<div v-if="!comment.comment_sender"
+											@click.stop="like_comment_or_cancel(comment)" class="comment-action">
+											<img v-if="comment.liked" class="action-icon"
+												src="../../static/square/like-after.jpg" />
+											<img v-else class="action-icon" src="../../static/square/like-before.jpg" />
+											<span>{{comment.likes}}</span>
+										</div>
+										<div v-if="(comment.sender_id === user_id && !comment.comment_sender) || identity === 3"
+											@click.stop="delete_comment(comment.id, true)" class="comment-action">
+											<span style="color: red;">删除</span>
+										</div>
+										<div v-else-if="(comment.sender_id === user_id && comment.comment_sender) || identity === 3"
+											@click.stop="delete_comment(comment.id, false)" class="comment-action">
+											<span style="color: red;">删除</span>
+										</div>
 									</div>
 								</div>
 								<div class="comment-content">
 									{{comment.content}}
 								</div>
-								<div class="comment-actions flex">
-									<div v-if="!comment.comment_sender" @click.stop="like_comment_or_cancel(comment)"
-										class="comment-action">
-										<img v-if="comment.liked" class="action-icon"
-											src="../../static/square/like-after.jpg" />
-										<img v-else class="action-icon" src="../../static/square/like-before.jpg" />
-										<span>{{comment.likes}}</span>
+								<span class="comment-time">{{comment.time}}</span>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<div style="margin-top: 30rpx; z-index: 999;">
+					<div style="font-size: 30rpx; font-weight: bold;">全部评论</div>
+					<div v-if="post.comment_length !== 0" class="comment-section">
+						<div v-for="(comment, ind) in comments" :key="ind" class="comment-item">
+							<div @click="reply_comment(comment)">
+								<div class="comment-header flex">
+									<img v-if="comment.sender_pic" class="comment-avatar"
+										:src="baseUrl + comment.sender_pic" alt="User Avatar" />
+									<div class="comment-user-info">
+										<span v-if="comment.sender_realname"
+											class="comment-username">{{ comment.sender_realname }}
+										</span>
+										<span v-else class="comment-username">{{ comment.sender_nickname }}</span>
 									</div>
-									<div v-if="(comment.sender_id === user_id && !comment.comment_sender) || identity === 3"
-										@click.stop="delete_comment(comment.id, true)" class="comment-action">
-										<span style="color: red;">删除</span>
+									<div class="comment-actions flex" style="margin-left: auto;">
+										<div @click.stop="like_comment_or_cancel(comment)" class="comment-action">
+											<img v-if="comment.liked" class="action-icon"
+												src="../../static/square/like-after.jpg" />
+											<img v-else class="action-icon" src="../../static/square/like-before.jpg" />
+											<span>{{ comment.likes }}</span>
+										</div>
 									</div>
-									<div v-else-if="(comment.sender_id === user_id && comment.comment_sender) || identity === 3"
-										@click.stop="delete_comment(comment.id, false)" class="comment-action">
-										<span style="color: red;">删除</span>
+								</div>
+
+								<div class="comment-content">
+									{{comment.content}}
+								</div>
+								<div style="display: flex; margin-bottom: 20rpx;">
+									<span class="comment-time">{{comment.time}}</span>
+									<span v-if="comment.reply_length !== 0 && !comment.show_replies" class="comment-time"
+										style="color: #1fb4b3; font-size: 24rpx;"
+										@click.stop="expand_replies(comment)">展开 {{ comment.reply_length }} 条回复 ∨</span>
+									<span v-if="comment.reply_length !== 0 && comment.show_replies" class="comment-time"
+										style="color: #1fb4b3; font-size: 24rpx;"
+										@click.stop="hide_replies(comment)">收起 ∧</span>
+									<div v-if="comment.sender_id === user_id || identity === 3"
+										@click.stop="delete_comment(comment.id, true)" class="comment-action"
+										style="margin-left: 20rpx;">
+										<span class="delete-text">删除</span>
+									</div>
+								</div>
+
+								<!-- 展开回复内容 -->
+								<div v-if="comment.show_replies" class="replies" style="margin-left: 40rpx; margin-top: 35rpx;" @click.stop="">
+									<div v-for="reply in comment.replies" :key="reply.id" class="comment-reply">
+										<div class="comment-header flex" style="margin-top: 20rpx;">
+											<img v-if="reply.sender_pic" class="comment-avatar"
+												:src="baseUrl + reply.sender_pic" alt="User Avatar" />
+											<div class="comment-user-info">
+												<span v-if="reply.sender_realname"
+													class="comment-username">{{ reply.sender_realname }}</span>
+												<span v-else class="comment-username">{{ reply.sender_nickname }}</span>
+											</div>
+										</div>
+
+										<div class="comment-content" style="margin-left: 20rpx;">
+											{{ reply.content }}
+										</div>
+										
+										<div style="display: flex;">
+											<div style="display: flex; margin-bottom: 10rpx;">
+												<span class="comment-time">{{ reply.time }}</span>
+											</div>
+											<div v-if="reply.sender_id === user_id || identity === 3"
+												@click.stop="delete_comment(reply.id, false)" class="comment-action"
+												style="margin-left: 20rpx;">
+												<span class="delete-text">删除</span>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 			</div>
 		</section>
 	</div>
@@ -162,13 +237,14 @@
 				"id": this.id
 			}, "application", (res) => {
 				this.post = res.data.post;
-				fetch_data("POST", "get_post_comments_and_replies", {
+				fetch_data("POST", "get_post_comments", {
 					"post_id": this.id
 				}, "application", (res) => {
 					this.comments = res.data.comments.map(comment => ({
 						...comment,
 						time: utils.format_time(comment.time),
 						liked: false,
+						show_replies: false,
 					}));
 					this.comment_length = res.data.comment_length;
 					wx.hideToast();
@@ -190,7 +266,7 @@
 				// 筛选出所有图片URL
 				const image_urls = Object.keys(post_images)
 					.filter(key => key.startsWith("image") && key !== "image_length" && post_images[
-					key]) // 筛选出以"image"开头且值不为空的键
+						key]) // 筛选出以"image"开头且值不为空的键
 					.map(key => post_images[key]);
 				wx.previewImage({
 					urls: image_urls,
@@ -249,12 +325,13 @@
 									icon: "none",
 									duration: 700,
 								});
-								fetch_data("POST", "get_post_comments_and_replies", {
+								fetch_data("POST", "get_post_comments", {
 									"post_id": this.id
 								}, "application", (res) => {
 									this.comments = res.data.comments.map(comment => ({
 										...comment,
 										time: utils.format_time(comment.time),
+										show_replies: false,
 									}));
 								});
 							})
@@ -295,6 +372,30 @@
 						}
 					}
 				})
+			},
+
+			expand_replies(comment) {
+				wx.showToast({
+					title: "加载中...",
+					icon: "loading",
+					duration: 10000,
+				});
+				fetch_data("POST", "get_comment_replies", {
+					'comment_id': comment.id
+				}, "application", res => {
+					const replies = res.data.replies.map(reply => ({
+						...reply,
+						time: utils.format_time(reply.time)
+					}));
+					comment.replies = replies;
+					comment.show_replies = true;
+					wx.hideToast();
+				})
+			},
+			
+			hide_replies(comment) {
+				comment.replies = [];
+				comment.show_replies = false;
 			},
 
 			like_comment_or_cancel(comment) {
@@ -339,12 +440,13 @@
 										duration: 700,
 									});
 								}
-								fetch_data("POST", "get_post_comments_and_replies", {
+								fetch_data("POST", "get_post_comments", {
 									"post_id": this.id
 								}, "application", (res) => {
 									this.comments = res.data.comments.map(comment => ({
 										...comment,
 										time: utils.format_time(comment.time),
+										show_replies: false,
 									}));
 								});
 							})
@@ -389,12 +491,13 @@
 									duration: 700,
 								});
 								// TODO
-								fetch_data("POST", "get_post_comments_and_replies", {
+								fetch_data("POST", "get_post_comments", {
 									"post_id": this.id
 								}, "application", (res) => {
 									this.comments = res.data.comments.map(comment => ({
 										...comment,
 										time: utils.format_time(comment.time),
+										show_replies: false,
 									}));
 								});
 							})
@@ -538,15 +641,13 @@
 			}
 
 			.comment-section {
-				margin-top: 20rpx;
 				padding: 20rpx;
-				background-color: #f9f9f9;
-				border-radius: 25rpx;
 			}
 
 			.comment-item {
 				padding: 20rpx 0;
 				border-bottom: 1px solid #eaeaea;
+				margin-top: 10rpx;
 			}
 
 			.comment-item:last-child {
@@ -559,16 +660,16 @@
 				margin-bottom: 10rpx;
 			}
 
+			.comment-user-info {
+				margin-left: 10rpx;
+			}
+
 			.comment-avatar {
 				width: 60rpx;
 				height: 60rpx;
 				border-radius: 50%;
 				margin-right: 10rpx;
-			}
-
-			.comment-user-info {
-				display: flex;
-				flex-direction: column;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 			}
 
 			.comment-username {
@@ -581,19 +682,23 @@
 				font-size: 22rpx;
 				color: #999;
 				margin-top: 4rpx;
+				margin-left: 25rpx;
 			}
 
 			.comment-content {
-				margin-top: 20rpx;
 				font-size: 28rpx;
 				color: #666;
 				line-height: 1.5;
+				padding: 10rpx;
+				background-color: #fff;
+				border-radius: 10rpx;
+				margin-left: 15rpx;
+				margin-top: 10rpx;
 			}
 
 			.comment-actions {
 				display: flex;
-				align-items: center;
-				margin: 20rpx 10rpx;
+				justify-content: flex-end;
 			}
 
 			.comment-action {
@@ -604,6 +709,16 @@
 				color: #999;
 				cursor: pointer;
 				z-index: 999;
+				transition: color 0.3s, transform 0.3s;
+			}
+
+			.comment-action:hover {
+				color: #007aff;
+				transform: scale(1.1);
+			}
+
+			.delete-text {
+				color: red;
 			}
 
 			.action-icon {
@@ -611,6 +726,7 @@
 				height: 30rpx;
 				margin-right: 5rpx;
 			}
+
 		}
 	}
 </style>

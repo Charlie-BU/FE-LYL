@@ -3,7 +3,7 @@
 /* 公共样式 */
 .container.data-v-1e689d86 {
   padding: 20rpx;
-  background-color: #f9f9f9;
+  background-color: #d4f1f0;
 }
 /* 顶部标题样式 */
 .top.data-v-1e689d86 {
@@ -18,7 +18,7 @@
 /* 列表项样式 */
 .list-item.data-v-1e689d86 {
   background-color: #ffffff;
-  border-radius: 10rpx;
+  border-radius: 20rpx;
   margin-bottom: 20rpx;
   padding: 20rpx;
   box-shadow: 0 4rpx 6rpx rgba(0, 0, 0, 0.1);
@@ -50,7 +50,6 @@
 }
 .detail-item.data-v-1e689d86 {
   display: flex;
-  justify-content: space-between;
   padding: 10rpx 0;
   margin-left: 20rpx;
   margin-right: 20rpx;

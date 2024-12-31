@@ -3,12 +3,12 @@
 		<view class="zp-item" v-for="(item,index) in datas" :key="index" @click="itemClick(item,1,index)">
 			<view class="zp-item-title">
 				<view class="left" v-if="item.type == 1">
-					<text>{{item.title}}<text v-if="item.star_as_business" class="score">{{item.star_as_business[0]}}</text></text>
+					<text>{{item.title}}</text>
 				</view>
 				<view class="left" v-else>
-					<image :src="getFullUrl(item.user.head_pic)" class="left-img" mode="aspectFit" />
+					<image :src="getFullUrl(item.user.head_pic)" class="left-img" mode="aspectFill" />
 					<!-- <text>{{item.user.user_name}}</text> -->
-					<text>{{item.user.user_name}}<text v-if="item.star_as_elite" class="score">{{item.star_as_elite[0]}}</text></text>
+					<text>{{item.user.user_name}}</text>
 				</view>
 				<view class="right">{{item.salary + item.salary_unit}}</view>
 			</view>
@@ -17,8 +17,8 @@
 			</view>
 			<view class="zp-item-bot">
 				<view class="left">
-					<view class="name-title" v-if="item.type == 1">{{item.user.qy_name}}</view>
-					<view class="name-title" v-else>{{item.user.user_name}}</view>
+					<view class="name-title" v-if="item.type == 1">{{item.user.qy_name}}<text v-if="item.star_as_business" class="score">{{item.star_as_business[1]}} 分</text></view>
+					<view class="name-title" v-else>{{item.user.user_name}}<text v-if="item.star_as_elite" class="score">{{item.star_as_elite[1]}} 分</text></view>
 				</view>
 				<view class="right">
 					<text v-if="showTime" class="time-text">16:30</text>
@@ -118,6 +118,11 @@
 
 <style lang="scss" scoped>
 	.items-container {
+		.score {
+			color: #1ca6a5;
+			margin-left: 20rpx;
+		}
+		
 		.zp-item {
 			padding: 30rpx 22rpx;
 			margin-bottom: 16rpx;
@@ -146,14 +151,6 @@
 						height: 63rpx;
 						border-radius: 50%;
 						margin-right: 12rpx;
-					}
-
-					.score {
-						font-size: 30rpx;
-						margin-left: 20rpx;
-						font-weight: 800;
-						color: gold;
-						white-space: nowrap;
 					}
 
 					text {
