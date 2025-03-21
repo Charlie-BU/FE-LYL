@@ -286,7 +286,6 @@
 	@import "static/css/item.scss";
 
 	.container {
-		height: 120%;
 		background: #fff;
 		position: relative;
 	}
@@ -338,8 +337,8 @@
 	}
 	
 	.preview-image {
-		width: 60px;
-		height: 60px;
+		width: 180rpx;
+		height: 180rpx;
 		object-fit: cover;
 		border-radius: 4px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

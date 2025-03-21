@@ -166,21 +166,6 @@
 			_this.login()
 			// #endif
 			_this.get_index_data()
-			//设置右上角文本
-			// uni.setTabBarBadge({
-			// 	index:1,
-			// 	text:'4',
-			// 	success(res) {
-			// 		console.log('设置右上角文本 success: ',res);
-			// 	}
-			// })
-			//显示 tabBar 某一项的右上角的红点
-			// uni.showTabBarRedDot({
-			// 	index:2,
-			// 	success(res) {
-			// 		console.log('右上角的红点 success: ',res);
-			// 	}
-			// })
 			uni.$on('chooseTag', res => {
 				if (res.from == 1) {
 					let arr = res.arr
@@ -205,6 +190,10 @@
 					break;
 				default:
 					break;
+			}
+			if (_this.user_id) {
+				// 更新last_login时间戳
+				fetch_data("POST", "update_last_login", { "user_id": _this.user_id }, "user");
 			}
 		},
 		onReachBottom() {
@@ -322,7 +311,7 @@
 				let unreadTotal = content.unreadTotal;
 				if (unreadTotal > 0) {
 					uni.setTabBarBadge({
-						index: 1,
+						index: 2,
 						text: unreadTotal.toString(),
 						success(res) {
 							console.log('setTabBarBadge success', res);
@@ -333,7 +322,7 @@
 					});
 				} else {
 					uni.removeTabBarBadge({
-						index: 1,
+						index: 2,
 						success(res) {
 							console.log('removeTabBarBadge success', res);
 						},
@@ -578,7 +567,6 @@
 					);
 					// 等待所有请求完成后处理结果
 					await Promise.all(promises);
-					console.log('所有评分已添加');
 				} else {
 					_this.hasMore = false;
 				}

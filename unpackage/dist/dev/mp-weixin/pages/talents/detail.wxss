@@ -108,6 +108,7 @@
   box-sizing: border-box;
   box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.08);
   height: 136rpx;
+  z-index: 999;
 }
 .project-bot .bot-item.data-v-1cad5292 {
   text-align: center;
@@ -129,7 +130,6 @@
   border-radius: 10rpx;
 }
 .container.data-v-1cad5292 {
-  height: 120%;
   background: #fff;
   position: relative;
 }
@@ -173,8 +173,8 @@
   z-index: 999;
 }
 .preview-image.data-v-1cad5292 {
-  width: 60px;
-  height: 60px;
+  width: 180rpx;
+  height: 180rpx;
   object-fit: cover;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

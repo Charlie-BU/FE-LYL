@@ -60,4 +60,14 @@
 .detail-value.data-v-1e689d86 {
   color: #333;
 }
+.terminate-button.data-v-1e689d86 {
+  background-color: #f44336;
+  color: #fff;
+  padding: 5rpx 10rpx;
+  border: none;
+  border-radius: 10rpx;
+  cursor: pointer;
+  margin-top: -110rpx;
+  height: 90rpx;
+}
 

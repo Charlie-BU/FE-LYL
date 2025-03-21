@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { fetch_data } from "../../utils/ajax_request";
 	var validate = require("@/components/validate/validate.js");
 	var _this;
 	export default {

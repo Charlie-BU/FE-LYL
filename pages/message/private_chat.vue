@@ -238,27 +238,20 @@
 						<image src="@/static/message/chat-file.png" mode="widthFix" class="item-img" />
 						<view class="item-text">文件</view>
 					</view>
-					<view class="bot-item" @click="send_custom_msg('swap_phone')">
-						<image src="@/static/message/chat-phone.png" mode="widthFix" class="item-img" />
-						<view class="item-text">换电话</view>
+					<view v-if="identity === 2" class="bot-item" @click="show_items_model()">
+					<!-- <view class="bot-item" @click="show_items_model()"> -->
+						<image src="@/static/message/chat-cooperate.png" mode="widthFix" class="item-img" />
+						<view class="item-text">意向合作</view>
 					</view>
-					<view class="bot-item" @click="send_custom_msg()">
-						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
-						<view class="item-text">换微信</view>
+					<view class="bot-item" @click="show_evaluate_items_model()">
+						<image src="@/static/message/chat-evaluate.png" mode="widthFix" class="item-img" />
+						<view class="item-text">合作评价</view>
 					</view>
 					<view class="bot-item" @click="subscribe_wx_msg">
 						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
 						<view class="item-text">订阅新消息提醒</view>
 					</view>
-					<!-- <view class="bot-item" @click="confirm_coopration('swap_phone')">
-						<image src="@/static/message/chat-phone.png" mode="widthFix" class="item-img" />
-						<view class="item-text">确认合作</view>
-					</view>
-					<view class="bot-item" @click="grade_coopration()">
-						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
-						<view class="item-text">合作评分</view>
-					</view>
-					<view class="bot-item" @click="sign_contrast()">
+					<!-- <view class="bot-item" @click="sign_contrast()">
 						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
 						<view class="item-text">签署合同</view>
 					</view>
@@ -283,6 +276,107 @@
 				<view class="weixin-info">双方同意后，可以看到彼此的微信号<br>您可以在个人信息中修改微信号</view>
 				<view class="weixin-bot">
 					<button class="confirm-btn" @click="confirmWeixin">确定</button>
+				</view>
+			</view>
+		</u-popup>
+
+		<u-popup :show="showItemsModal" @close="showItemsModal=false" mode="center" :customStyle="customAlertStyle"
+			bgColor="transparent" :overlayOpacity="0.4">
+			<view class="cooperate-popup">
+				<view class="cooperate-title">
+					<text>意向合作</text>
+				</view>
+				<view class="cooperate-content">
+					<text>请选择将与该用户合作的项目</text>
+				</view>
+				<picker :range="items.map(item => item[1])" v-model="selectedItemIndex" @change="onPickerChange">
+					<view class="picker">
+						{{ items[selectedItemIndex] ? items[selectedItemIndex][1] : "" }}
+					</view>
+				</picker>
+				<view class="cooperate-bot" style="margin-top: 30rpx; margin-left: 160rpx;">
+					<button class="confirm-btn" @click="begin_cooperate()">确认</button>
+				</view>
+			</view>
+		</u-popup>
+
+		<u-popup :show="showCooperateModal" @close="showCooperateModal=false" mode="center"
+			:customStyle="customAlertStyle" bgColor="transparent" :overlayOpacity="0.4">
+			<view class="cooperate-popup">
+				<view class="cooperate-title">
+					<text>意向合作</text>
+				</view>
+				<view class="cooperate-content">
+					<text>您发布的项目有 5 次意向合作的机会，可与候选人交换联系方式，请谨慎使用</text>
+				</view>
+				<view style="display: flex; justify-content: center;">
+					<view class="bot-item" @click="send_custom_msg('swap_phone')" style="margin-right: 10px;">
+						<image src="@/static/message/chat-phone.png" mode="widthFix" class="item-img" />
+						<view class="item-text">换电话</view>
+					</view>
+					<view class="bot-item" @click="send_custom_msg()" style="margin-left: 20px;">
+						<image src="@/static/message/chat-weixin.png" mode="widthFix" class="item-img" />
+						<view class="item-text">换微信</view>
+					</view>
+				</view>
+			</view>
+		</u-popup>
+
+		<u-popup :show="showEvaluateItemsModal" @close="showEvaluateItemsModal=false" mode="center" :customStyle="customAlertStyle"
+			bgColor="transparent" :overlayOpacity="0.4">
+			<view class="cooperate-popup">
+				<view class="cooperate-title">
+					<text>合作评价</text>
+				</view>
+				<view class="cooperate-content">
+					<text style="margin-left: 30rpx;">请选择将评价的合作项目</text>
+				</view>
+				<picker :range="items.map(item => item[1])" v-model="selectedItemIndex" @change="onPickerChange">
+					<view class="picker">
+						{{ items[selectedItemIndex] ? items[selectedItemIndex][1] : "" }}
+					</view>
+				</picker>
+				<view class="cooperate-bot" style="margin-top: 30rpx; margin-left: 160rpx;">
+					<button class="confirm-btn" @click="evaluate_service()">确认</button>
+				</view>
+			</view>
+		</u-popup>
+		
+		<u-popup :show="showEvaluateModal" @close="showEvaluateModal=false" mode="center"
+			:customStyle="customAlertStyle" bgColor="transparent" :overlayOpacity="0.4">
+			<view class="cooperate-popup">
+				<view class="cooperate-title">
+					<text>合作评价</text>
+				</view>
+				<view class="cooperate-content">
+					<text>确认合作后，双方一个月内可以对合作进行互评，如满一个月未评价，则默认五星好评；人才方、项目方分别评价后，双方自动解除合作关系</text>
+				</view>
+				<view style="display: flex;">
+					<text v-if="identity === 1" style="margin-top: 8rpx;">合作满意度：</text>
+					<text v-else style="margin-top: 8rpx;">服务配合：</text>
+					<view v-for="i in evaluateIndex1" :key="i" style="margin-bottom: 15rpx;">
+						<image @click="select_star(i, 'evaluateIndex1')" src="@/static/message/starred.png"
+							mode="widthFix" style="width: 50rpx;" />
+					</view>
+					<view v-for="i in (5-evaluateIndex1)" :key="i" style="margin-bottom: 15rpx;">
+						<image @click="select_star(i + evaluateIndex1, 'evaluateIndex1')"
+							src="@/static/message/unstarred.png" mode="widthFix" style="width: 50rpx;" />
+					</view>
+				</view>
+				<view style="display: flex; margin-top: 20rpx;">
+					<text v-if="identity === 1" style="margin-top: 8rpx;">付款可靠度：</text>
+					<text v-else style="margin-top: 8rpx;">专业能力：</text>
+					<view v-for="i in evaluateIndex2" :key="i" style="margin-bottom: 15rpx;">
+						<image @click="select_star(i, 'evaluateIndex2')" src="@/static/message/starred.png"
+							mode="widthFix" style="width: 50rpx;" />
+					</view>
+					<view v-for="i in (5-evaluateIndex2)" :key="i" style="margin-bottom: 15rpx;">
+						<image @click="select_star(i + evaluateIndex2, 'evaluateIndex2')"
+							src="@/static/message/unstarred.png" mode="widthFix" style="width: 50rpx;" />
+					</view>
+				</view>
+				<view class="cooperate-bot" style="margin-top: 30rpx; margin-left: 160rpx;">
+					<button class="confirm-btn" @click="submit_evaluate()">确认</button>
 				</view>
 			</view>
 		</u-popup>
@@ -332,8 +426,23 @@
 				safe_area_bottom: 0,
 				swap_type: 1,
 				df_user: {},
-				df_resume: ''
+				df_resume: '',
+				items: [],
+				selectedItemIndex: "",
+				showItemsModal: false,
+				showCooperateModal: false,
+				showEvaluateItemsModal: false,
+				showEvaluateModal: false,
+				evaluateIndex1: 0,
+				evaluateIndex2: 0
 			}
+		},
+		computed: {
+			selectedItem() {
+				if (this.selectedItemIndex === -1) return null;
+				else if (this.selectedItemIndex) return this.items[this.selectedItemIndex];
+				return null;
+			},
 		},
 		onLoad(e) {
 			_this = this;
@@ -372,7 +481,6 @@
 			this.initAudioPlayer();
 			// 录音监听器
 			this.initRecorderListeners();
-
 		},
 		onReady() {
 			this.loadHistoryMessage();
@@ -388,6 +496,11 @@
 			GoEasy.im.off(GoEasy.IM_EVENT.MESSAGE_DELETED, this.onMessageDeleted);
 		},
 		methods: {
+			onPickerChange(event) {
+				// 获取 picker 的新索引值
+				const newIndex = event.detail.value;
+				this.selectedItemIndex = newIndex; // 更新选中索引
+			},
 			formatDate,
 			is_self(item) {
 				let senderId = item.senderId
@@ -1118,12 +1231,6 @@
 					urls: [item.payload.url]
 				})
 			},
-			confirm_coopration() {
-				console.log("确认合作");
-			},
-			grade_coopration() {
-				console.log("合作打分");
-			},
 			sign_contrast() {
 				console.log("签署合同");
 			},
@@ -1133,11 +1240,164 @@
 			subscribe_wx_msg() {
 				// 询问用户是否订阅消息提醒
 				utils.get_openid((openid) => {
-					fetch_data("POST", "store_openid", { "my_id": _this.user_id, "openid": openid }, "user");
+					fetch_data("POST", "store_openid", {
+						"my_id": _this.user_id,
+						"openid": openid
+					}, "user");
 				})
 				utils.subscirbe_message(['8AMX7lHwjpeH4uN-6XslAmSDJhcbbsJcB_RLdIcQZ4o'], () => {
 					this.$u.toast("订阅成功");
 				});
+			},
+
+			show_items_model() {
+				wx.showToast({
+					title: "请稍后...",
+					icon: "loading",
+					duration: 100000,
+				});
+				fetch_data("POST", "get_his_items", { "user_id": _this.user_id }, "user", (res) => {
+					this.items = res.data.items;
+					wx.hideToast();
+					this.showItemsModal = true;
+				});
+			},
+
+			begin_cooperate() {
+				if (!this.selectedItem) {
+					this.$u.toast("请选择将与该用户合作的项目");
+					return;
+				}
+				this.showItemsModal = false;
+				wx.showModal({
+					title: '意向合作',
+					content: '您发布的项目有 5 次意向合作的机会，确认与该用户意向合作？',
+					success: res => {
+						if (res.confirm) {
+							wx.showToast({
+								title: "加载中...",
+								icon: "loading",
+								duration: 10000,
+							});
+							const data = {
+								"item_id": this.selectedItem[0],
+								"cooperator_id": this.to.data.user_id,
+							}
+							fetch_data("POST", "item_cooperate", data, "application", res => {
+								if (res.data.status === 200) {
+									wx.showToast({
+										title: "合作成功，请选择是否与对方交换微信或电话",
+										icon: "none",
+										duration: 1000,
+									});
+									this.selectedItemIndex = -1;
+								} else {
+									wx.showToast({
+										title: res.data.message,
+										icon: "none",
+										duration: 1000,
+									});
+									this.selectedItemIndex = -1;
+									return;
+								}
+								this.showCooperateModal = true;
+							})
+						}
+					}
+				})
+			},
+			
+			show_evaluate_items_model() {
+				wx.showToast({
+					title: "请稍后...",
+					icon: "loading",
+					duration: 100000,
+				});
+				if (_this.identity === 1) {
+					fetch_data("POST", "get_evaluate_items_Im_buyer", { "my_id": _this.user_id, "to_id": _this.to.data.user_id }, "user", (res) => {
+						this.items = res.data.items;
+						wx.hideToast();
+						this.showEvaluateItemsModal = true;
+					});
+				} else if (_this.identity === 2) {
+					fetch_data("POST", "get_evaluate_items_Im_seller", { "my_id": _this.user_id, "to_id": _this.to.data.user_id }, "user", (res) => {
+						this.items = res.data.items;
+						wx.hideToast();
+						this.showEvaluateItemsModal = true;
+					});
+				}
+			},
+			evaluate_service() {
+				if (!this.selectedItem) {
+					this.$u.toast("请选择将评价的合作项目");
+					return;
+				}
+				this.showEvaluateItemsModal = false;
+				this.showEvaluateModal = true;
+			},
+			select_star(i, whichone) {
+				if (whichone === "evaluateIndex1") {
+					this.evaluateIndex1 = i + 1;
+				} else {
+					this.evaluateIndex2 = i + 1;
+				}
+			},
+			submit_evaluate() {
+				wx.showToast({
+					title: "评价中...",
+					icon: "loading",
+					duration: 100000,
+				});
+				const data = {
+					"my_id": this.user_id,
+					"to_id": this.to.data.user_id,
+					"item_id": this.selectedItem[0],
+					"evaluateIndex1": this.evaluateIndex1,
+					"evaluateIndex2": this.evaluateIndex2,
+				}
+				if (!data.item_id) {
+					wx.showToast({
+						title: "请选择将评价的合作项目",
+						icon: "none",
+						duration: 700,
+					});
+					return;
+				}
+				if (!data.evaluateIndex1 || !data.evaluateIndex2) {
+					wx.showToast({
+						title: "请先为对方评价再提交",
+						icon: "none",
+						duration: 700,
+					});
+					return;
+				}
+				if (data.evaluateIndex1 < 0 || data.evaluateIndex1 > 5 ||	data.evaluateIndex2 < 0 || data.evaluateIndex2 > 5) {
+					wx.showToast({
+						title: "参数有误，请稍后再试",
+						icon: "none",
+						duration: 700,
+					});
+					return;
+				}
+				fetch_data("POST", "cooperation_evaluate", data, "user", res => {
+					if (res.data.status === 200) {
+						wx.showToast({
+							title: "评价成功，感谢您的合作",
+							icon: "none",
+							duration: 1000,
+						});
+						this.selectedItemIndex = -1;
+					} else {
+						wx.showToast({
+							title: res.data.message,
+							icon: "none",
+							duration: 1000,
+						});
+						this.selectedItemIndex = -1;
+						return;
+					}
+					this.showEvaluateModal = false;
+				})
 			}
 		}
 	}
@@ -1458,19 +1718,19 @@
 					height: 500rpx;
 					padding-top: 44rpx;
 					box-sizing: border-box;
-
-					.bot-item {
-						text-align: center;
-
-						.item-img {
-							width: 100rpx;
-						}
-
-						.item-text {
-							font-size: 26rpx;
-						}
-					}
 				}
+			}
+		}
+
+		.bot-item {
+			text-align: center;
+
+			.item-img {
+				width: 100rpx;
+			}
+
+			.item-text {
+				font-size: 26rpx;
 			}
 		}
 
@@ -1517,6 +1777,71 @@
 					border-radius: 10rpx;
 					color: #fff;
 				}
+			}
+		}
+	}
+
+	.picker {
+		padding: 15px;
+		text-align: center;
+		background-color: #f5f5f5;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		font-size: 16px;
+		color: #333;
+		cursor: pointer;
+	}
+
+	.picker::after {
+		float: right;
+		margin-right: 10px;
+		font-size: 12px;
+		color: #999;
+	}
+
+	.cooperate-popup {
+		background: #fff;
+		padding: 60rpx 60rpx;
+		border-radius: 16rpx;
+		width: 70%;
+		margin: 0 auto;
+
+		.cooperate-title {
+			color: #000;
+			font-size: 42rpx;
+			text-align: center;
+			margin-bottom: 20rpx;
+		}
+
+		.cooperate-content {
+			color: #adadad;
+			font-size: 24rpx;
+			text-align: justify;
+			width: 80%;
+			/* Make the popup narrower */
+			margin: 0 auto;
+			margin-bottom: 40rpx;
+		}
+
+		.cooperate-bot {
+			display: flex;
+			justify-content: space-between;
+
+			.confirm-btn,
+			.cancel-btn {
+				line-height: 60rpx;
+				font-size: 26rpx;
+				border-radius: 10rpx;
+				color: #fff;
+				padding: 0 20rpx;
+			}
+
+			.confirm-btn {
+				background: #02AAAB;
+			}
+
+			.cancel-btn {
+				background: #B0B0B0;
 			}
 		}
 	}

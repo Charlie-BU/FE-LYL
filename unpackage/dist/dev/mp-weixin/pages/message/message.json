@@ -2,11 +2,11 @@
   "navigationBarTitleText": "消息",
   "enablePullDownRefresh": false,
   "navigationBarBackgroundColor": "#1abfc0",
-  "navigationBarTextStyle": "black",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "u-tabs": "/uview-ui/components/u-tabs/u-tabs",
     "u-swipe-action": "/uview-ui/components/u-swipe-action/u-swipe-action",
     "u-swipe-action-item": "/uview-ui/components/u-swipe-action-item/u-swipe-action-item",
-    "u-empty": "/uview-ui/components/u-empty/u-empty"
+    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons"
   }
 }

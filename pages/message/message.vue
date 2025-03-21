@@ -69,8 +69,9 @@
 				</u-swipe-action-item>
 			</u-swipe-action>
 		</block>
-		<view class="empty-container" v-else>
-			<u-empty text="暂无相关消息" :icon="emptyIcon" />
+		<view class="no-posts" v-else>
+			<p class="no-posts-message">当前没有消息哦，快去联系吧！</p>
+			<uni-icons type="heart-filled" color="#999" size="50" />
 		</view>
 	</view>
 </template>
@@ -216,7 +217,7 @@
 						let unreadTotal = content.unreadTotal;
 						if (unreadTotal > 0) {
 							uni.setTabBarBadge({
-								index: 1,
+								index: 2,
 								text: unreadTotal.toString(),
 								success(res) {
 									console.log('setTabBarBadge success',
@@ -304,9 +305,10 @@
 	}
 </script>
 <!-- #ifdef MP-WEIXIN -->
+
 <style>
 	page {
-		background: #fff;
+		background: linear-gradient(0deg, #efefef 0%, #f6f6f6 25%, #1abfc0 100%);
 	}
 </style>
 <!-- #endif -->
@@ -381,5 +383,21 @@
 			background: #fff;
 			padding: 120rpx 0;
 		}
+	}
+	
+	.no-posts {
+		text-align: center;
+		margin-top: 100px;
+		color: #666;
+	}
+	
+	.no-posts-message {
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+	
+	.no-posts uni-icons {
+		margin-top: 10px;
+		color: #999;
 	}
 </style>

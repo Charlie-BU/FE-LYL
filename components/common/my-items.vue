@@ -17,7 +17,8 @@
 			</view>
 			<view class="zp-item-bot">
 				<view class="left">
-					<view class="name-title" v-if="item.type == 1">{{item.user.qy_name}}<text v-if="item.star_as_business" class="score">{{item.star_as_business[1]}} 分</text></view>
+					<!-- <view class="name-title" v-if="item.type == 1">{{item.user.qy_name}}<text v-if="item.star_as_business" class="score">{{item.star_as_business[1]}} 分</text></view> -->
+					<view class="name-title" v-if="item.type == 1">{{item.user.qy_name}}<text v-if="item.star_as_elite" class="score">{{item.star_as_elite[1]}} 分</text></view>
 					<view class="name-title" v-else>{{item.user.user_name}}<text v-if="item.star_as_elite" class="score">{{item.star_as_elite[1]}} 分</text></view>
 				</view>
 				<view class="right">

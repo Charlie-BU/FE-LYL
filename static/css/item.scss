@@ -97,7 +97,7 @@
 		}
 	}
 }
-//项目、人才等页面底部
+// 项目、人才等页面底部
 .project-bot{
 	position: fixed;
 	left: 0;
@@ -110,6 +110,7 @@
 	box-sizing: border-box;
 	box-shadow: 0px -1px 0px 0px rgba(0,0,0,0.08); 
 	height: 136rpx;
+	z-index: 999;
 	.bot-item{
 		text-align: center;
 		margin-right: 26rpx;

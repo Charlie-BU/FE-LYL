@@ -1,30 +1,43 @@
 <template>
-	<view v-if="item_chats.length !== 0" class="container">
-		<view class="top">
-			沟通中：<span class="count">{{item_chats.length}}</span>
-		</view>
-
-		<!-- 列表循环 -->
-		<view v-for="(chat, index) in item_chats" :key="index" class="list-item">
-			<view class="header" @click="changeMode(index)">
-				<view>
-					<!-- <text class="masked">{{chat.elite_name.slice(0,2) + '*'.repeat(chat.elite_name.length - 2)}}</text> -->
-					<text class="masked">{{chat.elite_name}}</text>
-				</view>
-				<text class="arrow">{{item_chats[index].mode ? '∧' : '∨'}}</text>
-			</view>
-
-			<view v-if="item_chats[index].mode" class="details">
+	<view class="container">
+		<!-- <view v-if="cooperator_id">
+			<view class="top">已合作</view>
+			<view class="details">
 				<view class="detail-item">
-					<text class="detail-label">沟通时间：</text>
-					<text class="detail-value">{{chat.update_time}}</text>
+					<text class="detail-label">合作者：</text>
+					<text class="detail-value">{{cooperator.name}}</text>
 				</view>
 				<view class="detail-item">
 					<text class="detail-label">用户评分：</text>
-					<text class="detail-value">{{chat.elite_star}} 分</text>
+					<text class="detail-value">{{cooperator.star}}</text>
 				</view>
-				<view class="icon">
-					<image src="@/static/index/cooperating.png" mode="aspectFill" />
+				<view v-if="user_id === item_owner_id" class="detail-item" style="justify-content: flex-end;">
+					<button @click="terminateCooperation" class="terminate-button">解除合作</button>
+				</view>
+			</view>
+		</view> -->
+		<view v-if="item_chats.length !== 0">
+			<view class="top">
+				沟通中：<span class="count">{{localItemChats.length}}</span>
+			</view>
+			<!-- 列表循环 -->
+			<view v-for="(chat, index) in localItemChats" :key="index" class="list-item">
+				<view class="header" @click="changeMode(index)">
+					<view>
+						<text class="masked">{{chat.elite_name}}</text>
+					</view>
+					<text class="arrow">{{localItemChats[index].mode ? '∧' : '∨'}}</text>
+				</view>
+
+				<view v-if="localItemChats[index].mode" class="details">
+					<view class="detail-item">
+						<text class="detail-label">沟通时间：</text>
+						<text class="detail-value">{{chat.update_time}}</text>
+					</view>
+					<view class="detail-item">
+						<text class="detail-label">用户评分：</text>
+						<text class="detail-value">{{chat.elite_star}}</text>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -32,22 +45,97 @@
 </template>
 
 <script>
+	import {
+		fetch_data
+	} from '../../utils/ajax_request.js'
+	import * as utils from '../../utils/utils.js'
 	export default {
 		data() {
 			return {
-				item_chats: [],
+				localItemChats: [], // 本地副本
+				cooperator: {
+					"name": "",
+					"star": "",
+				},
 			};
 		},
+		props: {
+			cooperator_id: {
+				type: Number,
+				required: false,
+			},
+			item_id: {
+				type: Number,
+				required: false,
+			},
+			item_owner_id: {
+				type: Number,
+				required: false,
+			},
+			item_chats: {
+				type: Array,
+				required: false,
+			}
+		},
 		created() {
-			this.get_lists();
+			this.localItemChats = this.item_chats.map((item_chat) => ({
+				...item_chat,
+				elite_star: utils.show_stars(item_chat.elite_star)[0],
+				mode: false,
+			}));
+			if (this.cooperator_id) {
+				fetch_data("POST", "get_user_star", {
+					"user_id": this.cooperator_id
+				}, "user", (res) => {
+					this.cooperator.name = res.data.username;
+					this.cooperator.star = utils.show_stars(res.data.star_as_elite)[0];
+				});
+			}
 		},
 		methods: {
-			get_lists() {
-				this.item_chats = uni.getStorageSync("item_chats");
-				uni.removeStorageSync("item_chats");
-			},
 			changeMode(index) {
-				this.item_chats[index].mode = !this.item_chats[index].mode;
+				this.localItemChats[index].mode = !this.localItemChats[index].mode;
+			},
+			terminateCooperation() {
+				wx.showModal({
+					title: '解除合作',
+					content: '确认与该用户解除合作？',
+					success: res => {
+						if (res.confirm) {
+							wx.showToast({
+								title: "加载中...",
+								icon: "loading",
+								duration: 10000,
+							});
+							const data = {
+								"item_id": this.item_id,
+								"item_owner_id": this.user_id,
+							}
+							console.log(data)
+							fetch_data("POST", "item_terminate_cooperate", data, "application", res => {
+								if (res.data.status === -1) {
+									wx.showToast({
+										title: "权限不足",
+										icon: "none",
+										duration: 1000,
+									});
+								} else if (res.data.status === -2) {
+									wx.showToast({
+										title: "该项目暂未与任何人合作",
+										icon: "none",
+										duration: 1000,
+									});
+								} else if (res.data.status === 200) {
+									wx.showToast({
+										title: "合作解除成功",
+										icon: "none",
+										duration: 1000,
+									});
+								}
+							})
+						}
+					}
+				})
 			},
 		},
 	};
@@ -123,5 +211,16 @@
 
 	.detail-value {
 		color: #333;
+	}
+
+	.terminate-button {
+		background-color: #f44336;
+		color: #fff;
+		padding: 5rpx 10rpx;
+		border: none;
+		border-radius: 10rpx;
+		cursor: pointer;
+		margin-top: -110rpx;
+		height: 90rpx;
 	}
 </style>

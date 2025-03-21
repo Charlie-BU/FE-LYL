@@ -1,6 +1,6 @@
 <template>
 	<view class="items-container">
-		<view class="zp-item" v-for="(item,index) in datas" :key="index" @click="itemClick(6,item,index)">
+		<view class="zp-item" v-for="(item, index) in datas" :key="index" @click="itemClick(6,item,index)">
 			<view class="zp-item-title">
 				<view class="left">
 					<text>{{item.title}}</text>
@@ -12,42 +12,43 @@
 				<view class="tab-item" v-for="(item2,index2) in item.arr" :key="index2">{{item2}}</view>
 			</view>
 			<view class="zp-item-status" v-if="item.status == -1">
-				<image src="@/static/index/check-wait.png" mode="widthFix" class="icon"/>
+				<image src="@/static/index/check-wait.png" mode="widthFix" class="icon" />
 				<text class="blue-text">审核中</text>
 			</view>
 			<view class="zp-item-status" v-if="item.status == 2">
-				<image src="@/static/index/jg-red.png" mode="widthFix" class="icon"/>
+				<image src="@/static/index/jg-red.png" mode="widthFix" class="icon" />
 				<text class="red-text">已驳回：{{item.reason}}</text>
 			</view>
 			<view class="zp-item-status" v-if="item.status == 3">
-				<image src="@/static/my/qiyong.png" mode="widthFix" class="icon"/>
+				<image src="@/static/my/qiyong.png" mode="widthFix" class="icon" />
 				<text class="success-text">启用中</text>
 			</view>
 			<view class="zp-item-status" v-if="item.status == 4">
-				<image src="@/static/index/yitingyong.png" mode="widthFix" class="icon"/>
+				<image src="@/static/index/yitingyong.png" mode="widthFix" class="icon" />
 				<text class="yellow-text">已停用</text>
 			</view>
 			<view class="zp-item-bot">
 				<button size="mini" class="theme-btn" @click.stop="itemClick(1,item,index)">
-					<image src="@/static/my/bianji-btn.png" mode="widthFix" class="right-icon"/>
+					<image src="@/static/my/bianji-btn.png" mode="widthFix" class="right-icon" />
 					<text>编辑</text>
 				</button>
-				<button size="mini" class="qy-btn" @click.stop="itemClick(2,item,index)" v-if="item.status == 1 || item.status == 4">
-					<image src="@/static/index/qy-icon.png" mode="widthFix" class="right-icon"/>
+				<button size="mini" class="qy-btn" @click.stop="itemClick(2,item,index)"
+					v-if="item.status == 1 || item.status == 4">
+					<image src="@/static/index/qy-icon.png" mode="widthFix" class="right-icon" />
 					<text>启用</text>
 				</button>
 				<block v-if="item.status == 3">
 					<button size="mini" class="sx-btn" @click.stop="itemClick(3,item,index)">
-						<image src="@/static/my/shuaxin.png" mode="widthFix" class="right-icon"/>
+						<image src="@/static/my/shuaxin.png" mode="widthFix" class="right-icon" />
 						<text>刷新</text>
 					</button>
 					<button size="mini" class="ty-btn" @click.stop="itemClick(4,item,index)">
-						<image src="@/static/my/ty-btn.png" mode="widthFix" class="right-icon"/>
+						<image src="@/static/my/ty-btn.png" mode="widthFix" class="right-icon" />
 						<text>停用</text>
 					</button>
 				</block>
 				<button size="mini" class="del-btn" @click.stop="itemClick(5,item,index)">
-					<image src="@/static/index/del-red.png" mode="widthFix" class="right-icon"/>
+					<image src="@/static/index/del-red.png" mode="widthFix" class="right-icon" />
 					<text>删除</text>
 				</button>
 			</view>
@@ -57,143 +58,168 @@
 
 <script>
 	export default {
-		name:"my-xm-items",
-		props:{
-			datas:{
-				type:Array,
-				default:() => []
+		name: "my-xm-items",
+		props: {
+			datas: {
+				type: Array,
+				default: () => []
 			},
 		},
 		data() {
 			return {
-				
+
 			};
 		},
-		methods:{
-			itemClick(type,item,index){
+		methods: {
+			itemClick(type, item, index) {
 				let param = {
 					type,
 					index,
-					item:item
+					item: item
 				}
-				this.$emit('itemClick',param)
+				this.$emit('itemClick', param)
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.items-container{
-		.zp-item{
-			padding:30rpx 22rpx;
+	.items-container {
+		.zp-item {
+			padding: 30rpx 22rpx;
 			margin-bottom: 16rpx;
 			background: #fff;
 			border-radius: 16rpx;
-			>view{
-				&:not(:first-child){
+
+			>view {
+				&:not(:first-child) {
 					display: flex;
 					flex-wrap: wrap;
 					margin-top: 20rpx;
 				}
 			}
-			&-title{
+
+			&-title {
 				display: flex;
 				justify-content: space-between;
-				.left{
-					text{
+
+				.left {
+					text {
 						font-size: 34rpx;
 						font-weight: 500;
-						&:not(:last-child){
+
+						&:not(:last-child) {
 							margin-right: 10rpx;
 						}
 					}
 				}
-				.center{
+
+				.center {
 					width: 160rpx;
 				}
-				.right{
+
+				.right {
 					color: #02ABAB;
 					font-size: 30rpx;
 					font-weight: bold;
 					flex-shrink: 0;
 				}
 			}
-			&-tab{
-				.tab-item{
+
+			&-tab {
+				.tab-item {
 					background: #EFEFEF;
 					color: #5E5E5E;
 					padding: 4rpx 12rpx;
-					border-radius:6rpx;
-					font-size:24rpx;
-					&:not(:first-child){
+					border-radius: 6rpx;
+					font-size: 24rpx;
+
+					&:not(:first-child) {
 						margin-left: 10rpx;
 					}
 				}
 			}
-			&-status{
+
+			&-status {
 				display: flex;
 				align-items: center;
-				.icon{
+
+				.icon {
 					width: 32rpx;
 				}
-				text{
+
+				text {
 					font-size: 26rpx;
 					margin-left: 8rpx;
-					&.blue-text{
+
+					&.blue-text {
 						color: #2F94FF;
 					}
-					&.success-text{
+
+					&.success-text {
 						color: #12A70B;
 					}
-					&.theme-text{
+
+					&.theme-text {
 						color: #02AAAB;
 					}
-					&.red-text{
+
+					&.red-text {
 						color: #E92129;
 					}
-					&.yellow-text{
+
+					&.yellow-text {
 						color: #FF9900;
 					}
 				}
 			}
-			&-bot{
+
+			&-bot {
 				align-items: center;
 				justify-content: flex-end;
-				button{
+
+				button {
 					display: inline-flex;
 					align-items: center;
 					height: 52rpx;
 					line-height: 52rpx;
 					padding: 0 20rpx;
 					border-radius: 8rpx;
-					&:not(:last-child){
+
+					&:not(:last-child) {
 						margin-right: 14rpx;
 					}
-					&.theme-btn{
+
+					&.theme-btn {
 						background: #02AAAB;
 						color: #fff;
 					}
-					&.del-btn{
+
+					&.del-btn {
 						background: #FFF6F6;
 						color: #F03D37;
 						border: 2rpx solid #F03D37;
 					}
-					&.qy-btn{
+
+					&.qy-btn {
 						background: #F5FFF5;
 						color: #12A70B;
 						border: 2rpx solid #12A70B;
 					}
-					&.ty-btn{
+
+					&.ty-btn {
 						background: #fff9f1;
 						color: #FF9900;
 						border: 2rpx solid #FF9900;
 					}
-					&.sx-btn{
+
+					&.sx-btn {
 						background: #DEF4F4;
 						color: #02AAAB;
 						border: 2rpx solid #02AAAB;
 					}
-					.right-icon{
+
+					.right-icon {
 						width: 32rpx;
 						margin-right: 8rpx;
 					}

@@ -88,7 +88,7 @@ export function format_time(datetime) {
 		.padStart(2, '0');
 	const seconds = is_timestamp ? date.getSeconds().toString().padStart(2, '0') : date.getUTCSeconds().toString()
 		.padStart(2, '0');
-	return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+	return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
 export function subscirbe_message(template_Ids, callback = null) {

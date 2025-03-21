@@ -5,16 +5,19 @@
   background: linear-gradient(0deg, #efefef 0%, #f6f6f6 25%, #1abfc0 100%);
 }
 .post-button.data-v-d4e6bb4e {
-  width: 100rpx;
-  padding: 10rpx 20rpx;
-  background: linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4);
-  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
   border: none;
-  border-radius: 20rpx;
-  font-size: 26rpx;
-  font-weight: bold;
-  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.2);
-  transition: all 0.3s;
+  font-size: 20px;
+  margin-top: 12rpx;
+  margin-left: 12rpx;
+  color: #1fb4b3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 .poster-name.data-v-d4e6bb4e {
   white-space: nowrap;
@@ -28,7 +31,7 @@
   color: #999999;
 }
 .post-content.data-v-d4e6bb4e {
-  margin-top: 34rpx;
+  margin-top: 30rpx;
   font-family: PingFang SC, PingFang SC;
   font-size: 26rpx;
   color: black;
@@ -100,14 +103,9 @@
 }
 /* 容器样式 */
 .post-type-bar.data-v-d4e6bb4e {
-  border-radius: 20px;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  /* 渐变背景 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* 添加轻微阴影 */
-  width: -webkit-fit-content;
-  width: fit-content;
-  margin-top: 20rpx;
+  margin-top: 25rpx;
+  font-size: 26rpx;
+  color: #1fb4b3;
 }
 /* 标签样式 */
 .post-type-bar-label.data-v-d4e6bb4e {
@@ -231,6 +229,7 @@ label.data-v-d4e6bb4e {
   object-fit: cover;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 30rpx;
 }
 /* 单选框容器 */
 .category-options.data-v-d4e6bb4e {
@@ -287,7 +286,7 @@ label.data-v-d4e6bb4e {
   align-items: center;
 }
 .btn-submit.data-v-d4e6bb4e {
-  background: linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4);
+  background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
   color: #ffffff;
   display: flex;
   justify-content: center;
