@@ -32,7 +32,8 @@
     "pages/kefu/online",
     "pages/message/private_chat",
     "pages/square/index",
-    "pages/square/detail"
+    "pages/square/detail",
+    "pages/service/index"
   ],
   "subPackages": [
     {

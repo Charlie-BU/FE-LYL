@@ -336,7 +336,17 @@
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor":"#1abfc0"
 			}
+		},
+		{
+			"path" : "pages/service/index",
+			"style" : 
+			{
+				"navigationBarTitleText": "服务包",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#1abfc0"
+			}
 		}
+        
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

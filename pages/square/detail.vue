@@ -590,7 +590,7 @@ export default {
     width: fit-content;
     margin-top: 20rpx;
     height: 50rpx;
-}
+} 
 
 /* 标签样式 */
 .post-type-bar-label {

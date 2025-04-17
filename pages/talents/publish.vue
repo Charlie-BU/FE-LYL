@@ -425,7 +425,7 @@ export default {
             });
         },
 
-        // 提交：废弃
+        // 外包提交接口：废弃
         async tijiao() {
             // 这里需要加防抖
             if (_this.posted) {
