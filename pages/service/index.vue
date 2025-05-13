@@ -4,7 +4,7 @@
 			<view class="header-buttons">
 				<button v-if="is_admin" class="add-service-btn" @click="addService">新增服务包</button>
 				<button v-if="identity === 2" class="my-purchase-btn" @click="toMyPurchase">我的购买</button>
-				<button v-else-if="identity === 1" class="my-purchase-btn" @click="toMyPurchase">我的接单</button>
+				<button v-else-if="identity === 1" class="my-purchase-btn" @click="getMyService">分配给我的服务包</button>
 			</view>
 		</view>
 		<u-loading-page :loading="true" v-if="load" fontSize="28rpx" />
@@ -28,8 +28,10 @@
 						<text>{{ feature }}</text>
 					</view>
 				</view>
+				<button v-if="identity === 1 && showBuyerButton" class="buy-btn" @click="showBuyer(item)">查看买家</button>
 				<button v-if="identity === 2" class="buy-btn" @click="buyService(item)">立即购买</button>
 				<button v-if="identity === 3" class="buy-btn" @click="assignTalent(item)">分配人才</button>
+				<button v-if="identity === 3" class="buy-btn" @click="showThisTalent(item)">查看人才</button>
 			</view>
 			<u-loadmore class="load-more" :status="hasMore ? 'loading' : 'nomore'" :nomoreText="noMore" />
 		</view>
@@ -97,7 +99,9 @@
 								<text class="user-name">{{ user.name || "【未填写姓名】" }}</text>
 								<text class="user-phone">{{ user.phone }}</text>
 							</view>
-							<button class="assign-btn" @click="confirmAssign(user)">分配</button>
+							<button v-if="user.his_service_ids.includes(currentService.id)" class="assign-btn"
+								style="background: red;" @click="confirmUnassign(user)">取消分配</button>
+							<button v-else class="assign-btn" @click="confirmAssign(user)">分配</button>
 						</view>
 					</view>
 					<view v-else-if="searched" class="empty-tip">
@@ -107,6 +111,30 @@
 			</view>
 		</view>
 
+		<!-- 查看人才弹窗 -->
+		<view class="modal" v-if="showTalentModal && is_admin">
+			<view class="modal-content">
+				<view class="modal-header">
+					<text class="modal-title">服务包人才</text>
+					<text class="modal-close" @click="closeTalentModal">×</text>
+				</view>
+				<view class="modal-body">
+					<view class="user-info" v-if="serviceTalents && serviceTalents.length > 0">
+						<view class="user-item" v-for="(user, index) in serviceTalents" :key="index">
+							<view class="user-detail">
+								<text class="user-name">{{ user.name || "【未填写姓名】" }}</text>
+								<text class="user-phone">{{ user.phone }}</text>
+							</view>
+							<button class="assign-btn" style="background: red;"
+								@click="confirmUnassign(user)">取消分配</button>
+						</view>
+					</view>
+					<view v-else class="empty-tip">
+						<text>该服务包暂未分配人才</text>
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -134,7 +162,10 @@ export default {
 			searchPhone: '',
 			users: null,
 			searched: false,  // 添加标记，用于显示空状态
-			currentService: null
+			currentService: null,
+			showTalentModal: false,
+			serviceTalents: [],
+			showBuyerButton: false,
 		}
 	},
 	onLoad() {
@@ -145,6 +176,32 @@ export default {
 		getServiceList() {
 			// 获取服务包数据
 			fetch_data("POST", 'get_all_services', null, "service", res => {
+				if (res.data.status == 200) {
+					const pageData = res.data.services;
+					_this.lists.push(...pageData);
+					// 将load状态的更新移到这里
+					if (_this.load) {
+						_this.load = false;
+					}
+				} else {
+					uni.showToast({
+						title: '数据获取失败',
+						icon: 'none',
+						duration: 800
+					})
+				}
+			});
+		},
+		getMyService() {
+			// 获取分配给我的服务包
+			if (_this.identity !== 1) {
+				return;
+			}
+			_this.lists = [];
+			_this.showBuyerButton = true;
+			fetch_data("POST", 'get_my_services', {
+				talent_id: _this.user_id,
+			}, "service", res => {
 				if (res.data.status == 200) {
 					const pageData = res.data.services;
 					_this.lists.push(...pageData);
@@ -316,11 +373,47 @@ export default {
 			this.searched = false;
 		},
 
+		showThisTalent(item) {
+			this.currentService = item;
+			this.showTalentModal = true;
+			this.getTalentsByService();
+		},
+
 		closeAssignModal() {
 			this.showAssignModal = false;
 			this.searchPhone = '';
 			this.users = null;
 			this.searched = false;
+		},
+
+		closeTalentModal() {
+			this.showTalentModal = false;
+			this.serviceTalents = [];
+		},
+
+		getTalentsByService() {
+			if (!this.currentService) {
+				return;
+			}
+			// 显示加载提示
+			uni.showToast({
+				title: '查询中',
+				icon: 'loading',
+				duration: 1000000
+			});
+			// 调用查询接口
+			fetch_data("POST", 'get_talents_by_service', { service_id: this.currentService.id }, "service", res => {
+				if (res.data.status == 200) {
+					this.serviceTalents = res.data.serviceTalents;
+					uni.hideToast();
+				} else {
+					this.serviceTalents = [];
+					uni.showToast({
+						title: res.data.message || '查询失败',
+						icon: 'none'
+					});
+				}
+			})
 		},
 
 		searchUser() {
@@ -364,8 +457,8 @@ export default {
 			});
 		},
 
-		confirmAssign(user) {
-			if (!user || !this.currentService) {
+		confirmAssign(talent) {
+			if (!talent || !this.currentService) {
 				return;
 			}
 
@@ -379,7 +472,7 @@ export default {
 			// 调用分配接口
 			fetch_data("POST", 'assign_talent', {
 				service_id: this.currentService.id,
-				user_id: user.id
+				talent_id: talent.id
 			}, "service", res => {
 				uni.hideToast();
 
@@ -389,13 +482,54 @@ export default {
 						icon: 'success',
 						duration: 2000
 					});
-					this.closeAssignModal();
 				} else {
 					uni.showToast({
 						title: res.data.message || '分配失败',
 						icon: 'none',
 						duration: 2000
 					});
+				}
+			});
+		},
+		confirmUnassign(talent) {
+			if (!talent || !this.currentService) {
+				return;
+			}
+
+			uni.showModal({
+				title: '提示',
+				content: '确定要取消分配该人才吗？',
+				success: function (res) {
+					if (res.confirm) {
+						// 显示加载提示
+						uni.showToast({
+							title: '请稍后',
+							icon: 'loading',
+							duration: 1000000
+						});
+
+						// 调用取消分配接口
+						fetch_data("POST", 'unassign_talent', {
+							service_id: _this.currentService.id,
+							talent_id: talent.id
+						}, "service", res => {
+							uni.hideToast();
+
+							if (res.data.status == 200) {
+								uni.showToast({
+									title: '取消分配成功',
+									icon: 'success',
+									duration: 2000
+								});
+							} else {
+								uni.showToast({
+									title: res.data.message || '取消分配失败',
+									icon: 'none',
+									duration: 2000
+								});
+							}
+						});
+					}
 				}
 			});
 		}
