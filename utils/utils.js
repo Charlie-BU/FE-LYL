@@ -35,7 +35,7 @@ export function decodeBase64(encodedString) {
 	let output = '';
 	for (let bc = 0, bs, buffer, idx = 0;
 		(buffer = str.charAt(idx++)); ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer, bc++ % 4) ? output +=
-		String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
+			String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
 		buffer = chars.indexOf(buffer);
 	}
 	return output;
@@ -113,4 +113,9 @@ export function show_stars(star_value) {
 	let stars = star_value <= 0 ? 0 : (star_value >= 100 ? 5 : Math.floor(star_value / 20) + 1);
 	let unstars = 5 - stars;
 	return ["★".repeat(stars) + "☆".repeat(unstars), (star_value / 20).toFixed(1)];
+}
+
+export function is_admin() {
+	const identity = uni.getStorageSync("identity");
+	return identity === 3;
 }

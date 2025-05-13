@@ -5,6 +5,7 @@ import GoEasy from '@/uni_modules/GOEASY-IM/js_sdk/goeasy-2.11.1.esm.min.js'
 
 // #ifndef VUE3
 import Vue from 'vue'
+import VueCompositionAPI from '@vue/composition-api'
 Vue.config.productionTip = false
 App.mpType = 'app'
 
@@ -14,6 +15,7 @@ import {
 } from 'vue-jsonp';
 Vue.use(uView);
 Vue.use(VueJsonp);
+Vue.use(VueCompositionAPI)
 let vuexStore = require("@/store/$u.mixin.js");
 Vue.mixin(vuexStore);
 

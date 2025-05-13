@@ -3,6 +3,10 @@
 	<view class="container">
 		<u-loading-page :loading="true" v-if="load" fontSize="28rpx" />
 		<block v-else>
+			<!-- 这里嵌入服务包入口 -->
+			<view class="service-entry" @click="goNext('/pages/service/index')">
+				<image src="@/static/index/lxwm.png" mode="widthFix" />
+			</view>
 			<template v-if="identity == 3">
 				<u-sticky>
 					<view class="kefu-top">
@@ -62,11 +66,6 @@
 					</view>
 				</view>
 
-				<!-- 这里嵌入服务包入口 -->
-				<view class="service-entry" @click="goNext('/pages/service/index')">
-					<image src="@/static/index/lxwm.png" mode="widthFix" />
-				</view>
-
 				<view class="info">
 					<view class="items">
 						<my-items :datas="lists" @itemClick="itemClick"></my-items>
@@ -106,6 +105,7 @@ import * as utils from "../../utils/utils.js"
 import wxLogin from "@/components/wx-login/wx-login.vue"
 var _this;
 const GoEasy = uni.$GoEasy;
+
 export default {
 	data() {
 		return {
