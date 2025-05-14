@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 公共样式 */
+.container.data-v-84277732 {
+  padding: 30rpx;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+.container .service-list.data-v-84277732 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 40rpx;
+}
+.container .service-item.data-v-84277732 {
+  background-color: #ffffff;
+  /* 改为纯白色背景 */
+  border-radius: 24rpx;
+  padding: 40rpx;
+  box-shadow: 0 8rpx 24rpx rgba(2, 171, 171, 0.08);
+  /* 调整阴影颜色为主题色 */
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(2, 171, 171, 0.15);
+  /* 加深边框颜色 */
+}
+.container .service-item.data-v-84277732:hover {
+  -webkit-transform: translateY(-4rpx);
+          transform: translateY(-4rpx);
+  box-shadow: 0 12rpx 30rpx rgba(2, 171, 171, 0.12);
+}
+.container .service-item-header.data-v-84277732 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.container .service-item-title.data-v-84277732 {
+  font-size: 38rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  /* 更深的标题颜色 */
+  letter-spacing: 0.5rpx;
+}
+.container .service-item-price.data-v-84277732 {
+  margin: 36rpx 0;
+  display: flex;
+  align-items: baseline;
+}
+.container .service-item-price .price-symbol.data-v-84277732 {
+  font-size: 34rpx;
+  color: #02ABAB;
+  margin-right: 4rpx;
+}
+.container .service-item-price .price-value.data-v-84277732 {
+  font-size: 52rpx;
+  font-weight: 700;
+  color: #02ABAB;
+  letter-spacing: -1rpx;
+}
+.container .service-item-desc.data-v-84277732 {
+  font-size: 28rpx;
+  color: #666666;
+  /* 更改描述文字颜色 */
+  line-height: 1.6;
+  margin-bottom: 36rpx;
+}
+.container .service-item-features.data-v-84277732 {
+  margin-bottom: 40rpx;
+}
+.container .service-item-features .feature-item.data-v-84277732 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 12rpx 20rpx;
+  background-color: rgba(2, 171, 171, 0.05);
+  /* 特性背景改为主题色淡色 */
+  border-radius: 12rpx;
+  transition: all 0.3s ease;
+}
+.container .service-item-features .feature-item text.data-v-84277732 {
+  font-size: 26rpx;
+  color: #333333;
+  /* 更改文字颜色 */
+  margin-left: 16rpx;
+}
+/* 人才列表样式调整 */
+.talent-list.data-v-84277732 {
+  margin-top: 30rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid rgba(2, 171, 171, 0.1);
+  /* 改用主题色边框 */
+}
+.top.data-v-84277732 {
+  color: #333;
+  border-bottom: 2rpx solid rgba(2, 171, 171, 0.2);
+  /* 使用主题色边框 */
+  padding-bottom: 10rpx;
+  margin-bottom: 20rpx;
+}
+.count.data-v-84277732 {
+  color: #02ABAB;
+  /* 改用主题色 */
+}
+.list-item.data-v-84277732 {
+  background-color: rgba(2, 171, 171, 0.02);
+  /* 淡化背景色 */
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 4rpx 6rpx rgba(2, 171, 171, 0.06);
+  border: 1px solid rgba(2, 171, 171, 0.1);
+}
+.header.data-v-84277732 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+  margin-left: 20rpx;
+}
+.masked.data-v-84277732 {
+  color: #333333;
+}
+.arrow.data-v-84277732 {
+  color: #02ABAB;
+  /* 改用主题色 */
+  cursor: pointer;
+  margin-right: 13rpx;
+}
+.details.data-v-84277732 {
+  margin-top: 20rpx;
+  padding-top: 10rpx;
+  border-top: 1rpx dashed rgba(2, 171, 171, 0.1);
+  /* 使用主题色虚线 */
+}
+.detail-item.data-v-84277732 {
+  display: flex;
+  padding: 10rpx 0;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.detail-label.data-v-84277732 {
+  color: #888888;
+  /* 调整标签颜色 */
+}
+.detail-value.data-v-84277732 {
+  color: #333333;
+}
+.empty-talent.data-v-84277732 {
+  text-align: center;
+  padding: 30rpx 0;
+  color: #888888;
+  /* 调整空状态文字颜色 */
+  font-size: 28rpx;
+}
+

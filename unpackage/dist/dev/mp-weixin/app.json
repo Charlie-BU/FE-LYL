@@ -33,7 +33,8 @@
     "pages/message/private_chat",
     "pages/square/index",
     "pages/square/detail",
-    "pages/service/index"
+    "pages/service/index",
+    "pages/service/my-service"
   ],
   "subPackages": [
     {

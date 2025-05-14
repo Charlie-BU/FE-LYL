@@ -1,385 +1,405 @@
 {
-	"easycom": {
-		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue",
-		"^my-(.*)": "@/components/common/my-$1.vue"
-	},
-	"subPackages": [{
-			"root": "auth",
-			"pages": [{
-					"path": "register",
-					"style": {
-						"navigationBarTitleText": "",
-						"enablePullDownRefresh": false,
-						"navigationBarBackgroundColor": "#00000000",
-						"navigationBarTextStyle": "black",
-						"navigationStyle": "custom",
-						"app-plus": {
-							"titleNView": {
-								"type": "float",
-								"titleText": "",
-								"backgroundColor": "rgba(0,0,0,0)"
-							}
-						}
-					}
-				}, {
-					"path": "forget",
-					"style": {
-						"navigationBarTitleText": "忘记密码",
-						"enablePullDownRefresh": false,
-						"navigationBarBackgroundColor": "#00000000",
-						"navigationBarTextStyle": "black",
-						"navigationStyle": "custom",
-						"app-plus": {
-							"titleNView": {
-								"type": "float",
-								"titleText": "",
-								"backgroundColor": "rgba(0,0,0,0)"
-							}
-						}
-					}
-
-				},
-				{
-					"path": "mobile-login",
-					"style": {
-						"navigationBarTitleText": "",
-						"enablePullDownRefresh": false
-					}
-				},
-				{
-					"path": "kefu-login",
-					"style": {
-						"navigationBarTitleText": "",
-						"enablePullDownRefresh": false
-					}
-				}
-			]
-		},
-		{
-			"root": "my",
-			"pages": [{
-					"path": "link-up",
-					"style": {
-						"navigationBarTitleText": "沟通过",
-						"enablePullDownRefresh": false
-					}
-				},
-				{
-					"path": "my-resume",
-					"style": {
-						"navigationBarTitleText": "我的简历",
-						"enablePullDownRefresh": false
-					}
-				},
-				{
-					"path": "desired-city",
-					"style": {
-						"navigationBarTitleText": "期望城市",
-						"enablePullDownRefresh": false
-					}
-				},
-				{
-					"path": "change-identity",
-					"style": {
-						"navigationBarTitleText": "选择身份",
-						"enablePullDownRefresh": false,
-						"navigationStyle": "custom"
-					}
-				},
-				{
-					"path": "item-list",
-					"style": {
-						"navigationBarTitleText": "项目列表",
-						"enablePullDownRefresh": true
-					}
-				}
-			]
-		}
-	],
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": true,
-				"navigationBarBackgroundColor": "#15B3B4",
-				"navigationBarTextStyle": "white"
-			}
-		},
-		{
-			"path": "pages/index/login",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/index/html-detail",
-			"style": {
-				"navigationBarTitleText": "文章详情",
-				"enablePullDownRefresh": false
-			}
-		}, {
-			"path": "pages/my/my",
-			"style": {
-				"navigationBarTitleText": "我的",
-				"enablePullDownRefresh": true,
-				"navigationStyle": "custom"
-			}
-		}, {
-			"path": "pages/my/set",
-			"style": {
-				"navigationBarTitleText": "设置",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/my/password",
-			"style": {
-				"navigationBarTitleText": "密码",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/index/notice-list",
-			"style": {
-				"navigationBarTitleText": "公告列表",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/index/search",
-			"style": {
-				"navigationBarTitleText": "职位搜索",
-				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#fff",
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/my/user-collect",
-			"style": {
-				"navigationBarTitleText": "收藏",
-				"enablePullDownRefresh": false
-			}
-		}, {
-			"path": "pages/my/servicepay",
-			"style": {
-				"navigationBarTitleText": "我的收款",
-				"enablePullDownRefresh": false
-			}
-		}, {
-			"path": "pages/my/servicekf",
-			"style": {
-				"navigationBarTitleText": "发起代管",
-				"enablePullDownRefresh": false
-			}
-		}, {
-			"path": "pages/my/contract",
-			"style": {
-				"navigationBarTitleText": "我的合约",
-				"enablePullDownRefresh": true
-			}
-		}, {
-			"path": "pages/my/invoice",
-			"style": {
-				"navigationBarTitleText": "开具发票",
-				"enablePullDownRefresh": true
-			}
-		}, {
-			"path": "pages/my/invoicelist",
-			"style": {
-				"navigationBarTitleText": "开票记录",
-				"enablePullDownRefresh": true
-			}
-		}, {
-			"path": "pages/my/contract-detail",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": true
-			}
-		}, {
-			"path": "pages/my/qrcode",
-			"style": {
-				"navigationBarTitleText": "分销推广",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/my/nickname",
-			"style": {
-				"navigationBarTitleText": "修改昵称",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/my/user-personal",
-			"style": {
-				"navigationBarTitleText": "编辑信息",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "pages/my/service",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		},
-		{
-			"path": "pages/message/message",
-			"style": {
-				"navigationBarTitleText": "消息",
-				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#1abfc0",
-				"navigationBarTextStyle": "white"
-			}
-		},
-		{
-			"path": "pages/talents/index",
-			"style": {
-				"navigationBarTitleText": "人才",
-				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#15B3B4",
-				"navigationBarTextStyle": "white"
-			}
-		},
-		{
-			"path": "pages/index/detail",
-			"style": {
-				"navigationBarTitleText": "项目详情",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/talents/detail",
-			"style": {
-				"navigationBarTitleText": "人才详情",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/kefu/index",
-			"style": {
-				"navigationBarTitleText": "审核",
-				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#15B3B4",
-				"navigationBarTextStyle": "white"
-			}
-		},
-		{
-			"path": "pages/talents/my",
-			"style": {
-				"navigationBarTitleText": "我的",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/talents/publish",
-			"style": {
-				"navigationBarTitleText": "发布项目",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/index/filter-list",
-			"style": {
-				"navigationBarTitleText": "筛选项目",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/kefu/my",
-			"style": {
-				"navigationBarTitleText": "我的",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/kefu/link-up",
-			"style": {
-				"navigationBarTitleText": "沟通过",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/kefu/online",
-			"style": {
-				"navigationBarTitleText": "在线",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/message/private_chat",
-			"style": {
-				"navigationBarTitleText": "私聊",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/square/index",
-			"style": {
-				"navigationBarTitleText": "广场",
-				"enablePullDownRefresh": true,
-				"navigationBarBackgroundColor":"#1abfc0",
-				"navigationBarTextStyle": "white"
-			}
-		},
-		{
-			"path" : "pages/square/detail",
-			"style" : 
-			{
-				"navigationBarTitleText": "帖子详情",
-				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#1abfc0"
-			}
-		},
-		{
-			"path" : "pages/service/index",
-			"style" : 
-			{
-				"navigationBarTitleText": "服务包",
-				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#1abfc0"
-			}
-		}
-        
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "利易联",
-		"navigationBarBackgroundColor": "#fff",
-		"navigationBarTextStyle": "black",
-		"backgroundColor": "#F7F7F7"
-	},
-	"tabBar": {
-		"color": "#686868",
-		"selectedColor": "#48A6A5",
-		"borderStyle": "black",
-		"backgroundColor": "#ffffff",
-		"list": [{
-			"pagePath": "pages/index/index",
-			"iconPath": "static/tabbar/index.png",
-			"selectedIconPath": "static/tabbar/index_s.png",
-			"text": "首页"
-		}, {
-			"pagePath": "pages/square/index",
-			"iconPath": "static/tabbar/rencai.png",
-			"selectedIconPath": "static/tabbar/rencai_s.png",
-			"text": "广场"
-		}, {
-			"pagePath": "pages/message/message",
-			"iconPath": "static/tabbar/message.png",
-			"selectedIconPath": "static/tabbar/message_s.png",
-			"text": "消息"
-		}, {
-			"pagePath": "pages/my/my",
-			"iconPath": "static/tabbar/profile.png",
-			"selectedIconPath": "static/tabbar/profile_s.png",
-			"text": "我的"
-		}]
-	}
+    "easycom": {
+        "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue",
+        "^my-(.*)": "@/components/common/my-$1.vue"
+    },
+    "subPackages": [
+        {
+            "root": "auth",
+            "pages": [
+                {
+                    "path": "register",
+                    "style": {
+                        "navigationBarTitleText": "",
+                        "enablePullDownRefresh": false,
+                        "navigationBarBackgroundColor": "#00000000",
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "app-plus": {
+                            "titleNView": {
+                                "type": "float",
+                                "titleText": "",
+                                "backgroundColor": "rgba(0,0,0,0)"
+                            }
+                        }
+                    }
+                },
+                {
+                    "path": "forget",
+                    "style": {
+                        "navigationBarTitleText": "忘记密码",
+                        "enablePullDownRefresh": false,
+                        "navigationBarBackgroundColor": "#00000000",
+                        "navigationBarTextStyle": "black",
+                        "navigationStyle": "custom",
+                        "app-plus": {
+                            "titleNView": {
+                                "type": "float",
+                                "titleText": "",
+                                "backgroundColor": "rgba(0,0,0,0)"
+                            }
+                        }
+                    }
+                },
+                {
+                    "path": "mobile-login",
+                    "style": {
+                        "navigationBarTitleText": "",
+                        "enablePullDownRefresh": false
+                    }
+                },
+                {
+                    "path": "kefu-login",
+                    "style": {
+                        "navigationBarTitleText": "",
+                        "enablePullDownRefresh": false
+                    }
+                }
+            ]
+        },
+        {
+            "root": "my",
+            "pages": [
+                {
+                    "path": "link-up",
+                    "style": {
+                        "navigationBarTitleText": "沟通过",
+                        "enablePullDownRefresh": false
+                    }
+                },
+                {
+                    "path": "my-resume",
+                    "style": {
+                        "navigationBarTitleText": "我的简历",
+                        "enablePullDownRefresh": false
+                    }
+                },
+                {
+                    "path": "desired-city",
+                    "style": {
+                        "navigationBarTitleText": "期望城市",
+                        "enablePullDownRefresh": false
+                    }
+                },
+                {
+                    "path": "change-identity",
+                    "style": {
+                        "navigationBarTitleText": "选择身份",
+                        "enablePullDownRefresh": false,
+                        "navigationStyle": "custom"
+                    }
+                },
+                {
+                    "path": "item-list",
+                    "style": {
+                        "navigationBarTitleText": "项目列表",
+                        "enablePullDownRefresh": true
+                    }
+                }
+            ]
+        }
+    ],
+    "pages": [
+        {
+            "path": "pages/index/index",
+            "style": {
+                "navigationBarTitleText": "首页",
+                "enablePullDownRefresh": true,
+                "navigationBarBackgroundColor": "#15B3B4",
+                "navigationBarTextStyle": "white"
+            }
+        },
+        {
+            "path": "pages/index/login",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/html-detail",
+            "style": {
+                "navigationBarTitleText": "文章详情",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/my",
+            "style": {
+                "navigationBarTitleText": "我的",
+                "enablePullDownRefresh": true,
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/my/set",
+            "style": {
+                "navigationBarTitleText": "设置",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/password",
+            "style": {
+                "navigationBarTitleText": "密码",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/notice-list",
+            "style": {
+                "navigationBarTitleText": "公告列表",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/search",
+            "style": {
+                "navigationBarTitleText": "职位搜索",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor": "#fff",
+                "navigationBarTextStyle": "black"
+            }
+        },
+        {
+            "path": "pages/my/user-collect",
+            "style": {
+                "navigationBarTitleText": "收藏",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/servicepay",
+            "style": {
+                "navigationBarTitleText": "我的收款",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/servicekf",
+            "style": {
+                "navigationBarTitleText": "发起代管",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/contract",
+            "style": {
+                "navigationBarTitleText": "我的合约",
+                "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/my/invoice",
+            "style": {
+                "navigationBarTitleText": "开具发票",
+                "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/my/invoicelist",
+            "style": {
+                "navigationBarTitleText": "开票记录",
+                "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/my/contract-detail",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": true
+            }
+        },
+        {
+            "path": "pages/my/qrcode",
+            "style": {
+                "navigationBarTitleText": "分销推广",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/nickname",
+            "style": {
+                "navigationBarTitleText": "修改昵称",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/user-personal",
+            "style": {
+                "navigationBarTitleText": "编辑信息",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/my/service",
+            "style": {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/message/message",
+            "style": {
+                "navigationBarTitleText": "消息",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor": "#1abfc0",
+                "navigationBarTextStyle": "white"
+            }
+        },
+        {
+            "path": "pages/talents/index",
+            "style": {
+                "navigationBarTitleText": "人才",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor": "#15B3B4",
+                "navigationBarTextStyle": "white"
+            }
+        },
+        {
+            "path": "pages/index/detail",
+            "style": {
+                "navigationBarTitleText": "项目详情",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/talents/detail",
+            "style": {
+                "navigationBarTitleText": "人才详情",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/kefu/index",
+            "style": {
+                "navigationBarTitleText": "审核",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor": "#15B3B4",
+                "navigationBarTextStyle": "white"
+            }
+        },
+        {
+            "path": "pages/talents/my",
+            "style": {
+                "navigationBarTitleText": "我的",
+                "enablePullDownRefresh": false,
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/talents/publish",
+            "style": {
+                "navigationBarTitleText": "发布项目",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/index/filter-list",
+            "style": {
+                "navigationBarTitleText": "筛选项目",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/kefu/my",
+            "style": {
+                "navigationBarTitleText": "我的",
+                "enablePullDownRefresh": false,
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/kefu/link-up",
+            "style": {
+                "navigationBarTitleText": "沟通过",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/kefu/online",
+            "style": {
+                "navigationBarTitleText": "在线",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/message/private_chat",
+            "style": {
+                "navigationBarTitleText": "私聊",
+                "enablePullDownRefresh": false
+            }
+        },
+        {
+            "path": "pages/square/index",
+            "style": {
+                "navigationBarTitleText": "广场",
+                "enablePullDownRefresh": true,
+                "navigationBarBackgroundColor": "#1abfc0",
+                "navigationBarTextStyle": "white"
+            }
+        },
+        {
+            "path": "pages/square/detail",
+            "style": {
+                "navigationBarTitleText": "帖子详情",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor": "#1abfc0"
+            }
+        },
+        {
+            "path": "pages/service/index",
+            "style": {
+                "navigationBarTitleText": "服务包",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor": "#1abfc0"
+            }
+        },
+        {
+            "path": "pages/service/my-service",
+            "style": {
+                "navigationBarTitleText": "我购买的服务包",
+                "enablePullDownRefresh": false,
+                "navigationBarBackgroundColor": "#1abfc0"
+            }
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "利易联",
+        "navigationBarBackgroundColor": "#fff",
+        "backgroundColor": "#F7F7F7"
+    },
+    "tabBar": {
+        "color": "#686868",
+        "selectedColor": "#48A6A5",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "static/tabbar/index.png",
+                "selectedIconPath": "static/tabbar/index_s.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/square/index",
+                "iconPath": "static/tabbar/rencai.png",
+                "selectedIconPath": "static/tabbar/rencai_s.png",
+                "text": "广场"
+            },
+            {
+                "pagePath": "pages/message/message",
+                "iconPath": "static/tabbar/message.png",
+                "selectedIconPath": "static/tabbar/message_s.png",
+                "text": "消息"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "iconPath": "static/tabbar/profile.png",
+                "selectedIconPath": "static/tabbar/profile_s.png",
+                "text": "我的"
+            }
+        ]
+    }
 }

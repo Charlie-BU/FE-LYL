@@ -3,7 +3,7 @@
 		<view class="header">
 			<view class="header-buttons">
 				<button v-if="is_admin" class="add-service-btn" @click="addService">新增服务包</button>
-				<button v-if="identity === 2" class="my-purchase-btn" @click="toMyPurchase">我的购买</button>
+				<button v-if="identity === 2" class="my-purchase-btn" @click="toMyService">我的购买</button>
 				<button v-else-if="identity === 1" class="my-purchase-btn" @click="getMyService">分配给我的服务包</button>
 			</view>
 		</view>
@@ -218,14 +218,96 @@ export default {
 				}
 			});
 		},
+
 		buyService(item) {
-			uni.navigateTo({
-				url: `/pages/my/servicepay?id=${item.id}&name=${item.name}`
+			if (!item) {
+				return;
+			}
+
+			// 显示加载提示
+			uni.showToast({
+				title: '请稍后',
+				icon: 'loading',
+				duration: 1000000
 			});
+
+			// 获取用户openid
+			utils.get_openid((openid) => {
+				// 调用后端创建订单接口
+				fetch_data("POST", 'create_pay', {
+					amount: item.price,
+					description: item.name, // 商品描述使用服务包名称
+					attach: JSON.stringify({
+						service_id: item.id,
+						user_id: uni.getStorageSync('user_id')
+					}), // 附加数据，用于回调时识别订单
+					openid: openid
+				}, "service", res => {
+					uni.hideToast();
+					if (res.data) {
+						// 调用微信支付
+						uni.requestPayment({
+							provider: 'wxpay',
+							timeStamp: res.data.timeStamp,
+							nonceStr: res.data.nonceStr,
+							package: res.data.package,
+							signType: res.data.signType,
+							paySign: res.data.paySign,
+							success: () => {
+								try {
+									fetch_data("POST", 'buy_service', {
+										service_id: item.id,
+										buyer_id: uni.getStorageSync('user_id')
+									}, "service", res => {
+										if (res.data.status == 200) {
+											uni.showToast({
+												title: '服务包购买成功',
+												icon: 'none',
+												duration: 2000
+											});
+											// 支付成功后跳转到订单列表
+											setTimeout(() => {
+												uni.navigateTo({
+													url: '/pages/service/my-service'
+												});
+											}, 2000);
+											return;
+										} else {
+											uni.showToast({
+												title: "支付成功，但交易失败，请联系利易联客服",
+												icon: 'none',
+												duration: 2000
+											});
+											return;
+										}
+									});
+								} catch (error) {
+									uni.showToast({
+										title: '支付成功，但交易失败，请联系利易联客服',
+										icon: 'none',
+										duration: 2000
+									});
+									console.log(error)
+									return;
+								}
+							},
+							fail: (err) => {
+								console.log('支付失败:', err);
+							}
+						});
+					} else {
+						uni.showToast({
+							title: res.data.message || '创建订单失败',
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				});
+			})
 		},
-		toMyPurchase() {
+		toMyService() {
 			uni.navigateTo({
-				url: '/pages/my/servicepay'
+				url: '/pages/service/my-service'
 			});
 		},
 		addService() {

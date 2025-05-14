@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "我购买的服务包",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#1abfc0",
+  "usingComponents": {
+    "u-loading-page": "/uview-ui/components/u-loading-page/u-loading-page",
+    "u-icon": "/uview-ui/components/u-icon/u-icon",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore"
+  }
+}
