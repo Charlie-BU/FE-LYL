@@ -34,6 +34,7 @@
     "pages/square/index",
     "pages/square/detail",
     "pages/service/index",
+    "pages/service/detail",
     "pages/service/my-service"
   ],
   "subPackages": [

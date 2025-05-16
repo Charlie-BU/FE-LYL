@@ -5,10 +5,11 @@
             <view class="service-item" v-for="(item, index) in lists" :key="index">
                 <view class="service-item-header">
                     <view class="service-item-title">{{ item.name }}</view>
+                    <view class="service-item-amount">x{{ item.amount || 1 }}</view>
                 </view>
                 <view class="service-item-price">
                     <text class="price-symbol">¥</text>
-                    <text class="price-value">{{ item.price }}</text>
+                    <text class="price-value">{{ item.price * item.amount }}</text>
                 </view>
                 <view class="service-item-desc">{{ item.description }}</view>
                 <view class="service-item-features">
@@ -91,17 +92,24 @@ export default {
                 my_id: uni.getStorageSync('user_id')
             }, "service", res => {
                 if (res.data.status == 200) {
-                    const service = res.data.service;
-                    if (service) {
-                        // 为每个人才添加mode属性
-                        if (service.talents) {
-                            service.talents = service.talents.map(talent => ({
-                                ...talent,
-                                star: show_stars(talent.star_as_elite)[0] || null,
-                                mode: false
-                            }));
-                        }
-                        _this.lists.push(service)
+                    let services = res.data.services;
+
+                    if (services.length !== 0) {
+                        services = services.map(service => {
+                            const newService = {
+                                ...service[0],
+                                amount: service[1].amount,
+                            };
+                            if (newService.talents) {
+                                newService.talents = newService.talents.map(talent => ({
+                                    ...talent,
+                                    star: show_stars(talent.star_as_elite)[0] || null,
+                                    mode: false
+                                }));
+                            }
+                            return newService;
+                        });
+                        _this.lists.push(...services)
                     }
                     if (_this.load) {
                         _this.load = false;
@@ -123,7 +131,7 @@ export default {
                     return;
                 }
                 const resume_id = res.data.resume_id;
-                _this.toNext(`/pages/talents/detail?id=${resume_id}`)
+                _this.toNext(`/pages/talents/detail?id=${resume_id}&showContact=false`)
             });
         },
         goToBuy() {
@@ -138,7 +146,6 @@ export default {
 <style lang="scss" scoped>
 .container {
     padding: 30rpx;
-    background-color: #f8f9fa;
     min-height: 100vh;
 
     .service-list {
@@ -170,6 +177,17 @@ export default {
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30rpx;
+
+            .service-item-amount {
+                font-size: 32rpx;
+                color: #02ABAB;
+                font-weight: 600;
+                background: rgba(2, 171, 171, 0.1);
+                padding: 8rpx 20rpx;
+                border-radius: 30rpx;
+                min-width: 60rpx;
+                text-align: center;
+            }
         }
 
         &-title {
@@ -310,5 +328,127 @@ export default {
     color: #888888;
     /* 调整空状态文字颜色 */
     font-size: 28rpx;
+}
+
+.empty-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+
+    .empty-content {
+        text-align: center;
+
+        .empty-tips {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40rpx;
+
+            .main-tip {
+                font-size: 32rpx;
+                color: #333;
+                margin-bottom: 16rpx;
+            }
+
+            .sub-tip {
+                font-size: 28rpx;
+                color: #999;
+            }
+        }
+
+        .empty-button {
+            .go-buy-btn {
+                background: #02ABAB;
+                color: #fff;
+                border-radius: 44rpx;
+                padding: 20rpx 60rpx;
+                font-size: 30rpx;
+                border: none;
+            }
+        }
+    }
+}
+
+.empty-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    border-radius: 24rpx;
+
+    .empty-content {
+        text-align: center;
+        padding: 60rpx 40rpx;
+        transform: translateY(-40rpx);
+        animation: float 3s ease-in-out infinite;
+
+        .empty-tips {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50rpx;
+
+            .main-tip {
+                font-size: 36rpx;
+                color: #333;
+                margin-bottom: 20rpx;
+                font-weight: 600;
+                background: linear-gradient(90deg, #02ABAB, #05C5C5);
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+
+            .sub-tip {
+                font-size: 28rpx;
+                color: #666;
+                letter-spacing: 2rpx;
+            }
+        }
+
+        .empty-button {
+            .go-buy-btn {
+                background: linear-gradient(45deg, #02ABAB, #05C5C5);
+                color: #fff;
+                border-radius: 44rpx;
+                padding: 24rpx 80rpx;
+                font-size: 32rpx;
+                border: none;
+                box-shadow: 0 8rpx 20rpx rgba(2, 171, 171, 0.2);
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    width: 200%;
+                    height: 200%;
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: rotate(45deg);
+                    transition: all 0.3s ease;
+                }
+
+                &:active {
+                    transform: translateY(4rpx);
+                    box-shadow: 0 4rpx 10rpx rgba(2, 171, 171, 0.2);
+                }
+            }
+        }
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(-40rpx);
+    }
+
+    50% {
+        transform: translateY(-50rpx);
+    }
 }
 </style>

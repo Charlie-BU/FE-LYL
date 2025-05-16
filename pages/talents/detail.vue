@@ -53,7 +53,7 @@
 				</view>
 				<view style="height: 136rpx;"></view>
 			</view>
-			<view class="project-bot" v-if="identity != 3">
+			<view class="project-bot" v-if="identity != 3 && showContact">
 				<view class="bot-item" @click="items_sc()">
 					<image :src="is_sc == 0 ? '/static/index/shoucang.png' : '/static/index/shoucang_selected.png'"
 						mode="widthFix" class="item-img" />
@@ -82,10 +82,14 @@ export default {
 			fromIdentity: 0,
 			star: [],
 			preview_images: [],
+			showContact: true,
 		}
 	},
 	onLoad(e) {
 		_this = this;
+		if (e?.showContact === 'false') {
+			this.showContact = false;
+		}
 		if (e.id) {
 			_this.id = e.id
 		} else {

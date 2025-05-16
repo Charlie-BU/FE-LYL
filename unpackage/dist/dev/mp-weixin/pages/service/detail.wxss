@@ -1,0 +1,212 @@
+@charset "UTF-8";
+/* 颜色变量 */
+/* 公共样式 */
+.container.data-v-3000c024 {
+  padding: 30rpx;
+}
+.service-detail.data-v-3000c024 {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+}
+.service-detail .service-name.data-v-3000c024 {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+.service-detail .service-price.data-v-3000c024 {
+  margin: 30rpx 0;
+}
+.service-detail .service-price .price-symbol.data-v-3000c024 {
+  color: #02ABAB;
+  font-size: 32rpx;
+}
+.service-detail .service-price .price-value.data-v-3000c024 {
+  color: #02ABAB;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+.service-detail .service-desc.data-v-3000c024 {
+  color: #666;
+  font-size: 28rpx;
+  line-height: 1.6;
+  margin-bottom: 30rpx;
+}
+.service-detail .service-features .feature-item.data-v-3000c024 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.service-detail .service-features .feature-item text.data-v-3000c024 {
+  margin-left: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.service-detail .buy-btn.data-v-3000c024 {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: #02ABAB;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 40rpx;
+  margin-top: 40rpx;
+}
+.modal-content.data-v-3000c024 {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+}
+.modal-content .modal-header.data-v-3000c024 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.modal-content .modal-header .modal-title.data-v-3000c024 {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.modal-content .modal-header .modal-close.data-v-3000c024 {
+  font-size: 40rpx;
+  color: #999;
+}
+.modal-content .modal-body .quantity-selector.data-v-3000c024 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30rpx 0;
+}
+.modal-content .modal-body .quantity-selector .minus.data-v-3000c024,
+.modal-content .modal-body .quantity-selector .plus.data-v-3000c024 {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  background-color: #f5f5f5;
+  font-size: 36rpx;
+}
+.modal-content .modal-body .quantity-selector .quantity-input.data-v-3000c024 {
+  width: 100rpx;
+  height: 60rpx;
+  text-align: center;
+  margin: 0 20rpx;
+  border: 1px solid #eee;
+}
+.modal-content .modal-body .total-price.data-v-3000c024 {
+  text-align: center;
+  margin-top: 20rpx;
+}
+.modal-content .modal-body .total-price .price-symbol.data-v-3000c024,
+.modal-content .modal-body .total-price .price-value.data-v-3000c024 {
+  color: #02ABAB;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.modal-content .modal-footer.data-v-3000c024 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40rpx;
+}
+.modal-content .modal-footer button.data-v-3000c024 {
+  width: 45%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-size: 32rpx;
+}
+.modal-content .modal-footer .cancel-btn.data-v-3000c024 {
+  background-color: #f5f5f5;
+  color: #666;
+}
+.modal-content .modal-footer .confirm-btn.data-v-3000c024 {
+  background-color: #02ABAB;
+  color: #fff;
+}
+.modal-content.data-v-3000c024 {
+  width: 600rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+}
+.modal-content .modal-header.data-v-3000c024 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #eee;
+}
+.modal-content .modal-header .modal-title.data-v-3000c024 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+.modal-content .modal-header .modal-close.data-v-3000c024 {
+  font-size: 40rpx;
+  color: #999;
+  padding: 10rpx;
+}
+.modal-content .modal-body .quantity-selector.data-v-3000c024 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40rpx 0;
+}
+.modal-content .modal-body .quantity-selector .minus.data-v-3000c024,
+.modal-content .modal-body .quantity-selector .plus.data-v-3000c024 {
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  background-color: #f5f5f5;
+  font-size: 40rpx;
+  color: #333;
+  border-radius: 8rpx;
+}
+.modal-content .modal-body .quantity-selector .quantity-input.data-v-3000c024 {
+  width: 120rpx;
+  height: 70rpx;
+  text-align: center;
+  margin: 0 30rpx;
+  border: 1px solid #eee;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+}
+.modal-content .modal-body .total-price.data-v-3000c024 {
+  text-align: center;
+  margin: 30rpx 0;
+  font-size: 32rpx;
+}
+.modal-content .modal-body .total-price .price-symbol.data-v-3000c024,
+.modal-content .modal-body .total-price .price-value.data-v-3000c024 {
+  color: #02ABAB;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.modal-content .modal-footer.data-v-3000c024 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40rpx;
+  padding-top: 30rpx;
+  border-top: 1px solid #eee;
+}
+.modal-content .modal-footer button.data-v-3000c024 {
+  width: 240rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-size: 32rpx;
+}
+.modal-content .modal-footer .cancel-btn.data-v-3000c024 {
+  background-color: #f5f5f5;
+  color: #666;
+}
+.modal-content .modal-footer .confirm-btn.data-v-3000c024 {
+  background-color: #02ABAB;
+  color: #fff;
+}
+

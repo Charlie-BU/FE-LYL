@@ -29,7 +29,8 @@
 					</view>
 				</view>
 				<button v-if="identity === 1 && showBuyerButton" class="buy-btn" @click="showBuyer(item)">查看买家</button>
-				<button v-if="identity === 2" class="buy-btn" @click="buyService(item)">立即购买</button>
+				<button v-if="identity === 2" class="buy-btn" @click="gotoDetail(item)">查看详情</button>
+				<!-- <button v-if="identity === 2" class="buy-btn" @click="buyService(item)">立即购买</button> -->
 				<button v-if="identity === 3" class="buy-btn" @click="assignTalent(item)">分配人才</button>
 				<button v-if="identity === 3" class="buy-btn" @click="showThisTalent(item)">查看人才</button>
 			</view>
@@ -219,6 +220,15 @@ export default {
 			});
 		},
 
+		gotoDetail(item) {
+			if (!item) {
+				return;
+			}
+			uni.navigateTo({
+				url: `/pages/service/detail?id=${item.id}`
+			});
+		},
+
 		buyService(item) {
 			if (!item) {
 				return;
@@ -305,6 +315,7 @@ export default {
 				});
 			})
 		},
+
 		toMyService() {
 			uni.navigateTo({
 				url: '/pages/service/my-service'
@@ -622,7 +633,6 @@ export default {
 <style lang="scss" scoped>
 .container {
 	padding: 30rpx;
-	background-color: #f8f9fa;
 	min-height: 100vh;
 
 	.header {

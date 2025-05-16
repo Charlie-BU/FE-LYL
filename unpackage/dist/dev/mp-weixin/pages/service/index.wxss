@@ -3,7 +3,6 @@
 /* 公共样式 */
 .container.data-v-7881794f {
   padding: 30rpx;
-  background-color: #f8f9fa;
   min-height: 100vh;
 }
 .container .header.data-v-7881794f {
