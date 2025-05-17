@@ -96,18 +96,14 @@ export default {
 
                     if (services.length !== 0) {
                         services = services.map(service => {
-                            const newService = {
-                                ...service[0],
-                                amount: service[1].amount,
-                            };
-                            if (newService.talents) {
-                                newService.talents = newService.talents.map(talent => ({
+                            if (service.talents) {
+                                service.talents = service.talents.map(talent => ({
                                     ...talent,
                                     star: show_stars(talent.star_as_elite)[0] || null,
                                     mode: false
                                 }));
                             }
-                            return newService;
+                            return service;
                         });
                         _this.lists.push(...services)
                     }
@@ -176,7 +172,7 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30rpx;
+            margin-bottom: 20rpx;  // 从30rpx减少到20rpx
 
             .service-item-amount {
                 font-size: 32rpx;
@@ -199,7 +195,7 @@ export default {
         }
 
         &-price {
-            margin: 36rpx 0;
+            margin: 24rpx 0;  // 从36rpx减少到24rpx
             display: flex;
             align-items: baseline;
 
@@ -222,11 +218,11 @@ export default {
             color: #666666;
             /* 更改描述文字颜色 */
             line-height: 1.6;
-            margin-bottom: 36rpx;
+            margin-bottom: 24rpx;  // 从36rpx减少到24rpx
         }
 
         &-features {
-            margin-bottom: 40rpx;
+            margin-bottom: 30rpx;  // 从40rpx减少到30rpx
 
             .feature-item {
                 display: flex;

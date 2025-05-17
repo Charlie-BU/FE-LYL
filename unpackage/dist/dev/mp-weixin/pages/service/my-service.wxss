@@ -34,7 +34,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
 }
 .container .service-item-header .service-item-amount.data-v-84277732 {
   font-size: 32rpx;
@@ -54,7 +54,7 @@
   letter-spacing: 0.5rpx;
 }
 .container .service-item-price.data-v-84277732 {
-  margin: 36rpx 0;
+  margin: 24rpx 0;
   display: flex;
   align-items: baseline;
 }
@@ -74,10 +74,10 @@
   color: #666666;
   /* 更改描述文字颜色 */
   line-height: 1.6;
-  margin-bottom: 36rpx;
+  margin-bottom: 24rpx;
 }
 .container .service-item-features.data-v-84277732 {
-  margin-bottom: 40rpx;
+  margin-bottom: 30rpx;
 }
 .container .service-item-features .feature-item.data-v-84277732 {
   display: flex;

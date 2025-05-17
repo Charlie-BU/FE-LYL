@@ -13,7 +13,7 @@
                     <text>{{ feature }}</text>
                 </view>
             </view>
-            <button class="buy-btn" @click="showBuyModal">立即购买</button>
+            <button v-if="identity === 2" class="buy-btn" @click="showBuyModal">立即购买</button>
         </view>
 
         <!-- 购买数量弹窗 -->
@@ -89,6 +89,9 @@ export default {
             });
         },
         showBuyModal() {
+            if (this.identity !== 2) {
+                return;
+            }
             this.showModal = true
         },
         closeModal() {
@@ -104,6 +107,9 @@ export default {
             this.quantity++
         },
         async confirmPurchase() {
+            if (this.identity !== 2) {
+                return;
+            }
             // 显示加载提示
             uni.showToast({
                 title: '请稍后',

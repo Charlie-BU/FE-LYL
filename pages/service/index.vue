@@ -1,38 +1,48 @@
 <template>
 	<view class="container">
-		<view class="header">
+		<view style="display: flex">
+			<view style="width: 67%;">
+				<u-tabs lineColor="#02ABAB" :list="tabbar_list" :scrollable="true" :current="current" @change="change"
+					:activeStyle="{
+						color: '#02ABAB',
+						fontWeight: 'bold',
+						transform: 'scale(1.05)',
+						fontSize: '28rpx'
+					}" :inactiveStyle="{
+						color: '#666',
+						transform: 'scale(1)',
+						fontSize: '28rpx'
+					}"></u-tabs>
+			</view>
 			<view class="header-buttons">
-				<button v-if="is_admin" class="add-service-btn" @click="addService">新增服务包</button>
-				<button v-if="identity === 2" class="my-purchase-btn" @click="toMyService">我的购买</button>
-				<button v-else-if="identity === 1" class="my-purchase-btn" @click="getMyService">分配给我的服务包</button>
+				<button v-if="is_admin" class="add-service-btn" style="white-space: nowrap;"
+					@click="addService">新增服务包</button>
+				<button v-if="identity === 2" class="my-purchase-btn" style="white-space: nowrap;"
+					@click="toMyService">我的购买</button>
+				<button v-else-if="identity === 1" class="my-purchase-btn" style="white-space: nowrap;"
+					@click="getMyService">分配给我</button>
 			</view>
 		</view>
 		<u-loading-page :loading="true" v-if="load" fontSize="28rpx" />
 		<view class="service-list" v-else-if="lists">
-			<view class="service-item" v-for="(item, index) in lists" :key="index">
-				<view class="service-item-header">
+			<view class="service-grid">
+				<view class="service-item" v-for="(item, index) in lists" :key="index">
 					<view class="service-item-title">{{ item.name }}</view>
-					<view class="operation-buttons">
-						<button v-if="is_admin" class="edit-btn" @click="editService(item)">编辑</button>
-						<button v-if="is_admin" class="delete-btn" @click="deleteService(item)">删除</button>
+					<view class="service-item-price">
+						<text class="price-symbol">¥</text>
+						<text class="price-value">{{ item.price }}</text>
+					</view>
+					<button v-if="identity === 1 || identity === 2" class="detail-btn"
+						@click="gotoDetail(item)">查看详情</button>
+
+					<button v-if="is_admin" class="detail-btn" @click="assignTalent(item)">分配人才</button>
+					<button v-if="is_admin" class="detail-btn" style="margin-top: 15rpx;"
+						@click="showThisTalent(item)">查看人才</button>
+					<view class="service-item-actions" v-if="is_admin">
+						<button class="action-btn edit" @click="editService(item)">编辑</button>
+						<button class="action-btn delete" @click="deleteService(item.id)">删除</button>
 					</view>
 				</view>
-				<view class="service-item-price">
-					<text class="price-symbol">¥</text>
-					<text class="price-value">{{ item.price }}</text>
-				</view>
-				<view class="service-item-desc">{{ item.description }}</view>
-				<view class="service-item-features">
-					<view class="feature-item" v-for="(feature, fIndex) in item.features" :key="fIndex">
-						<u-icon name="checkmark-circle" color="#02ABAB" size="28"></u-icon>
-						<text>{{ feature }}</text>
-					</view>
-				</view>
-				<button v-if="identity === 1 && showBuyerButton" class="buy-btn" @click="showBuyer(item)">查看买家</button>
-				<button v-if="identity === 2" class="buy-btn" @click="gotoDetail(item)">查看详情</button>
-				<!-- <button v-if="identity === 2" class="buy-btn" @click="buyService(item)">立即购买</button> -->
-				<button v-if="identity === 3" class="buy-btn" @click="assignTalent(item)">分配人才</button>
-				<button v-if="identity === 3" class="buy-btn" @click="showThisTalent(item)">查看人才</button>
 			</view>
 			<u-loadmore class="load-more" :status="hasMore ? 'loading' : 'nomore'" :nomoreText="noMore" />
 		</view>
@@ -51,6 +61,19 @@
 					<view class="form-item">
 						<text class="label">服务包名称</text>
 						<input type="text" v-model="formData.name" placeholder="请输入服务包名称" />
+					</view>
+					<view v-if="!isEdit" class="form-item">
+						<text class="label">服务包分类</text>
+						<picker @change="categoryChange" :value="formData.category_id" :range="categories"
+							range-key="name">
+							<view class="picker-wrapper">
+								<view class="picker-content">
+									<text class="picker-text">{{ formData.category_id !== null ?
+										categories[formData.category_id].name : '请选择分类' }}</text>
+									<u-icon name="arrow-down" size="28" color="#02ABAB"></u-icon>
+								</view>
+							</view>
+						</picker>
 					</view>
 					<view class="form-item">
 						<text class="label">价格</text>
@@ -149,7 +172,7 @@ export default {
 			lists: [],
 			load: true,
 			hasMore: false,
-			noMore: '没有更多了',
+			noMore: '',
 			is_admin: utils.is_admin(),
 			showModal: false,
 			isEdit: false,
@@ -157,7 +180,8 @@ export default {
 				name: '',
 				price: '',
 				description: '',
-				features: ['']
+				features: [''],
+				category_id: null
 			},
 			showAssignModal: false,
 			searchPhone: '',
@@ -167,19 +191,43 @@ export default {
 			showTalentModal: false,
 			serviceTalents: [],
 			showBuyerButton: false,
+			categories: [],
+			tabbar_list: [],
+			current: 0,
 		}
 	},
 	onLoad() {
 		_this = this;
-		_this.getServiceList();
+		_this.getServiceCategories();
+		_this.getServiceList(1);
 	},
 	methods: {
-		getServiceList() {
-			// 获取服务包数据
-			fetch_data("POST", 'get_all_services', null, "service", res => {
+		change(observer) {
+			// 使用observer的索引作为current值
+			this.current = observer.index;
+			const categoryId = this.categories[observer.index]?.id || null;
+			this.getServiceList(categoryId);
+		},
+
+		getServiceCategories() {
+			fetch_data("POST", 'get_service_categories', null, "service", res => {
 				if (res.data.status == 200) {
-					const pageData = res.data.services;
-					_this.lists.push(...pageData);
+					this.categories = res.data.categories;
+					this.tabbar_list = this.categories.map(category => {
+						return { name: category.name };
+					});
+				}
+			})
+		},
+
+		getServiceList(category_id = null) {
+			let params = {};
+			if (category_id) {
+				params.category_id = category_id;
+			}
+			fetch_data("POST", 'get_all_services', params, "service", res => {
+				if (res.data.status == 200) {
+					_this.lists = res.data.services;
 					// 将load状态的更新移到这里
 					if (_this.load) {
 						_this.load = false;
@@ -327,7 +375,8 @@ export default {
 				name: '',
 				price: '',
 				description: '',
-				features: ['']
+				features: [''],
+				category_id: null
 			};
 			this.showModal = true;
 		},
@@ -353,11 +402,22 @@ export default {
 				this.formData.features.splice(index, 1);
 			}
 		},
+
+		categoryChange(e) {
+			this.formData.category_id = e.detail.value;
+		},
 		confirmModal() {
 			// 表单验证
 			if (!this.formData.name.trim()) {
 				uni.showToast({
 					title: '请输入服务包名称',
+					icon: 'none'
+				});
+				return;
+			}
+			if (!this.formData.category_id && !this.isEdit) {
+				uni.showToast({
+					title: '请选择分类',
 					icon: 'none'
 				});
 				return;
@@ -393,7 +453,12 @@ export default {
 
 			// 调用接口保存数据
 			const url = this.isEdit ? 'edit_service' : 'add_service';
-			fetch_data("POST", url, this.formData, "service", res => {
+			let postData = this.formData;
+			if (!this.isEdit) {
+				console.log(this.formData);
+				postData.category_id = Number(this.categories[this.formData.category_id].id);
+			}
+			fetch_data("POST", url, postData, "service", res => {
 				// 隐藏加载提示
 				uni.hideToast();
 
@@ -418,7 +483,7 @@ export default {
 				}
 			});
 		},
-		deleteService(item) {
+		deleteService(itemId) {
 			uni.showModal({
 				title: '提示',
 				content: '确定要删除该服务包吗？',
@@ -431,7 +496,7 @@ export default {
 							duration: 1000000
 						});
 
-						fetch_data("POST", 'delete_service', { id: item.id }, "service", res => {
+						fetch_data("POST", 'delete_service', { id: itemId }, "service", res => {
 							// 隐藏加载提示
 							uni.hideToast();
 
@@ -635,15 +700,10 @@ export default {
 	padding: 30rpx;
 	min-height: 100vh;
 
-	.header {
+	.header-buttons {
 		display: flex;
-		justify-content: flex-end;
-		margin-bottom: 30rpx;
-
-		.header-buttons {
-			display: flex;
-			gap: 20rpx;
-		}
+		gap: 20rpx;
+		padding: 20rpx;
 
 		.add-service-btn,
 		.my-purchase-btn {
@@ -673,136 +733,62 @@ export default {
 	}
 
 	.service-list {
+		padding: 20rpx;
+	}
+
+	.service-grid {
 		display: grid;
-		grid-template-columns: repeat(1, 1fr);
-		gap: 40rpx;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30rpx;
 	}
 
 	.service-item {
 		background-color: #fff;
-		border-radius: 24rpx;
-		padding: 40rpx;
-		box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
-		transition: transform 0.3s ease;
-		position: relative;
-		overflow: hidden;
+		border-radius: 16rpx;
+		padding: 40rpx 30rpx;
+		box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
-		&:hover {
-			transform: translateY(-4rpx);
-		}
+	.service-item-title {
+		font-size: 32rpx;
+		font-weight: bold;
+		margin-bottom: 24rpx;
+		text-align: center;
+	}
 
-		&-header {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			margin-bottom: 30rpx;
-		}
+	.service-item-price {
+		margin-bottom: 24rpx;
+	}
 
-		&-title {
-			font-size: 38rpx;
-			font-weight: 600;
-			color: #2c3e50;
-			letter-spacing: 0.5rpx;
-		}
+	.price-symbol {
+		font-size: 28rpx;
+		color: #02ABAB;
+	}
 
-		.operation-buttons {
-			display: flex;
-			gap: 16rpx;
+	.price-value {
+		font-size: 44rpx;
+		color: #02ABAB;
+		font-weight: bold;
+	}
 
-			button {
-				font-size: 24rpx;
-				padding: 8rpx 24rpx;
-				border-radius: 30rpx;
-				height: auto;
-				line-height: 1.8;
-				transition: all 0.3s ease;
-				box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+	.detail-btn {
+		font-size: 28rpx;
+		padding: 12rpx 36rpx;
+		border-radius: 40rpx;
+		height: auto;
+		line-height: 1.8;
+		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease;
+		background: linear-gradient(135deg, #02ABAB, #029595);
+		color: #fff;
+	}
 
-				&:active {
-					transform: translateY(2rpx);
-					box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.1);
-				}
-			}
-
-			.edit-btn {
-				background: linear-gradient(135deg, #FFA500, #ff9100);
-				color: #fff;
-			}
-
-			.delete-btn {
-				background: linear-gradient(135deg, #FF4444, #ff3333);
-				color: #fff;
-			}
-		}
-
-		&-price {
-			margin: 36rpx 0;
-			display: flex;
-			align-items: baseline;
-
-			.price-symbol {
-				font-size: 34rpx;
-				color: #02ABAB;
-				margin-right: 4rpx;
-			}
-
-			.price-value {
-				font-size: 52rpx;
-				font-weight: 700;
-				color: #02ABAB;
-				letter-spacing: -1rpx;
-			}
-		}
-
-		&-desc {
-			font-size: 28rpx;
-			color: #5c6b7c;
-			line-height: 1.6;
-			margin-bottom: 36rpx;
-		}
-
-		&-features {
-			margin-bottom: 40rpx;
-
-			.feature-item {
-				display: flex;
-				align-items: center;
-				margin-bottom: 20rpx;
-				padding: 12rpx 20rpx;
-				background-color: #f8f9fa;
-				border-radius: 12rpx;
-				transition: all 0.3s ease;
-
-				&:hover {
-					background-color: #f0f2f5;
-				}
-
-				text {
-					font-size: 26rpx;
-					color: #4a5568;
-					margin-left: 16rpx;
-				}
-			}
-		}
-
-		.buy-btn {
-			width: 100%;
-			height: 88rpx;
-			line-height: 88rpx;
-			background: linear-gradient(135deg, #02ABAB, #029595);
-			color: #fff;
-			font-size: 30rpx;
-			font-weight: 600;
-			border-radius: 44rpx;
-			margin-top: 30rpx;
-			box-shadow: 0 6rpx 16rpx rgba(2, 171, 171, 0.2);
-			transition: all 0.3s ease;
-
-			&:active {
-				transform: translateY(2rpx);
-				box-shadow: 0 3rpx 8rpx rgba(2, 171, 171, 0.2);
-			}
-		}
+	.detail-btn:active {
+		opacity: 0.9;
+		transform: translateY(2rpx);
 	}
 }
 
@@ -855,6 +841,7 @@ export default {
 
 	.modal-header {
 		padding: 40rpx;
+		height: 40rpx;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -896,6 +883,37 @@ export default {
 				color: #2c3e50;
 				margin-bottom: 20rpx;
 				font-weight: 500;
+			}
+
+			.picker-wrapper {
+				width: 100%;
+				border: 2rpx solid #E5E5E5;
+				border-radius: 8rpx;
+				background-color: #fff;
+				transition: all 0.3s ease;
+
+				&:active {
+					border-color: #02ABAB;
+					background-color: #F8F8F8;
+				}
+
+				.picker-content {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					padding: 20rpx 24rpx;
+
+					.picker-text {
+						font-size: 28rpx;
+						color: #333;
+						flex: 1;
+
+						&:empty::before {
+							content: '请选择分类';
+							color: #999;
+						}
+					}
+				}
 			}
 
 			input,
@@ -1117,6 +1135,31 @@ export default {
 			padding: 40rpx 0;
 			color: #64748b;
 			font-size: 28rpx;
+		}
+	}
+}
+
+.service-item-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 20rpx;
+	margin-bottom: 20rpx;
+
+	.action-btn {
+		padding: 10rpx 30rpx;
+		font-size: 28rpx;
+		border-radius: 40rpx;
+		border: none;
+		color: #fff;
+		line-height: 1.8;
+		margin-top: 15rpx;
+
+		&.edit {
+			background-color: #02ABAB;
+		}
+
+		&.delete {
+			background-color: #ff4d4f;
 		}
 	}
 }
