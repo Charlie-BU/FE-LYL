@@ -282,4 +282,40 @@
             transform: translateY(-50rpx);
 }
 }
+.details.data-v-84277732 {
+  padding: 20rpx 0;
+}
+.details .detail-row.data-v-84277732 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 0;
+}
+.details .detail-item.data-v-84277732 {
+  display: flex;
+  align-items: center;
+}
+.details .detail-item .detail-label.data-v-84277732 {
+  color: #666;
+  font-size: 28rpx;
+  margin-right: 10rpx;
+}
+.details .detail-item .detail-value.data-v-84277732 {
+  color: #333;
+  font-size: 28rpx;
+}
+.details .cooperate-btn.data-v-84277732 {
+  margin-top: 15rpx;
+  padding: 0 30rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background-color: #02ABAB;
+  border-radius: 28rpx;
+  border: none;
+}
+.details .cooperate-btn.data-v-84277732:active {
+  opacity: 0.8;
+}
 

@@ -16,7 +16,7 @@
 			</view>
 			<view class="header-buttons">
 				<button v-if="is_admin" class="add-service-btn" style="white-space: nowrap;"
-					@click="addService">新增服务包</button>
+					@click="addService">新增服务套餐</button>
 				<button v-if="identity === 2" class="my-purchase-btn" style="white-space: nowrap;"
 					@click="toMyService">我的购买</button>
 				<button v-else-if="identity === 1" class="my-purchase-btn" style="white-space: nowrap;"
@@ -50,20 +50,20 @@
 			<u-empty text="暂无相关数据" mode="list" />
 		</view>
 
-		<!-- 新增/编辑服务包弹窗 -->
+		<!-- 新增/编辑服务套餐弹窗 -->
 		<view class="modal" v-if="showModal">
 			<view class="modal-content">
 				<view class="modal-header">
-					<text class="modal-title">{{ isEdit ? '编辑服务包' : '新增服务包' }}</text>
+					<text class="modal-title">{{ isEdit ? '编辑服务套餐' : '新增服务套餐' }}</text>
 					<text class="modal-close" @click="closeModal">×</text>
 				</view>
 				<view class="modal-body">
 					<view class="form-item">
-						<text class="label">服务包名称</text>
-						<input type="text" v-model="formData.name" placeholder="请输入服务包名称" />
+						<text class="label">服务套餐名称</text>
+						<input type="text" v-model="formData.name" placeholder="请输入服务套餐名称" />
 					</view>
 					<view v-if="!isEdit" class="form-item">
-						<text class="label">服务包分类</text>
+						<text class="label">服务套餐分类</text>
 						<picker @change="categoryChange" :value="formData.category_id" :range="categories"
 							range-key="name">
 							<view class="picker-wrapper">
@@ -139,7 +139,7 @@
 		<view class="modal" v-if="showTalentModal && is_admin">
 			<view class="modal-content">
 				<view class="modal-header">
-					<text class="modal-title">服务包人才</text>
+					<text class="modal-title">服务套餐人才</text>
 					<text class="modal-close" @click="closeTalentModal">×</text>
 				</view>
 				<view class="modal-body">
@@ -154,7 +154,7 @@
 						</view>
 					</view>
 					<view v-else class="empty-tip">
-						<text>该服务包暂未分配人才</text>
+						<text>该服务套餐暂未分配人才</text>
 					</view>
 				</view>
 			</view>
@@ -242,7 +242,7 @@ export default {
 			});
 		},
 		getMyService() {
-			// 获取分配给我的服务包
+			// 获取分配给我的服务套餐
 			if (_this.identity !== 1) {
 				return;
 			}
@@ -294,7 +294,7 @@ export default {
 				// 调用后端创建订单接口
 				fetch_data("POST", 'create_pay', {
 					amount: item.price,
-					description: item.name, // 商品描述使用服务包名称
+					description: item.name, // 商品描述使用服务套餐名称
 					attach: JSON.stringify({
 						service_id: item.id,
 						user_id: uni.getStorageSync('user_id')
@@ -319,7 +319,7 @@ export default {
 									}, "service", res => {
 										if (res.data.status == 200) {
 											uni.showToast({
-												title: '服务包购买成功',
+												title: '服务套餐购买成功',
 												icon: 'none',
 												duration: 2000
 											});
@@ -410,7 +410,7 @@ export default {
 			// 表单验证
 			if (!this.formData.name.trim()) {
 				uni.showToast({
-					title: '请输入服务包名称',
+					title: '请输入服务套餐名称',
 					icon: 'none'
 				});
 				return;
@@ -486,7 +486,7 @@ export default {
 		deleteService(itemId) {
 			uni.showModal({
 				title: '提示',
-				content: '确定要删除该服务包吗？',
+				content: '确定要删除该服务套餐吗？',
 				success: function (res) {
 					if (res.confirm) {
 						// 显示加载提示

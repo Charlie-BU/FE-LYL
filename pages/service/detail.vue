@@ -63,7 +63,7 @@ export default {
         }
     },
     onLoad(options) {
-        // 获取服务包详情数据
+        // 获取服务套餐详情数据
         if (options.id) {
             this.serviceData.id = options.id
             this.getServiceDetail(options.id)
@@ -122,7 +122,7 @@ export default {
                 // 调用后端创建订单接口
                 fetch_data("POST", 'create_pay', {
                     amount: this.totalPrice,
-                    description: this.serviceData.name, // 商品描述使用服务包名称
+                    description: this.serviceData.name, // 商品描述使用服务套餐名称
                     attach: JSON.stringify({
                         service_id: this.serviceData.id,
                         user_id: uni.getStorageSync('user_id')
@@ -149,7 +149,7 @@ export default {
                                         if (res.data.status == 200) {
                                             this.closeModal()
                                             uni.showToast({
-                                                title: '服务包购买成功',
+                                                title: '服务套餐购买成功',
                                                 icon: 'none',
                                                 duration: 2000
                                             });

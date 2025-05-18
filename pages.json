@@ -344,31 +344,35 @@
             "style": {
                 "navigationBarTitleText": "帖子详情",
                 "enablePullDownRefresh": false,
-                "navigationBarBackgroundColor": "#1abfc0"
+                "navigationBarBackgroundColor": "#1abfc0",
+                "navigationBarTextStyle": "white"
             }
         },
         {
             "path": "pages/service/index",
             "style": {
-                "navigationBarTitleText": "服务包",
+                "navigationBarTitleText": "服务套餐",
                 "enablePullDownRefresh": false,
-                "navigationBarBackgroundColor": "#1abfc0"
+                "navigationBarBackgroundColor": "#1abfc0",
+                "navigationBarTextStyle": "white"
             }
         },
         {
             "path": "pages/service/detail",
             "style": {
-                "navigationBarTitleText": "服务包详情",
+                "navigationBarTitleText": "服务套餐详情",
                 "enablePullDownRefresh": false,
-                "navigationBarBackgroundColor": "#1abfc0"
+                "navigationBarBackgroundColor": "#1abfc0",
+                "navigationBarTextStyle": "white"
             }
         },
         {
             "path": "pages/service/my-service",
             "style": {
-                "navigationBarTitleText": "我购买的服务包",
+                "navigationBarTitleText": "我购买的服务套餐",
                 "enablePullDownRefresh": false,
-                "navigationBarBackgroundColor": "#1abfc0"
+                "navigationBarBackgroundColor": "#1abfc0",
+                "navigationBarTextStyle": "white"
             }
         }
     ],

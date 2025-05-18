@@ -133,6 +133,9 @@
   background: #fff;
   position: relative;
 }
+.project.data-v-5166ee27 {
+  min-height: 100vh;
+}
 .chats-list.data-v-5166ee27 {
   margin-top: 40rpx;
   padding: 20rpx;

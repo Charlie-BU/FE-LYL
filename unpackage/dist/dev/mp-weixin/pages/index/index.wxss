@@ -6,10 +6,14 @@
 }
 .container .service-entry.data-v-57280228 {
   padding: 20rpx 30rpx;
+  margin-bottom: -22rpx;
 }
 .container .service-entry image.data-v-57280228 {
-  width: 100%;
+  width: 110%;
+  margin-left: -5%;
   border-radius: 12rpx;
+  height: auto;
+  object-fit: cover;
 }
 .container .top-search.data-v-57280228 {
   background: left top/100% 300rpx no-repeat;

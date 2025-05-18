@@ -4,7 +4,12 @@
         <view class="service-list" v-else-if="lists.length > 0">
             <view class="service-item" v-for="(item, index) in lists" :key="index">
                 <view class="service-item-header">
-                    <view class="service-item-title">{{ item.name }}</view>
+                    <view class="service-item-title" style="display: flex;">{{ item.name }} <view
+                            class="service-item-amount"
+                            style="margin-left: 20rpx; background: rgba(255, 153, 0, 0.1); color: #B88230; font-size: 28rpx;">
+                            {{
+                                item.coop_talent_id ? "合作中" : "待合作" }}</view>
+                    </view>
                     <view class="service-item-amount">x{{ item.amount || 1 }}</view>
                 </view>
                 <view class="service-item-price">
@@ -22,7 +27,9 @@
                 <!-- 添加人才列表部分 -->
                 <view v-if="item.talents && item.talents.length !== 0" class="talent-list">
                     <view class="top">
-                        已分配人才：<span class="count">{{ item.talents.length }}</span>
+                        {{ item.coop_talent_id ? "合作人才" : "已分配人才" }}：<span v-if="!item.coop_talent_id" class="count">{{
+                            item.talents.length
+                            }}</span>
                     </view>
                     <view v-for="(talent, tIndex) in item.talents" :key="tIndex" class="list-item">
                         <view class="header" @click="changeTalentMode(index, tIndex)">
@@ -32,7 +39,8 @@
                             <text class="arrow">{{ talent.mode ? '∧' : '∨' }}</text>
                         </view>
 
-                        <view v-if="talent.mode" class="details" @click="gotoTalentDatail(talent.id)">
+                        <view v-if="talent.mode" class="details"
+                            @click="gotoTalentDatail(talent.id, item.coop_talent_id ? true : false)">
                             <view class="detail-item">
                                 <text class="detail-label">手机号：</text>
                                 <text class="detail-value">{{ talent.phone || '未设置' }}</text>
@@ -41,6 +49,10 @@
                                 <text class="detail-label">评分：</text>
                                 <text class="detail-value">{{ talent.star || '暂无评分' }}</text>
                             </view>
+                            <button v-if="!item.coop_talent_id" class="cooperate-btn" :disabled="!talent.is_online"
+                                @click.stop="cooperate(talent.id, item.id, talent.name || talent.phone, item.service_buyer_id, talent.is_online)">合作</button>
+                            <button v-else class="cooperate-btn" style="background-color: #1ac51a;"
+                                @click.stop="finishCooperate(talent.id, item.id, item.service_buyer_id)">完成合作</button>
                         </view>
                     </view>
                 </view>
@@ -74,7 +86,7 @@ export default {
             lists: [],
             load: true,
             hasMore: false,
-            noMore: ''
+            noMore: '',
         }
     },
     onLoad() {
@@ -105,7 +117,7 @@ export default {
                             }
                             return service;
                         });
-                        _this.lists.push(...services)
+                        _this.lists = services;
                     }
                     if (_this.load) {
                         _this.load = false;
@@ -119,7 +131,7 @@ export default {
                 }
             });
         },
-        gotoTalentDatail(talent_id) {
+        gotoTalentDatail(talent_id, showContact) {
             fetch_data("POST", 'get_his_resume_id', {
                 talent_id: talent_id
             }, "service", res => {
@@ -127,12 +139,86 @@ export default {
                     return;
                 }
                 const resume_id = res.data.resume_id;
-                _this.toNext(`/pages/talents/detail?id=${resume_id}&showContact=false`)
+                _this.toNext(`/pages/talents/detail?id=${resume_id}&showContact=${showContact}`)
             });
         },
         goToBuy() {
             uni.navigateTo({
                 url: '/pages/service/index'
+            });
+        },
+
+        cooperate(talentId, serviceId, talentName, service_buyer_id, is_online = 1) {
+            if (!is_online) {
+                uni.showToast({
+                    title: '该人才暂不可接服务套餐',
+                    icon: 'none',
+                    duration: 1000
+                });
+                return;
+            }
+            // 显示确认弹窗
+            uni.showModal({
+                title: '确认合作',
+                content: '确认合作后不可取消，确认与' + talentName + '合作？',
+                success: (res) => {
+                    if (res.confirm) {
+                        // 调用确认合作接口
+                        fetch_data("POST", 'confirm_cooperate', {
+                            talent_id: talentId,
+                            service_id: serviceId,
+                            service_buyer_id: service_buyer_id
+                        }, "service", res => {
+                            if (res.data.status === 200) {
+                                uni.showToast({
+                                    title: '合作成功',
+                                    icon: 'success',
+                                    duration: 2000
+                                });
+                                // 刷新列表
+                                this.getMyPurchaseList();
+                            } else {
+                                uni.showToast({
+                                    title: res.data.message || '操作失败',
+                                    icon: 'none',
+                                    duration: 2000
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        },
+
+        finishCooperate(talentId, serviceId, service_buyer_id) {
+            uni.showModal({
+                title: '确认完成',
+                content: '确认完成此次合作？',
+                success: (res) => {
+                    if (res.confirm) {
+                        fetch_data("POST", 'finish_cooperate', {
+                            talent_id: talentId,
+                            service_id: serviceId,
+                            service_buyer_id: service_buyer_id
+                        }, "service", res => {
+                            if (res.data.status === 200) {
+                                uni.showToast({
+                                    title: '完成合作成功',
+                                    icon: 'success',
+                                    duration: 2000
+                                });
+                                // 刷新列表
+                                this.getMyPurchaseList();
+                            } else {
+                                uni.showToast({
+                                    title: res.data.message || '操作失败',
+                                    icon: 'none',
+                                    duration: 2000
+                                });
+                            }
+                        });
+                    }
+                }
             });
         }
     }
@@ -172,7 +258,7 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20rpx;  // 从30rpx减少到20rpx
+            margin-bottom: 20rpx; // 从30rpx减少到20rpx
 
             .service-item-amount {
                 font-size: 32rpx;
@@ -195,7 +281,7 @@ export default {
         }
 
         &-price {
-            margin: 24rpx 0;  // 从36rpx减少到24rpx
+            margin: 24rpx 0; // 从36rpx减少到24rpx
             display: flex;
             align-items: baseline;
 
@@ -218,11 +304,11 @@ export default {
             color: #666666;
             /* 更改描述文字颜色 */
             line-height: 1.6;
-            margin-bottom: 24rpx;  // 从36rpx减少到24rpx
+            margin-bottom: 24rpx; // 从36rpx减少到24rpx
         }
 
         &-features {
-            margin-bottom: 30rpx;  // 从40rpx减少到30rpx
+            margin-bottom: 30rpx; // 从40rpx减少到30rpx
 
             .feature-item {
                 display: flex;
@@ -445,6 +531,49 @@ export default {
 
     50% {
         transform: translateY(-50rpx);
+    }
+}
+
+.details {
+    padding: 20rpx 0;
+
+    .detail-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10rpx 0;
+    }
+
+    .detail-item {
+        display: flex;
+        align-items: center;
+
+        .detail-label {
+            color: #666;
+            font-size: 28rpx;
+            margin-right: 10rpx;
+        }
+
+        .detail-value {
+            color: #333;
+            font-size: 28rpx;
+        }
+    }
+
+    .cooperate-btn {
+        margin-top: 15rpx;
+        padding: 0 30rpx;
+        height: 56rpx;
+        line-height: 56rpx;
+        font-size: 28rpx;
+        color: #fff;
+        background-color: #02ABAB;
+        border-radius: 28rpx;
+        border: none;
+
+        &:active {
+            opacity: 0.8;
+        }
     }
 }
 </style>

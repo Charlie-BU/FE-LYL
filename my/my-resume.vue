@@ -22,7 +22,8 @@
                         <text>出生年月</text>
                     </view>
                     <view class="row-input">
-                        <text :class="{ 'text-c3': form.birthday == '' }">{{ form.birthday ? form.birthday : "请选择出生年月" }}</text>
+                        <text :class="{ 'text-c3': form.birthday == '' }">{{ form.birthday ? form.birthday : "请选择出生年月"
+                            }}</text>
                     </view>
                     <view class="row-right">
                         <u-icon name="arrow-right" size="16" color="#7D7D7D" />
@@ -46,7 +47,8 @@
                         <text>工作属性</text>
                     </view>
                     <view class="row-input" @click="goNext('property', 5)">
-                        <text :class="{ 'text-c3': other.property == '' }">{{ other.property ? other.property : "请选择工作属性" }}</text>
+                        <text :class="{ 'text-c3': other.property == '' }">{{ other.property ? other.property :
+                            "请选择工作属性" }}</text>
                     </view>
                     <view class="row-right" @click="goNext('property', 5)">
                         <u-icon name="arrow-right" size="16" color="#7D7D7D" />
@@ -58,7 +60,8 @@
                         <text>期望城市</text>
                     </view>
                     <view class="row-input" @click="goNext('citys', 4)">
-                        <text :class="{ 'text-c3': other.citys == '' }">{{ other.citys ? other.citys : "请选择期望城市" }}</text>
+                        <text :class="{ 'text-c3': other.citys == '' }">{{ other.citys ? other.citys : "请选择期望城市"
+                            }}</text>
                     </view>
                     <view class="row-right" @click="goNext('citys', 4)">
                         <u-icon name="arrow-right" size="16" color="#7D7D7D" />
@@ -71,9 +74,11 @@
                     </view>
                     <view class="row-input">
                         <block v-if="form.salary_unit">
-                            <u-input placeholder="请输入薪资" border="none" type="text" placeholderClass="placeholder28" v-model="form.salary" clearable />
+                            <u-input placeholder="请输入薪资" border="none" type="text" placeholderClass="placeholder28"
+                                v-model="form.salary" clearable />
                         </block>
-                        <text @click="showUnit = true" :class="{ 'text-c3': form.salary_unit == '' }">{{ form.salary_unit ? form.salary_unit : "请先选择单位再输入薪资" }}</text>
+                        <text @click="showUnit = true" :class="{ 'text-c3': form.salary_unit == '' }">{{
+                            form.salary_unit ? form.salary_unit : "请先选择单位再输入薪资" }}</text>
                     </view>
                     <view class="row-right" @click="showUnit = true">
                         <u-icon name="arrow-right" size="16" color="#7D7D7D" />
@@ -97,7 +102,8 @@
                         <text>擅长技能</text>
                     </view>
                     <view class="row-input" @click="goNext('talents', 3)">
-                        <text :class="{ 'text-c3': other.talents == '' }">{{ other.talents ? other.talents : "请选择擅长技能" }}</text>
+                        <text :class="{ 'text-c3': other.talents == '' }">{{ other.talents ? other.talents : "请选择擅长技能"
+                            }}</text>
                     </view>
                     <view class="row-right" @click="goNext('talents', 3)">
                         <u-icon name="arrow-right" size="16" color="#7D7D7D" />
@@ -109,7 +115,8 @@
                         <text class="detail-tip">(请详细填写，提高简历评分)</text>
                     </view>
                     <view class="row-textarea">
-                        <u-textarea :maxlength="300" height="80" border="none" v-model="form.strength" :customStyle="customStyle1" placeholder="请输入个人优势" />
+                        <u-textarea :maxlength="300" height="80" border="none" v-model="form.strength"
+                            :customStyle="customStyle1" placeholder="请输入个人优势" />
                         <view class="textarea-count">已输入{{ form.strength.length }}/300</view>
                     </view>
                 </view>
@@ -119,7 +126,8 @@
                         <text class="detail-tip">(请详细填写，提高简历评分)</text>
                     </view>
                     <view class="row-textarea">
-                        <u-textarea :maxlength="300" height="80" border="none" v-model="form.experience" :customStyle="customStyle1" placeholder="请输入项目经历" />
+                        <u-textarea :maxlength="300" height="80" border="none" v-model="form.experience"
+                            :customStyle="customStyle1" placeholder="请输入项目经历" />
                         <view class="textarea-count">已输入{{ form.experience.length }}/300</view>
                     </view>
                 </view>
@@ -131,9 +139,11 @@
                     </view>
                     <div class="image-preview">
                         <div v-for="(image, index) in preview_images" :key="index">
-                            <image :src="image" class="preview-image" mode="aspectFill" @click="image_operation(preview_images, image, 'upload')" />
+                            <image :src="image" class="preview-image" mode="aspectFill"
+                                @click="image_operation(preview_images, image, 'upload')" />
                         </div>
-                        <button v-if="preview_images.length === 0" @click="choose_image()" class="upload-button">+</button>
+                        <button v-if="preview_images.length === 0" @click="choose_image()"
+                            class="upload-button">+</button>
                         <button v-else @click="clear_image()" class="upload-button">×</button>
                     </div>
                 </view>
@@ -143,7 +153,8 @@
                         <text>备注信息</text>
                     </view>
                     <view class="row-textarea">
-                        <u-textarea :maxlength="300" height="80" border="none" v-model="form.remark" :customStyle="customStyle1" placeholder="请输入备注信息" />
+                        <u-textarea :maxlength="300" height="80" border="none" v-model="form.remark"
+                            :customStyle="customStyle1" placeholder="请输入备注信息" />
                         <view class="textarea-count">已输入{{ form.remark.length }}/300</view>
                     </view>
                 </view>
@@ -153,19 +164,11 @@
                 <button class="submit-bot-btn" :disabled="submitDisabled" @click="real_submit">发布</button>
             </view>
         </block>
-        <u-datetime-picker
-            :show="showDate"
-            confirmColor="#02AAAB"
-            cancelColor="#B8B8B8"
-            title="出生年月"
-            :minDate="minDate"
-            :maxDate="maxDate"
-            @confirm="confirmDate"
-            @cancel="showDate = false"
-            mode="year-month"
-        />
+        <u-datetime-picker :show="showDate" confirmColor="#02AAAB" cancelColor="#B8B8B8" title="出生年月" :minDate="minDate"
+            :maxDate="maxDate" @confirm="confirmDate" @cancel="showDate = false" mode="year-month" />
 
-        <u-picker :show="showUnit" :columns="columns" confirmColor="#02AAAB" cancelColor="#B8B8B8" @cancel="showUnit = false" @confirm="confirmUnit"></u-picker>
+        <u-picker :show="showUnit" :columns="columns" confirmColor="#02AAAB" cancelColor="#B8B8B8"
+            @cancel="showUnit = false" @confirm="confirmUnit"></u-picker>
     </view>
 </template>
 

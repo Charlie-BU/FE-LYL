@@ -54,7 +54,8 @@
 							</view>
 							<div class="image-preview">
 								<div v-for="(image, index) in preview_images" :key="index">
-									<image :src="image" class="preview-image" mode="aspectFill" @click="image_operation(preview_images, image, 'upload')" />
+									<image :src="image" class="preview-image" mode="aspectFill"
+										@click="image_operation(preview_images, image, 'upload')" />
 								</div>
 							</div>
 						</view>
@@ -66,12 +67,14 @@
 						<!-- 意向合作 -->
 						<div v-for="(attr, index) in attrList" :key="attr">
 							<div v-if="detail[attr]" class="chats-list">
-								<inCoop :cooperator_id="detail[attr]" :item_owner_id="detail.user_id" :item_id="detail.id" />
+								<inCoop :cooperator_id="detail[attr]" :item_owner_id="detail.user_id"
+									:item_id="detail.id" />
 							</div>
 						</div>
 						<!-- 沟通列表 -->
 						<div v-if="item_chats.length !== 0 || detail.cooperator_id" class="chats-list">
-							<coopList :item_chats="item_chats" :cooperator_id="detail.cooperator_id" :item_owner_id="detail.user_id" :item_id="detail.id" />
+							<coopList :item_chats="item_chats" :cooperator_id="detail.cooperator_id"
+								:item_owner_id="detail.user_id" :item_id="detail.id" />
 						</div>
 					</view>
 				</view>
@@ -79,7 +82,8 @@
 			</view>
 			<view class="project-bot" v-if="identity != 3">
 				<view class="bot-item" @click="items_sc()">
-					<image :src="is_sc == 0 ? '/static/index/shoucang.png' : '/static/index/shoucang_selected.png'" mode="widthFix" class="item-img" />
+					<image :src="is_sc == 0 ? '/static/index/shoucang.png' : '/static/index/shoucang_selected.png'"
+						mode="widthFix" class="item-img" />
 					<view class="item-text">{{ is_sc == 0 ? "收藏" : "已收藏" }}</view>
 				</view>
 				<button class="project-btn" @click="toChat">立即沟通</button>
@@ -331,6 +335,10 @@ export default {
 .container {
 	background: #fff;
 	position: relative;
+}
+
+.project {
+	min-height: 100vh;
 }
 
 .chats-list {

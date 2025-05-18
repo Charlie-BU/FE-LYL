@@ -3,9 +3,9 @@
 	<view class="container">
 		<u-loading-page :loading="true" v-if="load" fontSize="28rpx" />
 		<block v-else>
-			<!-- 这里嵌入服务包入口 -->
-			<view class="service-entry" @click="goNext('/pages/service/index')">
-				<image src="@/static/index/lxwm.png" mode="widthFix" />
+			<!-- 非客服服务套餐入口 -->
+			<view class="service-entry" v-if="identity === 3" @click="goNext('/pages/service/index')">
+				<image src="@/static/service/service-icon.png" mode="widthFix" />
 			</view>
 			<template v-if="identity == 3">
 				<u-sticky>
@@ -64,6 +64,11 @@
 							indicatorInactiveColor="rgba(255, 255, 255, 0.3)" radius="5" @click="clickAd"
 							keyName="image" />
 					</view>
+				</view>
+
+				<!-- 非客服服务套餐入口 -->
+				<view class="service-entry" v-if="identity !== 3" @click="goNext('/pages/service/index')">
+					<image src="@/static/service/service-icon.png" mode="widthFix" />
 				</view>
 
 				<view class="info">
@@ -621,10 +626,14 @@ export default {
 
 	.service-entry {
 		padding: 20rpx 30rpx;
+		margin-bottom: -22rpx;
 
 		image {
-			width: 100%;
+			width: 110%;
+			margin-left: -5%;
 			border-radius: 12rpx;
+			height: auto;
+			object-fit: cover;
 		}
 	}
 

@@ -295,6 +295,10 @@ export default {
 	position: relative;
 }
 
+.project {
+	min-height: 100vh;
+}
+
 .top {
 	display: flex;
 	align-items: center;
