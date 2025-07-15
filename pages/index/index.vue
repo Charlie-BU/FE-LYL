@@ -3,11 +3,11 @@
 	<view class="container">
 		<u-loading-page :loading="true" v-if="load" fontSize="28rpx" />
 		<block v-else>
-			<!-- 非客服服务套餐入口 -->
-			<view class="service-entry" v-if="identity === 3" @click="goNext('/pages/service/index')">
+			<!-- 客服服务套餐入口 -->
+			<!-- <view class="service-entry" v-if="identity === 3" @click="goNext('/pages/service/index')">
 				<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/service/service-icon.png"
 					mode="widthFix" />
-			</view>
+			</view> -->
 			<template v-if="identity == 3">
 				<u-sticky>
 					<view class="kefu-top">
@@ -71,10 +71,10 @@
 				</view>
 
 				<!-- 非客服服务套餐入口 -->
-				<view class="service-entry" v-if="identity !== 3" @click="goNext('/pages/service/index')">
+				<!-- <view class="service-entry" v-if="identity !== 3" @click="goNext('/pages/service/index')">
 					<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/service/service-icon.png"
 						mode="widthFix" />
-				</view>
+				</view> -->
 
 				<view class="info">
 					<view class="items">
