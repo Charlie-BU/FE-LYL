@@ -82,7 +82,7 @@
 			</view>
 			<view class="project-bot" v-if="identity != 3">
 				<view class="bot-item" @click="items_sc()">
-					<image :src="is_sc == 0 ? '/static/index/shoucang.png' : '/static/index/shoucang_selected.png'"
+					<image :src="is_sc == 0 ? 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/shoucang.png' : 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/shoucang_selected.png'"
 						mode="widthFix" class="item-img" />
 					<view class="item-text">{{ is_sc == 0 ? "收藏" : "已收藏" }}</view>
 				</view>

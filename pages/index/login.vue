@@ -15,7 +15,7 @@
 			<view style="height: 89rpx;"></view>
 			<!-- #ifdef MP-WEIXIN -->
 			<view class="login-xieyi">
-				<image :src="checkbox ? '/static/common/checkbox_select.png' : '/static/common/checkbox_unselect.png'"
+				<image :src="checkbox ? 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/checkbox_select.png' : 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/checkbox_unselect.png'"
 					mode="widthFix" @click="checkbox = !checkbox" class="xieyi-img" />
 				<view class="xieyi-text">
 					<text>我已阅读并同意</text>
@@ -179,6 +179,7 @@ import { fetch_data } from "../../utils/ajax_request";
 						'xcx_openid': uni.getStorageSync('xcx_openid'),
 						'reid': uni.getStorageSync('reid') || "",
 					}
+                    
 					const data = await this.$post('port/weixin_mobile', res)
 					if (data.code == 200) {
 						//存入用户信息
@@ -187,9 +188,26 @@ import { fetch_data } from "../../utils/ajax_request";
 						this.$u.vuex('user_token', data.result.user_token)
 						_this.toNext(`/my/change-identity?is_kf=${data.result.is_kf}`, true)
 					} else {
-						uni.$u.toast(data.msg)
+                        fetch_data(
+                            "POST",
+                            "register",
+                            res,
+                            "user",
+                            (r) => {
+                                if (r.data.status == 200) {
+                                    //存入用户信息
+                                    this.$u.vuex('user_id', r.data.user_id)
+                                    //存入token
+                                    this.$u.vuex('user_token', r.data.user_token)
+                                    _this.toNext(`/my/change-identity?is_kf=false`, true)
+                                } else{
+                                    uni.$u.toast("注册失败")
+                                }
+                            }
+                        );
 					}
 				} else {
+                    console.log(e)
 					uni.$u.toast('获取失败')
 					this.loginShow = false
 				}

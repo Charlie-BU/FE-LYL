@@ -63,10 +63,13 @@
 								<image :src="identity == 3 ? '/my/static/kefu.png' : current_user.head_pic"
 									mode="aspectFill" class="left-img" />
 								<view class="audio-file" @click.stop="playAudio(item)">
-									<image src="@/static/common/play-self1.gif" mode="widthFix" class="audio-icon"
+									<image
+										src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/play-self1.gif"
+										mode="widthFix" class="audio-icon"
 										v-if="audioPlayer.playingMessage && audioPlayer.playingMessage.messageId === item.messageId" />
-									<image src="@/static/common/voice-self.png" mode="widthFix" class="audio-icon"
-										v-else />
+									<image
+										src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/voice-self.png"
+										mode="widthFix" class="audio-icon" v-else />
 								</view>
 								<view class="audio-text">{{ Math.ceil(item.payload.duration) }}″</view>
 							</view>
@@ -78,8 +81,9 @@
 									<view class="center-top">
 										<image src="@/static/message/chat-phone-blue.png" mode="widthFix"
 											class="top-icon" v-if="item.payload.type == 1" />
-										<image src="@/static/index/weixin.png" mode="widthFix" class="top-icon"
-											v-else />
+										<image
+											src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/weixin.png"
+											mode="widthFix" class="top-icon" v-else />
 										<view class="right">
 											<view class="title-text">
 												{{ item.payload.type == 1 ? '我的手机号' : '我的微信号' }}：
@@ -117,7 +121,9 @@
 									mode="aspectFill" class="left-img" @click.stop="clickHead()" />
 								<view class="center-info">
 									<view class="center-top">
-										<image src="@/static/index/weixin.png" mode="widthFix" class="top-icon" />
+										<image
+											src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/weixin.png"
+											mode="widthFix" class="top-icon" />
 										<text class="top-text">我想要和您交换微信，您是否同意</text>
 									</view>
 									<view class="center-bot-button"
@@ -169,8 +175,9 @@
 									<view class="center-top">
 										<image src="@/static/message/chat-phone-blue.png" mode="widthFix"
 											class="top-icon" v-if="item.payload.type == 1" />
-										<image src="@/static/index/weixin.png" mode="widthFix" class="top-icon"
-											v-else />
+										<image
+											src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/weixin.png"
+											mode="widthFix" class="top-icon" v-else />
 										<view class="right">
 											<view class="title-text">
 												{{ item.payload.type == 1 ? '我的手机号' : '我的微信号' }}：
@@ -204,9 +211,11 @@
 								<image :src="toIdentity == 3 ? '/my/static/kefu.png' : to.data.head_pic"
 									mode="aspectFill" class="left-img" @click.stop="clickHead()" />
 								<view class="audio-file" @click.stop="playAudio(item)">
-									<image src="@/static/common/play.gif" mode="widthFix" class="audio-icon"
+									<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/play.gif"
+										mode="widthFix" class="audio-icon"
 										v-if="audioPlayer.playingMessage && audioPlayer.playingMessage.messageId === item.messageId" />
-									<image src="@/static/common/voice.png" mode="widthFix" class="audio-icon" v-else />
+									<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/voice.png"
+										mode="widthFix" class="audio-icon" v-else />
 								</view>
 								<view class="audio-text">{{ Math.ceil(item.payload.duration) }}″</view>
 							</view>
@@ -266,7 +275,8 @@
 		</view>
 
 		<view class="record-loading" v-if="recorderManager.recording">
-			<image src="@/static/common/recording-loading.gif" mode="widthFix" />
+			<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/recording-loading.gif"
+				mode="widthFix" />
 		</view>
 		<u-popup :show="show_wx" @close="show_wx = false" mode="center" :customStyle="customAlertStyle"
 			bgColor="transparent" :overlayOpacity="0.4">

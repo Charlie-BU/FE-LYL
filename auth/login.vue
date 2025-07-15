@@ -15,7 +15,7 @@
 			<!-- #ifdef MP-WEIXIN -->
 			<view class="login-xieyi">
 				<image 
-				:src="checkbox ? '/static/common/checkbox_select.png' : '/static/common/checkbox_unselect.png'" 
+				:src="checkbox ? 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/checkbox_select.png' : 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/checkbox_unselect.png'" 
 				mode="widthFix" 
 				@click="checkbox = !checkbox"
 				class="xieyi-img"/>

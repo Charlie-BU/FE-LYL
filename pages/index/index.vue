@@ -5,7 +5,8 @@
 		<block v-else>
 			<!-- 非客服服务套餐入口 -->
 			<view class="service-entry" v-if="identity === 3" @click="goNext('/pages/service/index')">
-				<image src="@/static/service/service-icon.png" mode="widthFix" />
+				<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/service/service-icon.png"
+					mode="widthFix" />
 			</view>
 			<template v-if="identity == 3">
 				<u-sticky>
@@ -29,7 +30,9 @@
 								}" v-model="form.keyword" />
 							<view class="search-right"
 								@click.stop="goNext(`/pages/index/filter-list?from=1&is_filter=1&kf_type=${form.type}`)">
-								<image src="@/static/index/shaixuan-black.png" mode="widthFix" />
+								<image
+									src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/shaixuan-black.png"
+									mode="widthFix" />
 								<text>筛选</text>
 							</view>
 						</view>
@@ -48,7 +51,8 @@
 					<view class="search" @click="goNext('/pages/index/search')">
 						<u-search placeholder="请输入要搜索的内容" disabled bgColor="#fff" :showAction="false" />
 						<view class="search-right" @click.stop="goNext('/pages/index/filter-list?from=1&is_filter=1')">
-							<image src="@/static/index/shaixuan.png" mode="widthFix" />
+							<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/shaixuan.png"
+								mode="widthFix" />
 							<text>筛选</text>
 						</view>
 					</view>
@@ -68,7 +72,8 @@
 
 				<!-- 非客服服务套餐入口 -->
 				<view class="service-entry" v-if="identity !== 3" @click="goNext('/pages/service/index')">
-					<image src="@/static/service/service-icon.png" mode="widthFix" />
+					<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/service/service-icon.png"
+						mode="widthFix" />
 				</view>
 
 				<view class="info">

@@ -3,7 +3,7 @@ var res = ""
 // 服务器ip
 var local = 'http://127.0.0.1:8000/'
 var release = 'https://liyilian.fun/'
-var run = local;
+var run = release;
 
 export function fetch_data(request_type = null, url = null, data = null, blue = null, success = null) {
 	let full_url = run + blue + '/' + url;

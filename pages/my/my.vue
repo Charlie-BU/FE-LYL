@@ -167,13 +167,16 @@
 								</view>
 								<view class="jl-item-bot" :class="{ 'column': resume.status == 2 }">
 									<view class="left-error-item" v-if="resume.status == 2">
-										<image src="@/static/index/jg-red.png" mode="widthFix" class="left-icon" />
+										<image
+											src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/jg-red.png"
+											mode="widthFix" class="left-icon" />
 										<text class="red-text">已驳回：{{ resume.reason }}</text>
 									</view>
 									<view class="left" v-else>
 										<view class="left-item" v-if="resume.status == -1">
-											<image src="@/static/index/check-wait.png" mode="widthFix"
-												class="left-icon" />
+											<image
+												src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/check-wait.png"
+												mode="widthFix" class="left-icon" />
 											<text class="blue-text">审核中</text>
 										</view>
 										<view class="left-item" v-if="resume.status == 3">
@@ -181,8 +184,9 @@
 											<text class="success-text">启用中</text>
 										</view>
 										<view class="left-item" v-if="resume.status == 4">
-											<image src="@/static/index/yitingyong.png" mode="widthFix"
-												class="left-icon" />
+											<image
+												src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/yitingyong.png"
+												mode="widthFix" class="left-icon" />
 											<text class="yellow-text">已停用</text>
 										</view>
 										<view class="left-item" v-if="resume.status == 3" @click.stop="refreshClick()">
@@ -203,8 +207,9 @@
 										</button>
 										<button size="mini" class="qy-btn" @click.stop="do_resume(2, 3)"
 											v-if="resume.status == 1 || resume.status == 4">
-											<image src="@/static/index/qy-icon.png" mode="widthFix"
-												class="right-icon" />
+											<image
+												src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/index/qy-icon.png"
+												mode="widthFix" class="right-icon" />
 											<text>启用</text>
 										</button>
 									</view>

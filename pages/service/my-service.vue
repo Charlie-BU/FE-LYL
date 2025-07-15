@@ -4,13 +4,23 @@
         <view class="service-list" v-else-if="lists.length > 0">
             <view class="service-item" v-for="(item, index) in lists" :key="index">
                 <view class="service-item-header">
-                    <view class="service-item-title" style="display: flex;">{{ item.name }} <view
-                            class="service-item-amount"
-                            style="margin-left: 20rpx; background: rgba(255, 153, 0, 0.1); color: #B88230; font-size: 28rpx;">
-                            {{
-                                item.coop_talent_id ? "合作中" : "待合作" }}</view>
+                    <view class="service-item-title">
+                        <text class="name">{{ item.name }}</text>
+                        <view class="service-item-label" :class="{ pending: !item.coop_talent_id }">
+                            {{ item.coop_talent_id ? "合作中" : "待合作" }}
+                        </view>
                     </view>
                     <view class="service-item-amount">x{{ item.amount || 1 }}</view>
+                </view>
+                <view class="service-images" v-if="item.images && item.images.length > 0">
+                    <swiper class="swiper" circular autoplay interval="3000" duration="500" @change="swiperChange">
+                        <swiper-item v-for="(image, index) in item.images" :key="index" class="swiper-item">
+                            <image :src="image" mode="aspectFill" @click="previewImage(index, item.images || [])" />
+                        </swiper-item>
+                    </swiper>
+                    <view class="swiper-dots">
+                        <view v-for="(i, index) in item.images" :key="index" :class="['dot', currentSwiperIndex === index ? 'active' : '']"></view>
+                    </view>
                 </view>
                 <view class="service-item-price">
                     <text class="price-symbol">¥</text>
@@ -27,32 +37,38 @@
                 <!-- 添加人才列表部分 -->
                 <view v-if="item.talents && item.talents.length !== 0" class="talent-list">
                     <view class="top">
-                        {{ item.coop_talent_id ? "合作人才" : "已分配人才" }}：<span v-if="!item.coop_talent_id" class="count">{{
-                            item.talents.length
-                            }}</span>
+                        {{ item.coop_talent_id ? "合作人才" : "已分配人才" }}：
+                        <span v-if="!item.coop_talent_id" class="count">{{ item.talents.length }}</span>
                     </view>
                     <view v-for="(talent, tIndex) in item.talents" :key="tIndex" class="list-item">
                         <view class="header" @click="changeTalentMode(index, tIndex)">
                             <view>
-                                <text class="masked">{{ talent.name || '【未填写姓名】' }}</text>
+                                <text class="masked">{{ talent.name || "【未填写姓名】" }}</text>
                             </view>
-                            <text class="arrow">{{ talent.mode ? '∧' : '∨' }}</text>
+                            <text class="arrow">{{ talent.mode ? "∧" : "∨" }}</text>
                         </view>
 
-                        <view v-if="talent.mode" class="details"
-                            @click="gotoTalentDatail(talent.id, item.coop_talent_id ? true : false)">
+                        <view v-if="talent.mode" class="details" @click="gotoTalentDatail(talent.id, item.coop_talent_id ? true : false)">
                             <view class="detail-item">
                                 <text class="detail-label">手机号：</text>
-                                <text class="detail-value">{{ talent.phone || '未设置' }}</text>
+                                <text class="detail-value">{{ talent.phone || "未设置" }}</text>
                             </view>
                             <view class="detail-item">
                                 <text class="detail-label">评分：</text>
-                                <text class="detail-value">{{ talent.star || '暂无评分' }}</text>
+                                <text class="detail-value">{{ talent.star || "暂无评分" }}</text>
                             </view>
-                            <button v-if="!item.coop_talent_id" class="cooperate-btn" :disabled="!talent.is_online"
-                                @click.stop="cooperate(talent.id, item.id, talent.name || talent.phone, item.service_buyer_id, talent.is_online)">合作</button>
-                            <button v-else class="cooperate-btn" style="background-color: #1ac51a;"
-                                @click.stop="finishCooperate(talent.id, item.id, item.service_buyer_id)">完成合作</button>
+                            <button v-if="item.coop_talent_id" class="cooperate-btn" @click.stop="toChat(talent.id, talent.name, talent.phone)">立即沟通</button>
+                            <button
+                                v-if="!item.coop_talent_id"
+                                class="cooperate-btn"
+                                :disabled="!talent.is_online"
+                                @click.stop="cooperate(talent.id, item.id, talent.name || talent.phone, item.service_buyer_id, talent.is_online)"
+                            >
+                                合作
+                            </button>
+                            <button v-else class="cooperate-btn" style="background-color: #1ac51a" @click.stop="finishCooperate(talent.id, item.id, item.service_buyer_id)">
+                                完成合作
+                            </button>
                         </view>
                     </view>
                 </view>
@@ -77,8 +93,8 @@
 </template>
 
 <script>
-import { fetch_data } from '../../utils/ajax_request.js'
-import { show_stars } from '../../utils/utils.js';
+import { fetch_data } from "../../utils/ajax_request.js";
+import { show_stars } from "../../utils/utils.js";
 var _this;
 export default {
     data() {
@@ -86,8 +102,9 @@ export default {
             lists: [],
             load: true,
             hasMore: false,
-            noMore: '',
-        }
+            noMore: "",
+            currentSwiperIndex: 0
+        };
     },
     onLoad() {
         _this = this;
@@ -100,91 +117,131 @@ export default {
 
         getMyPurchaseList() {
             // 获取我购买的服务包数据
-            fetch_data("POST", 'get_service_I_bought', {
-                my_id: uni.getStorageSync('user_id')
-            }, "service", res => {
-                if (res.data.status == 200) {
-                    let services = res.data.services;
+            fetch_data(
+                "POST",
+                "get_service_I_bought",
+                {
+                    my_id: uni.getStorageSync("user_id")
+                },
+                "service",
+                (res) => {
+                    if (res.data.status == 200) {
+                        let services = res.data.services;
 
-                    if (services.length !== 0) {
-                        services = services.map(service => {
-                            if (service.talents) {
-                                service.talents = service.talents.map(talent => ({
-                                    ...talent,
-                                    star: show_stars(talent.star_as_elite)[0] || null,
-                                    mode: false
-                                }));
-                            }
-                            return service;
+                        if (services.length !== 0) {
+                            services = services.map((service) => {
+                                if (service.talents) {
+                                    service.talents = service.talents.map((talent) => ({
+                                        ...talent,
+                                        star: show_stars(talent.star_as_elite)[0] || null,
+                                        mode: false
+                                    }));
+                                }
+                                return service;
+                            });
+                            _this.lists = services;
+                        }
+                        if (_this.load) {
+                            _this.load = false;
+                        }
+                    } else {
+                        uni.showToast({
+                            title: "数据获取失败",
+                            icon: "none",
+                            duration: 800
                         });
-                        _this.lists = services;
                     }
-                    if (_this.load) {
-                        _this.load = false;
-                    }
-                } else {
-                    uni.showToast({
-                        title: '数据获取失败',
-                        icon: 'none',
-                        duration: 800
-                    })
                 }
-            });
+            );
         },
         gotoTalentDatail(talent_id, showContact) {
-            fetch_data("POST", 'get_his_resume_id', {
-                talent_id: talent_id
-            }, "service", res => {
-                if (res.data.status !== 200) {
-                    return;
+            fetch_data(
+                "POST",
+                "get_his_resume_id",
+                {
+                    talent_id: talent_id
+                },
+                "service",
+                (res) => {
+                    if (res.data.status !== 200) {
+                        return;
+                    }
+                    const resume_id = res.data.resume_id;
+                    _this.toNext(`/pages/talents/detail?id=${resume_id}&showContact=${showContact}`);
                 }
-                const resume_id = res.data.resume_id;
-                _this.toNext(`/pages/talents/detail?id=${resume_id}&showContact=${showContact}`)
-            });
+            );
         },
         goToBuy() {
             uni.navigateTo({
-                url: '/pages/service/index'
+                url: "/pages/service/index"
             });
         },
 
+        async toChat(talent_id, talent_name, talent_phone) {
+            if (_this.user_id == 0) {
+                uni.navigateTo({
+                    url: "/pages/index/login"
+                });
+                return;
+            }
+            if (_this.user_id == talent_id) {
+                this.$u.toast("无法与自己沟通");
+                return;
+            }
+            if (_this.identity !== 2) {
+                this.$u.toast("当前身份不合法");
+                return;
+            }
+            _this.toNext(`/pages/message/private_chat?id=user_${talent_id}&title=${talent_name || talent_phone}`);
+        },
+
         cooperate(talentId, serviceId, talentName, service_buyer_id, is_online = 1) {
+            if (_this.user_id == talentId) {
+                this.$u.toast("无法与自己合作");
+                return;
+            }
             if (!is_online) {
                 uni.showToast({
-                    title: '该人才暂不可接服务套餐',
-                    icon: 'none',
+                    title: "该人才暂不可接服务套餐",
+                    icon: "none",
                     duration: 1000
                 });
                 return;
             }
             // 显示确认弹窗
             uni.showModal({
-                title: '确认合作',
-                content: '确认合作后不可取消，确认与' + talentName + '合作？',
+                title: "确认合作",
+                content: "确认合作后不可取消，确认与" + talentName + "合作？",
                 success: (res) => {
                     if (res.confirm) {
                         // 调用确认合作接口
-                        fetch_data("POST", 'confirm_cooperate', {
-                            talent_id: talentId,
-                            service_id: serviceId,
-                            service_buyer_id: service_buyer_id
-                        }, "service", res => {
-                            if (res.data.status === 200) {
-                                uni.showToast({
-                                    title: '合作成功',
-                                    icon: 'success',
-                                    duration: 2000
-                                });
-                                // 刷新列表
-                                this.getMyPurchaseList();
-                            } else {
-                                uni.showToast({
-                                    title: res.data.message || '操作失败',
-                                    icon: 'none',
-                                    duration: 2000
-                                });
+                        fetch_data(
+                            "POST",
+                            "confirm_cooperate",
+                            {
+                                talent_id: talentId,
+                                service_id: serviceId,
+                                service_buyer_id: service_buyer_id
+                            },
+                            "service",
+                            (res) => {
+                                if (res.data.status === 200) {
+                                    uni.showToast({
+                                        title: "合作成功",
+                                        icon: "success",
+                                        duration: 2000
+                                    });
+                                    // 刷新列表
+                                    this.getMyPurchaseList();
+                                } else {
+                                    uni.showToast({
+                                        title: res.data.message || "操作失败",
+                                        icon: "none",
+                                        duration: 2000
+                                    });
+                                }
                             }
-                        });
+                        );
                     }
                 }
             });
@@ -192,37 +249,61 @@ export default {
 
         finishCooperate(talentId, serviceId, service_buyer_id) {
             uni.showModal({
-                title: '确认完成',
-                content: '确认完成此次合作？',
+                title: "确认完成",
+                content: "确认完成此次合作？",
                 success: (res) => {
                     if (res.confirm) {
-                        fetch_data("POST", 'finish_cooperate', {
-                            talent_id: talentId,
-                            service_id: serviceId,
-                            service_buyer_id: service_buyer_id
-                        }, "service", res => {
-                            if (res.data.status === 200) {
-                                uni.showToast({
-                                    title: '完成合作成功',
-                                    icon: 'success',
-                                    duration: 2000
-                                });
-                                // 刷新列表
-                                this.getMyPurchaseList();
-                            } else {
-                                uni.showToast({
-                                    title: res.data.message || '操作失败',
-                                    icon: 'none',
-                                    duration: 2000
-                                });
+                        fetch_data(
+                            "POST",
+                            "finish_cooperate",
+                            {
+                                talent_id: talentId,
+                                service_id: serviceId,
+                                service_buyer_id: service_buyer_id
+                            },
+                            "service",
+                            (res) => {
+                                if (res.data.status === 200) {
+                                    uni.showToast({
+                                        title: "完成合作成功",
+                                        icon: "success",
+                                        duration: 2000
+                                    });
+                                    // 刷新列表
+                                    this.getMyPurchaseList();
+                                } else {
+                                    uni.showToast({
+                                        title: res.data.message || "操作失败",
+                                        icon: "none",
+                                        duration: 2000
+                                    });
+                                }
                             }
-                        });
+                        );
                     }
                 }
             });
+        },
+        // 添加轮播图切换事件处理
+        swiperChange(e) {
+            this.currentSwiperIndex = e.detail.current;
+        },
+        // 添加图片预览功能
+        previewImage(index, imgs_list) {
+            if (!imgs_list || !Array.isArray(imgs_list)) {
+                uni.showToast({
+                    title: "图片数据异常",
+                    icon: "none"
+                });
+                return;
+            }
+            uni.previewImage({
+                current: imgs_list[index], // 修改这里，直接使用图片URL
+                urls: imgs_list
+            });
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -262,7 +343,7 @@ export default {
 
             .service-item-amount {
                 font-size: 32rpx;
-                color: #02ABAB;
+                color: #02abab;
                 font-weight: 600;
                 background: rgba(2, 171, 171, 0.1);
                 padding: 8rpx 20rpx;
@@ -287,14 +368,14 @@ export default {
 
             .price-symbol {
                 font-size: 34rpx;
-                color: #02ABAB;
+                color: #02abab;
                 margin-right: 4rpx;
             }
 
             .price-value {
                 font-size: 52rpx;
                 font-weight: 700;
-                color: #02ABAB;
+                color: #02abab;
                 letter-spacing: -1rpx;
             }
         }
@@ -329,6 +410,95 @@ export default {
             }
         }
     }
+
+    .service-images {
+        width: 100%;
+        height: 500rpx;
+        position: relative;
+        margin-bottom: 30rpx;
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+
+            .swiper-item {
+                width: 100%;
+                height: 100%;
+
+                image {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 30rpx;
+                }
+            }
+        }
+
+        .swiper-dots {
+            position: absolute;
+            bottom: 30rpx;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12rpx;
+
+            .dot {
+                width: 12rpx;
+                height: 12rpx;
+                background: rgba(255, 255, 255, 0.6);
+                border-radius: 6rpx;
+                transition: all 0.3s ease;
+
+                &.active {
+                    width: 24rpx;
+                    background: #fff;
+                }
+            }
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120rpx;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+            border-radius: 0 0 30rpx 30rpx;
+            pointer-events: none;
+        }
+    }
+}
+
+.service-item-title {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    font-size: 28rpx;
+    gap: 12rpx;
+
+    .name {
+        word-break: break-all;
+    }
+
+    .service-item-label {
+        background: rgba(255, 153, 0, 0.1);
+        color: #b88230;
+        font-size: 28rpx;
+        display: inline-flex;
+        align-items: center;
+        padding: 8rpx 20rpx;
+        border-radius: 4rpx;
+        font-size: 24rpx;
+        white-space: nowrap;
+        border-radius: 30rpx;
+        min-width: 60rpx;
+        text-align: center;
+
+        &.pending {
+            color: #b88230;
+            background: rgba(255, 153, 0, 0.1);
+        }
+    }
 }
 
 /* 人才列表样式调整 */
@@ -348,7 +518,7 @@ export default {
 }
 
 .count {
-    color: #02ABAB;
+    color: #02abab;
     /* 改用主题色 */
 }
 
@@ -375,7 +545,7 @@ export default {
 }
 
 .arrow {
-    color: #02ABAB;
+    color: #02abab;
     /* 改用主题色 */
     cursor: pointer;
     margin-right: 13rpx;
@@ -441,7 +611,7 @@ export default {
 
         .empty-button {
             .go-buy-btn {
-                background: #02ABAB;
+                background: #02abab;
                 color: #fff;
                 border-radius: 44rpx;
                 padding: 20rpx 60rpx;
@@ -476,7 +646,7 @@ export default {
                 color: #333;
                 margin-bottom: 20rpx;
                 font-weight: 600;
-                background: linear-gradient(90deg, #02ABAB, #05C5C5);
+                background: linear-gradient(90deg, #02abab, #05c5c5);
                 -webkit-background-clip: text;
                 color: transparent;
             }
@@ -490,7 +660,7 @@ export default {
 
         .empty-button {
             .go-buy-btn {
-                background: linear-gradient(45deg, #02ABAB, #05C5C5);
+                background: linear-gradient(45deg, #02abab, #05c5c5);
                 color: #fff;
                 border-radius: 44rpx;
                 padding: 24rpx 80rpx;
@@ -502,7 +672,7 @@ export default {
                 overflow: hidden;
 
                 &::after {
-                    content: '';
+                    content: "";
                     position: absolute;
                     top: -50%;
                     left: -50%;
@@ -523,7 +693,6 @@ export default {
 }
 
 @keyframes float {
-
     0%,
     100% {
         transform: translateY(-40rpx);
@@ -567,7 +736,7 @@ export default {
         line-height: 56rpx;
         font-size: 28rpx;
         color: #fff;
-        background-color: #02ABAB;
+        background-color: #02abab;
         border-radius: 28rpx;
         border: none;
 

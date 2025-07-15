@@ -28,14 +28,14 @@
 				</view>
 					<block v-for="(item,index) in info.filearr">
 						<view class="user-top-bot">
-							<image src='/static/common/wenjians.png' mode="widthFix"/>
+							<image src='https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/wenjians.png' mode="widthFix"/>
 							<view class="user-top-bot-center">
 								<view class="tit">合约文件</view>
 							</view>
 							<button size="mini" @click="previewFile(item.src)">查看</button>
 						</view>
 						<!-- <view class="infos">
-							<image src='/static/common/wenjians.png' class="info-img" mode="aspectFill"/>
+							<image src='https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/wenjians.png' class="info-img" mode="aspectFill"/>
 							<view class="rightbtn" @click="previewFile(item.src)">查看文件  &nbsp;&nbsp;&nbsp; ></view>
 						</view> -->
 					</block>

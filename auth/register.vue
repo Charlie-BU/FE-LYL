@@ -75,7 +75,7 @@
 				</view>
 			</view>
 			<view class="xieyi" @click="goXieYi()">
-				<image @click.stop="changeXieyi" :src="xieyi?'/static/common/checkbox_select.png':'/static/common/checkbox_unselect.png'" mode="widthFix" class="check-img"/>
+				<image @click.stop="changeXieyi" :src="xieyi?'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/checkbox_select.png':'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/checkbox_unselect.png'" mode="widthFix" class="check-img"/>
 				<text>我已阅读并同意</text>
 				<text class="theme">《注册协议》</text>
 			</view>

@@ -27,20 +27,22 @@
 		<view class="service-list" v-else-if="lists">
 			<view class="service-grid">
 				<view class="service-item" v-for="(item, index) in lists" :key="index">
-					<view class="service-item-title">{{ item.name }}</view>
-					<view class="service-item-price">
-						<text class="price-symbol">¥</text>
-						<text class="price-value">{{ item.price }}</text>
-					</view>
-					<button v-if="identity === 1 || identity === 2" class="detail-btn"
-						@click="gotoDetail(item)">查看详情</button>
+					<view @click="gotoDetail(item)">
+						<view class="service-item-title">{{ item.name }}</view>
+						<view class="service-item-price">
+							<text class="price-symbol">¥</text>
+							<text class="price-value">{{ item.price }}</text>
+						</view>
+						<button v-if="identity === 1 || identity === 2" class="detail-btn"
+							@click.stop="gotoDetail(item)">查看详情</button>
 
-					<button v-if="is_admin" class="detail-btn" @click="assignTalent(item)">分配人才</button>
-					<button v-if="is_admin" class="detail-btn" style="margin-top: 15rpx;"
-						@click="showThisTalent(item)">查看人才</button>
-					<view class="service-item-actions" v-if="is_admin">
-						<button class="action-btn edit" @click="editService(item)">编辑</button>
-						<button class="action-btn delete" @click="deleteService(item.id)">删除</button>
+						<button v-if="is_admin" class="detail-btn" @click.stop="assignTalent(item)">分配人才</button>
+						<button v-if="is_admin" class="detail-btn" style="margin-top: 15rpx;"
+							@click.stop="showThisTalent(item)">查看人才</button>
+						<button v-if="is_admin" class="detail-btn" style="width: 112px;"
+							@click.stop="editService(item)">编辑</button>
+						<button v-if="is_admin" class="detail-btn" style="background: #ff4d4f; width: 112px;"
+							@click.stop="deleteService(item.id)">删除</button>
 					</view>
 				</view>
 			</view>
@@ -89,11 +91,28 @@
 							<view class="feature-input" v-for="(feature, index) in formData.features" :key="index">
 								<input type="text" v-model="formData.features[index]" placeholder="请输入特色" />
 								<text class="delete-feature" @click="deleteFeature(index)"
-									v-if="formData.features.length > 1">×</text>
+									v-if="formData.features && formData.features.length > 1">×</text>
 							</view>
 						</view>
 						<view class="add-feature" @click="addFeature">+ 添加特色</view>
 					</view>
+					<!-- 暂时不加 -->
+					<!--<view class="form-item">
+						<text class="label">展示图片</text>
+						<view class="image-upload-area">
+							<view class="image-list">
+								<view class="image-item" v-for="(img, index) in formData.images" :key="index">
+									<image :src="img" mode="aspectFill"></image>
+									<view class="delete-btn" @click="deleteImage(index)">×</view>
+								</view>
+								<view class="upload-btn" @click="chooseImage"
+									v-if="formData.images && formData.images.length < 9">
+									<text>+</text>
+								</view>
+							</view>
+							<text class="tip-text">最多可上传9张图片</text>
+						</view>
+					</view> -->
 				</view>
 				<view class="modal-footer">
 					<button class="cancel-btn" @click="closeModal">取消</button>
@@ -181,7 +200,8 @@ export default {
 				price: '',
 				description: '',
 				features: [''],
-				category_id: null
+				category_id: null,
+				images: []
 			},
 			showAssignModal: false,
 			searchPhone: '',
@@ -369,6 +389,44 @@ export default {
 				url: '/pages/service/my-service'
 			});
 		},
+
+		chooseImage() {
+			const remainCount = 9 - this.formData.images?.length;
+			uni.chooseImage({
+				count: remainCount,
+				success: (res) => {
+					// 上传图片到服务器
+					res.tempFilePaths.forEach(path => {
+						uni.uploadFile({
+							url: 'YOUR_UPLOAD_API_URL',
+							filePath: path,
+							name: 'file',
+							success: (uploadRes) => {
+								const data = JSON.parse(uploadRes.data);
+								if (data.status === 200) {
+									this.formData.images.push(data.url);
+								} else {
+									uni.showToast({
+										title: '图片上传失败',
+										icon: 'none'
+									});
+								}
+							},
+							fail: () => {
+								uni.showToast({
+									title: '图片上传失败',
+									icon: 'none'
+								});
+							}
+						});
+					});
+				}
+			});
+		},
+		deleteImage(index) {
+			this.formData.images.splice(index, 1);
+		},
+
 		addService() {
 			this.isEdit = false;
 			this.formData = {
@@ -376,7 +434,8 @@ export default {
 				price: '',
 				description: '',
 				features: [''],
-				category_id: null
+				category_id: null,
+				images: []
 			};
 			this.showModal = true;
 		},
@@ -743,52 +802,114 @@ export default {
 	}
 
 	.service-item {
-		background-color: #fff;
-		border-radius: 16rpx;
+		background: linear-gradient(145deg, #ffffff, #f5f7fa);
+		border-radius: 24rpx;
 		padding: 40rpx 30rpx;
-		box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
+		box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.08);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+		border: 1rpx solid rgba(2, 171, 171, 0.1);
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 8rpx;
+			background: linear-gradient(90deg, #02ABAB, #05d5d5);
+		}
+
+		&:active {
+			transform: translateY(4rpx);
+			box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.06);
+		}
 	}
 
 	.service-item-title {
-		font-size: 32rpx;
+		font-size: 34rpx;
 		font-weight: bold;
-		margin-bottom: 24rpx;
+		margin-bottom: 30rpx;
 		text-align: center;
+		color: #333;
+		position: relative;
+		padding-bottom: 16rpx;
+
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 60rpx;
+			height: 4rpx;
+			background: linear-gradient(90deg, #02ABAB, #05d5d5);
+			border-radius: 4rpx;
+		}
 	}
 
 	.service-item-price {
-		margin-bottom: 24rpx;
+		text-align: center;
+		margin-bottom: 30rpx;
+		background: rgba(2, 171, 171, 0.08);
+		padding: 12rpx 30rpx;
+		border-radius: 40rpx;
+		box-shadow: inset 0 2rpx 6rpx rgba(0, 0, 0, 0.03);
 	}
 
 	.price-symbol {
-		font-size: 28rpx;
+		font-size: 30rpx;
 		color: #02ABAB;
+		font-weight: 500;
 	}
 
 	.price-value {
-		font-size: 44rpx;
+		font-size: 48rpx;
 		color: #02ABAB;
 		font-weight: bold;
+		text-shadow: 0 2rpx 4rpx rgba(2, 171, 171, 0.2);
 	}
 
 	.detail-btn {
 		font-size: 28rpx;
-		padding: 12rpx 36rpx;
+		padding: 16rpx 40rpx;
 		border-radius: 40rpx;
 		height: auto;
-		line-height: 1.8;
-		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+		line-height: 1.5;
+		box-shadow: 0 8rpx 16rpx rgba(2, 171, 171, 0.2);
 		transition: all 0.3s ease;
 		background: linear-gradient(135deg, #02ABAB, #029595);
 		color: #fff;
-	}
+		margin-top: 10rpx;
+		font-weight: 500;
+		letter-spacing: 2rpx;
+		border: none;
+		position: relative;
+		overflow: hidden;
 
-	.detail-btn:active {
-		opacity: 0.9;
-		transform: translateY(2rpx);
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+			transition: all 0.6s ease;
+		}
+
+		&:active {
+			transform: translateY(4rpx);
+			box-shadow: 0 4rpx 8rpx rgba(2, 171, 171, 0.15);
+		}
+
+		&:hover::after {
+			left: 100%;
+		}
 	}
 }
 
@@ -1144,23 +1265,60 @@ export default {
 	justify-content: flex-end;
 	gap: 20rpx;
 	margin-bottom: 20rpx;
+}
 
-	.action-btn {
-		padding: 10rpx 30rpx;
-		font-size: 28rpx;
-		border-radius: 40rpx;
-		border: none;
-		color: #fff;
-		line-height: 1.8;
-		margin-top: 15rpx;
+.image-upload-area {
+	margin-top: 20rpx;
+}
 
-		&.edit {
-			background-color: #02ABAB;
-		}
+.image-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20rpx;
+}
 
-		&.delete {
-			background-color: #ff4d4f;
-		}
-	}
+.image-item {
+	width: 180rpx;
+	height: 180rpx;
+	position: relative;
+}
+
+.image-item image {
+	width: 100%;
+	height: 100%;
+	border-radius: 8rpx;
+}
+
+.delete-btn {
+	position: absolute;
+	top: -20rpx;
+	right: -20rpx;
+	width: 40rpx;
+	height: 40rpx;
+	background: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24rpx;
+}
+
+.upload-btn {
+	width: 180rpx;
+	height: 180rpx;
+	border: 2rpx dashed #ddd;
+	border-radius: 8rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 60rpx;
+	color: #999;
+}
+
+.tip-text {
+	font-size: 24rpx;
+	color: #999;
+	margin-top: 10rpx;
 }
 </style>

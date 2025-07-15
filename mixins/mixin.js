@@ -4,7 +4,7 @@ module.exports = {
 			customAlertStyle: {
 				'width': '80%'
 			},
-			emptyIcon:'/static/common/empty.png',
+			emptyIcon:'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/empty.png',
 			noMore:'没有更多了~',
 			load: true,
 			hasMore: true,

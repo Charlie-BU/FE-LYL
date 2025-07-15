@@ -7,17 +7,17 @@
 		<view class="center">
 			<view class="center-items">
 				<view class="center-item" @click="changeIndex(1)">
-					<image :src="index == 1 ? '/static/common/radio-s.png' : '/static/common/radio.png'" mode="widthFix" class="left-icon"/>
+					<image :src="index == 1 ? 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/radio-s.png' : 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/radio.png'" mode="widthFix" class="left-icon"/>
 					<image src="static/zhaohuo.png" mode="widthFix" class="center-icon"/>
 					<text>我要找活</text>
 				</view>
 				<view class="center-item" @click="changeIndex(2)">
-					<image :src="index == 2 ? '/static/common/radio-s.png' : '/static/common/radio.png'" mode="widthFix" class="left-icon"/>
+					<image :src="index == 2 ? 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/radio-s.png' : 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/radio.png'" mode="widthFix" class="left-icon"/>
 					<image src="static/fahuo.png" mode="widthFix" class="center-icon"/>
 					<text>我要发活</text>
 				</view>
 				<view class="center-item" @click="changeIndex(3)" v-if="is_kf == 1">
-					<image :src="index == 3 ? '/static/common/radio-s.png' : '/static/common/radio.png'" mode="widthFix" class="left-icon"/>
+					<image :src="index == 3 ? 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/radio-s.png' : 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/radio.png'" mode="widthFix" class="left-icon"/>
 					<image src="static/kefu.png" mode="widthFix" class="center-icon"/>
 					<text>我是客服</text>
 				</view>
