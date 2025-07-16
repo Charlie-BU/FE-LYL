@@ -152,6 +152,7 @@
 					if (this.temp_head_pic) {
 						return this.temp_head_pic
 					}
+                    console.log(this.getFullUrl(this.form.head_pic))
 					return this.getFullUrl(this.form.head_pic)
 				}
 			}
