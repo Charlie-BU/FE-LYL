@@ -17,13 +17,34 @@
                 <text class="price-symbol">¥</text>
                 <text class="price-value">{{ serviceData.price }}</text>
             </view>
-            <view class="service-desc">{{ serviceData.description }}</view>
-            <view class="service-features">
+            <!-- Tab切换 -->
+            <view class="tab-container">
+                <view class="tab-header">
+                    <view :class="['tab-item', activeTab === 'intro' ? 'active' : '']" @click="switchTab('intro')">
+                        <text>服务详情</text>
+                    </view>
+                    <view :class="['tab-item', activeTab === 'rule' ? 'active' : '']" @click="switchTab('rule')">
+                        <text>下单须知</text>
+                    </view>
+                </view>
+                <view class="tab-content">
+                    <!-- 服务包介绍图片 -->
+                    <view class="service-intro-img" v-if="activeTab === 'intro' && serviceData.intro_img">
+                        <image :src="serviceData.intro_img" mode="widthFix" />
+                    </view>
+                    <!-- 服务规则图片 -->
+                    <view class="service-rule-img" v-if="activeTab === 'rule' && serviceData.rule_img">
+                        <image :src="serviceData.rule_img" mode="widthFix" />
+                    </view>
+                </view>
+            </view>
+            <!-- <view class="service-desc">{{ serviceData.description }}</view> -->
+            <!-- <view class="service-features">
                 <view class="feature-item" v-for="(feature, index) in serviceData.features" :key="index">
                     <u-icon name="checkmark-circle" color="#02ABAB" size="28"></u-icon>
                     <text>{{ feature }}</text>
-                </view>
-            </view>
+                </view> 
+            </view> -->
             <button v-if="identity === 2" class="buy-btn" @click="showBuyModal">立即购买</button>
         </view>
 
@@ -68,11 +89,14 @@ export default {
                 price: 0,
                 description: '',
                 features: [],
-                images: []
+                images: [],
+                intro_img: '',
+                rule_img: ''
             },
             currentSwiperIndex: 0,
             showModal: false,
-            quantity: 1
+            quantity: 1,
+            activeTab: 'intro' // 默认显示介绍Tab
         }
     },
     onLoad(options) {
@@ -217,6 +241,10 @@ export default {
                 urls: this.serviceData.images
             });
         },
+        // Tab切换方法
+        switchTab(tab) {
+            this.activeTab = tab;
+        },
     }
 }
 </script>
@@ -309,6 +337,7 @@ export default {
         font-weight: bold;
         margin-bottom: 30rpx;
         background: linear-gradient(90deg, #333, #666);
+        background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
         position: relative;
@@ -344,6 +373,60 @@ export default {
             font-size: 56rpx;
             font-weight: bold;
             text-shadow: 0 2rpx 4rpx rgba(2, 171, 171, 0.2);
+        }
+    }
+
+    .tab-container {
+        margin: 30rpx 0;
+
+        .tab-header {
+            display: flex;
+            border-bottom: 2rpx solid rgba(2, 171, 171, 0.1);
+            margin-bottom: 20rpx;
+
+            .tab-item {
+                flex: 1;
+                text-align: center;
+                padding: 20rpx 0;
+                font-size: 30rpx;
+                color: #666;
+                position: relative;
+                transition: all 0.3s ease;
+
+                &.active {
+                    color: #02ABAB;
+                    font-weight: 500;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2rpx;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 60rpx;
+                        height: 4rpx;
+                        background: linear-gradient(90deg, #02ABAB, #05d5d5);
+                        border-radius: 2rpx;
+                    }
+                }
+            }
+        }
+
+        .tab-content {
+            min-height: 200rpx;
+        }
+    }
+
+    .service-intro-img,
+    .service-rule-img {
+        width: 100%;
+        border-radius: 20rpx;
+        overflow: hidden;
+        box-shadow: 0 10rpx 20rpx rgba(0, 0, 0, 0.1);
+
+        image {
+            width: 100%;
+            display: block;
         }
     }
 
@@ -404,9 +487,14 @@ export default {
         font-size: 32rpx;
         font-weight: 500;
         border-radius: 44rpx;
-        margin-top: 40rpx;
         box-shadow: 0 8rpx 16rpx rgba(2, 171, 171, 0.2);
-        position: relative;
+        position: fixed;
+        bottom: 40rpx;
+        left: 0;
+        right: 0;
+        margin: 0 40rpx;
+        width: calc(100% - 80rpx);
+        z-index: 100;
         overflow: hidden;
         transition: all 0.3s ease;
 

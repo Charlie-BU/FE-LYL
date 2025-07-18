@@ -28,11 +28,14 @@
 			<view class="service-grid">
 				<view class="service-item" v-for="(item, index) in lists" :key="index">
 					<view @click="gotoDetail(item)">
-						<view class="service-item-title">{{ item.name }}</view>
-						<view class="service-item-price">
-							<text class="price-symbol">¥</text>
-							<text class="price-value">{{ item.price }}</text>
+						<view class="service-item-image">
+							<image :src="item.profile_img" mode="aspectFill" class="profile-image"></image>
+							<view class="price-tag">
+								<text class="price-symbol">¥</text>
+								<text class="price-value">{{ item.price }}</text>
+							</view>
 						</view>
+						<view class="service-item-title">{{ item.name }}</view>
 						<button v-if="identity === 1 || identity === 2" class="detail-btn"
 							@click.stop="gotoDetail(item)">查看详情</button>
 
@@ -81,38 +84,74 @@
 						<text class="label">价格</text>
 						<input type="number" v-model="formData.price" placeholder="请输入价格" />
 					</view>
+
 					<view class="form-item">
-						<text class="label">简介</text>
-						<textarea v-model="formData.description" placeholder="请输入简介" />
-					</view>
-					<view class="form-item">
-						<text class="label">特色</text>
-						<view class="features-list">
-							<view class="feature-input" v-for="(feature, index) in formData.features" :key="index">
-								<input type="text" v-model="formData.features[index]" placeholder="请输入特色" />
-								<text class="delete-feature" @click="deleteFeature(index)"
-									v-if="formData.features && formData.features.length > 1">×</text>
-							</view>
-						</view>
-						<view class="add-feature" @click="addFeature">+ 添加特色</view>
-					</view>
-					<!-- 暂时不加 -->
-					<!--<view class="form-item">
-						<text class="label">展示图片</text>
+						<text class="label">封面图片</text>
 						<view class="image-upload-area">
 							<view class="image-list">
+								<view class="image-item" v-if="formData.profile_img">
+									<image :src="formData.profile_img" mode="aspectFill"></image>
+									<view class="delete-btn" @click="deleteProfileImage">×</view>
+								</view>
+								<view class="upload-btn" @click="chooseProfileImage" v-if="!formData.profile_img">
+									<text class="icon">+</text>
+									<text class="text">上传图片</text>
+								</view>
+							</view>
+							<text class="tip-text">上传服务套餐封面图片</text>
+						</view>
+					</view>
+
+					<view class="form-item">
+						<text class="label">服务详情图片 <text class="image-count">1张</text></text>
+						<view class="image-upload-area">
+							<view class="image-list">
+								<view class="image-item" v-if="formData.intro_img">
+									<image :src="formData.intro_img" mode="aspectFill"></image>
+									<view class="delete-btn" @click="deleteIntroImage">×</view>
+								</view>
+								<view class="upload-btn" @click="chooseIntroImage" v-if="!formData.intro_img">
+									<text class="icon">+</text>
+									<text class="text">上传图片</text>
+								</view>
+							</view>
+							<text class="tip-text">上传服务详情长图（建议宽高比1:3）</text>
+						</view>
+					</view>
+
+					<view class="form-item">
+						<text class="label">下单须知图片 <text class="image-count">1张</text></text>
+						<view class="image-upload-area">
+							<view class="image-list">
+								<view class="image-item" v-if="formData.rule_img">
+									<image :src="formData.rule_img" mode="aspectFill"></image>
+									<view class="delete-btn" @click="deleteRuleImage">×</view>
+								</view>
+								<view class="upload-btn" @click="chooseRuleImage" v-if="!formData.rule_img">
+									<text class="icon">+</text>
+									<text class="text">上传图片</text>
+								</view>
+							</view>
+							<text class="tip-text">上传下单须知长图（建议宽高比1:3）</text>
+						</view>
+					</view>
+
+					<view class="form-item">
+						<text class="label">展示图片 <text class="image-count">最多9张</text></text>
+						<view class="image-upload-area">
+							<view class="multi-image-list">
 								<view class="image-item" v-for="(img, index) in formData.images" :key="index">
 									<image :src="img" mode="aspectFill"></image>
 									<view class="delete-btn" @click="deleteImage(index)">×</view>
 								</view>
-								<view class="upload-btn" @click="chooseImage"
-									v-if="formData.images && formData.images.length < 9">
-									<text>+</text>
+								<view class="upload-btn" @click="chooseImages" v-if="formData.images.length < 9">
+									<text class="icon">+</text>
+									<text class="text">上传图片</text>
 								</view>
 							</view>
-							<text class="tip-text">最多可上传9张图片</text>
+							<text class="tip-text">上传服务套餐展示图片（最多9张）</text>
 						</view>
-					</view> -->
+					</view>
 				</view>
 				<view class="modal-footer">
 					<button class="cancel-btn" @click="closeModal">取消</button>
@@ -182,7 +221,7 @@
 </template>
 
 <script>
-import { fetch_data } from '../../utils/ajax_request.js'
+import { run, fetch_data } from '../../utils/ajax_request.js'
 import * as utils from '../../utils/utils.js'
 var _this;
 export default {
@@ -198,9 +237,10 @@ export default {
 			formData: {
 				name: '',
 				price: '',
-				description: '',
-				features: [''],
 				category_id: null,
+				profile_img: '',
+				intro_img: '',
+				rule_img: '',
 				images: []
 			},
 			showAssignModal: false,
@@ -390,35 +430,69 @@ export default {
 			});
 		},
 
-		chooseImage() {
-			const remainCount = 9 - this.formData.images?.length;
+		chooseProfileImage() {
 			uni.chooseImage({
-				count: remainCount,
+				count: 1,
 				success: (res) => {
-					// 上传图片到服务器
-					res.tempFilePaths.forEach(path => {
-						uni.uploadFile({
-							url: 'YOUR_UPLOAD_API_URL',
-							filePath: path,
-							name: 'file',
-							success: (uploadRes) => {
-								const data = JSON.parse(uploadRes.data);
-								if (data.status === 200) {
-									this.formData.images.push(data.url);
-								} else {
-									uni.showToast({
-										title: '图片上传失败',
-										icon: 'none'
-									});
-								}
-							},
-							fail: () => {
-								uni.showToast({
-									title: '图片上传失败',
-									icon: 'none'
-								});
-							}
-						});
+					// 直接将临时文件路径保存到formData中，不立即上传
+					this.formData.profile_img = res.tempFilePaths[0];
+
+				}
+			});
+		},
+		deleteProfileImage() {
+			this.formData.profile_img = '';
+		},
+
+		chooseIntroImage() {
+			uni.chooseImage({
+				count: 1,
+				success: (res) => {
+					// 直接将临时文件路径保存到formData中，不立即上传
+					this.formData.intro_img = res.tempFilePaths[0];
+
+				}
+			});
+		},
+		deleteIntroImage() {
+			this.formData.intro_img = '';
+		},
+
+		chooseRuleImage() {
+			uni.chooseImage({
+				count: 1,
+				success: (res) => {
+					// 直接将临时文件路径保存到formData中，不立即上传
+					this.formData.rule_img = res.tempFilePaths[0];
+
+				}
+			});
+		},
+		deleteRuleImage() {
+			this.formData.rule_img = '';
+		},
+
+		chooseImages() {
+			const remainingCount = 9 - this.formData.images.length;
+			if (remainingCount <= 0) {
+				uni.showToast({
+					title: '最多只能上传9张图片',
+					icon: 'none'
+				});
+				return;
+			}
+
+			uni.chooseImage({
+				count: remainingCount,
+				success: (res) => {
+					// 直接将临时文件路径添加到formData.images数组中，不立即上传
+					res.tempFilePaths.forEach(filePath => {
+						this.formData.images.push(filePath);
+					});
+
+					uni.showToast({
+						title: `已选择${res.tempFilePaths.length}张图片`,
+						icon: 'success'
 					});
 				}
 			});
@@ -432,9 +506,10 @@ export default {
 			this.formData = {
 				name: '',
 				price: '',
-				description: '',
-				features: [''],
 				category_id: null,
+				profile_img: '',
+				intro_img: '',
+				rule_img: '',
 				images: []
 			};
 			this.showModal = true;
@@ -445,22 +520,17 @@ export default {
 				id: item.id,
 				name: item.name,
 				price: item.price,
-				description: item.description,
-				features: [...item.features]
+				profile_img: item.profile_img || '',
+				intro_img: item.intro_img || '',
+				rule_img: item.rule_img || '',
+				images: item.images || []
 			};
 			this.showModal = true;
 		},
 		closeModal() {
 			this.showModal = false;
 		},
-		addFeature() {
-			this.formData.features.push('');
-		},
-		deleteFeature(index) {
-			if (this.formData.features.length > 1) {
-				this.formData.features.splice(index, 1);
-			}
-		},
+
 
 		categoryChange(e) {
 			this.formData.category_id = e.detail.value;
@@ -488,16 +558,23 @@ export default {
 				});
 				return;
 			}
-			if (!this.formData.description.trim()) {
+			if (!this.formData.profile_img) {
 				uni.showToast({
-					title: '请输入简介',
+					title: '请上传封面图片',
 					icon: 'none'
 				});
 				return;
 			}
-			if (this.formData.features.some(f => !f.trim())) {
+			if (!this.formData.intro_img) {
 				uni.showToast({
-					title: '请填写所有特色内容',
+					title: '请上传服务详情图片',
+					icon: 'none'
+				});
+				return;
+			}
+			if (!this.formData.rule_img) {
+				uni.showToast({
+					title: '请上传下单须知图片',
 					icon: 'none'
 				});
 				return;
@@ -505,41 +582,200 @@ export default {
 
 			// 显示加载提示
 			uni.showToast({
-				title: '请稍后',
+				title: '正在上传图片...',
 				icon: 'loading',
 				duration: 1000000
 			});
 
-			// 调用接口保存数据
-			const url = this.isEdit ? 'edit_service' : 'add_service';
-			let postData = this.formData;
-			if (!this.isEdit) {
-				console.log(this.formData);
-				postData.category_id = Number(this.categories[this.formData.category_id].id);
-			}
-			fetch_data("POST", url, postData, "service", res => {
-				// 隐藏加载提示
-				uni.hideToast();
+			// 创建一个新的表单数据对象，用于存储上传后的图片URL
+			let finalFormData = {
+				...this.formData,
+				profile_img_url: '',
+				intro_img_url: '',
+				rule_img_url: '',
+				images_url: []
+			};
 
-				if (res.data.status == 200) {
-					uni.showToast({
-						title: this.isEdit ? '编辑成功' : '添加成功',
-						icon: 'none',
-						duration: 1000
+			// 创建Promise数组，用于跟踪所有图片上传
+			let uploadPromises = [];
+
+			// 上传封面图片
+			if (!this.formData.profile_img.startsWith('https://liyilian')) {
+				let profileImgPromise = new Promise((resolve, reject) => {
+					uni.uploadFile({
+						url: run + 'service/upload_image_to_OSS',
+						filePath: this.formData.profile_img,
+						name: 'image',
+						formData: {
+							type: 'profile_img'
+						},
+						success: (uploadRes) => {
+							const data = JSON.parse(uploadRes.data);
+							if (data.status === 200) {
+								finalFormData.profile_img_url = data.url;
+								resolve();
+							} else {
+								reject('封面图片上传失败: ' + data.message);
+							}
+						},
+						fail: () => {
+							reject('封面图片上传失败');
+						}
 					});
-					this.closeModal();
-					setTimeout(() => {
-						uni.reLaunch({
-							url: '/pages/service/index'
+				});
+				uploadPromises.push(profileImgPromise);
+			} else {
+				finalFormData.profile_img_url = this.formData.profile_img;
+			}
+
+
+			// 上传服务详情图片
+			if (!this.formData.intro_img.startsWith('https://liyilian')) {
+				let introImgPromise = new Promise((resolve, reject) => {
+					uni.uploadFile({
+						url: run + 'service/upload_image_to_OSS', // 服务详情图片上传API
+						filePath: this.formData.intro_img,
+						name: 'image',
+						formData: {
+							type: 'intro_img'
+						},
+						success: (uploadRes) => {
+							const data = JSON.parse(uploadRes.data);
+							if (data.status === 200) {
+								finalFormData.intro_img_url = data.url;
+								resolve();
+							} else {
+								reject('服务详情图片上传失败: ' + data.message);
+							}
+						},
+						fail: () => {
+							reject('服务详情图片上传失败');
+						}
+					});
+				});
+				uploadPromises.push(introImgPromise);
+			} else {
+				finalFormData.intro_img_url = this.formData.intro_img;
+			}
+
+			// 上传下单须知图片
+			if (!this.formData.rule_img.startsWith('https://liyilian')) {
+				let ruleImgPromise = new Promise((resolve, reject) => {
+					uni.uploadFile({
+						url: run + 'service/upload_image_to_OSS', // 下单须知图片上传API
+						filePath: this.formData.rule_img,
+						name: 'image',
+						formData: {
+							type: 'rule_img'
+						},
+						success: (uploadRes) => {
+							const data = JSON.parse(uploadRes.data);
+							if (data.status === 200) {
+								finalFormData.rule_img_url = data.url;
+								resolve();
+							} else {
+								reject('下单须知图片上传失败: ' + data.message);
+							}
+						},
+						fail: () => {
+							reject('下单须知图片上传失败');
+						}
+					});
+				});
+				uploadPromises.push(ruleImgPromise);
+			} else {
+				finalFormData.rule_img_url = this.formData.rule_img;
+			}
+
+			// 上传展示图片集
+			if (this.formData.images && this.formData.images.length > 0) {
+				let imagesPromises = this.formData.images.map((img, index) => {
+					if (img.startsWith('https://liyilian')) {
+						finalFormData.images_url[index] = img;
+						return Promise.resolve();
+					}
+					return new Promise((resolve, reject) => {
+						uni.uploadFile({
+							url: run + 'service/upload_image_to_OSS', // 展示图片上传API
+							filePath: img,
+							name: 'image',
+							formData: {
+								type: 'images'
+							},
+							success: (uploadRes) => {
+								const data = JSON.parse(uploadRes.data);
+								if (data.status === 200) {
+									finalFormData.images_url[index] = data.url;
+									resolve();
+								} else {
+									reject(`第${index + 1}张展示图片上传失败: ${data.message}`);
+								}
+							},
+							fail: () => {
+								reject(`第${index + 1}张展示图片上传失败`);
+							}
 						});
-					}, 1000)
-				} else {
-					uni.showToast({
-						title: res.data.message || '操作失败',
-						icon: 'none',
-						duration: 1000
 					});
+
+				});
+				uploadPromises = uploadPromises.concat(imagesPromises);
+			}
+
+			// 等待所有图片上传完成
+			Promise.all(uploadPromises).then(() => {
+				// 更新提示
+				uni.showToast({
+					title: '正在保存数据...',
+					icon: 'loading',
+					duration: 1000000
+				});
+
+				// 准备最终提交的数据
+				let postData = {
+					...this.formData,
+					profile_img: finalFormData.profile_img_url,
+					intro_img: finalFormData.intro_img_url,
+					rule_img: finalFormData.rule_img_url,
+					images: finalFormData.images_url
+				};
+
+				// 调用接口保存数据
+				const url = this.isEdit ? 'edit_service' : 'add_service';
+				if (!this.isEdit) {
+					postData.category_id = Number(this.categories[this.formData.category_id].id);
 				}
+				fetch_data("POST", url, postData, "service", res => {
+					// 隐藏加载提示
+					uni.hideToast();
+
+					if (res.data.status == 200) {
+						uni.showToast({
+							title: this.isEdit ? '编辑成功' : '添加成功',
+							icon: 'none',
+							duration: 1000
+						});
+						this.closeModal();
+						setTimeout(() => {
+							uni.reLaunch({
+								url: '/pages/service/index'
+							});
+						}, 1000)
+					} else {
+						uni.showToast({
+							title: res.data.message || '操作失败',
+							icon: 'none',
+							duration: 1000
+						});
+					}
+				});
+			}).catch(error => {
+				// 处理上传失败的情况
+				uni.hideToast();
+				uni.showToast({
+					title: error || '图片上传失败',
+					icon: 'none',
+					duration: 2000
+				});
 			});
 		},
 		deleteService(itemId) {
@@ -804,7 +1040,7 @@ export default {
 	.service-item {
 		background: linear-gradient(145deg, #ffffff, #f5f7fa);
 		border-radius: 24rpx;
-		padding: 40rpx 30rpx;
+		padding: 20rpx;
 		box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.08);
 		display: flex;
 		flex-direction: column;
@@ -828,16 +1064,26 @@ export default {
 			transform: translateY(4rpx);
 			box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.06);
 		}
+
+		>view {
+			width: 100%;
+		}
 	}
 
 	.service-item-title {
-		font-size: 34rpx;
+		font-size: 32rpx;
 		font-weight: bold;
-		margin-bottom: 30rpx;
+		margin-bottom: 20rpx;
 		text-align: center;
 		color: #333;
 		position: relative;
 		padding-bottom: 16rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		line-clamp: 2;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
 
 		&::after {
 			content: '';
@@ -852,26 +1098,42 @@ export default {
 		}
 	}
 
-	.service-item-price {
-		text-align: center;
-		margin-bottom: 30rpx;
-		background: rgba(2, 171, 171, 0.08);
-		padding: 12rpx 30rpx;
-		border-radius: 40rpx;
-		box-shadow: inset 0 2rpx 6rpx rgba(0, 0, 0, 0.03);
+	.service-item-image {
+		position: relative;
+		width: 100%;
+		height: 200rpx;
+		margin-bottom: 20rpx;
+		border-radius: 16rpx;
+		overflow: hidden;
+	}
+
+	.profile-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.price-tag {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		background-color: rgba(2, 171, 171, 0.8);
+		padding: 8rpx 20rpx;
+		border-top-left-radius: 16rpx;
+		color: #fff;
 	}
 
 	.price-symbol {
-		font-size: 30rpx;
-		color: #02ABAB;
+		font-size: 24rpx;
+		color: #ffffff;
 		font-weight: 500;
 	}
 
 	.price-value {
-		font-size: 48rpx;
-		color: #02ABAB;
+		font-size: 32rpx;
+		color: #ffffff;
 		font-weight: bold;
-		text-shadow: 0 2rpx 4rpx rgba(2, 171, 171, 0.2);
+		text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.2);
 	}
 
 	.detail-btn {
@@ -1287,6 +1549,7 @@ export default {
 	width: 100%;
 	height: 100%;
 	border-radius: 8rpx;
+	object-fit: cover;
 }
 
 .delete-btn {
@@ -1312,13 +1575,49 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 60rpx;
+	flex-direction: column;
 	color: #999;
+}
+
+.upload-btn .icon {
+	font-size: 60rpx;
+	margin-bottom: 10rpx;
+}
+
+.upload-btn .text {
+	font-size: 24rpx;
 }
 
 .tip-text {
 	font-size: 24rpx;
 	color: #999;
 	margin-top: 10rpx;
+}
+
+.image-section {
+	margin-bottom: 30rpx;
+}
+
+.image-section-title {
+	font-size: 28rpx;
+	font-weight: 500;
+	color: #333;
+	margin-bottom: 15rpx;
+}
+
+.multi-image-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20rpx;
+}
+
+.image-count {
+	background: rgba(2, 171, 171, 0.1);
+	padding: 6rpx 16rpx;
+	border-radius: 20rpx;
+	font-size: 24rpx;
+	color: #02ABAB;
+	margin-left: 10rpx;
+	font-weight: normal;
 }
 </style>

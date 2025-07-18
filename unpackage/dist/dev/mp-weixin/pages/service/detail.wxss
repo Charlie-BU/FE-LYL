@@ -79,6 +79,7 @@
   font-weight: bold;
   margin-bottom: 30rpx;
   background: linear-gradient(90deg, #333, #666);
+  background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   position: relative;
@@ -111,6 +112,54 @@
   font-size: 56rpx;
   font-weight: bold;
   text-shadow: 0 2rpx 4rpx rgba(2, 171, 171, 0.2);
+}
+.service-detail .tab-container.data-v-3000c024 {
+  margin: 30rpx 0;
+}
+.service-detail .tab-container .tab-header.data-v-3000c024 {
+  display: flex;
+  border-bottom: 2rpx solid rgba(2, 171, 171, 0.1);
+  margin-bottom: 20rpx;
+}
+.service-detail .tab-container .tab-header .tab-item.data-v-3000c024 {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  color: #666;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.service-detail .tab-container .tab-header .tab-item.active.data-v-3000c024 {
+  color: #02ABAB;
+  font-weight: 500;
+}
+.service-detail .tab-container .tab-header .tab-item.active.data-v-3000c024::after {
+  content: '';
+  position: absolute;
+  bottom: -2rpx;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background: linear-gradient(90deg, #02ABAB, #05d5d5);
+  border-radius: 2rpx;
+}
+.service-detail .tab-container .tab-content.data-v-3000c024 {
+  min-height: 200rpx;
+}
+.service-detail .service-intro-img.data-v-3000c024,
+.service-detail .service-rule-img.data-v-3000c024 {
+  width: 100%;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 10rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+.service-detail .service-intro-img image.data-v-3000c024,
+.service-detail .service-rule-img image.data-v-3000c024 {
+  width: 100%;
+  display: block;
 }
 .service-detail .service-desc.data-v-3000c024 {
   color: #666;
@@ -165,9 +214,14 @@
   font-size: 32rpx;
   font-weight: 500;
   border-radius: 44rpx;
-  margin-top: 40rpx;
   box-shadow: 0 8rpx 16rpx rgba(2, 171, 171, 0.2);
-  position: relative;
+  position: fixed;
+  bottom: 40rpx;
+  left: 0;
+  right: 0;
+  margin: 0 40rpx;
+  width: calc(100% - 80rpx);
+  z-index: 100;
   overflow: hidden;
   transition: all 0.3s ease;
 }

@@ -124,6 +124,48 @@
 					<text size="mini" v-else>请登录</text>
 				</view> -->
 			</view>
+			<!-- 客服服务套餐入口 -->
+			<view class="service-entry" v-if="identity === 3" @click="goNext('/pages/service/index')">
+				<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/service/service-icon.png"
+					mode="widthFix" />
+			</view>
+			<!-- 订单入口 -->
+			<view class="order-entry" v-if="identity === 1 || identity === 2">
+				<view class="order-buttons">
+					<view class="order-button" @click="goNext('/pages/service/orders?status=all')">
+						<view class="order-icon">
+							<u-icon name="file-text" color="#1abfc0" size="28"></u-icon>
+						</view>
+						<text>全部订单</text>
+					</view>
+					<view class="order-button" @click="goNext('/pages/service/orders?status=pending')">
+						<view class="order-icon">
+							<u-icon name="clock" color="#ff9900" size="28"></u-icon>
+						</view>
+						<text>待合作</text>
+					</view>
+					<view class="order-button" @click="goNext('/pages/service/orders?status=processing')">
+						<view class="order-icon">
+							<u-icon name="reload" color="#2979ff" size="28"></u-icon>
+						</view>
+						<text>合作中</text>
+					</view>
+					<view class="order-button" @click="goNext('/pages/service/orders?status=completed')">
+						<view class="order-icon">
+							<u-icon name="checkmark-circle" color="#19be6b" size="28"></u-icon>
+						</view>
+						<text>合作完成</text>
+					</view>
+				</view>
+			</view>
+			
+			<view class="order-entry admin-order" v-if="identity === 3" @click="goNext('/pages/service/orders')">
+				<view class="admin-order-button">
+					<u-icon name="grid" color="#ffffff" size="22"></u-icon>
+					<text>订单管理</text>
+				</view>
+			</view>
+			
 			<view class="info">
 				<view class="info-title" v-if="identity != 3">{{ temp_user.info_title }}</view>
 				<view class="tabs-info" v-if="identity == 2">
@@ -943,6 +985,104 @@ export default {
 				color: #fff;
 				background: $theme-color;
 				font-size: 24rpx;
+			}
+		}
+	}
+
+	.service-entry {
+		padding: 20rpx 30rpx;
+		margin-bottom: -22rpx;
+
+		image {
+			width: 110%;
+			margin-left: -5%;
+			border-radius: 12rpx;
+			height: auto;
+			object-fit: cover;
+		}
+	}
+	
+	.order-entry {
+		padding: 20rpx 30rpx;
+		margin-top: 10rpx;
+		
+		.order-buttons {
+			display: flex;
+			justify-content: space-between;
+			background: #fff;
+			border-radius: 16rpx;
+			padding: 20rpx 10rpx;
+			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+			
+			.order-button {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				width: 22%;
+				
+				.order-icon {
+					width: 80rpx;
+					height: 80rpx;
+					border-radius: 50%;
+					background: rgba(21, 179, 180, 0.1);
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					margin-bottom: 10rpx;
+					transition: all 0.3s;
+				}
+				
+				&:nth-child(1) .order-icon {
+					background: rgba(26, 191, 192, 0.1);
+				}
+				
+				&:nth-child(2) .order-icon {
+					background: rgba(255, 153, 0, 0.1);
+				}
+				
+				&:nth-child(3) .order-icon {
+					background: rgba(41, 121, 255, 0.1);
+				}
+				
+				&:nth-child(4) .order-icon {
+					background: rgba(25, 190, 107, 0.1);
+				}
+				
+				text {
+					font-size: 24rpx;
+					color: #333;
+					font-weight: 500;
+				}
+				
+				&:active .order-icon {
+					transform: scale(0.95);
+				}
+			}
+		}
+	}
+	
+	.admin-order {
+		.admin-order-button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: linear-gradient(135deg, #15B3B4, #1abfc0);
+			border-radius: 16rpx;
+			padding: 24rpx 0;
+			box-shadow: 0 4rpx 12rpx rgba(21, 179, 180, 0.3);
+			transition: all 0.3s;
+			
+			text {
+				color: #fff;
+				font-size: 30rpx;
+				font-weight: 500;
+				margin-left: 10rpx;
+			}
+			
+			&:active {
+				transform: scale(0.98);
+				box-shadow: 0 2rpx 8rpx rgba(21, 179, 180, 0.2);
 			}
 		}
 	}

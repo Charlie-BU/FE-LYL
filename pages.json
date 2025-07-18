@@ -374,6 +374,15 @@
                 "navigationBarBackgroundColor": "#1abfc0",
                 "navigationBarTextStyle": "white"
             }
+        },
+        {
+            "path": "pages/service/orders",
+            "style": {
+                "navigationBarTitleText": "服务订单",
+                "enablePullDownRefresh": true,
+                "navigationBarBackgroundColor": "#1abfc0",
+                "navigationBarTextStyle": "white"
+            }
         }
     ],
     "globalStyle": {

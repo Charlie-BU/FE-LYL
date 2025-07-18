@@ -35,7 +35,8 @@
     "pages/square/detail",
     "pages/service/index",
     "pages/service/detail",
-    "pages/service/my-service"
+    "pages/service/my-service",
+    "pages/service/orders"
   ],
   "subPackages": [
     {

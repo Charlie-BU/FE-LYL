@@ -19,15 +19,16 @@
                         </swiper-item>
                     </swiper>
                     <view class="swiper-dots">
-                        <view v-for="(i, index) in item.images" :key="index" :class="['dot', currentSwiperIndex === index ? 'active' : '']"></view>
+                        <view v-for="(i, index) in item.images" :key="index"
+                            :class="['dot', currentSwiperIndex === index ? 'active' : '']"></view>
                     </view>
                 </view>
                 <view class="service-item-price">
                     <text class="price-symbol">¥</text>
                     <text class="price-value">{{ item.price * item.amount }}</text>
                 </view>
-                <view class="service-item-desc">{{ item.description }}</view>
-                <view class="service-item-features">
+                <view v-if="item.description" class="service-item-desc">{{ item.description }}</view>
+                <view v-if="item.features && item.features.length > 0" class="service-item-features">
                     <view class="feature-item" v-for="(feature, fIndex) in item.features" :key="fIndex">
                         <u-icon name="checkmark-circle" color="#02ABAB" size="28"></u-icon>
                         <text>{{ feature }}</text>
@@ -48,7 +49,7 @@
                             <text class="arrow">{{ talent.mode ? "∧" : "∨" }}</text>
                         </view>
 
-                        <view v-if="talent.mode" class="details" @click="gotoTalentDatail(talent.id, item.coop_talent_id ? true : false)">
+                        <view v-if="talent.mode" class="details">
                             <view class="detail-item">
                                 <text class="detail-label">手机号：</text>
                                 <text class="detail-value">{{ talent.phone || "未设置" }}</text>
@@ -57,16 +58,18 @@
                                 <text class="detail-label">评分：</text>
                                 <text class="detail-value">{{ talent.star || "暂无评分" }}</text>
                             </view>
-                            <button v-if="item.coop_talent_id" class="cooperate-btn" @click.stop="toChat(talent.id, talent.name, talent.phone)">立即沟通</button>
-                            <button
-                                v-if="!item.coop_talent_id"
-                                class="cooperate-btn"
-                                :disabled="!talent.is_online"
-                                @click.stop="cooperate(talent.id, item.id, talent.name || talent.phone, item.service_buyer_id, talent.is_online)"
-                            >
+                            <button v-if="item.coop_talent_id" class="cooperate-btn"
+                                @click.stop="toChat(talent.id, talent.name, talent.phone)">立即沟通</button>
+                            <button v-if="!item.coop_talent_id" class="cooperate-btn" :disabled="!talent.is_online"
+                                @click.stop="gotoTalentDatail(talent.id, item.coop_talent_id ? true : false)">
+                                查看简历
+                            </button>
+                            <button v-if="!item.coop_talent_id" class="cooperate-btn" :disabled="!talent.is_online"
+                                @click.stop="cooperate(talent.id, item.id, talent.name || talent.phone, item.service_buyer_id, talent.is_online)">
                                 合作
                             </button>
-                            <button v-else class="cooperate-btn" style="background-color: #1ac51a" @click.stop="finishCooperate(talent.id, item.id, item.service_buyer_id)">
+                            <button v-else class="cooperate-btn" style="background-color: #1ac51a"
+                                @click.stop="finishCooperate(talent.id, item.id, item.service_buyer_id)">
                                 完成合作
                             </button>
                         </view>
@@ -164,6 +167,11 @@ export default {
                 "service",
                 (res) => {
                     if (res.data.status !== 200) {
+                        uni.showToast({
+                            title: "该人才暂无简历",
+                            icon: "none",
+                            duration: 800
+                        });
                         return;
                     }
                     const resume_id = res.data.resume_id;
@@ -647,6 +655,7 @@ export default {
                 margin-bottom: 20rpx;
                 font-weight: 600;
                 background: linear-gradient(90deg, #02abab, #05c5c5);
+                background-clip: text;
                 -webkit-background-clip: text;
                 color: transparent;
             }
@@ -693,6 +702,7 @@ export default {
 }
 
 @keyframes float {
+
     0%,
     100% {
         transform: translateY(-40rpx);
