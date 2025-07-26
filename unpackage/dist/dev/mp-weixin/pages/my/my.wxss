@@ -355,6 +355,13 @@
   background: #02ABAB;
   font-size: 24rpx;
 }
+.container .service-title.data-v-0be17cc6 {
+  font-size: 30rpx;
+  color: #141414;
+  font-weight: bold;
+  padding: 0 15rpx;
+  margin-top: 20rpx;
+}
 .container .service-entry.data-v-0be17cc6 {
   padding: 20rpx 30rpx;
   margin-bottom: -22rpx;

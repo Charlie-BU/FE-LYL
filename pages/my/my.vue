@@ -125,6 +125,7 @@
 				</view> -->
 			</view>
 			<!-- 客服服务套餐入口 -->
+			<view class="service-title">服务订单</view>
 			<view class="service-entry" v-if="identity === 3" @click="goNext('/pages/service/index')">
 				<image src="https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/service/service-icon.png"
 					mode="widthFix" />
@@ -158,14 +159,14 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="order-entry admin-order" v-if="identity === 3" @click="goNext('/pages/service/orders')">
 				<view class="admin-order-button">
 					<u-icon name="grid" color="#ffffff" size="22"></u-icon>
 					<text>订单管理</text>
 				</view>
 			</view>
-			
+
 			<view class="info">
 				<view class="info-title" v-if="identity != 3">{{ temp_user.info_title }}</view>
 				<view class="tabs-info" v-if="identity == 2">
@@ -989,6 +990,14 @@ export default {
 		}
 	}
 
+	.service-title {
+		font-size: 30rpx;
+		color: #141414;
+		font-weight: bold;
+		padding: 0 15rpx;
+		margin-top: 20rpx;
+	}
+
 	.service-entry {
 		padding: 20rpx 30rpx;
 		margin-bottom: -22rpx;
@@ -1001,11 +1010,11 @@ export default {
 			object-fit: cover;
 		}
 	}
-	
+
 	.order-entry {
 		padding: 20rpx 30rpx;
 		margin-top: 10rpx;
-		
+
 		.order-buttons {
 			display: flex;
 			justify-content: space-between;
@@ -1013,14 +1022,14 @@ export default {
 			border-radius: 16rpx;
 			padding: 20rpx 10rpx;
 			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
-			
+
 			.order-button {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
 				width: 22%;
-				
+
 				.order-icon {
 					width: 80rpx;
 					height: 80rpx;
@@ -1032,36 +1041,36 @@ export default {
 					margin-bottom: 10rpx;
 					transition: all 0.3s;
 				}
-				
+
 				&:nth-child(1) .order-icon {
 					background: rgba(26, 191, 192, 0.1);
 				}
-				
+
 				&:nth-child(2) .order-icon {
 					background: rgba(255, 153, 0, 0.1);
 				}
-				
+
 				&:nth-child(3) .order-icon {
 					background: rgba(41, 121, 255, 0.1);
 				}
-				
+
 				&:nth-child(4) .order-icon {
 					background: rgba(25, 190, 107, 0.1);
 				}
-				
+
 				text {
 					font-size: 24rpx;
 					color: #333;
 					font-weight: 500;
 				}
-				
+
 				&:active .order-icon {
 					transform: scale(0.95);
 				}
 			}
 		}
 	}
-	
+
 	.admin-order {
 		.admin-order-button {
 			display: flex;
@@ -1072,14 +1081,14 @@ export default {
 			padding: 24rpx 0;
 			box-shadow: 0 4rpx 12rpx rgba(21, 179, 180, 0.3);
 			transition: all 0.3s;
-			
+
 			text {
 				color: #fff;
 				font-size: 30rpx;
 				font-weight: 500;
 				margin-left: 10rpx;
 			}
-			
+
 			&:active {
 				transform: scale(0.98);
 				box-shadow: 0 2rpx 8rpx rgba(21, 179, 180, 0.2);

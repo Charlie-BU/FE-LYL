@@ -29,6 +29,14 @@
                             </view>
 
                             <!-- 合作者信息 -->
+                            <view class="cooperator-info">
+                                <text class="label">订单ID：</text>
+                                <text class="value">{{ order.order_id }}</text>
+                            </view>
+                            <view class="cooperator-info">
+                                <text class="label">合作时间：</text>
+                                <text class="value">{{ format_time(order.create_time) }}</text>
+                            </view>
                             <view v-if="identity !== 3">
                                 <view v-if="order.cooperator_name" class="cooperator-info">
                                     <text class="label">合作者：</text>
@@ -68,7 +76,7 @@
                         </button>
                         <button class="action-btn service-btn" @click.stop="lx_kefu">
                             <u-icon name="server-man" color="#ffffff" size="24"></u-icon>
-                            <text>联系客服</text>
+                            <text>{{ currentTab !== 3 ? '联系客服' : '退款/售后' }}</text>
                         </button>
                     </view>
                 </view>
@@ -76,7 +84,6 @@
 
             <!-- 空状态 -->
             <view v-else class="empty-state">
-                <image class="empty-icon" src="/static/my/empty-order.png" mode="aspectFit"></image>
                 <text class="empty-text">暂无订单数据</text>
             </view>
         </scroll-view>
@@ -85,6 +92,7 @@
 
 <script>
 import { fetch_data } from "../../utils/ajax_request.js";
+import { format_time } from "../../utils/utils.js";
 
 export default {
     data() {
@@ -112,6 +120,8 @@ export default {
         this.getOrderList();
     },
     methods: {
+        format_time,
+
         // 切换Tab
         switchTab(index) {
             if (this.currentTab === index) return;
@@ -162,13 +172,18 @@ export default {
 
         // 联系合作者
         contactCooperator(order) {
+            if (!order.cooperator_id) {
+                this.$u.toast('暂无合作者')
+                return
+            }
             // 跳转到聊天页面或拨打电话
             uni.showActionSheet({
                 itemList: ['发送消息', '拨打电话'],
                 success: (res) => {
                     if (res.tapIndex === 0) {
+                        const user_type = order.cooperator_identity === 2 ? 'user' : 'qy';
                         // 跳转到聊天页面
-                        this.toNext(`/pages/message/private_chat?id=user_${order.cooperator_id}&title=${order.cooperator_name || order.cooperator_phone}`);
+                        this.toNext(`/pages/message/private_chat?id=${user_type}_${order.cooperator_id}&title=${order.cooperator_name || order.cooperator_phone}`);
                     } else if (res.tapIndex === 1) {
                         // 拨打电话
                         uni.makePhoneCall({

@@ -17,6 +17,7 @@
                 <text class="price-symbol">¥</text>
                 <text class="price-value">{{ serviceData.price }}</text>
             </view>
+            <view class="service-desc">安心购：{{ serviceData.description }}</view>
             <!-- Tab切换 -->
             <view class="tab-container">
                 <view class="tab-header">
@@ -38,7 +39,6 @@
                     </view>
                 </view>
             </view>
-            <!-- <view class="service-desc">{{ serviceData.description }}</view> -->
             <!-- <view class="service-features">
                 <view class="feature-item" v-for="(feature, index) in serviceData.features" :key="index">
                     <u-icon name="checkmark-circle" color="#02ABAB" size="28"></u-icon>

@@ -86,6 +86,11 @@
 					</view>
 
 					<view class="form-item">
+						<text class="label">安心购</text>
+						<input type="text" v-model="formData.description" placeholder="请输入服务套餐描述" />
+					</view>
+
+					<view class="form-item">
 						<text class="label">封面图片</text>
 						<view class="image-upload-area">
 							<view class="image-list">
@@ -237,6 +242,7 @@ export default {
 			formData: {
 				name: '',
 				price: '',
+				description: '',
 				category_id: null,
 				profile_img: '',
 				intro_img: '',
@@ -354,7 +360,7 @@ export default {
 				// 调用后端创建订单接口
 				fetch_data("POST", 'create_pay', {
 					amount: item.price,
-					description: item.name, // 商品描述使用服务套餐名称
+					description: item.description,
 					attach: JSON.stringify({
 						service_id: item.id,
 						user_id: uni.getStorageSync('user_id')
@@ -506,6 +512,7 @@ export default {
 			this.formData = {
 				name: '',
 				price: '',
+				description: '',
 				category_id: null,
 				profile_img: '',
 				intro_img: '',
@@ -520,6 +527,7 @@ export default {
 				id: item.id,
 				name: item.name,
 				price: item.price,
+				description: item.description,
 				profile_img: item.profile_img || '',
 				intro_img: item.intro_img || '',
 				rule_img: item.rule_img || '',
