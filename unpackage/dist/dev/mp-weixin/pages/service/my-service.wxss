@@ -397,4 +397,37 @@
 .details .cooperate-btn.data-v-84277732:active {
   opacity: 0.8;
 }
+.cooperate-popup.data-v-84277732 {
+  background: #fff;
+  padding: 60rpx 60rpx;
+  border-radius: 16rpx;
+  width: 70%;
+  margin: 0 auto;
+}
+.cooperate-popup .cooperate-title.data-v-84277732 {
+  color: #000;
+  font-size: 42rpx;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+.cooperate-popup .cooperate-content.data-v-84277732 {
+  color: #adadad;
+  font-size: 24rpx;
+  text-align: justify;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 40rpx;
+}
+.cooperate-popup .cooperate-bot.data-v-84277732 {
+  display: flex;
+  justify-content: space-between;
+}
+.cooperate-popup .cooperate-bot .confirm-btn.data-v-84277732 {
+  line-height: 60rpx;
+  font-size: 26rpx;
+  border-radius: 10rpx;
+  color: #fff;
+  padding: 0 20rpx;
+  background: #02AAAB;
+}
 

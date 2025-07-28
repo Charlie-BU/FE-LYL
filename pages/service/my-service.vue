@@ -65,7 +65,7 @@
                                 查看简历
                             </button>
                             <button v-if="!item.coop_talent_id" class="cooperate-btn" :disabled="!talent.is_online"
-                                @click.stop="cooperate(talent.id, item.id, talent.name || talent.phone, item.service_buyer_id, talent.is_online)">
+                                @click.stop="cooperate(talent.id, item.id, talent.name || talent.phone, item.service_buyer_id, talent.is_online, item.name)">
                                 合作
                             </button>
                             <button v-else class="cooperate-btn" style="background-color: #1ac51a"
@@ -92,6 +92,44 @@
                 </view>
             </view>
         </view>
+
+        <!-- 添加评分弹窗 -->
+        <u-popup :show="showEvaluateModal" @close="showEvaluateModal = false" mode="center"
+            :customStyle="customAlertStyle" bgColor="transparent" :overlayOpacity="0.4">
+            <view class="cooperate-popup">
+                <view class="cooperate-title">
+                    <text>合作评价</text>
+                </view>
+                <view class="cooperate-content">
+                    <text>合作完成后，您可在一个月内对服务进行评价。如满一个月未评价，则默认五星好评</text>
+                </view>
+                <view style="display: flex;">
+                    <text style="margin-top: 8rpx;">服务配合：</text>
+                    <view v-for="i in evaluateIndex1" :key="i" style="margin-bottom: 15rpx;">
+                        <image @click="select_star(i, 'evaluateIndex1')" src="@/static/message/starred.png"
+                            mode="widthFix" style="width: 50rpx;" />
+                    </view>
+                    <view v-for="i in (5 - evaluateIndex1)" :key="i" style="margin-bottom: 15rpx;">
+                        <image @click="select_star(evaluateIndex1 + i, 'evaluateIndex1')"
+                            src="@/static/message/unstarred.png" mode="widthFix" style="width: 50rpx;" />
+                    </view>
+                </view>
+                <view style="display: flex; margin-top: 20rpx;">
+                    <text style="margin-top: 8rpx;">专业能力：</text>
+                    <view v-for="i in evaluateIndex2" :key="i" style="margin-bottom: 15rpx;">
+                        <image @click="select_star(i, 'evaluateIndex2')" src="@/static/message/starred.png"
+                            mode="widthFix" style="width: 50rpx;" />
+                    </view>
+                    <view v-for="i in (5 - evaluateIndex2)" :key="i" style="margin-bottom: 15rpx;">
+                        <image @click="select_star(evaluateIndex2 + i, 'evaluateIndex2')"
+                            src="@/static/message/unstarred.png" mode="widthFix" style="width: 50rpx;" />
+                    </view>
+                </view>
+                <view class="cooperate-bot" style="margin-top: 30rpx; margin-left: 160rpx;">
+                    <button class="confirm-btn" @click="submit_evaluate()">确认</button>
+                </view>
+            </view>
+        </u-popup>
     </view>
 </template>
 
@@ -106,7 +144,17 @@ export default {
             load: true,
             hasMore: false,
             noMore: "",
-            currentSwiperIndex: 0
+            currentSwiperIndex: 0,
+            // 添加评分弹窗相关数据
+            showEvaluateModal: false,
+            evaluateIndex1: 0,
+            evaluateIndex2: 0,
+            currentTalentId: null,
+            currentServiceId: null,
+            currentServiceBuyerId: null,
+            customAlertStyle: {
+                borderRadius: '16rpx'
+            }
         };
     },
     onLoad() {
@@ -203,7 +251,7 @@ export default {
             _this.toNext(`/pages/message/private_chat?id=user_${talent_id}&title=${talent_name || talent_phone}`);
         },
 
-        cooperate(talentId, serviceId, talentName, service_buyer_id, is_online = 1) {
+        cooperate(talentId, serviceId, talentName, service_buyer_id, is_online = 1, serviceName) {
             if (_this.user_id == talentId) {
                 this.$u.toast("无法与自己合作");
                 return;
@@ -239,6 +287,22 @@ export default {
                                         icon: "success",
                                         duration: 2000
                                     });
+
+                                    // 发送微信通知给人才
+                                    const notificationData = {
+                                        my_id: this.user_id,
+                                        receiver_id: talentId,
+                                        service_name: serviceName
+                                    };
+
+                                    fetch_data("POST", "send_notification", notificationData, "service", (notifyRes) => {
+                                        if (notifyRes.data.status === 200) {
+                                            console.log("微信通知发送成功");
+                                        } else {
+                                            console.log("微信通知发送失败", notifyRes);
+                                        }
+                                    });
+
                                     // 刷新列表
                                     this.getMyPurchaseList();
                                 } else {
@@ -255,44 +319,109 @@ export default {
             });
         },
 
-        finishCooperate(talentId, serviceId, service_buyer_id) {
-            uni.showModal({
-                title: "确认完成",
-                content: "确认完成此次合作？",
-                success: (res) => {
-                    if (res.confirm) {
-                        fetch_data(
-                            "POST",
-                            "finish_cooperate",
-                            {
-                                talent_id: talentId,
-                                service_id: serviceId,
-                                service_buyer_id: service_buyer_id
-                            },
-                            "service",
-                            (res) => {
-                                if (res.data.status === 200) {
-                                    uni.showToast({
-                                        title: "完成合作成功",
-                                        icon: "success",
-                                        duration: 2000
-                                    });
-                                    // 刷新列表
-                                    this.getMyPurchaseList();
-                                } else {
-                                    uni.showToast({
-                                        title: res.data.message || "操作失败",
-                                        icon: "none",
-                                        duration: 2000
-                                    });
-                                }
-                            }
-                        );
-                    }
-                }
-            });
-        },
+        // finishCooperate(talentId, serviceId, service_buyer_id) {
+        //     uni.showModal({
+        //         title: "确认完成",
+        //         content: "确认完成此次合作？",
+        //         success: (res) => {
+        //             if (res.confirm) {
+        //                 fetch_data(
+        //                     "POST",
+        //                     "finish_cooperate",
+        //                     {
+        //                         talent_id: talentId,
+        //                         service_id: serviceId,
+        //                         service_buyer_id: service_buyer_id
+        //                     },
+        //                     "service",
+        //                     (res) => {
+        //                         if (res.data.status === 200) {
+        //                             uni.showToast({
+        //                                 title: "完成合作成功",
+        //                                 icon: "success",
+        //                                 duration: 2000
+        //                             });
+        //                             // 刷新列表
+        //                             this.getMyPurchaseList();
+        //                         } else {
+        //                             uni.showToast({
+        //                                 title: res.data.message || "操作失败",
+        //                                 icon: "none",
+        //                                 duration: 2000
+        //                             });
+        //                         }
+        //                     }
+        //                 );
+        //             }
+        //         }
+        //     });
+        // },
+
         // 添加轮播图切换事件处理
+
+        finishCooperate(talentId, serviceId, service_buyer_id) {
+            // 保存当前合作信息
+            this.currentTalentId = talentId;
+            this.currentServiceId = serviceId;
+            this.currentServiceBuyerId = service_buyer_id;
+            // 重置评分
+            this.evaluateIndex1 = 0;
+            this.evaluateIndex2 = 0;
+            // 显示评分弹窗
+            this.showEvaluateModal = true;
+        },
+
+        // 添加评分选择方法
+        select_star(i, whichone) {
+            if (whichone === "evaluateIndex1") {
+                this.evaluateIndex1 = i + 1;
+            } else {
+                this.evaluateIndex2 = i + 1;
+            }
+        },
+
+        submit_evaluate() {
+            if (this.evaluateIndex1 === 0 || this.evaluateIndex2 === 0) {
+                uni.showToast({
+                    title: "请完成评分",
+                    icon: "none",
+                    duration: 1000
+                });
+                return;
+            }
+
+            fetch_data(
+                "POST",
+                "finish_cooperate",
+                {
+                    talent_id: this.currentTalentId,
+                    service_id: this.currentServiceId,
+                    service_buyer_id: this.currentServiceBuyerId,
+                    evaluate_score1: this.evaluateIndex1,
+                    evaluate_score2: this.evaluateIndex2
+                },
+                "service",
+                (res) => {
+                    if (res.data.status === 200) {
+                        uni.showToast({
+                            title: "合作已完成",
+                            icon: "success",
+                            duration: 2000
+                        });
+                        // 刷新列表
+                        this.getMyPurchaseList();
+                    } else {
+                        uni.showToast({
+                            title: res.data.message || "操作失败",
+                            icon: "none",
+                            duration: 2000
+                        });
+                    }
+                    this.showEvaluateModal = false;
+                }
+            );
+        },
+
         swiperChange(e) {
             this.currentSwiperIndex = e.detail.current;
         },
@@ -752,6 +881,44 @@ export default {
 
         &:active {
             opacity: 0.8;
+        }
+    }
+}
+
+.cooperate-popup {
+    background: #fff;
+    padding: 60rpx 60rpx;
+    border-radius: 16rpx;
+    width: 70%;
+    margin: 0 auto;
+
+    .cooperate-title {
+        color: #000;
+        font-size: 42rpx;
+        text-align: center;
+        margin-bottom: 20rpx;
+    }
+
+    .cooperate-content {
+        color: #adadad;
+        font-size: 24rpx;
+        text-align: justify;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 40rpx;
+    }
+
+    .cooperate-bot {
+        display: flex;
+        justify-content: space-between;
+
+        .confirm-btn {
+            line-height: 60rpx;
+            font-size: 26rpx;
+            border-radius: 10rpx;
+            color: #fff;
+            padding: 0 20rpx;
+            background: #02AAAB;
         }
     }
 }

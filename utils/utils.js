@@ -97,7 +97,7 @@ export function subscirbe_message(template_Ids, callback = null) {
 		tmplIds: template_Ids,
 		success(res) {
 			// 用户授权后，无论同意与否
-			if (res.errMsg == 'requestSubscribeMessage:ok') {
+			if (res.errMsg == 'requestSubscribeMessage:ok' && callback) {
 				callback();
 			}
 		},

@@ -7,24 +7,25 @@
 }
 .container .header-buttons.data-v-7881794f {
   display: flex;
-  gap: 20rpx;
-  padding: 20rpx;
+  gap: 15rpx;
+  padding: 15rpx;
 }
 .container .header-buttons .add-service-btn.data-v-7881794f,
 .container .header-buttons .my-purchase-btn.data-v-7881794f {
-  font-size: 28rpx;
-  padding: 12rpx 36rpx;
-  border-radius: 40rpx;
+  font-size: 24rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 30rpx;
   height: auto;
-  line-height: 1.8;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  line-height: 1.6;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  min-width: 120rpx;
 }
 .container .header-buttons .add-service-btn.data-v-7881794f:active,
 .container .header-buttons .my-purchase-btn.data-v-7881794f:active {
-  -webkit-transform: translateY(2rpx);
-          transform: translateY(2rpx);
-  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+  -webkit-transform: translateY(1rpx);
+          transform: translateY(1rpx);
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.08);
 }
 .container .header-buttons .add-service-btn.data-v-7881794f {
   background: linear-gradient(135deg, #4CAF50, #45a049);

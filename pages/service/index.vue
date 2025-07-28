@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view style="display: flex">
-			<view style="width: 67%;">
+			<view style="width: 80%;">
 				<u-tabs lineColor="#02ABAB" :list="tabbar_list" :scrollable="true" :current="current" @change="change"
 					:activeStyle="{
 						color: '#02ABAB',
@@ -1005,22 +1005,23 @@ export default {
 
 	.header-buttons {
 		display: flex;
-		gap: 20rpx;
-		padding: 20rpx;
+		gap: 15rpx; // 减小按钮间距
+		padding: 15rpx; // 减小容器内边距
 
 		.add-service-btn,
 		.my-purchase-btn {
-			font-size: 28rpx;
-			padding: 12rpx 36rpx;
-			border-radius: 40rpx;
+			font-size: 24rpx; // 减小字体大小
+			padding: 8rpx 24rpx; // 减小内边距
+			border-radius: 30rpx; // 调整圆角
 			height: auto;
-			line-height: 1.8;
-			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+			line-height: 1.6; // 调整行高
+			box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08); // 减小阴影
 			transition: all 0.3s ease;
+			min-width: 120rpx; // 设置最小宽度
 
 			&:active {
-				transform: translateY(2rpx);
-				box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+				transform: translateY(1rpx);
+				box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.08);
 			}
 		}
 

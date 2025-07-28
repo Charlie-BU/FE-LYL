@@ -90,9 +90,10 @@
 				</view>
 				<view v-if="identity === 1" class="user-top-bot">
 					<image src="/static/my/zaixian.png" mode="widthFix" />
-					<view class="user-top-bot-center">
+					<view class="user-top-bot-center" @click="subscirbe_message">
 						<view class="tit">可接服务套餐</view>
 						<view class="sub-tit">项目方购买您被分配的服务套餐即可选择与您合作</view>
+						<view class="sub-tit" style="color: #03AAAB; font-weight: bold;">请点击此处订阅接单微信提醒</view>
 					</view>
 					<view class="switch">
 						<u-switch asyncChange v-model="talentOnline" :inactiveValue="0" :activeValue="1" size="20"
@@ -501,6 +502,12 @@ export default {
 		}
 	},
 	methods: {
+		subscirbe_message() {
+			utils.get_openid((openid) => {
+				fetch_data("POST", "store_openid", { "my_id": _this.user_id, "openid": openid }, "user");
+			})
+			utils.subscirbe_message(['VPWt9pvTvCOWHtFBOQCo5mFmaalKwWmYDXk0l3sD2pQ']);
+		},
 		clickTab(item) {
 			if (_this.xm_form.status != item.status) {
 				_this.xm_form.status = item.status
@@ -537,6 +544,7 @@ export default {
 			});
 		},
 		talentOnlineChange(value) {
+			_this.subscirbe_message();
 			_this.switchLoad = true
 			fetch_data("POST", "talent_online_change", {
 				"talent_id": this.user_id,
