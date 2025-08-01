@@ -16,7 +16,7 @@
             <view v-if="orderList.length > 0">
                 <view v-for="(order, index) in orderList" :key="index" class="order-item">
                     <!-- 订单内容 -->
-                    <view class="order-content" @click="gotoMyService">
+                    <view class="order-content" @click="gotoMyService(order.service_id)">
                         <!-- 服务包封面图 -->
                         <image class="service-image" :src="order.profile_img" mode="aspectFill"></image>
 
@@ -158,10 +158,10 @@ export default {
             });
         },
 
-        gotoMyService() {
+        gotoMyService(order_id) {
             if (this.identity !== 2) return;
             if (this.status === 'completed') return;
-            this.toNext(`/pages/service/my-service`)
+            this.toNext(`/pages/service/my-service?order_id=${order_id}`)
         },
 
         // 下拉刷新

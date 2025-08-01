@@ -145,6 +145,7 @@ export default {
             hasMore: false,
             noMore: "",
             currentSwiperIndex: 0,
+            order_id: null, // 添加order_id属性
             // 添加评分弹窗相关数据
             showEvaluateModal: false,
             evaluateIndex1: 0,
@@ -157,8 +158,9 @@ export default {
             }
         };
     },
-    onLoad() {
+    onLoad(options) {
         _this = this;
+        _this.order_id = options.order_id; // 保存传入的order_id参数
         _this.getMyPurchaseList();
     },
     methods: {
@@ -190,6 +192,13 @@ export default {
                                 }
                                 return service;
                             });
+
+                            // 如果存在order_id参数，则筛选出对应的服务
+                            if (_this.order_id) {
+                                console.log(_this.order_id);
+                                services = services.filter(service => service.service_buyer_id == _this.order_id);
+                            }
+
                             _this.lists = services;
                         }
                         if (_this.load) {
