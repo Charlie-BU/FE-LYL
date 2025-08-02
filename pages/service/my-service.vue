@@ -130,6 +130,24 @@
                 </view>
             </view>
         </u-popup>
+
+        <u-popup :show="showConfirmModal" @close="showConfirmModal = false" mode="center"
+            :customStyle="customAlertStyle" bgColor="transparent" :overlayOpacity="0.4">
+            <view class="custom-popup">
+                <view class="popup-header">
+                    <image class="popup-icon" src="/static/service/coop.svg" mode="aspectFit"></image>
+                    <text class="popup-title">确认合作</text>
+                </view>
+                <view class="popup-content">
+                    <text>确认与{{ popupTalentName }}合作？</text>
+                    <text class="popup-notice">确认合作即表明您已阅读并同意平台规范</text>
+                </view>
+                <view class="popup-buttons">
+                    <button class="btn-cancel" @click="closePopup">取消</button>
+                    <button class="btn-confirm" @click="confirmCooperate">确认</button>
+                </view>
+            </view>
+        </u-popup>
     </view>
 </template>
 
@@ -155,7 +173,10 @@ export default {
             currentServiceBuyerId: null,
             customAlertStyle: {
                 borderRadius: '16rpx'
-            }
+            },
+            showConfirmModal: false,
+            popupTalentName: '',
+            currentCooperateData: null,
         };
     },
     onLoad(options) {
@@ -272,100 +293,87 @@ export default {
                 });
                 return;
             }
+            // 保存当前合作信息
+            this.currentCooperateData = {
+                talentId,
+                serviceId,
+                service_buyer_id,
+                serviceName
+            };
+
+            // 设置弹窗人才名称
+            this.popupTalentName = talentName;
+
             // 显示确认弹窗
-            uni.showModal({
-                title: "确认合作",
-                content: "确认合作后不可取消，确认与" + talentName + "合作？",
-                success: (res) => {
-                    if (res.confirm) {
-                        // 调用确认合作接口
-                        fetch_data(
-                            "POST",
-                            "confirm_cooperate",
-                            {
-                                talent_id: talentId,
-                                service_id: serviceId,
-                                service_buyer_id: service_buyer_id
-                            },
-                            "service",
-                            (res) => {
-                                if (res.data.status === 200) {
-                                    uni.showToast({
-                                        title: "合作成功",
-                                        icon: "success",
-                                        duration: 2000
-                                    });
-
-                                    // 发送微信通知给人才
-                                    const notificationData = {
-                                        my_id: this.user_id,
-                                        receiver_id: talentId,
-                                        service_name: serviceName
-                                    };
-
-                                    fetch_data("POST", "send_notification", notificationData, "service", (notifyRes) => {
-                                        if (notifyRes.data.status === 200) {
-                                            console.log("微信通知发送成功");
-                                        } else {
-                                            console.log("微信通知发送失败", notifyRes);
-                                        }
-                                    });
-
-                                    // 刷新列表
-                                    this.getMyPurchaseList();
-                                } else {
-                                    uni.showToast({
-                                        title: res.data.message || "操作失败",
-                                        icon: "none",
-                                        duration: 2000
-                                    });
-                                }
-                            }
-                        );
-                    }
-                }
-            });
+            this.showConfirmModal = true;
         },
 
-        // finishCooperate(talentId, serviceId, service_buyer_id) {
-        //     uni.showModal({
-        //         title: "确认完成",
-        //         content: "确认完成此次合作？",
-        //         success: (res) => {
-        //             if (res.confirm) {
-        //                 fetch_data(
-        //                     "POST",
-        //                     "finish_cooperate",
-        //                     {
-        //                         talent_id: talentId,
-        //                         service_id: serviceId,
-        //                         service_buyer_id: service_buyer_id
-        //                     },
-        //                     "service",
-        //                     (res) => {
-        //                         if (res.data.status === 200) {
-        //                             uni.showToast({
-        //                                 title: "完成合作成功",
-        //                                 icon: "success",
-        //                                 duration: 2000
-        //                             });
-        //                             // 刷新列表
-        //                             this.getMyPurchaseList();
-        //                         } else {
-        //                             uni.showToast({
-        //                                 title: res.data.message || "操作失败",
-        //                                 icon: "none",
-        //                                 duration: 2000
-        //                             });
-        //                         }
-        //                     }
-        //                 );
-        //             }
-        //         }
-        //     });
-        // },
+        confirmCooperate() {
+            if (!this.currentCooperateData) {
+                uni.showToast({
+                    title: "数据异常，请重试",
+                    icon: "none",
+                    duration: 2000
+                });
+                return;
+            }
 
-        // 添加轮播图切换事件处理
+            const { talentId, serviceId, service_buyer_id, serviceName } = this.currentCooperateData;
+
+            // 调用确认合作接口
+            fetch_data(
+                "POST",
+                "confirm_cooperate",
+                {
+                    talent_id: talentId,
+                    service_id: serviceId,
+                    service_buyer_id: service_buyer_id
+                },
+                "service",
+                (res) => {
+                    if (res.data.status === 200) {
+                        uni.showToast({
+                            title: "合作成功",
+                            icon: "success",
+                            duration: 2000
+                        });
+
+                        // 发送微信通知给人才
+                        const notificationData = {
+                            my_id: this.user_id,
+                            receiver_id: talentId,
+                            service_name: serviceName
+                        };
+
+                        fetch_data("POST", "send_notification", notificationData, "service", (notifyRes) => {
+                            if (notifyRes.data.status === 200) {
+                                console.log("微信通知发送成功");
+                            } else {
+                                console.log("微信通知发送失败", notifyRes);
+                            }
+                        });
+
+                        // 刷新列表
+                        this.getMyPurchaseList();
+                    } else {
+                        uni.showToast({
+                            title: res.data.message || "操作失败",
+                            icon: "none",
+                            duration: 2000
+                        });
+                    }
+
+                    // 关闭弹窗
+                    this.closePopup();
+                }
+            );
+        },
+
+        // 关闭确认弹窗
+        closePopup() {
+            this.showConfirmModal = false;
+            this.currentCooperateData = null;
+        },
 
         finishCooperate(talentId, serviceId, service_buyer_id) {
             // 保存当前合作信息
@@ -446,7 +454,8 @@ export default {
                 current: imgs_list[index], // 修改这里，直接使用图片URL
                 urls: imgs_list
             });
-        }
+        },
+
     }
 };
 </script>
@@ -929,5 +938,69 @@ export default {
             background: #02AAAB;
         }
     }
+}
+
+.custom-popup {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    width: 80%;
+    padding: 20px;
+}
+
+.popup-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.popup-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.popup-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.popup-content {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.popup-notice {
+    display: block;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #02AAAB;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-cancel,
+.btn-confirm {
+    flex: 1;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 20px;
+    margin: 0 10px;
+}
+
+.btn-cancel {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+.btn-confirm {
+    background-color: #02AAAB;
+    color: white;
 }
 </style>
