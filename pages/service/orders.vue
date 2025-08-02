@@ -15,6 +15,19 @@
             :refresher-triggered="isRefreshing">
             <view v-if="orderList.length > 0">
                 <view v-for="(order, index) in orderList" :key="index" class="order-item">
+                    <view class="order-status-tag status-pending" v-if="order.status === 1 && !order.talent_name">
+                        待合作
+                    </view>
+                    <view class="order-status-tag status-processing"
+                        v-else-if="order.status === 1 && order.talent_name">
+                        合作中
+                    </view>
+                    <view class="order-status-tag status-completed" v-else-if="order.status === 2">
+                        合作完成
+                    </view>
+                    <view class="order-status-tag status-refunded" v-else-if="order.status === 3">
+                        已退款
+                    </view>
                     <!-- 订单内容 -->
                     <view class="order-content" @click="gotoMyService(order.service_id)">
                         <!-- 服务包封面图 -->
@@ -356,6 +369,7 @@ export default {
     margin-bottom: 20rpx;
     padding: 20rpx;
     box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
 .order-content {
@@ -476,5 +490,37 @@ export default {
 .empty-text {
     font-size: 28rpx;
     color: #999999;
+}
+
+.order-status-tag {
+    position: absolute;
+    top: 20rpx;
+    right: 30rpx;
+    padding: 4rpx 12rpx;
+    border-radius: 20rpx;
+    font-size: 22rpx;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
+}
+
+.status-pending {
+    background-color: #ff9800;
+    /* 橙色 - 待合作 */
+}
+
+.status-processing {
+    background-color: #2196f3;
+    /* 蓝色 - 合作中 */
+}
+
+.status-completed {
+    background-color: #4caf50;
+    /* 绿色 - 合作完成 */
+}
+
+.status-refunded {
+    background-color: #f44336;
+    /* 红色 - 已退款 */
 }
 </style>
