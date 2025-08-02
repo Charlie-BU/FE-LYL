@@ -79,6 +79,14 @@
                             <text>{{ currentTab !== 3 ? '联系客服' : '退款/售后' }}</text>
                         </button>
                     </view>
+                    <view class="order-actions" v-else-if="currentTab !== 4">
+                        <button class="action-btn cooperator-btn" @click.stop="cancelCooperation(order)">
+                            <text>取消合作</text>
+                        </button>
+                        <button class="action-btn service-btn" @click.stop="setRefunded(order)">
+                            <text>标记为已退款</text>
+                        </button>
+                    </view>
                 </view>
             </view>
 
@@ -101,7 +109,8 @@ export default {
                 { name: '全部订单', status: 'all' },
                 { name: '待合作', status: 'pending' },
                 { name: '合作中', status: 'processing' },
-                { name: '合作完成', status: 'completed' }
+                { name: '合作完成', status: 'completed' },
+                { name: '已退款', status: 'refunded' }
             ],
             currentTab: 0,
             orderList: [],
@@ -158,6 +167,85 @@ export default {
             });
         },
 
+
+        cancelCooperation(order) {
+            wx.showModal({
+                title: "确认取消",
+                content: "确定要取消此次合作吗？",
+                success: (res) => {
+                    if (res.confirm) {
+                        wx.showToast({
+                            title: "取消中...",
+                            icon: "loading",
+                            duration: 100000
+                        });
+                        fetch_data('POST', 'cancel_cooperation', {
+                            service_buyer_id: order.service_buyer_id,
+                            user_id: uni.getStorageSync('user_id'),
+                            identity: uni.getStorageSync('identity')
+                        }, 'service', res => {
+                            if (res.data.status === 200) {
+                                wx.showToast({
+                                    title: "取消成功",
+                                    icon: "none",
+                                    duration: 700
+                                });
+                                setTimeout(() => {
+                                    uni.reLaunch({
+                                        url: "/pages/service/orders"
+                                    });
+                                }, 700);
+                            } else {
+                                wx.showToast({
+                                    title: res.data.message || '取消合作失败',
+                                    icon: 'none'
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        },
+
+        setRefunded(order) {
+            wx.showModal({
+                title: "确认标记退款",
+                content: "确定将该订单要标记为已退款吗？",
+                success: (res) => {
+                    if (res.confirm) {
+                        wx.showToast({
+                            title: "请稍后...",
+                            icon: "loading",
+                            duration: 100000
+                        });
+                        fetch_data('POST', 'mark_refund', {
+                            service_buyer_id: order.service_buyer_id,
+                            user_id: uni.getStorageSync('user_id'),
+                            identity: uni.getStorageSync('identity')
+                        }, 'service', res => {
+                            if (res.data.status === 200) {
+                                wx.showToast({
+                                    title: "标记成功",
+                                    icon: "none",
+                                    duration: 700
+                                });
+                                setTimeout(() => {
+                                    uni.reLaunch({
+                                        url: "/pages/service/orders"
+                                    });
+                                }, 700);
+                            } else {
+                                wx.showToast({
+                                    title: res.data.message || '取消合作失败',
+                                    icon: 'none'
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        },
+
         gotoMyService(order_id) {
             if (this.identity !== 2) return;
             if (this.status === 'completed') return;
@@ -181,7 +269,7 @@ export default {
                 itemList: ['发送消息', '拨打电话'],
                 success: (res) => {
                     if (res.tapIndex === 0) {
-                        const user_type = order.cooperator_identity === 2 ? 'user' : 'qy';
+                        const user_type = this.identity === 2 ? 'user' : 'qy';
                         // 跳转到聊天页面
                         this.toNext(`/pages/message/private_chat?id=${user_type}_${order.cooperator_id}&title=${order.cooperator_name || order.cooperator_phone}`);
                     } else if (res.tapIndex === 1) {
@@ -202,7 +290,7 @@ export default {
             } else {
                 this.$u.toast(data.msg)
             }
-        }
+        },
     }
 };
 </script>

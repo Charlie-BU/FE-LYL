@@ -195,7 +195,6 @@ export default {
 
                             // 如果存在order_id参数，则筛选出对应的服务
                             if (_this.order_id) {
-                                console.log(_this.order_id);
                                 services = services.filter(service => service.service_buyer_id == _this.order_id);
                             }
 
