@@ -29,7 +29,7 @@
                         已退款
                     </view>
                     <!-- 订单内容 -->
-                    <view class="order-content" @click="gotoMyService(order.service_id)">
+                    <view class="order-content" @click="gotoMyService(order.service_buyer_id)">
                         <!-- 服务包封面图 -->
                         <image class="service-image" :src="order.profile_img" mode="aspectFill"></image>
 
