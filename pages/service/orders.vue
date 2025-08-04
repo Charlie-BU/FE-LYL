@@ -10,11 +10,21 @@
             </view>
         </view>
 
+
+        <!-- 服务类别Tab -->
+        <view class="tab-container">
+            <view v-for="(item, index2) in categoryList" :key="index2" class="tab-item"
+                :class="{ active: currentCategory === index2 }" @click="changeCategory(index2)">
+                <text>{{ item.name }}</text>
+                <view v-if="currentCategory === index2" class="active-line"></view>
+            </view>
+        </view>
+
         <!-- 订单列表 -->
         <scroll-view scroll-y class="order-list" refresher-enabled @refresherrefresh="onRefresh"
             :refresher-triggered="isRefreshing">
-            <view v-if="orderList.length > 0">
-                <view v-for="(order, index) in orderList" :key="index" class="order-item">
+            <view v-if="filteredOrderList.length > 0">
+                <view v-for="(order, index) in filteredOrderList" :key="index" class="order-item">
                     <view class="order-status-tag status-pending" v-if="order.status === 1 && !order.talent_name">
                         待合作
                     </view>
@@ -127,8 +137,26 @@ export default {
             ],
             currentTab: 0,
             orderList: [],
-            isRefreshing: false
+            isRefreshing: false,
+            // 新增类别相关数据
+            categories: [],
+            categoryList: [{ name: '全部类别' }],
+            currentCategory: 0,
+            allOrderList: [] // 存储所有订单，用于筛选
         };
+    },
+    computed: {
+        // 根据当前选中的类别筛选订单列表
+        filteredOrderList() {
+            if (this.currentCategory === 0) {
+                // 选择"全部类别"时，返回所有订单
+                return this.orderList;
+            } else {
+                // 根据类别ID筛选订单
+                const categoryId = this.categories[this.currentCategory - 1]?.id;
+                return this.orderList.filter(order => order.category_id === categoryId);
+            }
+        }
     },
     onLoad(options) {
         // 检查URL中是否有status参数
@@ -139,10 +167,34 @@ export default {
                 this.currentTab = statusIndex;
             }
         }
+        // 获取服务类别
+        this.getServiceCategories();
+        // 获取订单列表
         this.getOrderList();
     },
     methods: {
         format_time,
+
+        // 获取服务类别
+        getServiceCategories() {
+            fetch_data("POST", 'get_service_categories', null, "service", res => {
+                if (res.data.status == 200) {
+                    this.categories = res.data.categories;
+                    // 构建类别列表，添加"全部类别"选项
+                    this.categoryList = [{ name: '全部类别' }].concat(
+                        this.categories.map(category => {
+                            return { name: category.name };
+                        })
+                    );
+                }
+            })
+        },
+
+        // 切换类别
+        changeCategory(index) {
+            this.currentCategory = index;
+            // 不需要重新请求数据，只需要通过计算属性筛选现有数据
+        },
 
         // 切换Tab
         switchTab(index) {
@@ -358,8 +410,9 @@ export default {
     border-radius: 2rpx;
 }
 
+// 调整订单列表的高度，因为添加了一个新的Tab
 .order-list {
-    height: calc(100vh - 180rpx);
+    height: calc(100vh - 240rpx);
     padding: 20rpx;
 }
 

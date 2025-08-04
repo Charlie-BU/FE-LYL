@@ -44,7 +44,7 @@
   border-radius: 2rpx;
 }
 .order-list.data-v-c832be90 {
-  height: calc(100vh - 180rpx);
+  height: calc(100vh - 240rpx);
   padding: 20rpx;
 }
 .order-item.data-v-c832be90 {
