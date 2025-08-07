@@ -594,4 +594,8 @@
   background: #fff;
   padding: 120rpx 0;
 }
+.popup-icon.data-v-0be17cc6 {
+  width: 60px;
+  height: 60px;
+}
 
