@@ -136,27 +136,37 @@
 				<view class="order-buttons">
 					<view class="order-button" @click="goNext('/pages/service/orders?status=all')">
 						<view class="order-icon">
-							<u-icon name="file-text" color="#1abfc0" size="28"></u-icon>
+							<!-- <u-icon name="file-text" color="#1abfc0" size="28"></u-icon> -->
 						</view>
 						<text>全部订单</text>
 					</view>
 					<view class="order-button" @click="goNext('/pages/service/orders?status=pending')">
 						<view class="order-icon">
-							<u-icon name="clock" color="#ff9900" size="28"></u-icon>
+							<image class="popup-icon" src="/static/service/coop.svg" mode="aspectFit"></image>
+							<!-- <u-icon name="clock" color="#ff9900" size="28"></u-icon> -->
 						</view>
 						<text>待合作</text>
 					</view>
 					<view class="order-button" @click="goNext('/pages/service/orders?status=processing')">
 						<view class="order-icon">
-							<u-icon name="reload" color="#2979ff" size="28"></u-icon>
+							<image class="popup-icon" src="/static/service/coop.svg" mode="aspectFit"></image>
+							<!-- <u-icon name="reload" color="#2979ff" size="28"></u-icon> -->
 						</view>
 						<text>合作中</text>
 					</view>
 					<view class="order-button" @click="goNext('/pages/service/orders?status=completed')">
 						<view class="order-icon">
-							<u-icon name="checkmark-circle" color="#19be6b" size="28"></u-icon>
+							<image class="popup-icon" src="/static/service/coop.svg" mode="aspectFit"></image>
+							<!-- <u-icon name="checkmark-circle" color="#19be6b" size="28"></u-icon> -->
 						</view>
 						<text>合作完成</text>
+					</view>
+					<view class="order-button" @click="goNext('/pages/service/orders?status=refunded')">
+						<view class="order-icon">
+							<image class="popup-icon" src="/static/service/coop.svg" mode="aspectFit"></image>
+							<!-- <u-icon name="checkmark-circle" color="#19be6b" size="28"></u-icon> -->
+						</view>
+						<text>已退款</text>
 					</view>
 				</view>
 			</view>

@@ -1,18 +1,17 @@
 <template>
     <view class="container">
 
-        <!-- 订单状态Tab -->
-        <view class="tab-container">
+        <!-- 服务类别Tab -->
+        <view class="tab-container" style="font-weight: 900;">
             <view v-for="(item, index) in tabList" :key="index" class="tab-item"
                 :class="{ active: currentTab === index }" @click="switchTab(index)">
-                <text>{{ item.name }}</text>
+                <text style="font-size: 31rpx;">{{ item.name }}</text>
                 <view v-if="currentTab === index" class="active-line"></view>
             </view>
         </view>
-
-
-        <!-- 服务类别Tab -->
-        <view class="tab-container">
+        
+        <!-- 订单状态Tab -->
+        <view class="tab-container" style="font-weight: 300;">
             <view v-for="(item, index2) in categoryList" :key="index2" class="tab-item"
                 :class="{ active: currentCategory === index2 }" @click="changeCategory(index2)">
                 <text>{{ item.name }}</text>
@@ -39,7 +38,7 @@
                         已退款
                     </view>
                     <!-- 订单内容 -->
-                    <view class="order-content" @click="gotoMyService(order.service_buyer_id)">
+                    <view class="order-content" @click="gotoMyService(order)">
                         <!-- 服务包封面图 -->
                         <image class="service-image" :src="order.profile_img" mode="aspectFill"></image>
 
@@ -93,13 +92,14 @@
 
                     <!-- 操作按钮 -->
                     <view class="order-actions" v-if="identity !== 3">
-                        <button class="action-btn cooperator-btn" @click.stop="contactCooperator(order)">
+                        <button v-if="order.status === 1" class="action-btn cooperator-btn" @click.stop="contactCooperator(order)">
                             <u-icon name="chat" color="#ffffff" size="24"></u-icon>
                             <text>联系合作者</text>
                         </button>
                         <button class="action-btn service-btn" @click.stop="lx_kefu">
                             <u-icon name="server-man" color="#ffffff" size="24"></u-icon>
-                            <text>{{ currentTab !== 3 ? '联系客服' : '退款/售后' }}</text>
+                            <text v-if="identity !== 1">{{ order.status !== 1 ? '联系客服' : '退款/售后' }}</text>
+                            <text v-else>联系客服</text>
                         </button>
                     </view>
                     <view class="order-actions" v-else-if="currentTab !== 4">
@@ -311,10 +311,11 @@ export default {
             });
         },
 
-        gotoMyService(order_id) {
+        gotoMyService(order) {
             if (this.identity !== 2) return;
             if (this.status === 'completed') return;
-            this.toNext(`/pages/service/my-service?order_id=${order_id}`)
+            if (order.status !== 1) return;
+            this.toNext(`/pages/service/my-service?order_id=${order.service_buyer_id}`)
         },
 
         // 下拉刷新
@@ -351,10 +352,11 @@ export default {
             if (data.code == 200) {
                 let id = data.result.id
                 let kf_name = data.result.kf_name
-                this.toNext(`/pages/message/private_chat?id=kf_${id}&title=${kf_name}`)
+                // this.toNext(`/pages/message/private_chat?id=kf_${id}&title=${kf_name}`)
+                this.toNext(`/pages/message/private_chat?id=kf_${id}&title=客服1号`)
             } else {
                 this.$u.toast(data.msg)
-            }
+            }            
         },
     }
 };
@@ -489,6 +491,7 @@ export default {
     padding-top: 20rpx;
     border-top: 1rpx solid #eaeaea;
     gap: 20rpx;
+    margin-right: 10rpx;
 }
 
 .action-btn {

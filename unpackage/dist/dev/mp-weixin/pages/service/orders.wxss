@@ -109,6 +109,7 @@
   padding-top: 20rpx;
   border-top: 1rpx solid #eaeaea;
   gap: 20rpx;
+  margin-right: 10rpx;
 }
 .action-btn.data-v-c832be90 {
   display: flex;
