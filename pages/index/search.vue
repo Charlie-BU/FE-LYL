@@ -94,7 +94,7 @@ export default {
 	},
 	methods: {
 		search(value) {
-			_this.startSearch = true
+			_this.startSearch = true;
 			_this.form.pageIndex = 1
 			_this.lists = []
 			_this.get_items_list()
