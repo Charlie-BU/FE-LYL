@@ -91,12 +91,17 @@
 
                     <!-- 操作按钮 -->
                     <view class="order-actions" v-if="identity !== 3">
+                        <button v-if="order.status === 1 && order.talent_name" class="action-btn service-btn"
+                            @click.stop="gotoMyService(order)">
+                            <u-icon name="checkbox-mark" color="#ffffff" size="24"></u-icon>
+                            <text>完成合作</text>
+                        </button>
                         <button v-if="order.status === 1" class="action-btn cooperator-btn"
                             @click.stop="contactCooperator(order)">
                             <u-icon name="chat" color="#ffffff" size="24"></u-icon>
                             <text>联系合作者</text>
                         </button>
-                        <button class="action-btn service-btn" @click.stop="lx_kefu">
+                        <button class="action-btn service-btn" @click.stop="lx_kefu" style="background: red;">
                             <u-icon name="server-man" color="#ffffff" size="24"></u-icon>
                             <text v-if="identity !== 1">{{ order.status !== 1 ? '联系客服' : '退款/售后' }}</text>
                             <text v-else>联系客服</text>
@@ -106,7 +111,8 @@
                         <button class="action-btn cooperator-btn" @click.stop="cancelCooperation(order)">
                             <text>取消合作</text>
                         </button>
-                        <button class="action-btn service-btn" @click.stop="setRefunded(order)">
+                        <button class="action-btn service-btn" style="background: red;"
+                            @click.stop="setRefunded(order)">
                             <text>标记为已退款</text>
                         </button>
                     </view>
