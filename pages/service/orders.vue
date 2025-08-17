@@ -1,6 +1,5 @@
 <template>
     <view class="container">
-
         <!-- 服务类别Tab -->
         <view class="tab-container" style="font-weight: 900;">
             <view v-for="(item, index) in tabList" :key="index" class="tab-item"
@@ -9,7 +8,7 @@
                 <view v-if="currentTab === index" class="active-line"></view>
             </view>
         </view>
-        
+
         <!-- 订单状态Tab -->
         <view class="tab-container" style="font-weight: 300;">
             <view v-for="(item, index2) in categoryList" :key="index2" class="tab-item"
@@ -64,7 +63,7 @@
                                     <text class="label">合作者：</text>
                                     <text class="value">{{ order.cooperator_name }}</text>
                                 </view>
-                                <view v-if="order.cooperator_phone" class="cooperator-info">
+                                <view v-if="order.cooperator_phone && order.status === 1" class="cooperator-info">
                                     <text class="label">联系电话：</text>
                                     <text class="value">{{ order.cooperator_phone }}</text>
                                 </view>
@@ -92,7 +91,8 @@
 
                     <!-- 操作按钮 -->
                     <view class="order-actions" v-if="identity !== 3">
-                        <button v-if="order.status === 1" class="action-btn cooperator-btn" @click.stop="contactCooperator(order)">
+                        <button v-if="order.status === 1" class="action-btn cooperator-btn"
+                            @click.stop="contactCooperator(order)">
                             <u-icon name="chat" color="#ffffff" size="24"></u-icon>
                             <text>联系合作者</text>
                         </button>
@@ -356,7 +356,7 @@ export default {
                 this.toNext(`/pages/message/private_chat?id=kf_${id}&title=客服1号`)
             } else {
                 this.$u.toast(data.msg)
-            }            
+            }
         },
     }
 };

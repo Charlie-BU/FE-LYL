@@ -143,7 +143,8 @@
 						</view>
 						<text>全部订单</text>
 					</view>
-					<view class="order-button" @click="goNext('/pages/service/orders?status=pending')">
+					<view v-if="identity !== 1" class="order-button"
+						@click="goNext('/pages/service/orders?status=pending')">
 						<!-- <view class="order-icon">
 							<u-icon name="clock" color="#ff9900" size="28"></u-icon>
 						</view> -->
@@ -161,9 +162,8 @@
 						<!-- <view class="order-icon">
 							<u-icon name="checkmark-circle" color="#19be6b" size="28"></u-icon>
 						</view> -->
-						<image class="popup-icon" src="/static/service/completed.svg" mode="aspectFit"
-							style="width: 38px; height: 38px; margin-bottom: 9px; margin-top: 12px;"></image>
-
+						<image class="popup-icon" src="/static/service/completed.png" mode="aspectFit"
+							style="width: 61px; height: 61px;"></image>
 						<text>合作完成</text>
 					</view>
 					<view class="order-button" @click="goNext('/pages/service/orders?status=refunded')">

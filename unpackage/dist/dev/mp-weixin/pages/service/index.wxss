@@ -20,6 +20,11 @@
   box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   min-width: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  line-height: normal;
 }
 .container .header-buttons .add-service-btn.data-v-7881794f:active,
 .container .header-buttons .my-purchase-btn.data-v-7881794f:active {

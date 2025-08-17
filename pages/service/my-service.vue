@@ -93,7 +93,7 @@
             </view>
         </view>
 
-        <!-- 添加评分弹窗 -->
+        <!-- 评分弹窗 -->
         <u-popup :show="showEvaluateModal" @close="showEvaluateModal = false" mode="center"
             :customStyle="customAlertStyle" bgColor="transparent" :overlayOpacity="0.4">
             <view class="cooperate-popup">
@@ -208,7 +208,7 @@ export default {
                                     service.talents = service.talents.map((talent) => ({
                                         ...talent,
                                         star: show_stars(talent.star_as_elite)[0] || null,
-                                        mode: false
+                                        mode: service.coop_talent_id ? true : false
                                     }));
                                 }
                                 return service;
@@ -220,6 +220,8 @@ export default {
                             }
 
                             _this.lists = services;
+                        } else {
+                            _this.lists = []
                         }
                         if (_this.load) {
                             _this.load = false;
@@ -424,8 +426,9 @@ export default {
                             icon: "success",
                             duration: 2000
                         });
-                        // 刷新列表
-                        this.getMyPurchaseList();
+                        setTimeout(() => {
+                            _this.toNext(`/pages/service/orders?status=completed`);
+                        }, 2000)
                     } else {
                         uni.showToast({
                             title: res.data.message || "操作失败",

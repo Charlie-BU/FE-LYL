@@ -40,11 +40,9 @@
 							@click.stop="gotoDetail(item)">查看详情</button>
 
 						<button v-if="is_admin" class="detail-btn" @click.stop="assignTalent(item)">分配人才</button>
-						<button v-if="is_admin" class="detail-btn" style="margin-top: 15rpx;"
-							@click.stop="showThisTalent(item)">查看人才</button>
-						<button v-if="is_admin" class="detail-btn" style="width: 112px;"
-							@click.stop="editService(item)">编辑</button>
-						<button v-if="is_admin" class="detail-btn" style="background: #ff4d4f; width: 112px;"
+						<button v-if="is_admin" class="detail-btn" @click.stop="showThisTalent(item)">查看人才</button>
+						<button v-if="is_admin" class="detail-btn" @click.stop="editService(item)">编辑</button>
+						<button v-if="is_admin" class="detail-btn" style="background: #ff4d4f"
 							@click.stop="deleteService(item.id)">删除</button>
 					</view>
 				</view>
@@ -587,6 +585,13 @@ export default {
 				});
 				return;
 			}
+			if (!this.formData.images.length) {
+				uni.showToast({
+					title: '请上传展示图片，至少一张',
+					icon: 'none'
+				});
+				return;
+			}
 
 			// 显示加载提示
 			uni.showToast({
@@ -1018,6 +1023,11 @@ export default {
 			box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.08); // 减小阴影
 			transition: all 0.3s ease;
 			min-width: 120rpx; // 设置最小宽度
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: auto;
+			line-height: normal;
 
 			&:active {
 				transform: translateY(1rpx);
