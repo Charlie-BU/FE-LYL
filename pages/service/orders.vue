@@ -289,25 +289,37 @@ export default {
                             icon: "loading",
                             duration: 100000
                         });
-                        fetch_data('POST', 'mark_refund', {
-                            service_buyer_id: order.service_buyer_id,
-                            user_id: uni.getStorageSync('user_id'),
-                            identity: uni.getStorageSync('identity')
+                        fetch_data('POST', 'refund_order', {
+                            out_trade_no: order.out_trade_no,
+                            amount: order.price
                         }, 'service', res => {
                             if (res.data.status === 200) {
-                                wx.showToast({
-                                    title: "标记成功",
-                                    icon: "none",
-                                    duration: 700
+                                fetch_data('POST', 'mark_refund', {
+                                    service_buyer_id: order.service_buyer_id,
+                                    user_id: uni.getStorageSync('user_id'),
+                                    identity: uni.getStorageSync('identity')
+                                }, 'service', res => {
+                                    if (res.data.status === 200) {
+                                        wx.showToast({
+                                            title: "标记成功",
+                                            icon: "none",
+                                            duration: 700
+                                        });
+                                        setTimeout(() => {
+                                            uni.reLaunch({
+                                                url: "/pages/service/orders"
+                                            });
+                                        }, 700);
+                                    } else {
+                                        wx.showToast({
+                                            title: res.data.message || '退款失败',
+                                            icon: 'none'
+                                        });
+                                    }
                                 });
-                                setTimeout(() => {
-                                    uni.reLaunch({
-                                        url: "/pages/service/orders"
-                                    });
-                                }, 700);
                             } else {
                                 wx.showToast({
-                                    title: res.data.message || '取消合作失败',
+                                    title: res.data.message || '退款失败',
                                     icon: 'none'
                                 });
                             }

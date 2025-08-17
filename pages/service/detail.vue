@@ -181,7 +181,8 @@ export default {
                                     fetch_data("POST", 'buy_service', {
                                         service_id: this.serviceData.id,
                                         buyer_id: uni.getStorageSync('user_id'),
-                                        amount: this.quantity
+                                        amount: this.quantity,
+                                        out_trade_no: res.data.out_trade_no
                                     }, "service", res => {
                                         if (res.data.status == 200) {
                                             this.closeModal()
