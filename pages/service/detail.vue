@@ -194,7 +194,7 @@ export default {
                                             // 支付成功后跳转到订单列表
                                             setTimeout(() => {
                                                 uni.navigateTo({
-                                                    url: '/pages/service/my-service'
+                                                    url: `/pages/service/my-service?order_id=${res.data.service_buyer_id}`
                                                 });
                                             }, 2000);
                                             return;

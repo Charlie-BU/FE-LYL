@@ -366,15 +366,16 @@ export default {
             });
         },
         async lx_kefu() {
-            const data = await this.$post('port/lx_kefu')
-            if (data.code == 200) {
-                let id = data.result.id
-                let kf_name = data.result.kf_name
-                // this.toNext(`/pages/message/private_chat?id=kf_${id}&title=${kf_name}`)
-                this.toNext(`/pages/message/private_chat?id=kf_${id}&title=客服1号`)
-            } else {
-                this.$u.toast(data.msg)
-            }
+            // const data = await this.$post('port/lx_kefu')
+            // if (data.code == 200) {
+            //     let id = data.result.id
+            //     let kf_name = data.result.kf_name
+            //     console.log(id, kf_name);
+            //     this.toNext(`/pages/message/private_chat?id=kf_${id}&title=${kf_name}`)
+            // } else {
+            //     this.$u.toast(data.msg)
+            // }
+            this.toNext(`/pages/message/private_chat?id=kf_9&title=客服1号`)
         },
     }
 };
