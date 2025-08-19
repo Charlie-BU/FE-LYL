@@ -111,9 +111,9 @@
                         <button class="action-btn cooperator-btn" @click.stop="cancelCooperation(order)">
                             <text>取消合作</text>
                         </button>
-                        <button class="action-btn service-btn" style="background: red;"
-                            @click.stop="setRefunded(order)">
-                            <text>标记为已退款</text>
+                        <button v-if="order.status !== 3" class="action-btn service-btn" style="background: red;"
+                            @click.stop="orderRefund(order)">
+                            <text>退款</text>
                         </button>
                     </view>
                 </view>
@@ -278,10 +278,10 @@ export default {
             });
         },
 
-        setRefunded(order) {
+        orderRefund(order) {
             wx.showModal({
-                title: "确认标记退款",
-                content: "确定将该订单要标记为已退款吗？",
+                title: "确认退款",
+                content: "确定将该订单退款吗？",
                 success: (res) => {
                     if (res.confirm) {
                         wx.showToast({
@@ -291,7 +291,7 @@ export default {
                         });
                         fetch_data('POST', 'refund_order', {
                             out_trade_no: order.out_trade_no,
-                            amount: order.price
+                            amount: Number(order.price) * Number(order.amount)
                         }, 'service', res => {
                             if (res.data.status === 200) {
                                 fetch_data('POST', 'mark_refund', {
