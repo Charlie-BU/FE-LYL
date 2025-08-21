@@ -17,8 +17,9 @@
                 <text class="price-symbol">¥</text>
                 <text class="price-value">{{ serviceData.price }}</text>
             </view>
+            <image src="/static/service/service-gurantee.png" mode="aspectFill" style="width: 100%; height: 54px;" />
             <view class="service-desc">安心购：{{ serviceData.description }}</view>
-            <!-- Tab切换 -->
+            <!-- Tab切换 --> 
             <view class="tab-container">
                 <view class="tab-header">
                     <view :class="['tab-item', activeTab === 'intro' ? 'active' : '']" @click="switchTab('intro')">

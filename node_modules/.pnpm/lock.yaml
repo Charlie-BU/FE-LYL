@@ -1,0 +1,40 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@vue/composition-api':
+        specifier: ^1.7.2
+        version: 1.7.2(vue@2.6.14)
+      vue-jsonp:
+        specifier: ^2.0.0
+        version: 2.1.0
+
+packages:
+
+  '@vue/composition-api@1.7.2':
+    resolution: {integrity: sha512-M8jm9J/laYrYT02665HkZ5l2fWTK4dcVg3BsDHm/pfz+MjDYwX+9FUaZyGwEyXEDonQYRCo0H7aLgdklcIELjw==}
+    peerDependencies:
+      vue: '>= 2.5 < 2.7'
+
+  vue-jsonp@2.1.0:
+    resolution: {integrity: sha512-kezmjaAcMWdieO3tWxniC+82DitYUYjR1e2GsWIKHCTf+zhWUt2nPhN3dnmnAVhDQ+po3BspM7sKjiQaIhijUg==}
+
+  vue@2.6.14:
+    resolution: {integrity: sha512-x2284lgYvjOMj3Za7kqzRcUSxBboHqtgRE2zlos1qWaOye5yUmHn42LB1250NJBLRwEcdrB0JRwyPTEPhfQjiQ==}
+    deprecated: Vue 2 has reached EOL and is no longer actively maintained. See https://v2.vuejs.org/eol/ for more details.
+
+snapshots:
+
+  '@vue/composition-api@1.7.2(vue@2.6.14)':
+    dependencies:
+      vue: 2.6.14
+
+  vue-jsonp@2.1.0: {}
+
+  vue@2.6.14: {}

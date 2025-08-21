@@ -18,22 +18,30 @@
             </view>
         </view>
 
+        <!-- 搜索 -->
+        <view style="margin-top: 20rpx;">
+            <u-search bgColor="#EFEFEF" placeholder="请输入订单ID" @search="searchOrder" @custom="searchOrder" :actionStyle="{
+                    'color': '#02AAAB'
+                }" v-model="searchText" />
+        </view>
+
+
         <!-- 订单列表 -->
         <scroll-view scroll-y class="order-list" refresher-enabled @refresherrefresh="onRefresh"
             :refresher-triggered="isRefreshing">
             <view v-if="filteredOrderList.length > 0">
                 <view v-for="(order, index) in filteredOrderList" :key="index" class="order-item">
-                    <view class="order-status-tag status-pending" v-if="order.status === 1 && !order.talent_name">
+                    <view class="order-status-tag status-pending" v-if="getOrderStatus(order) === 'pending'">
                         待合作
                     </view>
                     <view class="order-status-tag status-processing"
-                        v-else-if="order.status === 1 && order.talent_name">
+                        v-else-if="getOrderStatus(order) === 'processing'">
                         合作中
                     </view>
-                    <view class="order-status-tag status-completed" v-else-if="order.status === 2">
+                    <view class="order-status-tag status-completed" v-else-if="getOrderStatus(order) === 'completed'">
                         合作完成
                     </view>
-                    <view class="order-status-tag status-refunded" v-else-if="order.status === 3">
+                    <view class="order-status-tag status-refunded" v-else-if="getOrderStatus(order) === 'refunded'">
                         已退款
                     </view>
                     <!-- 订单内容 -->
@@ -91,12 +99,12 @@
 
                     <!-- 操作按钮 -->
                     <view class="order-actions" v-if="identity !== 3">
-                        <button v-if="order.status === 1 && order.talent_name" class="action-btn service-btn"
+                        <button v-if="getOrderStatus(order) === 'processing'" class="action-btn service-btn"
                             @click.stop="gotoMyService(order)">
                             <u-icon name="checkbox-mark" color="#ffffff" size="24"></u-icon>
                             <text>完成合作</text>
                         </button>
-                        <button v-if="order.status === 1" class="action-btn cooperator-btn"
+                        <button v-if="getOrderStatus(order) === 'processing'" class="action-btn cooperator-btn"
                             @click.stop="contactCooperator(order)">
                             <u-icon name="chat" color="#ffffff" size="24"></u-icon>
                             <text>联系合作者</text>
@@ -107,11 +115,11 @@
                             <text v-else>联系客服</text>
                         </button>
                     </view>
-                    <view class="order-actions" v-else-if="currentTab !== 4">
-                        <button class="action-btn cooperator-btn" @click.stop="cancelCooperation(order)">
+                    <view class="order-actions" v-else-if="getOrderStatus(order) !== 'refunded'">
+                        <button v-if="getOrderStatus(order) === 'processing'" class="action-btn cooperator-btn" @click.stop="cancelCooperation(order)">
                             <text>取消合作</text>
                         </button>
-                        <button v-if="order.status !== 3" class="action-btn service-btn" style="background: red;"
+                        <button v-if="getOrderStatus(order) !== 'completed'" class="action-btn service-btn" style="background: red;"
                             @click.stop="orderRefund(order)">
                             <text>退款</text>
                         </button>
@@ -148,7 +156,8 @@ export default {
             categories: [],
             categoryList: [{ name: '全部类别' }],
             currentCategory: 0,
-            allOrderList: [] // 存储所有订单，用于筛选
+            allOrderList: [], // 存储所有订单，用于筛选
+            searchText: '',
         };
     },
     computed: {
@@ -180,6 +189,30 @@ export default {
     },
     methods: {
         format_time,
+
+        searchOrder() {
+            if (this.searchText) {
+                this.orderList = this.allOrderList.filter(order => {
+                    return order.order_id && order.order_id.toString().includes(this.searchText);
+                });
+            } else {
+                this.orderList = [...this.allOrderList];
+            }
+        },
+
+        getOrderStatus(order) {
+            if (order.status === 1 && !order.talent_name) {
+                return 'pending';
+            } else if (order.status === 1 && order.talent_name) {
+                return 'processing';
+            } else if (order.status === 2) {
+                return 'completed';
+            } else if (order.status === 3) {
+                return 'refunded';
+            } else {
+                return 'unknown';
+            }
+        },
 
         // 获取服务类别
         getServiceCategories() {
@@ -228,7 +261,11 @@ export default {
                 this.isRefreshing = false;
 
                 if (res.data.status === 200) {
-                    this.orderList = res.data.orders || [];
+					this.allOrderList = res.data.orders || [];
+					this.orderList = [...this.allOrderList];
+					if (this.searchText) {
+					    this.search(this.searchText);
+					}
                 } else {
                     uni.showToast({
                         title: res.data.message || '获取订单列表失败',
@@ -375,7 +412,7 @@ export default {
             // } else {
             //     this.$u.toast(data.msg)
             // }
-            this.toNext(`/pages/message/private_chat?id=kf_9&title=客服1号`)
+            this.toNext(`/pages/message/private_chat?id=kf_3&title=客服99号`)
         },
     }
 };

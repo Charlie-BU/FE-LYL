@@ -50,10 +50,10 @@
                         </view>
 
                         <view v-if="talent.mode" class="details">
-                            <view class="detail-item">
+                            <!-- <view class="detail-item">
                                 <text class="detail-label">手机号：</text>
                                 <text class="detail-value">{{ talent.phone || "未设置" }}</text>
-                            </view>
+                            </view> -->
                             <view class="detail-item">
                                 <text class="detail-label">评分：</text>
                                 <text class="detail-value">{{ talent.star || "暂无评分" }}</text>

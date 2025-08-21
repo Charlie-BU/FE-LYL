@@ -218,7 +218,7 @@
 			}
 			.popup-inner{
 				height: 500rpx;
-				/deep/.picker-row{
+				::v-deep .picker-row{
 					height: 100rpx;
 					border-top: 2rpx solid #B5B5B5;
 					border-bottom: 2rpx solid #B5B5B5;

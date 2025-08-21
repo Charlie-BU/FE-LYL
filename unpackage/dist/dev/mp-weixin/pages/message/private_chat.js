@@ -1,2 +1,1739 @@
-(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["pages/message/private_chat"],{427:function(e,t,n){"use strict";(function(e,t){var o=n(4);n(26);o(n(25));var s=o(n(428));e.__webpack_require_UNI_MP_PLUGIN__=n,t(s.default)}).call(this,n(1)["default"],n(2)["createPage"])},428:function(e,t,n){"use strict";n.r(t);var o=n(429),s=n(431);for(var i in s)["default"].indexOf(i)<0&&function(e){n.d(t,e,(function(){return s[e]}))}(i);n(434);var a,r=n(32),u=Object(r["default"])(s["default"],o["render"],o["staticRenderFns"],!1,null,"4e66cb95",null,!1,o["components"],a);u.options.__file="pages/message/private_chat.vue",t["default"]=u.exports},429:function(e,t,n){"use strict";n.r(t);var o=n(430);n.d(t,"render",(function(){return o["render"]})),n.d(t,"staticRenderFns",(function(){return o["staticRenderFns"]})),n.d(t,"recyclableRender",(function(){return o["recyclableRender"]})),n.d(t,"components",(function(){return o["components"]}))},430:function(e,t,n){"use strict";var o;n.r(t),n.d(t,"render",(function(){return s})),n.d(t,"staticRenderFns",(function(){return a})),n.d(t,"recyclableRender",(function(){return i})),n.d(t,"components",(function(){return o}));try{o={uInput:function(){return Promise.all([n.e("common/vendor"),n.e("uview-ui/components/u-input/u-input")]).then(n.bind(null,639))},uPopup:function(){return Promise.all([n.e("common/vendor"),n.e("uview-ui/components/u-popup/u-popup")]).then(n.bind(null,631))}}}catch(r){if(-1===r.message.indexOf("Cannot find module")||-1===r.message.indexOf(".vue"))throw r;console.error(r.message),console.error("1. 排查组件名称拼写是否正确"),console.error("2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"),console.error("3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件")}var s=function(){var e=this,t=e.$createElement,n=(e._self._c,e.__map(e.lists,(function(t,n){var o=e.__get_orig(t),s=e.renderMessageDate(t,n),i=s?e.formatDate(t.timestamp):null,a=e.is_self(t),r=a&&"file"==t.type?e.getFileType(t):null,u=a&&"file"==t.type?e.formatFileSize(t):null,c=a&&"audio"==t.type?Math.ceil(t.payload.duration):null,l=a||"file"!=t.type?null:e.getFileType(t),d=a||"file"!=t.type?null:e.formatFileSize(t),f=a||"audio"!=t.type?null:Math.ceil(t.payload.duration);return{$orig:o,m0:s,m1:i,m2:a,m3:r,m4:u,g0:c,m5:l,m6:d,g1:f}}))),o=e.items.map((function(e){return e[1]})),s=e.items.map((function(e){return e[1]}));e._isMounted||(e.e0=function(t){e.show_wx=!1},e.e1=function(t){e.showItemsModal=!1},e.e2=function(t){e.showCooperateModal=!1},e.e3=function(t){e.showEvaluateItemsModal=!1},e.e4=function(t){e.showEvaluateModal=!1}),e.$mp.data=Object.assign({},{$root:{l0:n,g2:o,g3:s}})},i=!1,a=[];s._withStripped=!0},431:function(e,t,n){"use strict";n.r(t);var o=n(432),s=n.n(o);for(var i in o)["default"].indexOf(i)<0&&function(e){n.d(t,e,(function(){return o[e]}))}(i);t["default"]=s.a},432:function(e,t,n){"use strict";(function(e,o){var s=n(4),i=n(13);Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var a,r=s(n(44)),u=s(n(18)),c=s(n(50)),l=n(184),d=_(n(185)),f=n(342),m=s(n(433));function g(e){if("function"!==typeof WeakMap)return null;var t=new WeakMap,n=new WeakMap;return(g=function(e){return e?n:t})(e)}function _(e,t){if(!t&&e&&e.__esModule)return e;if(null===e||"object"!==i(e)&&"function"!==typeof e)return{default:e};var n=g(t);if(n&&n.has(e))return n.get(e);var o={},s=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var a in e)if("default"!==a&&Object.prototype.hasOwnProperty.call(e,a)){var r=s?Object.getOwnPropertyDescriptor(e,a):null;r&&(r.get||r.set)?Object.defineProperty(o,a,r):o[a]=e[a]}return o.default=e,n&&n.set(e,o),o}var p=e.$GoEasy,h=new m.default,v={data:function(){return{id:0,uid:0,to:{data:{head_pic:""}},recorderManager:h,audioPlayer:{innerAudioContext:null,playingMessage:null},msg:"",open_bot:!1,lastTimestamp:null,scrollTop:0,scroll_id:"",show_wx:!1,weixin:"",tempIndex:-1,toIdentity:1,init:0,title:"",safe_area_bottom:0,swap_type:1,df_user:{},df_resume:"",items:[],selectedItemIndex:"",showItemsModal:!1,showCooperateModal:!1,showEvaluateItemsModal:!1,showEvaluateModal:!1,evaluateIndex1:0,evaluateIndex2:0}},computed:{selectedItem:function(){return-1===this.selectedItemIndex?null:this.selectedItemIndex?this.items[this.selectedItemIndex]:null}},onLoad:function(t){if(a=this,t)for(var n in t)a[n]=t[n];if(0!=a.id){var o=e.getSystemInfoSync();this.safe_area_bottom=o.safeAreaInsets.bottom;var s=a.id.split("_");switch(s[0]){case"user":a.toIdentity=1;break;case"qy":a.toIdentity=2;break;case"kf":a.toIdentity=3;break;default:break}a.uid=s[1],a.get_user_info(),a.initGoEasyListeners(),this.initAudioPlayer(),this.initRecorderListeners()}else this.$u.toast("提交参数有误",(function(){a.finish()}))},onReady:function(){this.loadHistoryMessage(),a.title&&e.setNavigationBarTitle({title:a.title})},onUnload:function(){p.im.off(p.IM_EVENT.PRIVATE_MESSAGE_RECEIVED,this.onMessageReceived),p.im.off(p.IM_EVENT.MESSAGE_DELETED,this.onMessageDeleted)},methods:{onPickerChange:function(e){var t=e.detail.value;this.selectedItemIndex=t},formatDate:f.formatDate,is_self:function(e){var t=e.senderId;return this.get_prefix()+this.user_id==t},getFileType:function(e){var t=e.payload.name,n=t.split(".");return n[n.length-1]},formatFileSize:function(e){var t=e.payload.size;if(!t||0==Number(t))return"0B";var n="";n=t<1024?t.toFixed(2)+"B":t<1048576?(t/1024).toFixed(2)+"KB":t<1073741824?(t/1048576).toFixed(2)+"MB":(t/1073741824).toFixed(2)+"GB";var o=n+"",s=o.indexOf("."),i=o.substr(s+1,2);return"00"==i?o.substring(0,s)+o.substr(s+3,2):n},renderMessageDate:function(e,t){return 0===t||e.timestamp-this.lists[t-1].timestamp>3e5},changeOpen:function(){a.open_bot=!a.open_bot},get_user_info:function(){var e=this;return(0,c.default)(r.default.mark((function t(){var n,o,s,i,u;return r.default.wrap((function(t){while(1)switch(t.prev=t.next){case 0:if(!(a.uid>0)){t.next=6;break}return n={uid:a.uid},t.next=4,a.$post("port/user_info",n);case 4:o=t.sent,200==o.code?(s=o.result,i=s.user,u=s.resume,a.to={id:a.id,type:p.IM_SCENE.PRIVATE,data:{user_id:i.user_id,qy_name:i.qy_name,user_name:i.user_name,kf_name:i.kf_name,is_kf:i.is_kf,head_pic:i.head_pic,identity:a.toIdentity}},a.df_user=i,a.df_resume=u,1==a.init&&a.create_init_msg()):e.$u.toast(o.msg);case 6:case"end":return t.stop()}}),t)})))()},clickHead:function(){3!=this.identity&&3!=this.toIdentity&&(2==this.identity&&this.df_resume&&3==this.df_resume.status?a.toNext("/pages/talents/detail?id=".concat(this.df_resume.id)):1==this.identity&&a.toNext("/my/item-list?uid=".concat(this.df_user.user_id)))},create_init_msg:function(){var e="";switch(a.toIdentity){case 1:e="您好，我对您的简历很感兴趣，方便进一步沟通下吗？";break;case 2:e="我对这个岗位很有兴趣，方便聊聊吗？";break;case 3:e="";break;default:break}if(e){var t=p.im;t.createTextMessage({text:e,to:a.to,onSuccess:function(e){a.sendMessage(e)},onFailed:function(e){console.log("error :",e)}})}},getMore:function(){a.loadHistoryMessage()},loadHistoryMessage:function(){var e=this,t=null,n=this.lists[0];n&&(t=n.timestamp),p.im.history({userId:this.id,lastTimestamp:t,limit:30,onSuccess:function(n){var o=n.content;if(o.length>0){var s;if(t)(s=a.lists).unshift.apply(s,(0,u.default)(o));else a.lists=o;a.scroll_to_bottom()}e.markPrivateMessageAsRead()},onFailed:function(e){console.log("获取历史消息失败:",e)}})},confirmMsg:function(){if(""!=this.msg){var e=p.im;e.createTextMessage({text:a.msg,to:a.to,onSuccess:function(e){a.sendMessage(e,!0)},onFailed:function(e){console.log("error :",e)}})}else this.$u.toast("请输入发送消息")},confirmWeixin:function(){var t=this;return(0,c.default)(r.default.mark((function n(){var o,s,i;return r.default.wrap((function(n){while(1)switch(n.prev=n.next){case 0:if(""!=t.weixin&&null!=t.weixin){n.next=3;break}return t.$u.toast("请输入微信号"),n.abrupt("return");case 3:return o={weixin:a.weixin},n.next=6,a.$post("port/edit_user_wx",o);case 6:s=n.sent,200==s.code?(e.$u.toast(s.msg),a.current_user.weixin=a.weixin,1==a.swap_type?a.send_custom_msg():(i={type:2,content:a.weixin},p.im.createCustomMessage({type:"agree_wx_phone",to:a.to,payload:i,onSuccess:function(e){if(-1!=a.tempIndex){var t=a.lists[a.tempIndex];a.deleteMessage(t,a.tempIndex)}a.sendMessage(e,!1,!1),a.send_extra_msg(2)},onFailed:function(e){console.log("error :",e)}})),a.weixin="",a.show_wx=!1):e.$u.toast(s.msg);case 8:case"end":return n.stop()}}),n)})))()},send_image_msg:function(){e.chooseImage({count:1,success:function(e){var t=e.tempFiles[0];p.im.createImageMessage({to:a.to,file:t,onProgress:function(e){console.log(e)},onSuccess:function(e){console.log("创建图片消息成功:",e),a.sendMessage(e)},onFailed:function(e){console.log("error :",e)}})},fail:function(e){console.log(e)}})},send_custom_msg:function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"swap_wx";if("swap_wx"==e&&(""==a.current_user.weixin||null==a.current_user.weixin))return a.swap_type=1,a.show_wx=!0,void(a.tempIndex=-1);var t={status:-1};p.im.createCustomMessage({type:e,to:a.to,payload:t,onSuccess:function(e){console.log("创建自定义消息成功:",e),a.sendMessage(e)},onFailed:function(e){console.log("error :",e)}})},sendMessage:function(e){var t=arguments.length>1&&void 0!==arguments[1]&&arguments[1],n=!(arguments.length>2&&void 0!==arguments[2])||arguments[2];a.lists.push(e),n&&a.scroll_to_bottom();var s=p.im;s.sendMessage({message:e,onSuccess:function(e){console.log("Private message sent successfully.",e);var n=36e5,s=Date.now(),i=o.getStorageSync("last_execution_time")||0;if(s-i>=n){var r=a.to.id.match(/\d+/),u=r?r[0]:null,c={my_id:a.user_id,receiver_id:u};(0,l.fetch_data)("POST","send_notification",c,"user",(function(e){200===e.data.status?(console.log("微信通知发送成功"),o.setStorageSync("last_execution_time",s)):console.log("微信通知发送失败",e)}))}else console.log("已在1小时内给此人发送过，跳过此次执行");t&&(a.msg="")},onFailed:function(e){console.log("Failed to send private message，code:"+e.code+" ,error "+e.content)}})},initGoEasyListeners:function(){p.im.on(p.IM_EVENT.PRIVATE_MESSAGE_RECEIVED,this.onMessageReceived),p.im.on(p.IM_EVENT.MESSAGE_DELETED,this.onMessageDeleted)},onMessageReceived:function(e){console.log("监听到私聊消息：",e);var t=e.senderId,n=e.receiverId;this.get_prefix()+this.user_id==n&&t==this.id&&(a.lists.push(e),a.markPrivateMessageAsRead(),a.scroll_to_bottom())},onMessageDeleted:function(e){console.log("监听到私聊消息删除：",e)},markPrivateMessageAsRead:function(){p.im.markMessageAsRead({id:a.id,type:p.IM_SCENE.PRIVATE,onSuccess:function(){console.log("标记私聊已读成功")},onFailed:function(e){console.log("标记私聊已读失败",e)}})},scroll_to_bottom:function(){this.$nextTick((function(){var t=e.createSelectorQuery();t.select("#scroll").boundingClientRect(),t.select("#scroll-container").boundingClientRect(),t.exec((function(e){var t=e[0].height,n=e[1].height;if(n>t){var o=n-t;a.scrollTop=o}}))}))},refuse:function(t,n,o){var s="确定拒绝交换电话?";2==t&&(s="确定拒绝交换微信?"),e.showModal({title:"操作提示",content:s,success:function(e){if(e.confirm){var s={type:t};p.im.createCustomMessage({type:"refuse_wx_phone",to:a.to,payload:s,onSuccess:function(e){a.deleteMessage(n,o),a.sendMessage(e,!1,!1)},onFailed:function(e){console.log("error :",e)}})}else console.log("点击了取消")}})},deleteMessage:function(e,t){p.im.deleteMessage({messages:[e],onSuccess:function(){console.log("Messages delete successfully."),a.lists.splice(t,1)},onFailed:function(e){console.log("Failed to delete message, code:"+e.code+" content:"+e.content)}})},agree:function(t,n,o){var s="确定同意交换电话?";2==t&&(s="确定同意交换微信?"),e.showModal({title:"操作提示",content:s,success:function(e){if(e.confirm){if(2==t&&(""==a.current_user.weixin||null==a.current_user.weixin))return a.swap_type=2,a.show_wx=!0,void(a.tempIndex=o);var s={type:t};s.content=1==t?a.current_user.mobile:a.current_user.weixin,p.im.createCustomMessage({type:"agree_wx_phone",to:a.to,payload:s,onSuccess:function(e){a.deleteMessage(n,o),a.sendMessage(e,!1,!1),a.send_extra_msg(t)},onFailed:function(e){console.log("error :",e)}})}else console.log("点击了取消")}})},send_extra_msg:function(e){return(0,c.default)(r.default.mark((function t(){var n,o,s,i;return r.default.wrap((function(t){while(1)switch(t.prev=t.next){case 0:return n={uid:a.uid},t.next=3,a.$post("port/user_info",n);case 3:o=t.sent,200==o.code&&(s=o.result.user,i={type:e},i.content=1==e?s.mobile:s.weixin,p.im.createCustomMessage({type:"consent_wx_phone",to:a.to,payload:i,onSuccess:function(e){a.sendMessage(e,!1,!0)},onFailed:function(e){console.log("error :",e)}}));case 5:case"end":return t.stop()}}),t)})))()},copy:function(t){var n=t.payload.content;e.setClipboardData({data:n,success:function(){a.$u.toast("复制成功")},fail:function(e){console.log("复制失败:",e)}})},chooseMessageFile:function(){e.chooseMessageFile({count:1,type:"file",extension:["pdf","doc","docx"],success:function(e){var t=e.tempFiles[0],n=t.size;n>8388608?a.$u.toast("最多可发送8M文件"):p.im.createFileMessage({to:a.to,file:t,onProgress:function(e){console.log("上传进度:",e)},onSuccess:function(e){console.log("创建文件消息成功:",e),a.sendMessage(e)},onFailed:function(e){console.log("error :",e)}})},fail:function(e){console.log("选择微信文件失败",e)}})},openFile:function(t){var n=encodeURI(t.payload.url);e.downloadFile({url:n,success:function(t){var n=t.tempFilePath;e.openDocument({filePath:n,showMenu:!0,success:function(e){console.log("打开文档成功")},fail:function(e){console.log("打开文档失败",e)}})},fail:function(e){console.log("下载文件失败",e)}})},initRecorderListeners:function(){h.onRecordComplete((function(e,t){t<1e3?a.$u.toast("录音时间太短"):p.im.createAudioMessage({to:a.to,file:e,onProgress:function(e){console.log(e)},onSuccess:function(e){console.log("创建语音消息成功:",e),a.sendMessage(e)},onFailed:function(e){console.log("error :",e)}})}))},onRecordStart:function(){e.getSetting({success:function(t){t.authSetting["scope.record"]?(console.log("有录音权限"),h.start()):(e.authorize({scope:"scope.record",success:function(e){console.log("授权录音权限成功",e)},fail:function(e){console.log("授权录音权限失败",e)}}),0==t.authSetting["scope.record"]&&e.openSetting({success:function(e){console.log(e.authSetting)}}))}})},onRecordEnd:function(){e.getSetting({success:function(e){e.authSetting["scope.record"]&&h.stop()}})},initAudioPlayer:function(){var t=this;this.audioPlayer.innerAudioContext=e.createInnerAudioContext(),this.audioPlayer.innerAudioContext.onEnded((function(){t.audioPlayer.playingMessage=null})),this.audioPlayer.innerAudioContext.onStop((function(){t.audioPlayer.playingMessage=null}))},playAudio:function(e){console.log("播放语音",e);var t=this.audioPlayer.playingMessage;t&&(this.audioPlayer.innerAudioContext.stop(),t===e)||(this.audioPlayer.playingMessage=e,this.audioPlayer.innerAudioContext.src=encodeURI(e.payload.url),this.audioPlayer.innerAudioContext.play())},previewImage:function(t){e.previewImage({urls:[t.payload.url]})},sign_contrast:function(){console.log("签署合同")},manage_asset:function(){console.log("资金代管")},subscribe_wx_msg:function(){var e=this;d.get_openid((function(e){(0,l.fetch_data)("POST","store_openid",{my_id:a.user_id,openid:e},"user")})),d.subscirbe_message(["8AMX7lHwjpeH4uN-6XslAmSDJhcbbsJcB_RLdIcQZ4o"],(function(){e.$u.toast("订阅成功")}))},show_items_model:function(){var e=this;o.showToast({title:"请稍后...",icon:"loading",duration:1e5}),(0,l.fetch_data)("POST","get_his_items",{user_id:a.user_id},"user",(function(t){e.items=t.data.items,o.hideToast(),e.showItemsModal=!0}))},begin_cooperate:function(){var e=this;this.selectedItem?(this.showItemsModal=!1,o.showModal({title:"意向合作",content:"您发布的项目有 5 次意向合作的机会，确认与该用户意向合作？",success:function(t){if(t.confirm){o.showToast({title:"加载中...",icon:"loading",duration:1e4});var n={item_id:e.selectedItem[0],cooperator_id:e.to.data.user_id};(0,l.fetch_data)("POST","item_cooperate",n,"application",(function(t){if(200!==t.data.status)return o.showToast({title:t.data.message,icon:"none",duration:1e3}),void(e.selectedItemIndex=-1);o.showToast({title:"合作成功，请选择是否与对方交换微信或电话",icon:"none",duration:1e3}),e.selectedItemIndex=-1,e.showCooperateModal=!0}))}}})):this.$u.toast("请选择将与该用户合作的项目")},show_evaluate_items_model:function(){var e=this;o.showToast({title:"请稍后...",icon:"loading",duration:1e5}),1===a.identity?(0,l.fetch_data)("POST","get_evaluate_items_Im_buyer",{my_id:a.user_id,to_id:a.to.data.user_id},"user",(function(t){e.items=t.data.items,o.hideToast(),e.showEvaluateItemsModal=!0})):2===a.identity&&(0,l.fetch_data)("POST","get_evaluate_items_Im_seller",{my_id:a.user_id,to_id:a.to.data.user_id},"user",(function(t){e.items=t.data.items,o.hideToast(),e.showEvaluateItemsModal=!0}))},evaluate_service:function(){this.selectedItem?(this.showEvaluateItemsModal=!1,this.showEvaluateModal=!0):this.$u.toast("请选择将评价的合作项目")},select_star:function(e,t){"evaluateIndex1"===t?this.evaluateIndex1=e+1:this.evaluateIndex2=e+1},submit_evaluate:function(){var e=this;o.showToast({title:"评价中...",icon:"loading",duration:1e5});var t={my_id:this.user_id,to_id:this.to.data.user_id,item_id:this.selectedItem[0],evaluateIndex1:this.evaluateIndex1,evaluateIndex2:this.evaluateIndex2};t.item_id?t.evaluateIndex1&&t.evaluateIndex2?t.evaluateIndex1<0||t.evaluateIndex1>5||t.evaluateIndex2<0||t.evaluateIndex2>5?o.showToast({title:"参数有误，请稍后再试",icon:"none",duration:700}):(0,l.fetch_data)("POST","cooperation_evaluate",t,"user",(function(t){if(200!==t.data.status)return o.showToast({title:t.data.message,icon:"none",duration:1e3}),void(e.selectedItemIndex=-1);o.showToast({title:"评价成功，感谢您的合作",icon:"none",duration:1e3}),e.selectedItemIndex=-1,e.showEvaluateModal=!1})):o.showToast({title:"请先为对方评价再提交",icon:"none",duration:700}):o.showToast({title:"请选择将评价的合作项目",icon:"none",duration:700})}}};t.default=v}).call(this,n(2)["default"],n(1)["default"])},434:function(e,t,n){"use strict";n.r(t);var o=n(435),s=n.n(o);for(var i in o)["default"].indexOf(i)<0&&function(e){n.d(t,e,(function(){return o[e]}))}(i);t["default"]=s.a},435:function(e,t,n){}},[[427,"common/runtime","common/vendor"]]]);
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/message/private_chat"],{
+
+/***/ 427:
+/*!**********************************************************************************************!*\
+  !*** /Users/bytedance/Desktop/work/FE-LYL/main.js?{"page":"pages%2Fmessage%2Fprivate_chat"} ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx, createPage) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+__webpack_require__(/*! uni-pages */ 26);
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
+var _private_chat = _interopRequireDefault(__webpack_require__(/*! ./pages/message/private_chat.vue */ 428));
+// @ts-ignore
+wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
+createPage(_private_chat.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["createPage"]))
+
+/***/ }),
+
+/***/ 428:
+/*!***************************************************************************!*\
+  !*** /Users/bytedance/Desktop/work/FE-LYL/pages/message/private_chat.vue ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _private_chat_vue_vue_type_template_id_4e66cb95_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./private_chat.vue?vue&type=template&id=4e66cb95&scoped=true& */ 429);
+/* harmony import */ var _private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./private_chat.vue?vue&type=script&lang=js& */ 431);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _private_chat_vue_vue_type_style_index_0_id_4e66cb95_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./private_chat.vue?vue&type=style&index=0&id=4e66cb95&lang=scss&scoped=true& */ 434);
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
+
+var renderjs
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _private_chat_vue_vue_type_template_id_4e66cb95_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _private_chat_vue_vue_type_template_id_4e66cb95_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4e66cb95",
+  null,
+  false,
+  _private_chat_vue_vue_type_template_id_4e66cb95_scoped_true___WEBPACK_IMPORTED_MODULE_0__["components"],
+  renderjs
+)
+
+component.options.__file = "pages/message/private_chat.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ 429:
+/*!**********************************************************************************************************************!*\
+  !*** /Users/bytedance/Desktop/work/FE-LYL/pages/message/private_chat.vue?vue&type=template&id=4e66cb95&scoped=true& ***!
+  \**********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns, recyclableRender, components */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_uni_app_loader_page_meta_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_template_id_4e66cb95_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./private_chat.vue?vue&type=template&id=4e66cb95&scoped=true& */ 430);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_uni_app_loader_page_meta_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_template_id_4e66cb95_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_uni_app_loader_page_meta_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_template_id_4e66cb95_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_uni_app_loader_page_meta_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_template_id_4e66cb95_scoped_true___WEBPACK_IMPORTED_MODULE_0__["recyclableRender"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "components", function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_uni_app_loader_page_meta_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_template_id_4e66cb95_scoped_true___WEBPACK_IMPORTED_MODULE_0__["components"]; });
+
+
+
+/***/ }),
+
+/***/ 430:
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/bytedance/Desktop/work/FE-LYL/pages/message/private_chat.vue?vue&type=template&id=4e66cb95&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns, recyclableRender, components */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
+var components
+try {
+  components = {
+    uInput: function () {
+      return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 639))
+    },
+    uPopup: function () {
+      return Promise.all(/*! import() | uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 631))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.lists, function (item, index) {
+    var $orig = _vm.__get_orig(item)
+    var m0 = _vm.renderMessageDate(item, index)
+    var m1 = m0 ? _vm.formatDate(item.timestamp) : null
+    var m2 = _vm.is_self(item)
+    var m3 = m2 && item.type == "file" ? _vm.getFileType(item) : null
+    var m4 = m2 && item.type == "file" ? _vm.formatFileSize(item) : null
+    var g0 =
+      m2 && item.type == "audio" ? Math.ceil(item.payload.duration) : null
+    var m5 = !m2 && item.type == "file" ? _vm.getFileType(item) : null
+    var m6 = !m2 && item.type == "file" ? _vm.formatFileSize(item) : null
+    var g1 =
+      !m2 && item.type == "audio" ? Math.ceil(item.payload.duration) : null
+    return {
+      $orig: $orig,
+      m0: m0,
+      m1: m1,
+      m2: m2,
+      m3: m3,
+      m4: m4,
+      g0: g0,
+      m5: m5,
+      m6: m6,
+      g1: g1,
+    }
+  })
+  var g2 = _vm.items.map(function (item) {
+    return item[1]
+  })
+  var g3 = _vm.items.map(function (item) {
+    return item[1]
+  })
+  if (!_vm._isMounted) {
+    _vm.e0 = function ($event) {
+      _vm.show_wx = false
+    }
+    _vm.e1 = function ($event) {
+      _vm.showItemsModal = false
+    }
+    _vm.e2 = function ($event) {
+      _vm.showCooperateModal = false
+    }
+    _vm.e3 = function ($event) {
+      _vm.showEvaluateItemsModal = false
+    }
+    _vm.e4 = function ($event) {
+      _vm.showEvaluateModal = false
+    }
+  }
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0,
+        g2: g2,
+        g3: g3,
+      },
+    }
+  )
+}
+var recyclableRender = false
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ 431:
+/*!****************************************************************************************************!*\
+  !*** /Users/bytedance/Desktop/work/FE-LYL/pages/message/private_chat.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_13_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./private_chat.vue?vue&type=script&lang=js& */ 432);
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_13_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_13_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_13_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_13_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_13_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ 432:
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--13-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/bytedance/Desktop/work/FE-LYL/pages/message/private_chat.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni, wx) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
+var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 50));
+var _ajax_request = __webpack_require__(/*! ../../utils/ajax_request.js */ 184);
+var utils = _interopRequireWildcard(__webpack_require__(/*! ../../utils/utils.js */ 185));
+var _utils2 = __webpack_require__(/*! @/lib/utils */ 342);
+var _RecorderManager = _interopRequireDefault(__webpack_require__(/*! @/lib/RecorderManager */ 433));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var _this;
+var GoEasy = uni.$GoEasy;
+var recorderManager = new _RecorderManager.default();
+var _default = {
+  data: function data() {
+    return {
+      id: 0,
+      uid: 0,
+      to: {
+        data: {
+          head_pic: ''
+        }
+      },
+      recorderManager: recorderManager,
+      audioPlayer: {
+        innerAudioContext: null,
+        playingMessage: null
+      },
+      msg: '',
+      open_bot: false,
+      //上次查询结果里最后一条消息的时间戳，首次查询传入null即可
+      lastTimestamp: null,
+      scrollTop: 0,
+      scroll_id: '',
+      show_wx: false,
+      weixin: '',
+      tempIndex: -1,
+      toIdentity: 1,
+      init: 0,
+      title: '',
+      safe_area_bottom: 0,
+      swap_type: 1,
+      df_user: {},
+      df_resume: '',
+      items: [],
+      selectedItemIndex: "",
+      showItemsModal: false,
+      showCooperateModal: false,
+      showEvaluateItemsModal: false,
+      showEvaluateModal: false,
+      evaluateIndex1: 0,
+      evaluateIndex2: 0
+    };
+  },
+  computed: {
+    selectedItem: function selectedItem() {
+      if (this.selectedItemIndex === -1) return null;else if (this.selectedItemIndex) return this.items[this.selectedItemIndex];
+      return null;
+    }
+  },
+  onLoad: function onLoad(e) {
+    _this = this;
+    if (e) {
+      for (var item in e) {
+        _this[item] = e[item];
+      }
+    }
+    if (_this.id == 0) {
+      this.$u.toast('提交参数有误', function () {
+        _this.finish();
+      });
+      return;
+    }
+    var sys = uni.getSystemInfoSync();
+    this.safe_area_bottom = sys.safeAreaInsets.bottom;
+    var arr = _this.id.split('_');
+    switch (arr[0]) {
+      case 'user':
+        _this.toIdentity = 1;
+        break;
+      case 'qy':
+        _this.toIdentity = 2;
+        break;
+      case 'kf':
+        _this.toIdentity = 3;
+        break;
+      default:
+        break;
+    }
+    _this.uid = arr[1];
+    _this.get_user_info();
+    _this.initGoEasyListeners();
+    // 语音播放器
+    this.initAudioPlayer();
+    // 录音监听器
+    this.initRecorderListeners();
+  },
+  onReady: function onReady() {
+    this.loadHistoryMessage();
+    if (_this.title) {
+      uni.setNavigationBarTitle({
+        title: _this.title
+      });
+    }
+  },
+  onUnload: function onUnload() {
+    //退出聊天页面之前，清空监听器
+    GoEasy.im.off(GoEasy.IM_EVENT.PRIVATE_MESSAGE_RECEIVED, this.onMessageReceived);
+    GoEasy.im.off(GoEasy.IM_EVENT.MESSAGE_DELETED, this.onMessageDeleted);
+  },
+  methods: {
+    onPickerChange: function onPickerChange(event) {
+      // 获取 picker 的新索引值
+      var newIndex = event.detail.value;
+      this.selectedItemIndex = newIndex; // 更新选中索引
+    },
+
+    formatDate: _utils2.formatDate,
+    is_self: function is_self(item) {
+      var senderId = item.senderId;
+      // let arr = senderId.split('_')
+      return this.get_prefix() + this.user_id == senderId;
+      // let senderId = item.senderId
+      // let arr = senderId.split('_')
+      // return this.user_id == arr[1]
+    },
+    getFileType: function getFileType(item) {
+      var name = item.payload.name;
+      var arr = name.split('.');
+      return arr[arr.length - 1];
+    },
+    formatFileSize: function formatFileSize(item) {
+      var limit = item.payload.size;
+      if (!limit || Number(limit) == 0) {
+        return '0B';
+      }
+      // 将size B转换成 M
+      var size = '';
+      if (limit < 1 * 1024) {
+        //小于1KB，则转化成B
+        size = limit.toFixed(2) + 'B';
+      } else if (limit < 1 * 1024 * 1024) {
+        //小于1MB，则转化成KB
+        size = (limit / 1024).toFixed(2) + 'KB';
+      } else if (limit < 1 * 1024 * 1024 * 1024) {
+        //小于1GB，则转化成MB
+        size = (limit / (1024 * 1024)).toFixed(2) + 'MB';
+      } else {
+        //其他转化成GB
+        size = (limit / (1024 * 1024 * 1024)).toFixed(2) + 'GB';
+      }
+      var sizeStr = size + ''; //转成字符串
+      var index = sizeStr.indexOf('.'); //获取小数点处的索引
+      var dou = sizeStr.substr(index + 1, 2); //获取小数点后两位的值
+      if (dou == '00') {
+        //判断后两位是否为00，如果是则删除00
+        return sizeStr.substring(0, index) + sizeStr.substr(index + 3, 2);
+      }
+      return size;
+    },
+    //像微信那样显示时间，如果有几分钟没发消息了，才显示时间
+    //todo:本不需要该方法，可以在标签里完成，但小程序有兼容性问题，被迫这样实现
+    renderMessageDate: function renderMessageDate(message, index) {
+      if (index === 0) {
+        return true;
+        // return formatDate(message.timestamp)
+      } else {
+        if (message.timestamp - this.lists[index - 1].timestamp > 5 * 60 * 1000) {
+          return true;
+          // return formatDate(message.timestamp)
+        }
+      }
+
+      return false;
+    },
+    changeOpen: function changeOpen() {
+      _this.open_bot = !_this.open_bot;
+    },
+    //获取用户信息
+    get_user_info: function get_user_info() {
+      var _this2 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var params, data, _data$result, user, resume;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(_this.uid > 0)) {
+                  _context.next = 6;
+                  break;
+                }
+                params = {
+                  uid: _this.uid
+                };
+                _context.next = 4;
+                return _this.$post('port/user_info', params);
+              case 4:
+                data = _context.sent;
+                if (data.code == 200) {
+                  _data$result = data.result, user = _data$result.user, resume = _data$result.resume;
+                  _this.to = {
+                    id: _this.id,
+                    type: GoEasy.IM_SCENE.PRIVATE,
+                    data: {
+                      user_id: user.user_id,
+                      qy_name: user.qy_name,
+                      user_name: user.user_name,
+                      kf_name: user.kf_name,
+                      is_kf: user.is_kf,
+                      head_pic: user.head_pic,
+                      identity: _this.toIdentity
+                    }
+                  };
+                  _this.df_user = user;
+                  _this.df_resume = resume;
+                  if (_this.init == 1) {
+                    _this.create_init_msg();
+                  }
+                } else {
+                  _this2.$u.toast(data.msg);
+                }
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    //点击了头像
+    clickHead: function clickHead() {
+      if (this.identity == 3 || this.toIdentity == 3) {
+        return;
+      }
+      if (this.identity == 2 && this.df_resume && this.df_resume.status == 3) {
+        _this.toNext("/pages/talents/detail?id=".concat(this.df_resume.id));
+      } else if (this.identity == 1) {
+        _this.toNext("/my/item-list?uid=".concat(this.df_user.user_id));
+      }
+    },
+    //您好，我对这个岗位很有兴趣，方便聊聊吗？/ 您好，我对您的简历很感兴趣，方便进一步沟通下吗？
+    create_init_msg: function create_init_msg() {
+      var msg = '';
+      switch (_this.toIdentity) {
+        case 1:
+          msg = '您好，我对您的简历很感兴趣，方便进一步沟通下吗？';
+          break;
+        case 2:
+          msg = '我对这个岗位很有兴趣，方便聊聊吗？';
+          break;
+        case 3:
+          msg = '';
+          break;
+        default:
+          break;
+      }
+      if (msg) {
+        var im = GoEasy.im;
+        //创建消息, 内容最长不超过3K，可以发送字符串，对象和json格式字符串
+        im.createTextMessage({
+          text: msg,
+          //消息内容
+          to: _this.to,
+          onSuccess: function onSuccess(message) {
+            _this.sendMessage(message);
+          },
+          onFailed: function onFailed(e) {
+            console.log('error :', e);
+          }
+        });
+      }
+    },
+    getMore: function getMore() {
+      _this.loadHistoryMessage();
+    },
+    //查询历史消息
+    loadHistoryMessage: function loadHistoryMessage() {
+      var _this3 = this;
+      var lastMessageTimeStamp = null;
+      var lastMessage = this.lists[0];
+      if (lastMessage) {
+        lastMessageTimeStamp = lastMessage.timestamp;
+      }
+      GoEasy.im.history({
+        userId: this.id,
+        lastTimestamp: lastMessageTimeStamp,
+        limit: 30,
+        onSuccess: function onSuccess(result) {
+          var messages = result.content;
+          if (messages.length > 0) {
+            if (lastMessageTimeStamp) {
+              var _this$lists;
+              (_this$lists = _this.lists).unshift.apply(_this$lists, (0, _toConsumableArray2.default)(messages));
+            } else {
+              _this.lists = messages;
+            }
+            _this.scroll_to_bottom();
+          }
+          //收到的消息设置为已读
+          _this3.markPrivateMessageAsRead();
+          return;
+          uni.stopPullDownRefresh();
+          _this3.history.loading = false;
+          if (messages.length === 0) {
+            _this3.history.allLoaded = true;
+          } else {
+            if (lastMessageTimeStamp) {
+              _this3.history.messages = messages.concat(_this3.history.messages);
+            } else {
+              _this3.history.messages = messages;
+            }
+            if (messages.length < 10) {
+              _this3.history.allLoaded = true;
+            }
+            if (scrollToBottom) {
+              _this3.scrollToBottom();
+              //收到的消息设置为已读
+              _this3.markPrivateMessageAsRead();
+            }
+          }
+        },
+        onFailed: function onFailed(error) {
+          //获取失败
+          console.log('获取历史消息失败:', error);
+          // uni.stopPullDownRefresh();
+          // this.history.loading = false;
+        }
+      });
+    },
+    confirmMsg: function confirmMsg() {
+      if (this.msg == '') {
+        this.$u.toast('请输入发送消息');
+        return;
+      }
+      var im = GoEasy.im;
+      //创建消息, 内容最长不超过3K，可以发送字符串，对象和json格式字符串
+      im.createTextMessage({
+        text: _this.msg,
+        //消息内容
+        to: _this.to,
+        onSuccess: function onSuccess(message) {
+          _this.sendMessage(message, true);
+        },
+        onFailed: function onFailed(e) {
+          console.log('error :', e);
+        }
+      });
+    },
+    confirmWeixin: function confirmWeixin() {
+      var _this4 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        var params, data, info;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(_this4.weixin == '' || _this4.weixin == null)) {
+                  _context2.next = 3;
+                  break;
+                }
+                _this4.$u.toast('请输入微信号');
+                return _context2.abrupt("return");
+              case 3:
+                params = {
+                  weixin: _this.weixin
+                };
+                _context2.next = 6;
+                return _this.$post('port/edit_user_wx', params);
+              case 6:
+                data = _context2.sent;
+                if (data.code == 200) {
+                  uni.$u.toast(data.msg);
+                  _this.current_user.weixin = _this.weixin;
+                  if (_this.swap_type == 1) {
+                    //是点击的交换微信
+                    _this.send_custom_msg();
+                  } else {
+                    //是点击的操作同意交换微信
+                    info = {
+                      type: 2,
+                      content: _this.weixin
+                    };
+                    GoEasy.im.createCustomMessage({
+                      type: 'agree_wx_phone',
+                      //字符串，可以任意自定义类型，比如红包'hongbao', 订单'order，处方'chufang'
+                      to: _this.to,
+                      payload: info,
+                      onSuccess: function onSuccess(message) {
+                        if (_this.tempIndex != -1) {
+                          var item = _this.lists[_this.tempIndex];
+                          _this.deleteMessage(item, _this.tempIndex);
+                        }
+                        _this.sendMessage(message, false, false);
+                        _this.send_extra_msg(2);
+                      },
+                      onFailed: function onFailed(e) {
+                        console.log('error :', e);
+                      }
+                    });
+                  }
+                  _this.weixin = '';
+                  _this.show_wx = false;
+                } else {
+                  uni.$u.toast(data.msg);
+                }
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    //发送图片消息
+    send_image_msg: function send_image_msg() {
+      uni.chooseImage({
+        count: 1,
+        success: function success(res) {
+          var tempFile = res.tempFiles[0];
+          GoEasy.im.createImageMessage({
+            to: _this.to,
+            file: tempFile,
+            onProgress: function onProgress(progress) {
+              console.log(progress);
+            },
+            onSuccess: function onSuccess(message) {
+              console.log('创建图片消息成功:', message);
+              _this.sendMessage(message);
+            },
+            onFailed: function onFailed(e) {
+              console.log('error :', e);
+            }
+          });
+        },
+        fail: function fail(_fail) {
+          console.log(_fail);
+        }
+      });
+    },
+    //发送自定义消息
+    send_custom_msg: function send_custom_msg() {
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'swap_wx';
+      if (type == 'swap_wx') {
+        if (_this.current_user.weixin == '' || _this.current_user.weixin == null) {
+          _this.swap_type = 1;
+          _this.show_wx = true;
+          _this.tempIndex = -1;
+          return;
+        }
+      }
+      var info = {
+        status: -1
+      };
+      GoEasy.im.createCustomMessage({
+        type: type,
+        //字符串，可以任意自定义类型，比如红包'hongbao', 订单'order，处方'chufang'
+        to: _this.to,
+        payload: info,
+        onSuccess: function onSuccess(message) {
+          console.log('创建自定义消息成功:', message);
+          _this.sendMessage(message);
+        },
+        onFailed: function onFailed(e) {
+          console.log('error :', e);
+        }
+      });
+    },
+    sendMessage: function sendMessage(message) {
+      var is_text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var scroll_bottom = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+      _this.lists.push(message);
+      if (scroll_bottom) {
+        _this.scroll_to_bottom();
+      }
+      var im = GoEasy.im;
+      // 发送消息
+      im.sendMessage({
+        message: message,
+        onSuccess: function onSuccess(message1) {
+          //发送成功
+          console.log("Private message sent successfully.", message1);
+          // 给用户微信发送新消息提醒
+          var ONE_HOUR = 3600 * 1000; // 1 小时的毫秒数
+          var now = Date.now();
+          var last_execution_time = wx.getStorageSync('last_execution_time') || 0;
+          // 检查是否超过 1 小时
+          if (now - last_execution_time >= ONE_HOUR) {
+            var match = _this.to.id.match(/\d+/); // 匹配数字
+            var receiver_id = match ? match[0] : null;
+            var data = {
+              my_id: _this.user_id,
+              receiver_id: receiver_id
+            };
+            (0, _ajax_request.fetch_data)("POST", "send_notification", data, "user", function (res) {
+              if (res.data.status === 200) {
+                console.log("微信通知发送成功");
+                // 发送成功，更新本地存储时间戳
+                wx.setStorageSync('last_execution_time', now);
+              } else {
+                console.log("微信通知发送失败", res);
+              }
+            });
+          } else {
+            console.log("已在1小时内给此人发送过，跳过此次执行");
+          }
+          if (is_text) {
+            _this.msg = '';
+          }
+        },
+        onFailed: function onFailed(error) {
+          //发送失败
+          console.log('Failed to send private message，code:' + error.code + ' ,error ' + error.content);
+        }
+      });
+    },
+    initGoEasyListeners: function initGoEasyListeners() {
+      // 监听私聊消息
+      GoEasy.im.on(GoEasy.IM_EVENT.PRIVATE_MESSAGE_RECEIVED, this.onMessageReceived);
+      //监听消息删除
+      GoEasy.im.on(GoEasy.IM_EVENT.MESSAGE_DELETED, this.onMessageDeleted);
+    },
+    onMessageReceived: function onMessageReceived(message) {
+      console.log('监听到私聊消息：', message);
+      var senderId = message.senderId;
+      var receiverId = message.receiverId;
+      if (this.get_prefix() + this.user_id == receiverId && senderId == this.id) {
+        _this.lists.push(message);
+        //聊天时，收到消息标记为已读
+        _this.markPrivateMessageAsRead();
+        _this.scroll_to_bottom();
+      }
+      return;
+      var friendId = this.currentUser.id === senderId ? receiverId : senderId;
+      if (friendId === this.friend.id) {
+        this.history.messages.push(message);
+        //聊天时，收到消息标记为已读
+        this.markPrivateMessageAsRead();
+        //收到新消息，是滚动到最底部
+        this.scrollToBottom();
+      }
+    },
+    onMessageDeleted: function onMessageDeleted(deletedMessages) {
+      var _this5 = this;
+      console.log('监听到私聊消息删除：', deletedMessages);
+      return;
+      deletedMessages.forEach(function (message) {
+        var senderId = message.senderId;
+        var receiverId = message.receiverId;
+        var friendId = _this5.currentUser.id === senderId ? receiverId : senderId;
+        if (friendId === _this5.friend.id) {
+          var index = _this5.history.messages.indexOf(message);
+          if (index > -1) {
+            _this5.history.messages.splice(index, 1);
+          }
+        }
+      });
+    },
+    markPrivateMessageAsRead: function markPrivateMessageAsRead() {
+      GoEasy.im.markMessageAsRead({
+        // id: this.to.id,
+        // type: this.to.type,
+        id: _this.id,
+        type: GoEasy.IM_SCENE.PRIVATE,
+        onSuccess: function onSuccess() {
+          console.log('标记私聊已读成功');
+        },
+        onFailed: function onFailed(error) {
+          console.log("标记私聊已读失败", error);
+        }
+      });
+    },
+    scroll_to_bottom: function scroll_to_bottom() {
+      // _this.scroll_id = _this.lists[_this.lists.length - 1]['messageId']
+      this.$nextTick(function () {
+        var query = uni.createSelectorQuery();
+        query.select('#scroll').boundingClientRect();
+        query.select('#scroll-container').boundingClientRect();
+        query.exec(function (res) {
+          var scrollViewHeight = res[0].height;
+          var scrollContentHeight = res[1].height;
+          if (scrollContentHeight > scrollViewHeight) {
+            var scroll_top = scrollContentHeight - scrollViewHeight;
+            _this.scrollTop = scroll_top;
+          }
+        });
+      });
+      // console.log(this.scroll_id);
+    },
+    //拒绝交换电话/微信
+    refuse: function refuse(type, item, index) {
+      var content = '确定拒绝交换电话?';
+      if (type == 2) {
+        content = '确定拒绝交换微信?';
+      }
+      uni.showModal({
+        title: '操作提示',
+        content: content,
+        success: function success(res) {
+          if (res.confirm) {
+            var info = {
+              type: type
+            };
+            GoEasy.im.createCustomMessage({
+              type: 'refuse_wx_phone',
+              //字符串，可以任意自定义类型，比如红包'hongbao', 订单'order，处方'chufang'
+              to: _this.to,
+              payload: info,
+              onSuccess: function onSuccess(message) {
+                _this.deleteMessage(item, index);
+                _this.sendMessage(message, false, false);
+              },
+              onFailed: function onFailed(e) {
+                console.log('error :', e);
+              }
+            });
+          } else {
+            console.log('点击了取消');
+          }
+        }
+      });
+    },
+    //删除消息
+    deleteMessage: function deleteMessage(message, index) {
+      GoEasy.im.deleteMessage({
+        messages: [message],
+        //必须为数组格式，要删除的消息
+        onSuccess: function onSuccess() {
+          //消息删除成功
+          console.log("Messages delete successfully.");
+          _this.lists.splice(index, 1);
+        },
+        onFailed: function onFailed(error) {
+          //消息删除失败
+          console.log("Failed to delete message, code:" + error.code + " content:" + error.content);
+        }
+      });
+    },
+    //同意交换电话/微信
+    agree: function agree(type, item, index) {
+      var content = '确定同意交换电话?';
+      if (type == 2) {
+        content = '确定同意交换微信?';
+      }
+      uni.showModal({
+        title: '操作提示',
+        content: content,
+        success: function success(res) {
+          if (res.confirm) {
+            if (type == 2) {
+              if (_this.current_user.weixin == '' || _this.current_user.weixin == null) {
+                _this.swap_type = 2;
+                _this.show_wx = true;
+                _this.tempIndex = index;
+                return;
+              }
+            }
+            var info = {
+              type: type
+            };
+            if (type == 1) {
+              info.content = _this.current_user.mobile;
+            } else {
+              info.content = _this.current_user.weixin;
+            }
+            GoEasy.im.createCustomMessage({
+              type: 'agree_wx_phone',
+              //字符串，可以任意自定义类型，比如红包'hongbao', 订单'order，处方'chufang'
+              to: _this.to,
+              payload: info,
+              onSuccess: function onSuccess(message) {
+                _this.deleteMessage(item, index);
+                _this.sendMessage(message, false, false);
+                _this.send_extra_msg(type);
+              },
+              onFailed: function onFailed(e) {
+                console.log('error :', e);
+              }
+            });
+          } else {
+            console.log('点击了取消');
+          }
+        }
+      });
+    },
+    //同意交换微信号在发一条额外信息给对方
+    send_extra_msg: function send_extra_msg(type) {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+        var params, data, user, info;
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                params = {
+                  uid: _this.uid
+                };
+                _context3.next = 3;
+                return _this.$post('port/user_info', params);
+              case 3:
+                data = _context3.sent;
+                if (data.code == 200) {
+                  user = data.result.user;
+                  info = {
+                    type: type
+                  };
+                  if (type == 1) {
+                    info.content = user.mobile;
+                    // info.df_content = _this.df_user.mobile
+                  } else {
+                    info.content = user.weixin;
+                    // info.df_content = _this.df_user.weixin
+                  }
+
+                  GoEasy.im.createCustomMessage({
+                    type: 'consent_wx_phone',
+                    //字符串，可以任意自定义类型，比如红包'hongbao', 订单'order，处方'chufang'
+                    to: _this.to,
+                    payload: info,
+                    onSuccess: function onSuccess(message) {
+                      _this.sendMessage(message, false, true);
+                    },
+                    onFailed: function onFailed(e) {
+                      console.log('error :', e);
+                    }
+                  });
+                } else {}
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    copy: function copy(item) {
+      var content = item.payload.content;
+      uni.setClipboardData({
+        data: content,
+        success: function success() {
+          _this.$u.toast("\u590D\u5236\u6210\u529F");
+        },
+        fail: function fail(_fail2) {
+          console.log('复制失败:', _fail2);
+        }
+      });
+    },
+    chooseMessageFile: function chooseMessageFile() {
+      uni.chooseMessageFile({
+        count: 1,
+        type: 'file',
+        extension: ['pdf', 'doc', 'docx'],
+        success: function success(res) {
+          var tempFile = res.tempFiles[0];
+          var size = tempFile.size;
+          if (size > 8 * 1024 * 1024) {
+            _this.$u.toast('最多可发送8M文件');
+            return;
+          }
+          GoEasy.im.createFileMessage({
+            to: _this.to,
+            file: tempFile,
+            onProgress: function onProgress(progress) {
+              console.log('上传进度:', progress);
+            },
+            onSuccess: function onSuccess(message) {
+              console.log('创建文件消息成功:', message);
+              _this.sendMessage(message);
+            },
+            onFailed: function onFailed(e) {
+              console.log('error :', e);
+            }
+          });
+        },
+        fail: function fail(_fail3) {
+          console.log('选择微信文件失败', _fail3);
+        }
+      });
+    },
+    openFile: function openFile(item) {
+      var url = encodeURI(item.payload.url);
+      uni.downloadFile({
+        url: url,
+        success: function success(res) {
+          var filePath = res.tempFilePath;
+          uni.openDocument({
+            filePath: filePath,
+            // fileType:_this.getFileType(item),
+            showMenu: true,
+            success: function success(res1) {
+              console.log('打开文档成功');
+            },
+            fail: function fail(_fail4) {
+              console.log('打开文档失败', _fail4);
+            }
+          });
+        },
+        fail: function fail(_fail5) {
+          console.log('下载文件失败', _fail5);
+        }
+      });
+    },
+    initRecorderListeners: function initRecorderListeners() {
+      recorderManager.onRecordComplete(function (file, duration) {
+        if (duration < 1000) {
+          _this.$u.toast('录音时间太短');
+          return;
+        }
+        GoEasy.im.createAudioMessage({
+          to: _this.to,
+          file: file,
+          // notification: {
+          //   title: this.currentUser.name + '发来一段语音',
+          //   body: '[语音消息]',		// 字段最长 50 字符
+          //   sound: 'message',
+          //   badge: '+1'
+          // },
+          onProgress: function onProgress(progress) {
+            console.log(progress);
+          },
+          onSuccess: function onSuccess(message) {
+            console.log('创建语音消息成功:', message);
+            _this.sendMessage(message);
+          },
+          onFailed: function onFailed(e) {
+            console.log('error :', e);
+          }
+        });
+      });
+    },
+    onRecordStart: function onRecordStart() {
+      uni.getSetting({
+        success: function success(res) {
+          if (res.authSetting['scope.record']) {
+            console.log('有录音权限');
+            recorderManager.start();
+          } else {
+            uni.authorize({
+              scope: 'scope.record',
+              success: function success(res1) {
+                // recorderManager.start();
+                console.log('授权录音权限成功', res1);
+              },
+              fail: function fail(_fail6) {
+                console.log('授权录音权限失败', _fail6);
+              }
+            });
+            //判断录音是否是开启状态false没开启就跳转到开启页面
+            if (res.authSetting['scope.record'] == false) {
+              uni.openSetting({
+                success: function success(res) {
+                  console.log(res.authSetting);
+                }
+              });
+            }
+          }
+        }
+      });
+    },
+    onRecordEnd: function onRecordEnd() {
+      uni.getSetting({
+        success: function success(res) {
+          if (res.authSetting['scope.record']) {
+            recorderManager.stop();
+          }
+        }
+      });
+    },
+    initAudioPlayer: function initAudioPlayer() {
+      var _this6 = this;
+      this.audioPlayer.innerAudioContext = uni.createInnerAudioContext();
+      this.audioPlayer.innerAudioContext.onEnded(function () {
+        _this6.audioPlayer.playingMessage = null;
+      });
+      this.audioPlayer.innerAudioContext.onStop(function () {
+        _this6.audioPlayer.playingMessage = null;
+      });
+    },
+    playAudio: function playAudio(audioMessage) {
+      console.log('播放语音', audioMessage);
+      var playingMessage = this.audioPlayer.playingMessage;
+      if (playingMessage) {
+        this.audioPlayer.innerAudioContext.stop();
+        // 如果点击的消息正在播放，就认为是停止播放操作
+        if (playingMessage === audioMessage) {
+          return;
+        }
+      }
+      this.audioPlayer.playingMessage = audioMessage;
+      this.audioPlayer.innerAudioContext.src = encodeURI(audioMessage.payload.url);
+      this.audioPlayer.innerAudioContext.play();
+    },
+    //预览图片
+    previewImage: function previewImage(item) {
+      uni.previewImage({
+        urls: [item.payload.url]
+      });
+    },
+    sign_contrast: function sign_contrast() {
+      console.log("签署合同");
+    },
+    manage_asset: function manage_asset() {
+      console.log("资金代管");
+    },
+    subscribe_wx_msg: function subscribe_wx_msg() {
+      var _this7 = this;
+      // 询问用户是否订阅消息提醒
+      utils.get_openid(function (openid) {
+        (0, _ajax_request.fetch_data)("POST", "store_openid", {
+          "my_id": _this.user_id,
+          "openid": openid
+        }, "user");
+      });
+      utils.subscirbe_message(['8AMX7lHwjpeH4uN-6XslAmSDJhcbbsJcB_RLdIcQZ4o'], function () {
+        _this7.$u.toast("订阅成功");
+      });
+    },
+    show_items_model: function show_items_model() {
+      var _this8 = this;
+      wx.showToast({
+        title: "请稍后...",
+        icon: "loading",
+        duration: 100000
+      });
+      (0, _ajax_request.fetch_data)("POST", "get_his_items", {
+        "user_id": _this.user_id
+      }, "user", function (res) {
+        _this8.items = res.data.items;
+        wx.hideToast();
+        _this8.showItemsModal = true;
+      });
+    },
+    begin_cooperate: function begin_cooperate() {
+      var _this9 = this;
+      if (!this.selectedItem) {
+        this.$u.toast("请选择将与该用户合作的项目");
+        return;
+      }
+      this.showItemsModal = false;
+      wx.showModal({
+        title: '意向合作',
+        content: '您发布的项目有 5 次意向合作的机会，确认与该用户意向合作？',
+        success: function success(res) {
+          if (res.confirm) {
+            wx.showToast({
+              title: "加载中...",
+              icon: "loading",
+              duration: 10000
+            });
+            var data = {
+              "item_id": _this9.selectedItem[0],
+              "cooperator_id": _this9.to.data.user_id
+            };
+            (0, _ajax_request.fetch_data)("POST", "item_cooperate", data, "application", function (res) {
+              if (res.data.status === 200) {
+                wx.showToast({
+                  title: "合作成功，请选择是否与对方交换微信或电话",
+                  icon: "none",
+                  duration: 1000
+                });
+                _this9.selectedItemIndex = -1;
+              } else {
+                wx.showToast({
+                  title: res.data.message,
+                  icon: "none",
+                  duration: 1000
+                });
+                _this9.selectedItemIndex = -1;
+                return;
+              }
+              _this9.showCooperateModal = true;
+            });
+          }
+        }
+      });
+    },
+    show_evaluate_items_model: function show_evaluate_items_model() {
+      var _this10 = this;
+      wx.showToast({
+        title: "请稍后...",
+        icon: "loading",
+        duration: 100000
+      });
+      if (_this.identity === 1) {
+        (0, _ajax_request.fetch_data)("POST", "get_evaluate_items_Im_buyer", {
+          "my_id": _this.user_id,
+          "to_id": _this.to.data.user_id
+        }, "user", function (res) {
+          _this10.items = res.data.items;
+          wx.hideToast();
+          _this10.showEvaluateItemsModal = true;
+        });
+      } else if (_this.identity === 2) {
+        (0, _ajax_request.fetch_data)("POST", "get_evaluate_items_Im_seller", {
+          "my_id": _this.user_id,
+          "to_id": _this.to.data.user_id
+        }, "user", function (res) {
+          _this10.items = res.data.items;
+          wx.hideToast();
+          _this10.showEvaluateItemsModal = true;
+        });
+      }
+    },
+    evaluate_service: function evaluate_service() {
+      if (!this.selectedItem) {
+        this.$u.toast("请选择将评价的合作项目");
+        return;
+      }
+      this.showEvaluateItemsModal = false;
+      this.showEvaluateModal = true;
+    },
+    select_star: function select_star(i, whichone) {
+      if (whichone === "evaluateIndex1") {
+        this.evaluateIndex1 = i + 1;
+      } else {
+        this.evaluateIndex2 = i + 1;
+      }
+    },
+    submit_evaluate: function submit_evaluate() {
+      var _this11 = this;
+      wx.showToast({
+        title: "评价中...",
+        icon: "loading",
+        duration: 100000
+      });
+      var data = {
+        "my_id": this.user_id,
+        "to_id": this.to.data.user_id,
+        "item_id": this.selectedItem[0],
+        "evaluateIndex1": this.evaluateIndex1,
+        "evaluateIndex2": this.evaluateIndex2
+      };
+      if (!data.item_id) {
+        wx.showToast({
+          title: "请选择将评价的合作项目",
+          icon: "none",
+          duration: 700
+        });
+        return;
+      }
+      if (!data.evaluateIndex1 || !data.evaluateIndex2) {
+        wx.showToast({
+          title: "请先为对方评价再提交",
+          icon: "none",
+          duration: 700
+        });
+        return;
+      }
+      if (data.evaluateIndex1 < 0 || data.evaluateIndex1 > 5 || data.evaluateIndex2 < 0 || data.evaluateIndex2 > 5) {
+        wx.showToast({
+          title: "参数有误，请稍后再试",
+          icon: "none",
+          duration: 700
+        });
+        return;
+      }
+      (0, _ajax_request.fetch_data)("POST", "cooperation_evaluate", data, "user", function (res) {
+        if (res.data.status === 200) {
+          wx.showToast({
+            title: "评价成功，感谢您的合作",
+            icon: "none",
+            duration: 1000
+          });
+          _this11.selectedItemIndex = -1;
+        } else {
+          wx.showToast({
+            title: res.data.message,
+            icon: "none",
+            duration: 1000
+          });
+          _this11.selectedItemIndex = -1;
+          return;
+        }
+        _this11.showEvaluateModal = false;
+      });
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 434:
+/*!*************************************************************************************************************************************!*\
+  !*** /Users/bytedance/Desktop/work/FE-LYL/pages/message/private_chat.vue?vue&type=style&index=0&id=4e66cb95&lang=scss&scoped=true& ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_style_index_0_id_4e66cb95_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/postcss-loader/src??ref--8-oneOf-1-3!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!../../../../../../../Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./private_chat.vue?vue&type=style&index=0&id=4e66cb95&lang=scss&scoped=true& */ 435);
+/* harmony import */ var _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_style_index_0_id_4e66cb95_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_style_index_0_id_4e66cb95_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_style_index_0_id_4e66cb95_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_style_index_0_id_4e66cb95_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_2_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_8_oneOf_1_5_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_Applications_HBuilderX_app_Contents_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_private_chat_vue_vue_type_style_index_0_id_4e66cb95_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ 435:
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/bytedance/Desktop/work/FE-LYL/pages/message/private_chat.vue?vue&type=style&index=0&id=4e66cb95&lang=scss&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ })
+
+},[[427,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/message/private_chat.js.map

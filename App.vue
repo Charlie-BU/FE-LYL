@@ -358,11 +358,11 @@ export default {
 }
 
 //占位文字大小
-/deep/.placeholder28 {
+::v-deep .placeholder28 {
 	font-size: 28rpx;
 }
 
-/deep/.placeholder30 {
+::v-deep .placeholder30 {
 	font-size: 30rpx;
 }
 </style>

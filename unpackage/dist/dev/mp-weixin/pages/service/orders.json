@@ -4,6 +4,7 @@
   "navigationBarBackgroundColor": "#1abfc0",
   "navigationBarTextStyle": "white",
   "usingComponents": {
+    "u-search": "/uview-ui/components/u-search/u-search",
     "u-icon": "/uview-ui/components/u-icon/u-icon"
   }
 }

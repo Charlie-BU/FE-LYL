@@ -32,7 +32,7 @@ page.data-v-8e0171e0 {
   position: relative;
 }
 .container .items .item .right-text.data-v-8e0171e0::after {
-  content: '';
+  content: "";
   width: 8rpx;
   height: 8rpx;
   border-radius: 50%;
@@ -48,4 +48,3 @@ page.data-v-8e0171e0 {
 .container .items .item .grey-text.data-v-8e0171e0::after {
   background: #7A7A7A;
 }
-

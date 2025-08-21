@@ -11,7 +11,9 @@ view.data-v-b41816c0, scroll-view.data-v-b41816c0, swiper-item.data-v-b41816c0 {
   align-content: flex-start;
 }
 .u-back-top.data-v-b41816c0 {
+
   display: flex;
+
   flex-direction: row;
   flex-direction: column;
   align-items: center;
@@ -25,4 +27,3 @@ view.data-v-b41816c0, scroll-view.data-v-b41816c0, swiper-item.data-v-b41816c0 {
   -webkit-transform: scale(0.8);
           transform: scale(0.8);
 }
-
