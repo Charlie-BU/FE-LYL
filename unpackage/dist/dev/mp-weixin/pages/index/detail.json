@@ -3,6 +3,8 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "u-loading-page": "/uview-ui/components/u-loading-page/u-loading-page",
-    "weixin-login": "/components/wx-login/wx-login"
+    "weixin-login": "/components/wx-login/wx-login",
+    "in-coop": "/pages/index/in-cooperation",
+    "coop-list": "/pages/index/cooperation-list"
   }
 }

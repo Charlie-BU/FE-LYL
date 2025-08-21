@@ -30,7 +30,13 @@
     "pages/kefu/my",
     "pages/kefu/link-up",
     "pages/kefu/online",
-    "pages/message/private_chat"
+    "pages/message/private_chat",
+    "pages/square/index",
+    "pages/square/detail",
+    "pages/service/index",
+    "pages/service/detail",
+    "pages/service/my-service",
+    "pages/service/orders"
   ],
   "subPackages": [
     {
@@ -70,6 +76,12 @@
         "iconPath": "static/tabbar/index.png",
         "selectedIconPath": "static/tabbar/index_s.png",
         "text": "首页"
+      },
+      {
+        "pagePath": "pages/square/index",
+        "iconPath": "static/tabbar/rencai.png",
+        "selectedIconPath": "static/tabbar/rencai_s.png",
+        "text": "广场"
       },
       {
         "pagePath": "pages/message/message",

@@ -355,6 +355,96 @@
   background: #02ABAB;
   font-size: 24rpx;
 }
+.container .service-title.data-v-0be17cc6 {
+  font-size: 30rpx;
+  color: #141414;
+  font-weight: bold;
+  padding: 0 15rpx;
+  margin-top: 20rpx;
+}
+.container .service-entry.data-v-0be17cc6 {
+  padding: 20rpx 30rpx;
+  margin-bottom: -22rpx;
+}
+.container .service-entry image.data-v-0be17cc6 {
+  width: 110%;
+  margin-left: -5%;
+  border-radius: 12rpx;
+  height: auto;
+  object-fit: cover;
+}
+.container .order-entry.data-v-0be17cc6 {
+  padding: 20rpx 30rpx;
+  margin-top: 10rpx;
+}
+.container .order-entry .order-buttons.data-v-0be17cc6 {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx 10rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+.container .order-entry .order-buttons .order-button.data-v-0be17cc6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 22%;
+}
+.container .order-entry .order-buttons .order-button .order-icon.data-v-0be17cc6 {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: rgba(21, 179, 180, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10rpx;
+  transition: all 0.3s;
+}
+.container .order-entry .order-buttons .order-button:nth-child(1) .order-icon.data-v-0be17cc6 {
+  background: rgba(26, 191, 192, 0.1);
+}
+.container .order-entry .order-buttons .order-button:nth-child(2) .order-icon.data-v-0be17cc6 {
+  background: rgba(255, 153, 0, 0.1);
+}
+.container .order-entry .order-buttons .order-button:nth-child(3) .order-icon.data-v-0be17cc6 {
+  background: rgba(41, 121, 255, 0.1);
+}
+.container .order-entry .order-buttons .order-button:nth-child(4) .order-icon.data-v-0be17cc6 {
+  background: rgba(25, 190, 107, 0.1);
+}
+.container .order-entry .order-buttons .order-button text.data-v-0be17cc6 {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+}
+.container .order-entry .order-buttons .order-button:active .order-icon.data-v-0be17cc6 {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+.container .admin-order .admin-order-button.data-v-0be17cc6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #15B3B4, #1abfc0);
+  border-radius: 16rpx;
+  padding: 24rpx 0;
+  box-shadow: 0 4rpx 12rpx rgba(21, 179, 180, 0.3);
+  transition: all 0.3s;
+}
+.container .admin-order .admin-order-button text.data-v-0be17cc6 {
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 500;
+  margin-left: 10rpx;
+}
+.container .admin-order .admin-order-button.data-v-0be17cc6:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(21, 179, 180, 0.2);
+}
 .container .info.data-v-0be17cc6 {
   border-radius: 20rpx;
 }
@@ -504,4 +594,7 @@
   background: #fff;
   padding: 120rpx 0;
 }
-
+.popup-icon.data-v-0be17cc6 {
+  width: 60px;
+  height: 60px;
+}

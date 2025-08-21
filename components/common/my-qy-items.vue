@@ -2,7 +2,7 @@
 	<view class="items-container">
 		<view class="zp-item" v-for="(item,index) in 10" :key="index">
 			<view class="zp-item-top">
-				<image src="../../static/test.jpg" mode="aspectFill" class="left-img"/>
+				<!-- <image src="../../static/test.jpg" mode="aspectFill" class="left-img"/> -->
 				<view class="right">
 					<view class="title-text">济南市互联网开发有限公司</view>
 					<view class="zp-item-tab">
@@ -10,7 +10,7 @@
 						<view class="tab-item">10-50人</view>
 						<view class="tab-item">民营企业</view>
 					</view>
-				</view>
+				</view> 
 			</view>
 			<view class="zp-item-bot" v-if="showZw">
 				<view class="left">2个职位再招</view>

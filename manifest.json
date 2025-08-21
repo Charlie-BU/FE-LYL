@@ -160,5 +160,6 @@
             "base" : "",
             "mode" : "hash"
         }
-    }
+    },
+    "sassImplementationName" : "node-sass"
 }

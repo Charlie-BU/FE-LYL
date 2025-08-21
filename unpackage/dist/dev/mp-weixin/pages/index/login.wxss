@@ -1,5 +1,5 @@
 
-page{
+page {
 	background: #fff;
 }
 
@@ -198,4 +198,3 @@ page{
   text-align: center;
   color: #02ABAB;
 }
-

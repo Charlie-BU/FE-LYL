@@ -2,23 +2,21 @@
 	<view class="container">
 		<view class="login">
 			<view class="login-logo">
-				<image src="@/static/logo.png" mode="widthFix"/>
+				<image src="@/static/logo.png" mode="widthFix" />
 			</view>
 			<view class="login-btns">
 				<!-- #ifdef MP-WEIXIN -->
 				<button class="xcx-btn" v-if="!checkbox" @click="denglu">手机号快捷登录</button>
-				<button class="xcx-btn" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" v-else>手机号快捷登录</button>
+				<button class="xcx-btn" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber"
+					v-else>手机号快捷登录</button>
 				<!-- #endif -->
 				<button class="mobile-btn" @click="toNext('/auth/mobile-login')">手机号/用户名登录</button>
 			</view>
 			<view style="height: 89rpx;"></view>
 			<!-- #ifdef MP-WEIXIN -->
 			<view class="login-xieyi">
-				<image 
-				:src="checkbox ? '/static/common/checkbox_select.png' : '/static/common/checkbox_unselect.png'" 
-				mode="widthFix" 
-				@click="checkbox = !checkbox"
-				class="xieyi-img"/>
+				<image :src="checkbox ? 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/checkbox_select.png' : 'https://liyilian.oss-cn-hangzhou.aliyuncs.com/static/common/checkbox_unselect.png'"
+					mode="widthFix" @click="checkbox = !checkbox" class="xieyi-img" />
 				<view class="xieyi-text">
 					<text>我已阅读并同意</text>
 					<text class="theme-text" @click="goXieYi(1)">《利易联用户协议》</text>
@@ -33,12 +31,13 @@
 </template>
 
 <script>
+import { fetch_data } from "../../utils/ajax_request";
 	var validate = require("@/components/validate/validate.js");
 	var _this;
 	export default {
 		data() {
 			return {
-				checkbox:false
+				checkbox: false
 			}
 		},
 		onLoad(e) {
@@ -47,30 +46,30 @@
 			let url = window.location.href.split('#')[0];
 			let serch = url.split('?')[1];
 			let is_out = e.is_out || 0
-			if(serch && is_out==0){
-			    let arr = serch.split('&');
-			    let code = arr[0].split('code=')[1];
-			        if(code){
-			            //进行登录验证
-						// uni.showModal({
-						// 	title:'提示',
-						// 	content:code,
-						// 	success(res) {
-						// 		if (res.confirm) {
-						// 			uni.$u.toast('复制成功')
-						// 			uni.setClipboardData({
-						// 				data:code
-						// 			})
-						// 		}
-						// 	}
-						// })
-						_this.wx_denglu(code)
-			        }
+			if (serch && is_out == 0) {
+				let arr = serch.split('&');
+				let code = arr[0].split('code=')[1];
+				if (code) {
+					//进行登录验证
+					// uni.showModal({
+					// 	title:'提示',
+					// 	content:code,
+					// 	success(res) {
+					// 		if (res.confirm) {
+					// 			uni.$u.toast('复制成功')
+					// 			uni.setClipboardData({
+					// 				data:code
+					// 			})
+					// 		}
+					// 	}
+					// })
+					_this.wx_denglu(code)
+				}
 			}
 			// #endif
-			if(this.user_id>0){
+			if (this.user_id > 0) {
 				uni.switchTab({
-					url:'/pages/index/index'
+					url: '/pages/index/index'
 				})
 				return
 			}
@@ -79,45 +78,48 @@
 			// #endif
 		},
 		methods: {
-			async login(){
+			async login() {
 				uni.login({
-				  provider: 'weixin',
-				  onlyAuthorize:true,
-				  success(loginRes) {
-					_this.wx_login(loginRes.code)
-				  },fail(fail) {
-					console.log(fail)
-				  }
+					provider: 'weixin',
+					onlyAuthorize: true,
+					success(loginRes) {
+						_this.wx_login(loginRes.code)
+					},
+					fail(fail) {
+						console.log(fail)
+					}
 				});
 			},
-			async wx_login(code){
-				let res = {'code':code}
-				const data = await _this.$post('port/get_wx_xcx_data',res)
-				if(data.code==200){
-					let unionid=data.result.unionid
-					let xcx_openid=data.result.xcx_openid
-					let session_key=data.result.session_key
+			async wx_login(code) {
+				let res = {
+					'code': code
+				}
+				const data = await _this.$post('port/get_wx_xcx_data', res)
+				if (data.code == 200) {
+					let unionid = data.result.unionid
+					let xcx_openid = data.result.xcx_openid
+					let session_key = data.result.session_key
 					if (unionid) {
-						uni.setStorageSync('unionid',unionid)
+						uni.setStorageSync('unionid', unionid)
 					}
-					uni.setStorageSync('xcx_openid',xcx_openid)
-					uni.setStorageSync('session_key',session_key)
+					uni.setStorageSync('xcx_openid', xcx_openid)
+					uni.setStorageSync('session_key', session_key)
 				}
 			},
-			denglu(){
+			denglu() {
 				if (!_this.checkbox) {
 					uni.$u.toast('请阅读并同意协议')
 					return;
 				}
 			},
-			loginAfter(result){
-				console.log('loginAfter',result);
+			loginAfter(result) {
+				console.log('loginAfter', result);
 				this.$u.route({
 					url: "pages/index/index",
 					type: "reLaunch"
 				})
 			},
-			async doLogin(){
+			async doLogin() {
 				var rule = [{
 						// 字段名
 						name: 'mobile',
@@ -145,8 +147,8 @@
 					uni.$u.toast(err[0])
 					return;
 				}
-				_this.disabled=true
-				const data = await _this.$post('port/denglu',_this.form)
+				_this.disabled = true
+				const data = await _this.$post('port/denglu', _this.form)
 				if (data.code == 200) {
 					//存入用户信息
 					this.$u.vuex('user_id', data.result.user_id)
@@ -163,36 +165,61 @@
 					uni.$u.toast(data.msg)
 				}
 				setTimeout(() => {
-					_this.disabled=false
+					_this.disabled = false
 				}, 2000)
 			},
-			async getPhoneNumber(e){
-				if(e.target.errMsg=="getPhoneNumber:ok"){
-					this.loginDisabled=true
-					let res={
-						'encryptedData':e.target.encryptedData,
-						'iv':e.target.iv,
-						'session_key':uni.getStorageSync('session_key'),
-						'unionid':uni.getStorageSync('unionid'),
-						'xcx_openid':uni.getStorageSync('xcx_openid'),
-						'reid':uni.getStorageSync('reid') || "",
+			async getPhoneNumber(e) {
+				if (e.target.errMsg == "getPhoneNumber:ok") {
+					this.loginDisabled = true
+					let res = {
+						'encryptedData': e.target.encryptedData,
+						'iv': e.target.iv,
+						'session_key': uni.getStorageSync('session_key'),
+						'unionid': uni.getStorageSync('unionid'),
+						'xcx_openid': uni.getStorageSync('xcx_openid'),
+						'reid': uni.getStorageSync('reid') || "",
 					}
-					const data = await this.$post('port/weixin_mobile',res)
-					if (data.code==200) {
-						//存入用户信息
-						this.$u.vuex('user_id',data.result.user_id)
-						//存入token
-						this.$u.vuex('user_token', data.result.user_token)
-						_this.toNext(`/my/change-identity?is_kf=${data.result.is_kf}`,true)
-					}else{
-						uni.$u.toast(data.msg)
-					}
-				}else{
+                    console.log(res)
+                    fetch_data(
+                        "POST",
+                        "login",
+                        res,
+                        "user",
+                        (r) => {
+                            if (r.data.status == 200) {
+                                //存入用户信息
+                                this.$u.vuex('user_id', r.data.user_id)
+                                //存入token
+                                this.$u.vuex('user_token', r.data.user_token)
+                                _this.toNext(`/my/change-identity?is_kf=${r.data.is_kf}`, true)
+                            } else {
+                                fetch_data(
+                                    "POST",
+                                    "register",
+                                    res,
+                                    "user",
+                                    (r2) => {
+                                        if (r2.data.status == 200) {
+                                            //存入用户信息
+                                            this.$u.vuex('user_id', r2.data.user_id)
+                                            //存入token
+                                            this.$u.vuex('user_token', r2.data.user_token)
+                                            _this.toNext(`/my/change-identity?is_kf=false`, true)
+                                        } else{
+                                            uni.$u.toast("注册失败")
+                                        }
+                                    }
+                                );
+                            }
+                        }
+                    );
+				} else {
+                    console.log(e)
 					uni.$u.toast('获取失败')
-					this.loginShow=false
+					this.loginShow = false
 				}
 			},
-			goXieYi(type){
+			goXieYi(type) {
 				let title = '用户协议'
 				let id = 1
 				if (type == 2) {
@@ -207,18 +234,20 @@
 </script>
 <!-- #ifndef H5 -->
 <style>
-	page{
+	page {
 		background: #fff;
 	}
 </style>
 <!-- #endif -->
 <style lang="scss" scoped>
 	@import "@/auth/static/css/login.scss";
+
 	.container {
 		height: 100%;
 		background: #fff;
 		position: relative;
-		.login-bot{
+
+		.login-bot {
 			position: absolute;
 			width: 100%;
 			bottom: 80rpx;

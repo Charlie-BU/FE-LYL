@@ -12,7 +12,9 @@ view.data-v-ba9c95f0, scroll-view.data-v-ba9c95f0, swiper-item.data-v-ba9c95f0 {
 }
 .u-toolbar.data-v-ba9c95f0 {
   height: 42px;
+
   display: flex;
+
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -34,4 +36,3 @@ view.data-v-ba9c95f0, scroll-view.data-v-ba9c95f0, swiper-item.data-v-ba9c95f0 {
   font-size: 15px;
   padding: 0 15px;
 }
-

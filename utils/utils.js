@@ -1,11 +1,18 @@
-import { fetch_data } from './ajax_request.js'
+import {
+	times
+} from '../uview-ui/libs/function/digit.js';
+import {
+	fetch_data
+} from './ajax_request.js'
 
-function get_openid(success=null) {
+export function get_openid(success = null) {
 	wx.login({
 		success(r) {
 			if (r.code) {
 				// 由于微信官方要求，获取用户openid的接口调用必须在后端实现，此处把r.code发给后端，换取openid
-				fetch_data("POST", "fetch_openid", { "code": r.code }, "user", res => {
+				fetch_data("POST", "fetch_openid", {
+					"code": r.code
+				}, "user", res => {
 					if (res.data.openid) {
 						success(res.data.openid);
 					} else {
@@ -19,7 +26,7 @@ function get_openid(success=null) {
 	})
 }
 
-function decodeBase64(encodedString) {
+export function decodeBase64(encodedString) {
 	const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
 	let str = String(encodedString).replace(/=+$/, '');
 	if (str.length % 4 === 1) {
@@ -28,80 +35,71 @@ function decodeBase64(encodedString) {
 	let output = '';
 	for (let bc = 0, bs, buffer, idx = 0;
 		(buffer = str.charAt(idx++)); ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer, bc++ % 4) ? output +=
-		String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
+			String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0) {
 		buffer = chars.indexOf(buffer);
 	}
 	return output;
 }
 
-function decode(encodedString) {
+export function decode(encodedString) {
 	let byteString = decodeBase64(encodedString);
 	let decodedString = decodeURIComponent(escape(byteString));
 	return decodedString;
 }
 
-function token_operation(user_token) {
-	// 从user_token中拿到user_id和timestamp
-	const decoded_user_token = decode(user_token);
-	const regex = /(.*?)=(.*)=([\d.]+)$/;
-	const match = decoded_user_token.match(regex);
-	const user_id = match ? match[1] : null;
-	const token_check = match ? match[2] : null;
-	const timestamp = +(match ? match[3] : null);
-	// 设置token过期时间
-	const login_time = new Date(timestamp * 1000);
-	const valid_time_end = new Date(login_time.getTime() + 24 * 60 * 60 * 1000);
-	const now = new Date();
-	if (!match || token_check !== 'logined_user_id[ATTENTION]timestamp') {
-		console.log('用户token无效');
-		wx.clearStorageSync();
-		return null;
+function is_valid_timestamp(str) {
+	if (!/^\d+$/.test(str)) {
+		return false;
 	}
-	if (now > valid_time_end) {
-		console.log('登录过期');
-		wx.clearStorageSync();
-		return null;
+	const num = Number(str);
+	if (str.length === 10) {
+		const date = new Date(num * 1000);
+		return date.getTime() > 0;
+	} else if (str.length === 13) {
+		const date = new Date(num);
+		return date.getTime() > 0;
 	}
-	return user_id;
+	return false;
 }
 
-function get_user_info(user_token) {
-	const user_id = token_operation(user_token);
-	if (!user_id) {
-		return [null, null];
+export function format_time(datetime) {
+	// datetime目前接受两种类型参数：1.number类型以秒为单位的时间戳；2.string类型Mon, 25 Nov 2024 20:41:38 GMT
+	// js的Date对象在处理时间戳时，默认以毫秒为单位，而注意时间戳是否以秒为单位
+	let is_timestamp = false;
+	if (is_valid_timestamp(datetime.toString())) {
+		if (typeof datetime === 'number' && datetime.toString().length <= 10) {
+			datetime *= 1000; // 将秒级时间戳转换为毫秒级
+		}
+		is_timestamp = true;
 	}
-	fetch_data('POST', 'get_this_user', { 'user_id': user_id }, 'user', res => {
-		uni.setStorageSync("user", res.data.user);
-	})
-	// 计算活跃度
-	fetch_data('POST', 'cal_active', { 'user_id': user_id }, 'user')
-	return [+user_id, uni.getStorageSync("user")];
-}
-
-function format_time(datetime) {
 	const date = new Date(datetime);
 	if (isNaN(date.getTime())) {
 		console.log('Invalid datetime:', datetime);
 		return null;
 	}
-	const year = date.getUTCFullYear().toString();
-	const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-	const day = date.getUTCDate().toString().padStart(2, '0');
-	const hours = date.getUTCHours().toString().padStart(2, '0');
-	const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-	const seconds = date.getUTCSeconds().toString().padStart(2, '0');
-	return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+	const year = is_timestamp ? date.getFullYear().toString() : date.getUTCFullYear().toString();
+	const month = is_timestamp ? (date.getMonth() + 1).toString().padStart(2, '0') : (date.getUTCMonth() + 1).toString()
+		.padStart(2, '0');
+	const day = is_timestamp ? date.getDate().toString().padStart(2, '0') : date.getUTCDate().toString().padStart(2,
+		'0');
+	const hours = is_timestamp ? date.getHours().toString().padStart(2, '0') : date.getUTCHours().toString().padStart(2,
+		'0');
+	const minutes = is_timestamp ? date.getMinutes().toString().padStart(2, '0') : date.getUTCMinutes().toString()
+		.padStart(2, '0');
+	const seconds = is_timestamp ? date.getSeconds().toString().padStart(2, '0') : date.getUTCSeconds().toString()
+		.padStart(2, '0');
+	return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
-function subscirbe_message(template_Ids, callback = null) {
+export function subscirbe_message(template_Ids, callback = null) {
 	//template_Ids为列表，对应的消息模板
 	wx.requestSubscribeMessage({
 		tmplIds: template_Ids,
 		success(res) {
-			//用户授权后，无论同意与否
-			if (res.errMsg == 'requestSubscribeMessage:ok') {
+			// 用户授权后，无论同意与否
+			if (res.errMsg == 'requestSubscribeMessage:ok' && callback) {
 				callback();
-			} 
+			}
 		},
 		fail(e) {
 			console.log(e)
@@ -109,12 +107,15 @@ function subscirbe_message(template_Ids, callback = null) {
 	});
 }
 
-export {
-	get_openid,
-	get_rank,
-	get_my_rank,
-	decode,
-	get_user_info,
-	format_time,
-	subscirbe_message,
+// star_value最大值为100
+export function show_stars(star_value) {
+	star_value = Number(star_value);
+	let stars = star_value <= 0 ? 0 : (star_value >= 100 ? 5 : Math.floor(star_value / 20) + 1);
+	let unstars = 5 - stars;
+	return ["★".repeat(stars) + "☆".repeat(unstars), (star_value / 20).toFixed(1)];
+}
+
+export function is_admin() {
+	const identity = uni.getStorageSync("identity");
+	return identity === 3;
 }
