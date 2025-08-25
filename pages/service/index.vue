@@ -263,7 +263,6 @@ export default {
 	onLoad() {
 		_this = this;
 		_this.getServiceCategories();
-		_this.getServiceList(1);
 	},
 	methods: {
 		change(observer) {
@@ -280,6 +279,7 @@ export default {
 					this.tabbar_list = this.categories.map(category => {
 						return { name: category.name };
 					});
+					_this.getServiceList(this.categories[0].id);
 				}
 			})
 		},

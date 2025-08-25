@@ -186,18 +186,10 @@ export default {
                                         out_trade_no: res.data.out_trade_no
                                     }, "service", res => {
                                         if (res.data.status == 200) {
-                                            this.closeModal()
-                                            uni.showToast({
-                                                title: '服务套餐购买成功',
-                                                icon: 'none',
-                                                duration: 2000
+                                            // 这里千万不能被中断！
+                                            uni.navigateTo({
+                                                url: `/pages/service/my-service?order_id=${res.data.service_buyer_id}`
                                             });
-                                            // 支付成功后跳转到订单列表
-                                            setTimeout(() => {
-                                                uni.navigateTo({
-                                                    url: `/pages/service/my-service?order_id=${res.data.service_buyer_id}`
-                                                });
-                                            }, 2000);
                                             return;
                                         } else {
                                             uni.showToast({
