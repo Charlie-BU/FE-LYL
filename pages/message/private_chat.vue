@@ -446,7 +446,8 @@ export default {
 			showEvaluateItemsModal: false,
 			showEvaluateModal: false,
 			evaluateIndex1: 0,
-			evaluateIndex2: 0
+			evaluateIndex2: 0,
+			order_id: "",
 		}
 	},
 	computed: {
@@ -630,7 +631,7 @@ export default {
 					msg = '我对这个岗位很有兴趣，方便聊聊吗？'
 					break;
 				case 3:
-					msg = ''
+					msg = '您好，我需要退款。订单ID为' + _this.order_id
 					break;
 				default:
 					break;

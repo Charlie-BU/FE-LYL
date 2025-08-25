@@ -109,10 +109,13 @@
                             <u-icon name="chat" color="#ffffff" size="24"></u-icon>
                             <text>联系合作者</text>
                         </button>
-                        <button class="action-btn service-btn" @click.stop="lx_kefu" style="background: red;">
+                        <button class="action-btn service-btn" @click.stop="lx_kefu()" style="background: red;">
                             <u-icon name="server-man" color="#ffffff" size="24"></u-icon>
-                            <text v-if="identity !== 1">{{ order.status !== 1 ? '联系客服' : '退款/售后' }}</text>
-                            <text v-else>联系客服</text>
+                            <text>联系客服</text>
+                        </button>
+                        <button v-if="identity !== 1 && order.status === 1" class="action-btn service-btn" @click.stop="lx_kefu(order.order_id, 1)" style="background: red;">
+                            <u-icon name="server-man" color="#ffffff" size="24"></u-icon>
+                            <text>退款</text>
                         </button>
                     </view>
                     <view class="order-actions" v-else-if="getOrderStatus(order) !== 'refunded'">
@@ -402,7 +405,7 @@ export default {
                 }
             });
         },
-        async lx_kefu() {
+        async lx_kefu(order_id="", init=0) {
             // const data = await this.$post('port/lx_kefu')
             // if (data.code == 200) {
             //     let id = data.result.id
@@ -412,7 +415,7 @@ export default {
             // } else {
             //     this.$u.toast(data.msg)
             // }
-            this.toNext(`/pages/message/private_chat?id=kf_3&title=客服99号`)
+            this.toNext(`/pages/message/private_chat?id=kf_3&title=客服99号&init=${init}&order_id=${order_id}`)
         },
     }
 };
