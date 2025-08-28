@@ -319,11 +319,29 @@ export default {
         },
 
         orderRefund(order) {
+            const total_fee = Number(order.price) * Number(order.amount);
             wx.showModal({
-                title: "确认退款",
-                content: "确定将该订单退款吗？",
+                title: "申请退款",
+                editable: true,
+                placeholderText: "请输入退款金额",
                 success: (res) => {
                     if (res.confirm) {
+                        const refund_fee = parseFloat(res.content);
+                        if (isNaN(refund_fee) || refund_fee <= 0) {
+                            wx.showToast({
+                                title: "请输入有效的退款金额",
+                                icon: 'none'
+                            });
+                            return;
+                        }
+                        if (refund_fee > total_fee) {
+                            wx.showToast({
+                                title: "退款金额不能超过订单总金额",
+                                icon: 'none'
+                            });
+                            return;
+                        }
+
                         wx.showToast({
                             title: "请稍后...",
                             icon: "loading",
@@ -331,7 +349,8 @@ export default {
                         });
                         fetch_data('POST', 'refund_order', {
                             out_trade_no: order.out_trade_no,
-                            amount: Number(order.price) * Number(order.amount)
+                            totalAmount: total_fee,
+                            refundAmount: refund_fee
                         }, 'service', res => {
                             if (res.data.status === 200) {
                                 fetch_data('POST', 'mark_refund', {
@@ -341,7 +360,7 @@ export default {
                                 }, 'service', res => {
                                     if (res.data.status === 200) {
                                         wx.showToast({
-                                            title: "标记成功",
+                                            title: "退款成功",
                                             icon: "none",
                                             duration: 700
                                         });
