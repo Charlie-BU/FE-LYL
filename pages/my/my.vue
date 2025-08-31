@@ -148,14 +148,16 @@
 						<!-- <view class="order-icon">
 							<u-icon name="clock" color="#ff9900" size="28"></u-icon>
 						</view> -->
-						<image class="popup-icon" src="/static/service/pending.png" mode="aspectFit"></image>
+						<image class="popup-icon" src="/static/service/pending.png" mode="aspectFit"
+							style="width: 40px; height: 60px;"></image>
 						<text>待合作</text>
 					</view>
 					<view class="order-button" @click="goNext('/pages/service/orders?status=processing')">
 						<!-- <view class="order-icon">
 							<u-icon name="reload" color="#2979ff" size="28"></u-icon>
 						</view> -->
-						<image class="popup-icon" src="/static/service/processing.png" mode="aspectFit"></image>
+						<image class="popup-icon" src="/static/service/processing.png" mode="aspectFit"
+							style="width: 40px; height: 60px;"></image>
 						<text>合作中</text>
 					</view>
 					<view class="order-button" @click="goNext('/pages/service/orders?status=completed')">
@@ -163,14 +165,15 @@
 							<u-icon name="checkmark-circle" color="#19be6b" size="28"></u-icon>
 						</view> -->
 						<image class="popup-icon" src="/static/service/completed.png" mode="aspectFit"
-							style="width: 61px; height: 61px;"></image>
+							style="width: 40px; height: 60px;"></image>
 						<text>合作完成</text>
 					</view>
 					<view class="order-button" @click="goNext('/pages/service/orders?status=refunded')">
 						<!-- <view class="order-icon">
 							<u-icon name="checkmark-circle" color="#19be6b" size="28"></u-icon>
 						</view> -->
-						<image class="popup-icon" src="/static/service/refunded.png" mode="aspectFit"></image>
+						<image class="popup-icon" src="/static/service/refunded.png" mode="aspectFit"
+							style="width: 40px; height: 60px;"></image>
 						<text>已退款</text>
 					</view>
 				</view>
