@@ -15,9 +15,7 @@ view.data-v-2b1712d8, scroll-view.data-v-2b1712d8, swiper-item.data-v-2b1712d8 {
   border-top-left-radius: 100px;
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
-
   display: flex;
-
   flex-direction: row;
   line-height: 11px;
   text-align: center;
@@ -67,3 +65,4 @@ view.data-v-2b1712d8, scroll-view.data-v-2b1712d8, swiper-item.data-v-2b1712d8 {
 .u-badge--warning--inverted.data-v-2b1712d8 {
   color: #f9ae3d;
 }
+

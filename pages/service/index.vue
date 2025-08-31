@@ -85,7 +85,7 @@
 
 					<view class="form-item">
 						<text class="label">安心购</text>
-						<input type="text" v-model="formData.description" placeholder="请输入服务套餐描述" />
+						<input type="text" v-model="formData.description" placeholder="请输入安心购内容" />
 					</view>
 
 					<view class="form-item">

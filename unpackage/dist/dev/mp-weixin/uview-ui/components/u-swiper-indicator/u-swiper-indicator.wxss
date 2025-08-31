@@ -11,9 +11,7 @@ view.data-v-633cde80, scroll-view.data-v-633cde80, swiper-item.data-v-633cde80 {
   align-content: flex-start;
 }
 .u-swiper-indicator__wrapper.data-v-633cde80 {
-
   display: flex;
-
   flex-direction: row;
 }
 .u-swiper-indicator__wrapper--line.data-v-633cde80 {
@@ -38,3 +36,4 @@ view.data-v-633cde80, scroll-view.data-v-633cde80, swiper-item.data-v-633cde80 {
 .u-swiper-indicator__wrapper__dot--active.data-v-633cde80 {
   width: 12px;
 }
+

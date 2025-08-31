@@ -11,9 +11,7 @@ view.data-v-a5b2d580, scroll-view.data-v-a5b2d580, swiper-item.data-v-a5b2d580 {
   align-content: flex-start;
 }
 .u-swiper.data-v-a5b2d580 {
-
   display: flex;
-
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -27,9 +25,7 @@ view.data-v-a5b2d580, scroll-view.data-v-a5b2d580, swiper-item.data-v-a5b2d580 {
   flex: 1;
 }
 .u-swiper__wrapper__item__wrapper.data-v-a5b2d580 {
-
   display: flex;
-
   flex-direction: row;
   position: relative;
   overflow: hidden;
@@ -59,3 +55,4 @@ view.data-v-a5b2d580, scroll-view.data-v-a5b2d580, swiper-item.data-v-a5b2d580 {
   position: absolute;
   bottom: 10px;
 }
+

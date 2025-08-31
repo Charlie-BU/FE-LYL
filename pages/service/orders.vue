@@ -21,8 +21,8 @@
         <!-- 搜索 -->
         <view style="margin-top: 20rpx;">
             <u-search bgColor="#EFEFEF" placeholder="请输入订单ID" @search="searchOrder" @custom="searchOrder" :actionStyle="{
-                    'color': '#02AAAB'
-                }" v-model="searchText" />
+                'color': '#02AAAB'
+            }" v-model="searchText" />
         </view>
 
 
@@ -34,8 +34,7 @@
                     <view class="order-status-tag status-pending" v-if="getOrderStatus(order) === 'pending'">
                         待合作
                     </view>
-                    <view class="order-status-tag status-processing"
-                        v-else-if="getOrderStatus(order) === 'processing'">
+                    <view class="order-status-tag status-processing" v-else-if="getOrderStatus(order) === 'processing'">
                         合作中
                     </view>
                     <view class="order-status-tag status-completed" v-else-if="getOrderStatus(order) === 'completed'">
@@ -101,29 +100,31 @@
                     <view class="order-actions" v-if="identity !== 3">
                         <button v-if="getOrderStatus(order) === 'processing'" class="action-btn service-btn"
                             @click.stop="gotoMyService(order)">
-                            <u-icon name="checkbox-mark" color="#ffffff" size="24"></u-icon>
+                            <!-- <u-icon name="checkbox-mark" color="#ffffff" size="24"></u-icon> -->
                             <text>完成合作</text>
                         </button>
                         <button v-if="getOrderStatus(order) === 'processing'" class="action-btn cooperator-btn"
                             @click.stop="contactCooperator(order)">
-                            <u-icon name="chat" color="#ffffff" size="24"></u-icon>
+                            <!-- <u-icon name="chat" color="#ffffff" size="24"></u-icon> -->
                             <text>联系合作者</text>
                         </button>
                         <button class="action-btn service-btn" @click.stop="lx_kefu()" style="background: red;">
-                            <u-icon name="server-man" color="#ffffff" size="24"></u-icon>
+                            <!-- <u-icon name="server-man" color="#ffffff" size="24"></u-icon> -->
                             <text>联系客服</text>
                         </button>
-                        <button v-if="identity !== 1 && order.status === 1" class="action-btn service-btn" @click.stop="lx_kefu(order.order_id, 1)" style="background: red;">
-                            <u-icon name="server-man" color="#ffffff" size="24"></u-icon>
+                        <button v-if="identity !== 1 && order.status === 1" class="action-btn service-btn"
+                            @click.stop="lx_kefu(order.order_id, 1)" style="background: red;">
+                            <!-- <u-icon name="server-man" color="#ffffff" size="24"></u-icon> -->
                             <text>退款</text>
                         </button>
                     </view>
                     <view class="order-actions" v-else-if="getOrderStatus(order) !== 'refunded'">
-                        <button v-if="getOrderStatus(order) === 'processing'" class="action-btn cooperator-btn" @click.stop="cancelCooperation(order)">
+                        <button v-if="getOrderStatus(order) === 'processing'" class="action-btn cooperator-btn"
+                            @click.stop="cancelCooperation(order)">
                             <text>取消合作</text>
                         </button>
-                        <button v-if="getOrderStatus(order) !== 'completed'" class="action-btn service-btn" style="background: red;"
-                            @click.stop="orderRefund(order)">
+                        <button v-if="getOrderStatus(order) !== 'completed'" class="action-btn service-btn"
+                            style="background: red;" @click.stop="orderRefund(order)">
                             <text>退款</text>
                         </button>
                     </view>
@@ -264,11 +265,11 @@ export default {
                 this.isRefreshing = false;
 
                 if (res.data.status === 200) {
-					this.allOrderList = res.data.orders || [];
-					this.orderList = [...this.allOrderList];
-					if (this.searchText) {
-					    this.search(this.searchText);
-					}
+                    this.allOrderList = res.data.orders || [];
+                    this.orderList = [...this.allOrderList];
+                    if (this.searchText) {
+                        this.search(this.searchText);
+                    }
                 } else {
                     uni.showToast({
                         title: res.data.message || '获取订单列表失败',
@@ -424,7 +425,7 @@ export default {
                 }
             });
         },
-        async lx_kefu(order_id="", init=0) {
+        async lx_kefu(order_id = "", init = 0) {
             // const data = await this.$post('port/lx_kefu')
             // if (data.code == 200) {
             //     let id = data.result.id
@@ -584,6 +585,7 @@ export default {
     box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     border: none;
+    white-space: nowrap;
 
     &::after {
         border: none;

@@ -14,17 +14,13 @@ view.data-v-70102400, scroll-view.data-v-70102400, swiper-item.data-v-70102400 {
   position: relative;
 }
 .u-picker__view__column.data-v-70102400 {
-
   display: flex;
-
   flex-direction: row;
   flex: 1;
   justify-content: center;
 }
 .u-picker__view__column__item.data-v-70102400 {
-
   display: flex;
-
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -43,12 +39,11 @@ view.data-v-70102400, scroll-view.data-v-70102400, swiper-item.data-v-70102400 {
   right: 0;
   left: 0;
   bottom: 0;
-
   display: flex;
-
   flex-direction: row;
   justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.87);
   z-index: 1000;
 }
+

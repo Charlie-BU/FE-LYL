@@ -51,9 +51,9 @@
   font-weight: bold;
 }
 .container .center .left-scroll .left-items .act.data-v-7b901426::after {
-  content: "";
+  content: '';
   width: 6rpx;
-  height: 33%;
+  height: calc(33%);
   background: #02ABAB;
   position: absolute;
   display: block;
@@ -187,3 +187,4 @@
   color: #fff;
   background: #02ABAB;
 }
+

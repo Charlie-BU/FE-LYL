@@ -11,9 +11,7 @@ view.data-v-3b2b1a80, scroll-view.data-v-3b2b1a80, swiper-item.data-v-3b2b1a80 {
   align-content: flex-start;
 }
 .u-tabs__wrapper.data-v-3b2b1a80 {
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
 }
@@ -22,24 +20,18 @@ view.data-v-3b2b1a80, scroll-view.data-v-3b2b1a80, swiper-item.data-v-3b2b1a80 {
   overflow: auto hidden;
 }
 .u-tabs__wrapper__scroll-view.data-v-3b2b1a80 {
-
   display: flex;
-
   flex-direction: row;
   flex: 1;
 }
 .u-tabs__wrapper__nav.data-v-3b2b1a80 {
-
   display: flex;
-
   flex-direction: row;
   position: relative;
 }
 .u-tabs__wrapper__nav__item.data-v-3b2b1a80 {
   padding: 0 11px;
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -66,3 +58,4 @@ view.data-v-3b2b1a80, scroll-view.data-v-3b2b1a80, swiper-item.data-v-3b2b1a80 {
   transition-property: transform, -webkit-transform;
   transition-duration: 300ms;
 }
+

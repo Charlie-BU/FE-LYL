@@ -11,17 +11,13 @@ view.data-v-4c556b40, scroll-view.data-v-4c556b40, swiper-item.data-v-4c556b40 {
   align-content: flex-start;
 }
 .u-search.data-v-4c556b40 {
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
   flex: 1;
 }
 .u-search__content.data-v-4c556b40 {
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
   padding: 0 10px;
@@ -33,9 +29,7 @@ view.data-v-4c556b40, scroll-view.data-v-4c556b40, swiper-item.data-v-4c556b40 {
   overflow: hidden;
 }
 .u-search__content__icon.data-v-4c556b40 {
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
 }
@@ -52,9 +46,7 @@ view.data-v-4c556b40, scroll-view.data-v-4c556b40, swiper-item.data-v-4c556b40 {
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
   background-color: #C6C7CB;
-
   display: flex;
-
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -89,3 +81,4 @@ view.data-v-4c556b40, scroll-view.data-v-4c556b40, swiper-item.data-v-4c556b40 {
   width: 40px;
   margin-left: 5px;
 }
+

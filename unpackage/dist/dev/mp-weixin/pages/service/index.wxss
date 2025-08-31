@@ -62,7 +62,7 @@
   border: 1rpx solid rgba(2, 171, 171, 0.1);
 }
 .container .service-item.data-v-7881794f::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -94,7 +94,7 @@
   -webkit-box-orient: vertical;
 }
 .container .service-item-title.data-v-7881794f::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -156,7 +156,7 @@
   overflow: hidden;
 }
 .container .detail-btn.data-v-7881794f::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
@@ -303,7 +303,7 @@ to {
   flex: 1;
 }
 .modal .modal-body .form-item .picker-wrapper .picker-content .picker-text.data-v-7881794f:empty::before {
-  content: "请选择分类";
+  content: '请选择分类';
   color: #999;
 }
 .modal .modal-body .form-item input.data-v-7881794f,
@@ -576,3 +576,4 @@ to {
   margin-left: 10rpx;
   font-weight: normal;
 }
+

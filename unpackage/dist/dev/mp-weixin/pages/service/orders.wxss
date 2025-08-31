@@ -123,6 +123,7 @@
   box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border: none;
+  white-space: nowrap;
 }
 .action-btn.data-v-c832be90::after {
   border: none;
@@ -184,3 +185,4 @@
   background-color: #f44336;
   /* 红色 - 已退款 */
 }
+

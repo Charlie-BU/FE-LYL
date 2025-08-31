@@ -340,7 +340,8 @@
   box-shadow: 0 4rpx 10rpx rgba(2, 171, 171, 0.2);
 }
 @-webkit-keyframes float-data-v-84277732 {
-0%, 100% {
+0%,
+  100% {
     -webkit-transform: translateY(-40rpx);
             transform: translateY(-40rpx);
 }
@@ -350,7 +351,8 @@
 }
 }
 @keyframes float-data-v-84277732 {
-0%, 100% {
+0%,
+  100% {
     -webkit-transform: translateY(-40rpx);
             transform: translateY(-40rpx);
 }
@@ -482,3 +484,4 @@
   background-color: #02AAAB;
   color: white;
 }
+
