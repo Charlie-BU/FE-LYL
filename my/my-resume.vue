@@ -282,15 +282,15 @@ export default {
             };
             fetch_data("POST", "get_item_id", data1, "user", (res) => {
                 this.item_id = res.data.item_id;
-                fetch_data("POST", "get_item_files", { item_id: this.item_id }, "user", (res) => {
-                    const item_files = res.data.item_files;
-                    if (item_files && item_files?.length) {
-                        for (let i = 1; i <= item_files.length; i++) {
-                            _this.preview_images.push(item_files["file" + i]);
-                            _this.new_images.push(item_files["file" + i]);
-                        }
-                    }
-                });
+               fetch_data("POST", "get_item_files", { item_id: this.item_id }, "user", (res) => {
+                   const item_files = res.data.item_files;
+                   if (item_files && item_files.files && item_files.files.length) {
+                       item_files.files.forEach(file => {
+                           _this.preview_images.push(file);
+                           _this.new_images.push(file);
+                       });
+                   }
+               });
             });
         }, 1500);
     },

@@ -285,8 +285,10 @@ export default {
                             "user",
                             (res) => {
                                 const item_files = res.data.item_files;
-                                for (let i = 1; i <= item_files.length; i++) {
-                                    _this.preview_images.push(item_files["file" + i]);
+                                if (item_files && item_files.files) {
+                                    item_files.files.forEach(file => {
+                                        _this.preview_images.push(file);
+                                    });
                                 }
                             }
                         );

@@ -136,17 +136,17 @@ export default {
 					this.star = utils.show_stars(res.data.star_as_elite);
 				});
 				// 获取作品
-				fetch_data("POST", "get_item_files", {
-					"item_id": this.detail.id
-				}, "user", (res) => {
-					const item_files = res.data.item_files;
-					_this.preview_images = [];
-					if (item_files) {
-						for (let i = 1; i <= item_files.length; i++) {
-							_this.preview_images.push(item_files['file' + i]);
-						}
-					}
-				})
+				fetch_data("POST", "get_item_files", { 
+				    "item_id": this.detail.id 
+				}, "user", (res) => { 
+				    const item_files = res.data.item_files; 
+				    _this.preview_images = []; 
+				    if (item_files && item_files.files) { 
+				        item_files.files.forEach(file => {
+				            _this.preview_images.push(file);
+				        });
+				    } 
+				});
 			} else if (data.code == 100) {
 				this.$u.toast(data.msg, () => {
 					_this.finish()
